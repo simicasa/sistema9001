@@ -191,7 +191,7 @@ namespace ProgettoCMA
             this.initializeTextBoxes();
             foreach (var item in typeof(T).GetRuntimeProperties())
             {
-                if (this.textBoxes.ContainsKey(item.Name.ToLower()) || item.PropertyType == typeof(Indirizzo))
+                if (this.textBoxes.ContainsKey(item.Name.ToLower()) || item.PropertyType.IsClass)
                 {
                     if (item.PropertyType == typeof(Int32))
                     {
@@ -200,6 +200,14 @@ namespace ProgettoCMA
                     else if (item.PropertyType == typeof(Indirizzo))
                     {
                         item.SetValue(instanceToSave, this.createIndirizzo());
+                    }
+                    else if (item.PropertyType == typeof(Cliente))
+                    {
+                        IQueryable<Cliente> cliente = this.cdc.AziendaSet.OfType<Cliente>().Where(c => c.Ragione == this.textBoxes[item.Name.ToLower()].Text);
+                        if(cliente.Count() == 1)
+                        {
+                            item.SetValue(instanceToSave, cliente.First());
+                        }
                     }
                     else
                     {

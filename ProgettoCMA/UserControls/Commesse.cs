@@ -200,7 +200,7 @@ namespace ProgettoCMA
         private void addButton_Click(object sender, EventArgs e)
         {
             this.inhibit = true;
-            this.newInstance = new Commessa(-1, new Cliente(), "", this.home.utente, "");
+            this.newInstance = new Commessa(-1, (Cliente)listBox1.SelectedItem, "", this.home.utente, "");
             this.data.Add(newInstance);
             this.dataSubset.Add(newInstance);
             this.orderList();

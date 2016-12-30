@@ -46,7 +46,6 @@ namespace ProgettoCMA
         private void Home_Load(object sender, EventArgs e)
         {
         }
-
         private void Home_Shown(object sender, EventArgs e)
         {
             Login login = new Login(this);
@@ -56,20 +55,16 @@ namespace ProgettoCMA
 
         private void clientiGestioneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clienti clienti = new Clienti(this);
-            this.controlsAdd(clienti);
+            this.controlsAdd(new Clienti(this));
         }
-
         private void fornitoriGestioneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Fornitori fornitore = new Fornitori(this);
-            this.controlsAdd(fornitore);
+            this.controlsAdd(new Fornitori(this));
 
         }
         private void commesseGestioneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Commesse commessa = new Commesse(this);
-            this.controlsAdd(commessa);
+            this.controlsAdd(new Commesse(this));
         }
 
         private void controlsAdd(UserControl uc)
@@ -80,11 +75,11 @@ namespace ProgettoCMA
         }
         private void controlsClear()
         {
-            for (int i = this.Controls.Count - 1; i >= 0; i--)
+            foreach (var item in this.Controls)
             {
-                if (this.Controls[i].GetType() != typeof(MenuStrip))
+                if(item.GetType() != typeof(MenuStrip))
                 {
-                    this.Controls[i].Dispose();
+                    ((Control)item).Dispose();
                 }
             }
         }
