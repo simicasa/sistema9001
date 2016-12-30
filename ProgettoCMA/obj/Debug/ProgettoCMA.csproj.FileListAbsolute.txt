@@ -1,21 +1,3 @@
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.exe.config
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.exe
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.pdb
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\EntityFramework.dll
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\EntityFramework.xml
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\it\EntityFramework.resources.dll
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Properties.Resources.resources
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.exe
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Clienti.resources
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Home.resources
-C:\Users\simic\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Login.resources
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Fornitori.resources
-C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.UC.resources
 C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.exe.config
 C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.exe
 C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.pdb
@@ -36,23 +18,22 @@ C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\
 C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
 C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.UserControls.Categorie.resources
 C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Commesse.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.exe.config
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.exe
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.pdb
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.dll
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.xml
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\it\EntityFramework.resources.dll
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.UserControls.Categorie.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Clienti.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Home.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Login.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Commesse.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Fornitori.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Properties.Resources.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.UC.resources
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.exe
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.exe.config
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.exe
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\ProgettoCMA.pdb
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\EntityFramework.dll
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\EntityFramework.xml
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\bin\Debug\it\EntityFramework.resources.dll
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.categorie.resources
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Clienti.resources
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Home.resources
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Login.resources
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Commesse.resources
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Fornitori.resources
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Properties.Resources.resources
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.UC.resources
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.exe
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.pdb

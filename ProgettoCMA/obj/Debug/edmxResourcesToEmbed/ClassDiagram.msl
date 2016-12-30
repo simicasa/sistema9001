@@ -63,6 +63,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Categoria)">
         <MappingFragment StoreEntitySet="CategoriaSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -190,6 +190,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Associazione_Categoria_FornitoreSet">
     <Key>
@@ -791,6 +792,7 @@
           <NavigationProperty Name="Associazione_Categoria_Fornitore" Relationship="ClassDiagram.CategoriaAssociazione_Categoria_Fornitore" FromRole="Categoria" ToRole="Associazione_Categoria_Fornitore" />
           <NavigationProperty Name="RDO_Composizione" Relationship="ClassDiagram.CategoriaRDO_Composizione" FromRole="Categoria" ToRole="RDO_Composizione" />
           <NavigationProperty Name="Offerta_Composizione" Relationship="ClassDiagram.CategoriaOfferta_Composizione" FromRole="Categoria" ToRole="Offerta_Composizione" />
+          <Property Name="Nome" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Fornitore" BaseType="ClassDiagram.Azienda">
           <NavigationProperty Name="Associazione_Categoria_Fornitore" Relationship="ClassDiagram.FornitoreAssociazione_Categoria_Fornitore" FromRole="Fornitore" ToRole="Associazione_Categoria_Fornitore" />
@@ -1050,6 +1052,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Categoria)">
         <MappingFragment StoreEntitySet="CategoriaSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

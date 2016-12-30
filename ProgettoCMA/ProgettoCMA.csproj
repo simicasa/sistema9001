@@ -84,6 +84,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClassDiagram.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Categoria.cs" />
     <Compile Include="Classes\Cliente.cs" />
     <Compile Include="Classes\Commessa.cs" />
     <Compile Include="Classes\Fornitore.cs" />

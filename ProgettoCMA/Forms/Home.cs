@@ -83,5 +83,11 @@ namespace ProgettoCMA
                 }
             }
         }
+
+        private void gestioneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Categorie categoria = new Categorie(this);
+            this.controlsAdd(categoria);
+        }
     }
 }
