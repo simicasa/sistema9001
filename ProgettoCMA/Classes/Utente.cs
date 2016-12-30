@@ -24,6 +24,14 @@ namespace ProgettoCMA
         public static Utente checkLogin(String username, String password)
         {
             ClassDiagramContainer cdc = new ClassDiagramContainer();
+            IQueryable<Utente> utente = cdc.UtenteSet.Where(u => u.Username == username && u.Password == password);
+            int count = utente.Count();
+            if(count == 1)
+            {
+                return utente.First();
+            }
+            return null;
+            /*
             var res = from user in cdc.UtenteSet
                       where user.Username == username && user.Password == password
                       select user;
@@ -40,6 +48,7 @@ namespace ProgettoCMA
             }
             Console.WriteLine("nientaappost");
             return null;
+            */
         }
     }
 }

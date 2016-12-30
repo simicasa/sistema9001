@@ -69,12 +69,6 @@
     <Compile Include="Categoria.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <Compile Include="categorie.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="categorie.Designer.cs">
-      <DependentUpon>categorie.cs</DependentUpon>
-    </Compile>
     <Compile Include="ClassDiagram.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -90,18 +84,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClassDiagram.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Categoria.cs" />
     <Compile Include="Classes\Cliente.cs" />
+    <Compile Include="Classes\Commessa.cs" />
     <Compile Include="Classes\Fornitore.cs" />
     <Compile Include="Classes\Indirizzo.cs" />
     <Compile Include="Classes\Ruolo.cs" />
     <Compile Include="Cliente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <Compile Include="Clienti.cs">
+    <Compile Include="UserControls\Categorie.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Clienti.Designer.cs">
+    <Compile Include="UserControls\Categorie.Designer.cs">
+      <DependentUpon>Categorie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Clienti.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Clienti.Designer.cs">
       <DependentUpon>Clienti.cs</DependentUpon>
     </Compile>
     <Compile Include="Commessa.cs">
@@ -125,10 +125,16 @@
     <Compile Include="Fornitore.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <Compile Include="Fornitori.cs">
+    <Compile Include="UserControls\Commesse.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Fornitori.Designer.cs">
+    <Compile Include="UserControls\Commesse.Designer.cs">
+      <DependentUpon>Commesse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Fornitori.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Fornitori.Designer.cs">
       <DependentUpon>Fornitori.cs</DependentUpon>
     </Compile>
     <Compile Include="Indirizzo.cs">
@@ -174,19 +180,19 @@
     <Compile Include="Servizio.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <Compile Include="UC.cs">
+    <Compile Include="UserControls\UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC.Designer.cs">
+    <Compile Include="UserControls\UC.Designer.cs">
       <DependentUpon>UC.cs</DependentUpon>
     </Compile>
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="categorie.resx">
-      <DependentUpon>categorie.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Categorie.resx">
+      <DependentUpon>Categorie.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Clienti.resx">
+    <EmbeddedResource Include="UserControls\Clienti.resx">
       <DependentUpon>Clienti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Home.resx">
@@ -195,7 +201,10 @@
     <EmbeddedResource Include="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fornitori.resx">
+    <EmbeddedResource Include="UserControls\Commesse.resx">
+      <DependentUpon>Commesse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Fornitori.resx">
       <DependentUpon>Fornitori.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -208,7 +217,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UC.resx">
+    <EmbeddedResource Include="UserControls\UC.resx">
       <DependentUpon>UC.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="ClassDiagram.edmx">

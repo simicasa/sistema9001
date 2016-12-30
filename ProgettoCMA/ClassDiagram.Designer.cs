@@ -1,4 +1,4 @@
-﻿// Generazione del codice predefinita abilitata per il modello 'C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\ClassDiagram.edmx'. 
+﻿// Generazione del codice predefinita abilitata per il modello 'C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\ClassDiagram.edmx'. 
 // Per abilitare la generazione del codice legacy, modificare il valore della proprietà della finestra di progettazione 'Strategia di generazione del codice
 // su 'Legacy ObjectContext'. Questa proprietà è disponibile nella finestra Proprietà quando il modello è
 // aperto nella finestra di progettazione.

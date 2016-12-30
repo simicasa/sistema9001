@@ -136,6 +136,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codice" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Creazione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Chiusura" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Utente_ID" Type="int" Nullable="false" />
     <Property Name="Cliente_ID" Type="int" Nullable="false" />
   </EntityType>
@@ -181,7 +185,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Associazione_Categoria_FornitoreSet">
     <Key>

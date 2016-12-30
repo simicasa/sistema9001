@@ -21,6 +21,10 @@ namespace ProgettoCMA
         }
     
         public int ID { get; set; }
+        public string Codice { get; set; }
+        public string Creazione { get; set; }
+        public string Chiusura { get; set; }
+        public string Note { get; set; }
     
         public virtual Utente Utente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

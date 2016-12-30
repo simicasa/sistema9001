@@ -125,6 +125,10 @@
     <NavigationProperty Name="Utente" Relationship="ClassDiagram.UtenteCommessa" FromRole="Commessa" ToRole="Utente" />
     <NavigationProperty Name="RDO" Relationship="ClassDiagram.CommessaRDO" FromRole="Commessa" ToRole="RDO" />
     <NavigationProperty Name="Cliente" Relationship="ClassDiagram.ClienteCommessa" FromRole="Commessa" ToRole="Cliente" />
+    <Property Name="Codice" Type="String" Nullable="false" />
+    <Property Name="Creazione" Type="String" Nullable="false" />
+    <Property Name="Chiusura" Type="String" Nullable="false" />
+    <Property Name="Note" Type="String" Nullable="false" />
   </EntityType>
   <Association Name="UtenteCommessa">
     <End Type="ClassDiagram.Utente" Role="Utente" Multiplicity="1" />
@@ -185,7 +189,6 @@
     <NavigationProperty Name="Associazione_Categoria_Fornitore" Relationship="ClassDiagram.CategoriaAssociazione_Categoria_Fornitore" FromRole="Categoria" ToRole="Associazione_Categoria_Fornitore" />
     <NavigationProperty Name="RDO_Composizione" Relationship="ClassDiagram.CategoriaRDO_Composizione" FromRole="Categoria" ToRole="RDO_Composizione" />
     <NavigationProperty Name="Offerta_Composizione" Relationship="ClassDiagram.CategoriaOfferta_Composizione" FromRole="Categoria" ToRole="Offerta_Composizione" />
-    <Property Name="Nome" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="Fornitore" BaseType="ClassDiagram.Azienda">
     <NavigationProperty Name="Associazione_Categoria_Fornitore" Relationship="ClassDiagram.FornitoreAssociazione_Categoria_Fornitore" FromRole="Fornitore" ToRole="Associazione_Categoria_Fornitore" />

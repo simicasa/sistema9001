@@ -22,18 +22,15 @@ namespace ProgettoCMA
             this.menu = menuStrip1;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.MinimumSize = new Size(400, 200);
-
-            Utente utente = new Utente("angelo", "covino", "angelo", 1, "angelo");
-            /*
-            utente.Cognome = "ss";
-            utente.Nome = "dd";
-            utente.Ruolo = new Ruolo();
-            utente.ID = 15;
-            */
-            //this.ahsi("ciao");
-
-            //this.aggiungiUtente(utente);
+            this.MinimumSize = new Size(800, 600);
+            ClassDiagramContainer cdc = new ClassDiagramContainer();
+            if(cdc.UtenteSet.Where(u => u.Username == "angelo").Count() < 1)
+            {
+                Utente utente = new Utente("angelo", "covino", "angelo", 1, "angelo");
+                cdc.UtenteSet.Add(utente);
+                //cdc.Entry(utente).State = System.Data.Entity.EntityState.Added;
+                cdc.SaveChanges();
+            }
         }
         public void ahsi()
         {
@@ -45,24 +42,6 @@ namespace ProgettoCMA
             ConfigurationManager.RefreshSection("connectionStrings");
             Console.WriteLine(config.ConnectionStrings.ConnectionStrings["ClassDiagramContainer"].ConnectionString);
         }
-        public void aggiungiUtente(Utente utente)
-        {
-            ClassDiagramContainer cdc = new ClassDiagramContainer();
-            /*
-            var test = from r in cdc.UtenteSet select r;
-            Console.WriteLine("nananananananna");
-            Console.WriteLine(test.Count());
-            foreach (var t in test)
-            {
-                Console.WriteLine(t.Nome + " " + t.Cognome);
-                //Console.WriteLine(t.Ragione.ToString());
-                //Console.WriteLine(t.Indirizzo.Citta.ToString());
-            }
-            */
-            cdc.UtenteSet.Add(utente);
-            //cdc.Entry(utente).State = System.Data.Entity.EntityState.Added;
-            cdc.SaveChanges();
-        }
         
         private void Home_Load(object sender, EventArgs e)
         {
@@ -70,10 +49,9 @@ namespace ProgettoCMA
 
         private void Home_Shown(object sender, EventArgs e)
         {
-            /*
             Login login = new Login(this);
+            login.StartPosition = FormStartPosition.CenterParent;
             login.ShowDialog();
-            */
         }
 
         private void clientiGestioneToolStripMenuItem_Click(object sender, EventArgs e)
@@ -87,6 +65,11 @@ namespace ProgettoCMA
             Fornitori fornitore = new Fornitori(this);
             this.controlsAdd(fornitore);
 
+        }
+        private void commesseGestioneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Commesse commessa = new Commesse(this);
+            this.controlsAdd(commessa);
         }
 
         private void controlsAdd(UserControl uc)
@@ -104,21 +87,6 @@ namespace ProgettoCMA
                     this.Controls[i].Dispose();
                 }
             }
-        }
-
-        public void ripopolami()
-        {
-            ClassDiagramContainer cdc = new ClassDiagramContainer();
-            Utente user = new Utente("angelo", "covino", "angelo", 1, "angelo");
-            cdc.UtenteSet.Add(user);
-            cdc.Entry(user).State = System.Data.Entity.EntityState.Added;
-            cdc.SaveChanges();
-        }
-
-        private void gestioneToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            categorie categoria = new categorie(this);
-            this.controlsAdd(categoria);
         }
     }
 }

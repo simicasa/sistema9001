@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/30/2016 09:18:39
--- Generated from EDMX file: C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\ClassDiagram.edmx
+-- Date Created: 12/30/2016 12:39:06
+-- Generated from EDMX file: C:\Users\angelotm\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\ClassDiagram.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [DB];
+USE [CMA];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -179,6 +179,10 @@ GO
 -- Creating table 'CommessaSet'
 CREATE TABLE [dbo].[CommessaSet] (
     [ID] int IDENTITY(1,1) NOT NULL,
+    [Codice] nvarchar(max)  NOT NULL,
+    [Creazione] nvarchar(max)  NOT NULL,
+    [Chiusura] nvarchar(max)  NOT NULL,
+    [Note] nvarchar(max)  NOT NULL,
     [Utente_ID] int  NOT NULL,
     [Cliente_ID] int  NOT NULL
 );
@@ -223,8 +227,7 @@ GO
 
 -- Creating table 'CategoriaSet'
 CREATE TABLE [dbo].[CategoriaSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Nome] nvarchar(max)  NOT NULL
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 

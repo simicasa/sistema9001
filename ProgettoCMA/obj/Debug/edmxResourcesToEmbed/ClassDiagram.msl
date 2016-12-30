@@ -16,6 +16,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Commessa)">
         <MappingFragment StoreEntitySet="CommessaSet">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Codice" ColumnName="Codice" />
+          <ScalarProperty Name="Creazione" ColumnName="Creazione" />
+          <ScalarProperty Name="Chiusura" ColumnName="Chiusura" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -59,7 +63,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Categoria)">
         <MappingFragment StoreEntitySet="CategoriaSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Nome" ColumnName="Nome" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
