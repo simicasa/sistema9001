@@ -1,0 +1,593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClassDiagram.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ClassDiagramStoreContainer">
+    <EntitySet Name="UtenteSet" EntityType="ClassDiagram.Store.UtenteSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommessaSet" EntityType="ClassDiagram.Store.CommessaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RuoloSet" EntityType="ClassDiagram.Store.RuoloSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RDOSet" EntityType="ClassDiagram.Store.RDOSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RDO_ComposizioneSet" EntityType="ClassDiagram.Store.RDO_ComposizioneSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ODA_ComposizioneSet" EntityType="ClassDiagram.Store.ODA_ComposizioneSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ODASet" EntityType="ClassDiagram.Store.ODASet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategoriaSet" EntityType="ClassDiagram.Store.CategoriaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Associazione_Categoria_FornitoreSet" EntityType="ClassDiagram.Store.Associazione_Categoria_FornitoreSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ordine_ComposizioneSet" EntityType="ClassDiagram.Store.Ordine_ComposizioneSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrdineSet" EntityType="ClassDiagram.Store.OrdineSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OffertaSet" EntityType="ClassDiagram.Store.OffertaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Offerta_ComposizioneSet" EntityType="ClassDiagram.Store.Offerta_ComposizioneSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Associazione_Offerta_ServizioSet" EntityType="ClassDiagram.Store.Associazione_Offerta_ServizioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Metodo_PagamentoSet" EntityType="ClassDiagram.Store.Metodo_PagamentoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Metodo_SpedizioneSet" EntityType="ClassDiagram.Store.Metodo_SpedizioneSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ServizioSet" EntityType="ClassDiagram.Store.ServizioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContattoSet" EntityType="ClassDiagram.Store.ContattoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AziendaSet" EntityType="ClassDiagram.Store.AziendaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AziendaSet_Fornitore" EntityType="ClassDiagram.Store.AziendaSet_Fornitore" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AziendaSet_Cliente" EntityType="ClassDiagram.Store.AziendaSet_Cliente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AziendaContatto" EntityType="ClassDiagram.Store.AziendaContatto" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UtenteCommessa" Association="ClassDiagram.Store.UtenteCommessa">
+      <End Role="Utente" EntitySet="UtenteSet" />
+      <End Role="Commessa" EntitySet="CommessaSet" />
+    </AssociationSet>
+    <AssociationSet Name="RuoloUtente" Association="ClassDiagram.Store.RuoloUtente">
+      <End Role="Ruolo" EntitySet="RuoloSet" />
+      <End Role="Utente" EntitySet="UtenteSet" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriaAssociazione_Categoria_Fornitore" Association="ClassDiagram.Store.CategoriaAssociazione_Categoria_Fornitore">
+      <End Role="Categoria" EntitySet="CategoriaSet" />
+      <End Role="Associazione_Categoria_Fornitore" EntitySet="Associazione_Categoria_FornitoreSet" />
+    </AssociationSet>
+    <AssociationSet Name="FornitoreAssociazione_Categoria_Fornitore" Association="ClassDiagram.Store.FornitoreAssociazione_Categoria_Fornitore">
+      <End Role="Fornitore" EntitySet="AziendaSet_Fornitore" />
+      <End Role="Associazione_Categoria_Fornitore" EntitySet="Associazione_Categoria_FornitoreSet" />
+    </AssociationSet>
+    <AssociationSet Name="CommessaRDO" Association="ClassDiagram.Store.CommessaRDO">
+      <End Role="Commessa" EntitySet="CommessaSet" />
+      <End Role="RDO" EntitySet="RDOSet" />
+    </AssociationSet>
+    <AssociationSet Name="RDORDO_Composizione" Association="ClassDiagram.Store.RDORDO_Composizione">
+      <End Role="RDO" EntitySet="RDOSet" />
+      <End Role="RDO_Composizione" EntitySet="RDO_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="RDORDA" Association="ClassDiagram.Store.RDORDA">
+      <End Role="RDO" EntitySet="RDOSet" />
+      <End Role="RDA" EntitySet="ODASet" />
+    </AssociationSet>
+    <AssociationSet Name="RDARDA_Composizione" Association="ClassDiagram.Store.RDARDA_Composizione">
+      <End Role="RDA" EntitySet="ODASet" />
+      <End Role="RDA_Composizione" EntitySet="ODA_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="RDO_ComposizioneRDA_Composizione" Association="ClassDiagram.Store.RDO_ComposizioneRDA_Composizione">
+      <End Role="RDO_Composizione" EntitySet="RDO_ComposizioneSet" />
+      <End Role="RDA_Composizione" EntitySet="ODA_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriaRDO_Composizione" Association="ClassDiagram.Store.CategoriaRDO_Composizione">
+      <End Role="Categoria" EntitySet="CategoriaSet" />
+      <End Role="RDO_Composizione" EntitySet="RDO_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="RDA_ComposizioneOrdine_Composizione" Association="ClassDiagram.Store.RDA_ComposizioneOrdine_Composizione">
+      <End Role="RDA_Composizione" EntitySet="ODA_ComposizioneSet" />
+      <End Role="Ordine_Composizione" EntitySet="Ordine_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="OrdineOrdine_Composizione" Association="ClassDiagram.Store.OrdineOrdine_Composizione">
+      <End Role="Ordine" EntitySet="OrdineSet" />
+      <End Role="Ordine_Composizione" EntitySet="Ordine_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="OffertaOfferta_Composizione" Association="ClassDiagram.Store.OffertaOfferta_Composizione">
+      <End Role="Offerta" EntitySet="OffertaSet" />
+      <End Role="Offerta_Composizione" EntitySet="Offerta_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriaOfferta_Composizione" Association="ClassDiagram.Store.CategoriaOfferta_Composizione">
+      <End Role="Categoria" EntitySet="CategoriaSet" />
+      <End Role="Offerta_Composizione" EntitySet="Offerta_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="OrdineOfferta" Association="ClassDiagram.Store.OrdineOfferta">
+      <End Role="Ordine" EntitySet="OrdineSet" />
+      <End Role="Offerta" EntitySet="OffertaSet" />
+    </AssociationSet>
+    <AssociationSet Name="Associazione_Offerta_ServizioServizio" Association="ClassDiagram.Store.Associazione_Offerta_ServizioServizio">
+      <End Role="Associazione_Offerta_Servizio" EntitySet="Associazione_Offerta_ServizioSet" />
+      <End Role="Servizio" EntitySet="ServizioSet" />
+    </AssociationSet>
+    <AssociationSet Name="Associazione_Offerta_ServizioOfferta" Association="ClassDiagram.Store.Associazione_Offerta_ServizioOfferta">
+      <End Role="Associazione_Offerta_Servizio" EntitySet="Associazione_Offerta_ServizioSet" />
+      <End Role="Offerta" EntitySet="OffertaSet" />
+    </AssociationSet>
+    <AssociationSet Name="OffertaMetodo_Pagamento" Association="ClassDiagram.Store.OffertaMetodo_Pagamento">
+      <End Role="Offerta" EntitySet="OffertaSet" />
+      <End Role="Metodo_Pagamento" EntitySet="Metodo_PagamentoSet" />
+    </AssociationSet>
+    <AssociationSet Name="OffertaMetodo_Spedizione" Association="ClassDiagram.Store.OffertaMetodo_Spedizione">
+      <End Role="Offerta" EntitySet="OffertaSet" />
+      <End Role="Metodo_Spedizione" EntitySet="Metodo_SpedizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AziendaContatto_Azienda" Association="ClassDiagram.Store.FK_AziendaContatto_Azienda">
+      <End Role="Azienda" EntitySet="AziendaSet" />
+      <End Role="AziendaContatto" EntitySet="AziendaContatto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AziendaContatto_Contatto" Association="ClassDiagram.Store.FK_AziendaContatto_Contatto">
+      <End Role="Contatto" EntitySet="ContattoSet" />
+      <End Role="AziendaContatto" EntitySet="AziendaContatto" />
+    </AssociationSet>
+    <AssociationSet Name="ClienteCommessa" Association="ClassDiagram.Store.ClienteCommessa">
+      <End Role="Cliente" EntitySet="AziendaSet_Cliente" />
+      <End Role="Commessa" EntitySet="CommessaSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fornitore_inherits_Azienda" Association="ClassDiagram.Store.FK_Fornitore_inherits_Azienda">
+      <End Role="Azienda" EntitySet="AziendaSet" />
+      <End Role="Fornitore" EntitySet="AziendaSet_Fornitore" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cliente_inherits_Azienda" Association="ClassDiagram.Store.FK_Cliente_inherits_Azienda">
+      <End Role="Azienda" EntitySet="AziendaSet" />
+      <End Role="Cliente" EntitySet="AziendaSet_Cliente" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UtenteSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cognome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ruolo_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommessaSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Utente_ID" Type="int" Nullable="false" />
+    <Property Name="Cliente_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RuoloSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RDOSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Commessa_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RDO_ComposizioneSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RDO_Id" Type="int" Nullable="false" />
+    <Property Name="Categoria_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ODA_ComposizioneSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ODA_Id" Type="int" Nullable="false" />
+    <Property Name="RDO_Composizione_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ODASet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RDO_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategoriaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Associazione_Categoria_FornitoreSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Categoria_Id" Type="int" Nullable="false" />
+    <Property Name="Fornitore_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ordine_ComposizioneSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RDA_Composizione_Id" Type="int" Nullable="false" />
+    <Property Name="Ordine_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrdineSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OffertaSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ordine_Id" Type="int" Nullable="false" />
+    <Property Name="Associazione_Offerta_Servizio_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Offerta_ComposizioneSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Offerta_Id" Type="int" Nullable="false" />
+    <Property Name="Categoria_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Associazione_Offerta_ServizioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Metodo_PagamentoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Offerta_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Metodo_SpedizioneSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Offerta_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServizioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Associazione_Offerta_Servizio_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContattoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cognome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Mail" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AziendaSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ragione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Indirizzo_Civico" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Indirizzo_Provincia" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Indirizzo_Cap" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Indirizzo_Citta" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Indirizzo_Via" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Indirizzo_Nazione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Piva" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CodFisc" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Mail" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Note" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Creazione" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AziendaSet_Fornitore">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AziendaSet_Cliente">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AziendaContatto">
+    <Key>
+      <PropertyRef Name="Azienda_ID" />
+      <PropertyRef Name="Contatto_Id" />
+    </Key>
+    <Property Name="Azienda_ID" Type="int" Nullable="false" />
+    <Property Name="Contatto_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UtenteCommessa">
+    <End Role="Utente" Type="ClassDiagram.Store.UtenteSet" Multiplicity="1" />
+    <End Role="Commessa" Type="ClassDiagram.Store.CommessaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utente">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Commessa">
+        <PropertyRef Name="Utente_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RuoloUtente">
+    <End Role="Ruolo" Type="ClassDiagram.Store.RuoloSet" Multiplicity="1" />
+    <End Role="Utente" Type="ClassDiagram.Store.UtenteSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ruolo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Utente">
+        <PropertyRef Name="Ruolo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriaAssociazione_Categoria_Fornitore">
+    <End Role="Categoria" Type="ClassDiagram.Store.CategoriaSet" Multiplicity="1" />
+    <End Role="Associazione_Categoria_Fornitore" Type="ClassDiagram.Store.Associazione_Categoria_FornitoreSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Associazione_Categoria_Fornitore">
+        <PropertyRef Name="Categoria_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FornitoreAssociazione_Categoria_Fornitore">
+    <End Role="Fornitore" Type="ClassDiagram.Store.AziendaSet_Fornitore" Multiplicity="1" />
+    <End Role="Associazione_Categoria_Fornitore" Type="ClassDiagram.Store.Associazione_Categoria_FornitoreSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornitore">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Associazione_Categoria_Fornitore">
+        <PropertyRef Name="Fornitore_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommessaRDO">
+    <End Role="Commessa" Type="ClassDiagram.Store.CommessaSet" Multiplicity="1" />
+    <End Role="RDO" Type="ClassDiagram.Store.RDOSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commessa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RDO">
+        <PropertyRef Name="Commessa_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RDORDO_Composizione">
+    <End Role="RDO" Type="ClassDiagram.Store.RDOSet" Multiplicity="1" />
+    <End Role="RDO_Composizione" Type="ClassDiagram.Store.RDO_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RDO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RDO_Composizione">
+        <PropertyRef Name="RDO_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RDORDA">
+    <End Role="RDO" Type="ClassDiagram.Store.RDOSet" Multiplicity="1" />
+    <End Role="RDA" Type="ClassDiagram.Store.ODASet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RDO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RDA">
+        <PropertyRef Name="RDO_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RDARDA_Composizione">
+    <End Role="RDA" Type="ClassDiagram.Store.ODASet" Multiplicity="1" />
+    <End Role="RDA_Composizione" Type="ClassDiagram.Store.ODA_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RDA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RDA_Composizione">
+        <PropertyRef Name="ODA_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RDO_ComposizioneRDA_Composizione">
+    <End Role="RDO_Composizione" Type="ClassDiagram.Store.RDO_ComposizioneSet" Multiplicity="1" />
+    <End Role="RDA_Composizione" Type="ClassDiagram.Store.ODA_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RDO_Composizione">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RDA_Composizione">
+        <PropertyRef Name="RDO_Composizione_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriaRDO_Composizione">
+    <End Role="Categoria" Type="ClassDiagram.Store.CategoriaSet" Multiplicity="1" />
+    <End Role="RDO_Composizione" Type="ClassDiagram.Store.RDO_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RDO_Composizione">
+        <PropertyRef Name="Categoria_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RDA_ComposizioneOrdine_Composizione">
+    <End Role="RDA_Composizione" Type="ClassDiagram.Store.ODA_ComposizioneSet" Multiplicity="1" />
+    <End Role="Ordine_Composizione" Type="ClassDiagram.Store.Ordine_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RDA_Composizione">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ordine_Composizione">
+        <PropertyRef Name="RDA_Composizione_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrdineOrdine_Composizione">
+    <End Role="Ordine" Type="ClassDiagram.Store.OrdineSet" Multiplicity="1" />
+    <End Role="Ordine_Composizione" Type="ClassDiagram.Store.Ordine_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ordine_Composizione">
+        <PropertyRef Name="Ordine_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OffertaOfferta_Composizione">
+    <End Role="Offerta" Type="ClassDiagram.Store.OffertaSet" Multiplicity="1" />
+    <End Role="Offerta_Composizione" Type="ClassDiagram.Store.Offerta_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Offerta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Offerta_Composizione">
+        <PropertyRef Name="Offerta_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriaOfferta_Composizione">
+    <End Role="Categoria" Type="ClassDiagram.Store.CategoriaSet" Multiplicity="1" />
+    <End Role="Offerta_Composizione" Type="ClassDiagram.Store.Offerta_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Offerta_Composizione">
+        <PropertyRef Name="Categoria_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrdineOfferta">
+    <End Role="Ordine" Type="ClassDiagram.Store.OrdineSet" Multiplicity="1" />
+    <End Role="Offerta" Type="ClassDiagram.Store.OffertaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Offerta">
+        <PropertyRef Name="Ordine_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Associazione_Offerta_ServizioServizio">
+    <End Role="Associazione_Offerta_Servizio" Type="ClassDiagram.Store.Associazione_Offerta_ServizioSet" Multiplicity="1" />
+    <End Role="Servizio" Type="ClassDiagram.Store.ServizioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Associazione_Offerta_Servizio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Servizio">
+        <PropertyRef Name="Associazione_Offerta_Servizio_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Associazione_Offerta_ServizioOfferta">
+    <End Role="Associazione_Offerta_Servizio" Type="ClassDiagram.Store.Associazione_Offerta_ServizioSet" Multiplicity="1" />
+    <End Role="Offerta" Type="ClassDiagram.Store.OffertaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Associazione_Offerta_Servizio">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Offerta">
+        <PropertyRef Name="Associazione_Offerta_Servizio_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OffertaMetodo_Pagamento">
+    <End Role="Offerta" Type="ClassDiagram.Store.OffertaSet" Multiplicity="1" />
+    <End Role="Metodo_Pagamento" Type="ClassDiagram.Store.Metodo_PagamentoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Offerta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Metodo_Pagamento">
+        <PropertyRef Name="Offerta_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OffertaMetodo_Spedizione">
+    <End Role="Offerta" Type="ClassDiagram.Store.OffertaSet" Multiplicity="1" />
+    <End Role="Metodo_Spedizione" Type="ClassDiagram.Store.Metodo_SpedizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Offerta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Metodo_Spedizione">
+        <PropertyRef Name="Offerta_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClienteCommessa">
+    <End Role="Cliente" Type="ClassDiagram.Store.AziendaSet_Cliente" Multiplicity="1" />
+    <End Role="Commessa" Type="ClassDiagram.Store.CommessaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Commessa">
+        <PropertyRef Name="Cliente_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AziendaContatto_Azienda">
+    <End Role="Azienda" Type="ClassDiagram.Store.AziendaSet" Multiplicity="1" />
+    <End Role="AziendaContatto" Type="ClassDiagram.Store.AziendaContatto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Azienda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AziendaContatto">
+        <PropertyRef Name="Azienda_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AziendaContatto_Contatto">
+    <End Role="AziendaContatto" Type="ClassDiagram.Store.AziendaContatto" Multiplicity="*" />
+    <End Role="Contatto" Type="ClassDiagram.Store.ContattoSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Contatto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AziendaContatto">
+        <PropertyRef Name="Contatto_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fornitore_inherits_Azienda">
+    <End Role="Azienda" Type="ClassDiagram.Store.AziendaSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Fornitore" Type="ClassDiagram.Store.AziendaSet_Fornitore" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Azienda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Fornitore">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cliente_inherits_Azienda">
+    <End Role="Azienda" Type="ClassDiagram.Store.AziendaSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Cliente" Type="ClassDiagram.Store.AziendaSet_Cliente" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Azienda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
