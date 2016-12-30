@@ -185,6 +185,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Associazione_Categoria_FornitoreSet">
     <Key>

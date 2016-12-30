@@ -23,6 +23,7 @@ namespace ProgettoCMA
         }
     
         public int Id { get; set; }
+        public string Nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Associazione_Categoria_Fornitore> Associazione_Categoria_Fornitore { get; set; }
