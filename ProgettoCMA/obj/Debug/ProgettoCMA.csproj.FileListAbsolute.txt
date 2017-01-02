@@ -37,3 +37,4 @@ C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.exe
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
+C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
