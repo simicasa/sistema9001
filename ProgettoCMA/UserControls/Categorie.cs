@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace ProgettoCMA
 {
@@ -15,14 +16,14 @@ namespace ProgettoCMA
         public Categorie(Home home) : base(home)
         {
             InitializeComponent();
-            this.dbSet = Shared.cdc.CategoriaSet;            
-            
+
+            // DB SET
+            this.dbSet = Shared.cdc.CategoriaSet;
+
             // LIST
             this.list = listBox;
             this.list.DisplayMember = "Nome";
             this.list.ValueMember = "Nome";
-            this.getData();
-            this.orderList();
 
             // BUTTONS
             this.editBt = editButton;
@@ -31,23 +32,14 @@ namespace ProgettoCMA
             this.addBt = addButton;
             this.cancelBt = annullaButton;
 
-            this.textBoxesEnable(false);
+            this.initialize(this.orderList);
         }
 
-     
-
-
-        private void clientiListBox_SelectedIndexChanged(object sender, EventArgs e)
+        protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listInhibit)
-            {
-                return;
-            }
-            this.selectedIndex = this.list.SelectedIndex;
             if (this.newInstance != null)
             {
-                DialogResult dr = MessageBox.Show("Cambiare cliente e perdere il nuovo?", "Gestione Clienti", MessageBoxButtons.YesNo);
-                if (dr == DialogResult.Yes)
+                if (DialogResult.Yes == this.messageBoxShow("Cambiare categoria e perdere il nuovo?", MessageBoxButtons.YesNo))
                 {
                     this.listInhibit = true;
                     this.data.Remove(this.newInstance);
@@ -66,20 +58,6 @@ namespace ProgettoCMA
                     return;
                 }
             }
-            else if (saveButton.Enabled)
-            {
-                DialogResult dr = MessageBox.Show("Cambiare cliente e perdere i progressi?", "Gestione Clienti", MessageBoxButtons.YesNo);
-                if (dr == DialogResult.No)
-                {
-                    this.listInhibit = true;
-                    if (this.previousSelected != -1)
-                    {
-                        this.list.SetSelected(this.previousSelected, true);
-                    }
-                    this.listInhibit = false;
-                    return;
-                }
-            }
             if (this.selectedIndex == -1)
             {
                 if (this.data.Count() == 0)
@@ -89,17 +67,6 @@ namespace ProgettoCMA
                 }
                 return;
             }
-            this.updateUI(this.dataSubset[this.selectedIndex]);
-            this.previousSelected = this.list.SelectedIndex;
-        }
-        private void editButton_Click(object sender, EventArgs e)
-        {
-            if (this.selectedIndex == -1)
-            {
-                MessageBox.Show("Nessun cliente presente", "Gestione Clienti", MessageBoxButtons.OK);
-                return;
-            }
-            this.editButtons();
         }
         private void editButtons()
         {
@@ -118,57 +85,29 @@ namespace ProgettoCMA
 
             this.textBoxesEnable(false);
         }
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Continuare con il salvataggio?", "Aggiunta Categoria", MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
-                this.saveButtons();
-                this.updateFields();
-            }
-        }
-
         private void updateFields()
         {
+            this.listInhibit = true;
             bool isNew = (this.newInstance == null) ? false : true;
             Categoria categoria;
             if (!isNew)
             {
                 int ID = Int32.Parse(idValue.Text);
-                IQueryable<Categoria> iq = Shared.cdc.CategoriaSet.OfType<Categoria>().Where(x => x.Id == ID);
-                iq.Select(x => x);
-                var query = iq;
-                if (query.Count() == 1)
-                {
-                    categoria = query.First();
-                }
-                else
-                {
-                    throw new Exception("Errore utente non trovato");
-                }
-            }
-            else
-            {
-                categoria = this.newInstance;
-            }
-
-            if (isNew)
-            {
-                this.databaseAdd(categoria);
-            }
-            else
-            {
+                categoria = Shared.cdc.CategoriaSet.Where(x => x.Id == ID).First();
                 this.databaseUpdate(categoria);
                 Categoria old = this.dataSubset[this.selectedIndex];
                 this.dataSubset[this.selectedIndex] = categoria;
                 this.data[this.data.IndexOf(old)] = categoria;
             }
+            else
+            {
+                categoria = this.newInstance;
+                this.databaseAdd(categoria);
+            }
             try
             {
-                this.listInhibit = true;
                 this.orderList();
                 this.list.SelectedItem = categoria;
-                this.listInhibit = false;
-                //Shared.cdc.SaveChanges();
                 searchTextBox.Text = "";
                 this.newInstance = null;
             }
@@ -176,44 +115,69 @@ namespace ProgettoCMA
             {
                 Console.WriteLine(ex);
             }
+            this.listInhibit = false;
         }
         private void orderList()
         {
             base.orderList(x => x.Nome);
             this.list.DataSource = this.dataSubset;
         }
-        private void addButton_Click(object sender, EventArgs e)
+
+        protected override void editButton_Click(object sender, EventArgs e)
+        {
+            if (this.selectedIndex == -1)
+            {
+                MessageBox.Show("Nessun categoria presente", "Gestione Categoria", MessageBoxButtons.OK);
+                return;
+            }
+            this.editButtons();
+        }
+        protected override void saveButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Continuare con il salvataggio?", "Aggiunta Categoria", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                this.saveButtons();
+                this.updateFields();
+            }
+        }
+        protected override void addButton_Click(object sender, EventArgs e)
         {
             this.listInhibit = true;
-            this.newInstance = new Categoria("nuova categorie");
+            this.newInstance = new Categoria(-1, "");
             this.data.Add(newInstance);
             this.dataSubset.Add(newInstance);
             this.orderList();
             this.list.SelectedItem = newInstance;
             this.selectedIndex = this.list.SelectedIndex;
+            Console.WriteLine("1");
             this.editButtons();
+            Console.WriteLine("2");
             this.updateUI(this.newInstance);
             this.listInhibit = false;
         }
-        private void deleteButton_Click(object sender, EventArgs e)
+        protected override void deleteButton_Click(object sender, EventArgs e)
         {
-
+            DialogResult dr = MessageBox.Show("Eliminare il categoria?", "Gestione categorie", MessageBoxButtons.YesNo);
+            if (dr == DialogResult.Yes)
+            {
+                Categoria categoria = (Categoria)this.listBox.SelectedItem;
+                this.listInhibit = true;
+                Shared.cdc.CategoriaSet.Remove(categoria);
+                this.data.Remove(categoria);
+                this.dataSubset.Remove(categoria);
+                this.listInhibit = false;
+                this.orderList();
+                Shared.cdc.SaveChanges();
+            }
         }
-
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
             base.searchTextBoxFilterData(c => c.Nome.Contains(searchTextBox.Text));
         }
-
-        private void annullaButton_Click(object sender, EventArgs e)
+        protected override void annullaButton_Click(object sender, EventArgs e)
         {
             updateUI(this.dataSubset[this.selectedIndex]);
             saveButtons();
-        }
-
-        private void clientiGroupBox_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

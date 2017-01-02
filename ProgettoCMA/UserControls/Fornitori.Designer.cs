@@ -59,17 +59,19 @@
             this.ragioneSocialeLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
             this.noteValue = new System.Windows.Forms.TextBox();
+            this.listBox = new System.Windows.Forms.ListBox();
+            this.clientiGroupBox = new System.Windows.Forms.GroupBox();
+            this.searchCategoria = new System.Windows.Forms.TextBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.categoriaRemoveButton = new System.Windows.Forms.Button();
+            this.categoriaAddButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
-            this.listBox = new System.Windows.Forms.ListBox();
-            this.clientiGroupBox = new System.Windows.Forms.GroupBox();
-            this.categoriaRemoveButton = new System.Windows.Forms.Button();
-            this.categoriaAddButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.clientiGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,7 +90,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(335, 21);
+            this.label1.Location = new System.Drawing.Point(516, 20);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
@@ -100,7 +102,7 @@
             this.searchTextBox.Location = new System.Drawing.Point(6, 18);
             this.searchTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(320, 20);
+            this.searchTextBox.Size = new System.Drawing.Size(505, 20);
             this.searchTextBox.TabIndex = 32;
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
@@ -357,6 +359,111 @@
             this.noteValue.Size = new System.Drawing.Size(287, 47);
             this.noteValue.TabIndex = 4;
             // 
+            // listBox
+            // 
+            this.listBox.FormattingEnabled = true;
+            this.listBox.Location = new System.Drawing.Point(6, 46);
+            this.listBox.Name = "listBox";
+            this.listBox.Size = new System.Drawing.Size(140, 433);
+            this.listBox.TabIndex = 0;
+            // 
+            // clientiGroupBox
+            // 
+            this.clientiGroupBox.Controls.Add(this.searchCategoria);
+            this.clientiGroupBox.Controls.Add(this.listBox2);
+            this.clientiGroupBox.Controls.Add(this.listBox1);
+            this.clientiGroupBox.Controls.Add(this.annullaButton);
+            this.clientiGroupBox.Controls.Add(this.label1);
+            this.clientiGroupBox.Controls.Add(this.searchTextBox);
+            this.clientiGroupBox.Controls.Add(this.mailValue);
+            this.clientiGroupBox.Controls.Add(this.telefonoValue);
+            this.clientiGroupBox.Controls.Add(this.codFiscValue);
+            this.clientiGroupBox.Controls.Add(this.pIvaValue);
+            this.clientiGroupBox.Controls.Add(this.nazioneValue);
+            this.clientiGroupBox.Controls.Add(this.cittaValue);
+            this.clientiGroupBox.Controls.Add(this.capValue);
+            this.clientiGroupBox.Controls.Add(this.provinciaValue);
+            this.clientiGroupBox.Controls.Add(this.civicoValue);
+            this.clientiGroupBox.Controls.Add(this.viaValue);
+            this.clientiGroupBox.Controls.Add(this.ragioneValue);
+            this.clientiGroupBox.Controls.Add(this.creazioneValue);
+            this.clientiGroupBox.Controls.Add(this.idValue);
+            this.clientiGroupBox.Controls.Add(this.dataCreazioneLabel);
+            this.clientiGroupBox.Controls.Add(this.noteLabel);
+            this.clientiGroupBox.Controls.Add(this.emailLabel);
+            this.clientiGroupBox.Controls.Add(this.telefonoLabel);
+            this.clientiGroupBox.Controls.Add(this.codiceFiscaleLabel);
+            this.clientiGroupBox.Controls.Add(this.partitaIvaLabel);
+            this.clientiGroupBox.Controls.Add(this.nazioneLabel);
+            this.clientiGroupBox.Controls.Add(this.cittaLabel);
+            this.clientiGroupBox.Controls.Add(this.capLabel);
+            this.clientiGroupBox.Controls.Add(this.provinciaLabel);
+            this.clientiGroupBox.Controls.Add(this.civicoLabel);
+            this.clientiGroupBox.Controls.Add(this.label3);
+            this.clientiGroupBox.Controls.Add(this.label2);
+            this.clientiGroupBox.Controls.Add(this.viaLabel);
+            this.clientiGroupBox.Controls.Add(this.ragioneSocialeLabel);
+            this.clientiGroupBox.Controls.Add(this.idLabel);
+            this.clientiGroupBox.Controls.Add(this.noteValue);
+            this.clientiGroupBox.Controls.Add(this.deleteButton);
+            this.clientiGroupBox.Controls.Add(this.categoriaRemoveButton);
+            this.clientiGroupBox.Controls.Add(this.categoriaAddButton);
+            this.clientiGroupBox.Controls.Add(this.addButton);
+            this.clientiGroupBox.Controls.Add(this.saveButton);
+            this.clientiGroupBox.Controls.Add(this.editButton);
+            this.clientiGroupBox.Controls.Add(this.listBox);
+            this.clientiGroupBox.Location = new System.Drawing.Point(3, 2);
+            this.clientiGroupBox.Name = "clientiGroupBox";
+            this.clientiGroupBox.Size = new System.Drawing.Size(712, 485);
+            this.clientiGroupBox.TabIndex = 1;
+            this.clientiGroupBox.TabStop = false;
+            this.clientiGroupBox.Text = "Fornitori";
+            // 
+            // searchCategoria
+            // 
+            this.searchCategoria.Location = new System.Drawing.Point(566, 18);
+            this.searchCategoria.Margin = new System.Windows.Forms.Padding(1);
+            this.searchCategoria.Name = "searchCategoria";
+            this.searchCategoria.Size = new System.Drawing.Size(140, 20);
+            this.searchCategoria.TabIndex = 37;
+            this.searchCategoria.TextChanged += new System.EventHandler(this.searchCategoria_TextChanged);
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(566, 330);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(140, 147);
+            this.listBox2.TabIndex = 36;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(566, 67);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(140, 199);
+            this.listBox1.TabIndex = 35;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(604, 313);
+            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Categorie (Fornitore)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(620, 49);
+            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Categorie (Tutte)";
+            // 
             // deleteButton
             // 
             this.deleteButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.delete_512;
@@ -367,6 +474,30 @@
             this.deleteButton.Size = new System.Drawing.Size(30, 32);
             this.deleteButton.TabIndex = 3;
             this.deleteButton.UseVisualStyleBackColor = true;
+            // 
+            // categoriaRemoveButton
+            // 
+            this.categoriaRemoveButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.arrow_top_c;
+            this.categoriaRemoveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.categoriaRemoveButton.Location = new System.Drawing.Point(634, 273);
+            this.categoriaRemoveButton.Margin = new System.Windows.Forms.Padding(1);
+            this.categoriaRemoveButton.Name = "categoriaRemoveButton";
+            this.categoriaRemoveButton.Size = new System.Drawing.Size(30, 32);
+            this.categoriaRemoveButton.TabIndex = 3;
+            this.categoriaRemoveButton.UseVisualStyleBackColor = true;
+            this.categoriaRemoveButton.Click += new System.EventHandler(this.categoriaRemoveButton_Click);
+            // 
+            // categoriaAddButton
+            // 
+            this.categoriaAddButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.arrow_down_c;
+            this.categoriaAddButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.categoriaAddButton.Location = new System.Drawing.Point(602, 273);
+            this.categoriaAddButton.Margin = new System.Windows.Forms.Padding(1);
+            this.categoriaAddButton.Name = "categoriaAddButton";
+            this.categoriaAddButton.Size = new System.Drawing.Size(30, 32);
+            this.categoriaAddButton.TabIndex = 3;
+            this.categoriaAddButton.UseVisualStyleBackColor = true;
+            this.categoriaAddButton.Click += new System.EventHandler(this.categoriaAddButton_Click);
             // 
             // addButton
             // 
@@ -401,108 +532,6 @@
             this.editButton.Size = new System.Drawing.Size(30, 32);
             this.editButton.TabIndex = 3;
             this.editButton.UseVisualStyleBackColor = true;
-            // 
-            // listBox
-            // 
-            this.listBox.FormattingEnabled = true;
-            this.listBox.Location = new System.Drawing.Point(6, 46);
-            this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(140, 433);
-            this.listBox.TabIndex = 0;
-            // 
-            // clientiGroupBox
-            // 
-            this.clientiGroupBox.Controls.Add(this.categoriaRemoveButton);
-            this.clientiGroupBox.Controls.Add(this.categoriaAddButton);
-            this.clientiGroupBox.Controls.Add(this.textBox1);
-            this.clientiGroupBox.Controls.Add(this.listBox2);
-            this.clientiGroupBox.Controls.Add(this.listBox1);
-            this.clientiGroupBox.Controls.Add(this.annullaButton);
-            this.clientiGroupBox.Controls.Add(this.label1);
-            this.clientiGroupBox.Controls.Add(this.searchTextBox);
-            this.clientiGroupBox.Controls.Add(this.mailValue);
-            this.clientiGroupBox.Controls.Add(this.telefonoValue);
-            this.clientiGroupBox.Controls.Add(this.codFiscValue);
-            this.clientiGroupBox.Controls.Add(this.pIvaValue);
-            this.clientiGroupBox.Controls.Add(this.nazioneValue);
-            this.clientiGroupBox.Controls.Add(this.cittaValue);
-            this.clientiGroupBox.Controls.Add(this.capValue);
-            this.clientiGroupBox.Controls.Add(this.provinciaValue);
-            this.clientiGroupBox.Controls.Add(this.civicoValue);
-            this.clientiGroupBox.Controls.Add(this.viaValue);
-            this.clientiGroupBox.Controls.Add(this.ragioneValue);
-            this.clientiGroupBox.Controls.Add(this.creazioneValue);
-            this.clientiGroupBox.Controls.Add(this.idValue);
-            this.clientiGroupBox.Controls.Add(this.dataCreazioneLabel);
-            this.clientiGroupBox.Controls.Add(this.noteLabel);
-            this.clientiGroupBox.Controls.Add(this.emailLabel);
-            this.clientiGroupBox.Controls.Add(this.telefonoLabel);
-            this.clientiGroupBox.Controls.Add(this.codiceFiscaleLabel);
-            this.clientiGroupBox.Controls.Add(this.partitaIvaLabel);
-            this.clientiGroupBox.Controls.Add(this.nazioneLabel);
-            this.clientiGroupBox.Controls.Add(this.cittaLabel);
-            this.clientiGroupBox.Controls.Add(this.capLabel);
-            this.clientiGroupBox.Controls.Add(this.provinciaLabel);
-            this.clientiGroupBox.Controls.Add(this.civicoLabel);
-            this.clientiGroupBox.Controls.Add(this.viaLabel);
-            this.clientiGroupBox.Controls.Add(this.ragioneSocialeLabel);
-            this.clientiGroupBox.Controls.Add(this.idLabel);
-            this.clientiGroupBox.Controls.Add(this.noteValue);
-            this.clientiGroupBox.Controls.Add(this.deleteButton);
-            this.clientiGroupBox.Controls.Add(this.addButton);
-            this.clientiGroupBox.Controls.Add(this.saveButton);
-            this.clientiGroupBox.Controls.Add(this.editButton);
-            this.clientiGroupBox.Controls.Add(this.listBox);
-            this.clientiGroupBox.Location = new System.Drawing.Point(3, 2);
-            this.clientiGroupBox.Name = "clientiGroupBox";
-            this.clientiGroupBox.Size = new System.Drawing.Size(712, 485);
-            this.clientiGroupBox.TabIndex = 1;
-            this.clientiGroupBox.TabStop = false;
-            this.clientiGroupBox.Text = "Fornitori";
-            // 
-            // categoriaRemoveButton
-            // 
-            this.categoriaRemoveButton.Location = new System.Drawing.Point(640, 238);
-            this.categoriaRemoveButton.Name = "categoriaRemoveButton";
-            this.categoriaRemoveButton.Size = new System.Drawing.Size(24, 47);
-            this.categoriaRemoveButton.TabIndex = 39;
-            this.categoriaRemoveButton.Text = "^";
-            this.categoriaRemoveButton.UseVisualStyleBackColor = true;
-            this.categoriaRemoveButton.Click += new System.EventHandler(this.categoriaRemoveButton_Click);
-            // 
-            // categoriaAddButton
-            // 
-            this.categoriaAddButton.Location = new System.Drawing.Point(610, 238);
-            this.categoriaAddButton.Name = "categoriaAddButton";
-            this.categoriaAddButton.Size = new System.Drawing.Size(24, 47);
-            this.categoriaAddButton.TabIndex = 38;
-            this.categoriaAddButton.Text = "v";
-            this.categoriaAddButton.UseVisualStyleBackColor = true;
-            this.categoriaAddButton.Click += new System.EventHandler(this.categoriaAddButton_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(386, 17);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(320, 20);
-            this.textBox1.TabIndex = 37;
-            // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(566, 291);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(140, 186);
-            this.listBox2.TabIndex = 36;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(566, 46);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(140, 186);
-            this.listBox1.TabIndex = 35;
             // 
             // Fornitori
             // 
@@ -556,10 +585,12 @@
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.GroupBox clientiGroupBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox searchCategoria;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button categoriaRemoveButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button categoriaAddButton;
+        private System.Windows.Forms.Button categoriaRemoveButton;
     }
 }

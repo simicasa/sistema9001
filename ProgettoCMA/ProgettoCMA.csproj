@@ -258,6 +258,8 @@
       <LastGenOutput>ClassDiagram.cs</LastGenOutput>
       <DependentUpon>ClassDiagram.edmx</DependentUpon>
     </Content>
+    <None Include="Resources\arrow-top-c.png" />
+    <None Include="Resources\arrow-down-c.png" />
     <None Include="Resources\delete-512.png" />
     <None Include="Resources\add_user-128.png" />
     <None Include="Resources\floppy-disk-icon-8284.png" />

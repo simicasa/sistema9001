@@ -28,6 +28,10 @@ namespace ProgettoCMA
         protected T newInstance;
         protected int previousSelected = -1;
 
+        // CONTROLS
+        protected Control[] defaultEnabledControls = null;
+        protected Control[] defaultDisabledControls = null;
+
         // BUTTONS
         protected Button editBt = null;
         protected Button saveBt = null;
@@ -63,16 +67,32 @@ namespace ProgettoCMA
             return MessageBox.Show(text, caption, buttons, icon);
         }
 
-        public void initialize(Action orderListFunction)
+        protected void initialize(Action orderListFunction, Control[] defaultEnabledControls = null, Control[] defaultDisabledControls = null)
+        {
+            this.initializeFull(orderListFunction, this.getData, defaultEnabledControls, defaultDisabledControls);
+        }
+        protected void initializeFull(Action orderListFunction, Action getDataFunction, Control[] defaultEnabledControls, Control[] defaultDisabledControls)
         {
             this.defaultEnabledButtons = new Button[] { this.editBt, this.deleteBt, this.addBt };
             this.defaultDisabledButtons = new Button[] { this.saveBt, this.cancelBt };
-            this.getData();
+            if (defaultEnabledControls != null)
+            {
+                this.defaultEnabledControls = defaultEnabledControls;
+                this.defaultEnabledButtons = (Button[])(this.defaultEnabledButtons.Union(defaultEnabledControls.OfType<Button>()).ToArray());
+            }
+            if (defaultDisabledControls != null)
+            {
+                this.defaultDisabledControls = defaultDisabledControls;
+                this.defaultDisabledButtons = (Button[])(this.defaultDisabledButtons.Union(defaultDisabledControls.OfType<Button>()).ToArray());
+            }
+            this.controlsUpdate(false);
+
+            getDataFunction();
             orderListFunction();
             this.initializeTextBoxes();
             this.textBoxesEnable(false);
             this.listInhibit = false;
-            if(this.selectedIndex != -1)
+            if (this.selectedIndex != -1)
             {
                 this.updateUI(this.data[this.selectedIndex]);
             }
@@ -149,17 +169,25 @@ namespace ProgettoCMA
         {
             this.controlsEnable(this.textBoxes.Values.OfType<TextBox>().ToArray(), enabled);
         }
+        protected void controlsUpdate(bool editStatus)
+        {
+            this.controlsEnable(this.defaultEnabledControls, !editStatus);
+            this.controlsEnable(this.defaultDisabledControls, editStatus);
+        }
         private void controlsEnable(Control[] controls, bool enabled)
         {
-            foreach (var control in controls)
+            if(controls != null)
             {
-                if (control != null)
+                foreach (var control in controls)
                 {
-                    control.Enabled = enabled;
-                }
-                else
-                {
-                    Console.WriteLine("Controllo non presente");
+                    if (control != null)
+                    {
+                        control.Enabled = enabled;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Controllo non presente");
+                    }
                 }
             }
         }
@@ -180,7 +208,7 @@ namespace ProgettoCMA
             this.list.DataSource = dataFull;
         }
 
-        private void initializeTextBoxes(bool isIndirizzo = false)
+        protected void initializeTextBoxes(bool isIndirizzo = false)
         {
             Type a;
             PropertyInfo[] properties;
@@ -373,6 +401,7 @@ namespace ProgettoCMA
         protected DbSet dbSetSecondary = null;
         protected ListBox listSecondary = null;
         protected BindingList<T1> dataSecondary = null;
+        protected BindingList<T1> dataSecondarySubSet = null;
         protected int selectedIndexSecondary = -1;
 
         public UC() : base()
@@ -384,10 +413,20 @@ namespace ProgettoCMA
 
         }
 
+        protected void searchTextBoxFilterData1(Func<T1, bool> filter1)
+        {
+            IEnumerable<T1> dataFull = this.dataSecondary.Where(filter1).ToList();
+            this.dataSecondarySubSet = new BindingList<T1>(dataFull.ToList());
+            this.listSecondary.DataSource = dataFull;
+        }
+        protected new void initialize(Action orderListFunction, Control[] defaultEnabledControls = null, Control[] defaultDisabledControls = null)
+        {
+            this.initializeFull(orderListFunction, this.getData, defaultEnabledControls, defaultDisabledControls);
+        }
         protected new void getData()
         {
             base.getData();
-            this.dataSecondary = new BindingList<T1>(this.dbSetSecondary.OfType<T1>().ToList());
+            this.dataSecondary = this.dataSecondarySubSet = new BindingList<T1>(this.dbSetSecondary.OfType<T1>().ToList());
             if (this.dataSecondary.Count() > 0)
             {
                 this.selectedIndexSecondary = 0;
@@ -396,9 +435,10 @@ namespace ProgettoCMA
         protected void orderList(Func<T, Object> orderBy, Func<T1, Object> orderBy1)
         {
             base.orderList(orderBy);
-            if (this.dataSecondary != null)
+            if (this.dataSecondary != null && this.dataSecondarySubSet != null)
             {
                 this.dataSecondary = new BindingList<T1>(this.dataSecondary.OrderBy(orderBy1).ToList());
+                this.dataSecondarySubSet = new BindingList<T1>(this.dataSecondarySubSet.OrderBy(orderBy1).ToList());
             }
         }
     }
@@ -419,7 +459,11 @@ namespace ProgettoCMA
 
         }
 
-        protected new void getData()
+        protected new void initialize(Action orderListFunction, Control[] defaultEnabledControls = null, Control[] defaultDisabledControls = null)
+        {
+            this.initializeFull(orderListFunction, this.getData, defaultEnabledControls, defaultDisabledControls);
+        }
+        protected virtual new void getData()
         {
             base.getData();
             this.dataCombine = new BindingList<T2>(this.dbSetCombine.OfType<T2>().ToList());

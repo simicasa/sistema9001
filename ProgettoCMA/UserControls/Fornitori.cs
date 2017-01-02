@@ -13,9 +13,11 @@ namespace ProgettoCMA
 {
     public partial class Fornitori : UC<Fornitore, Categoria, Associazione_Categoria_Fornitore>
     {
+        BindingList<Categoria> dataCombineFull = null;
         public Fornitori(Home home) : base(home)
         {
             InitializeComponent();
+            this.visibilizzami(false);
 
             // DB SET
             this.dbSet = Shared.cdc.AziendaSet;
@@ -26,6 +28,12 @@ namespace ProgettoCMA
             this.list = listBox;
             this.list.DisplayMember = "Ragione";
             this.list.ValueMember = "Ragione";
+            this.listSecondary = listBox1;
+            this.listSecondary.DisplayMember = "Nome";
+            this.listSecondary.ValueMember = "Nome";
+            this.listCombine = listBox2;
+            this.listCombine.DisplayMember = "Nome";
+            this.listCombine.ValueMember = "Nome";
 
             // BUTTONS
             this.editBt = editButton;
@@ -34,7 +42,7 @@ namespace ProgettoCMA
             this.addBt = addButton;
             this.cancelBt = annullaButton;
 
-            this.initialize(this.orderList);
+            this.initialize(this.orderList, null, new Control[] { categoriaAddButton, categoriaRemoveButton, listBox1, listBox2, searchCategoria });
         }
 
         protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,7 +80,9 @@ namespace ProgettoCMA
         }
         private void editButtons()
         {
+            this.visibilizzami(true);
             this.buttonsUpdate(true);
+            this.controlsUpdate(true);
             searchTextBox.Enabled = false;
             this.list.Enabled = false;
 
@@ -82,12 +92,27 @@ namespace ProgettoCMA
         }
         private void saveButtons()
         {
+            this.visibilizzami(false);
             this.buttonsUpdate(false);
+            this.controlsUpdate(false);
             searchTextBox.Enabled = true;
             this.list.Enabled = true;
 
             this.textBoxesEnable(false);
         }
+
+        private void visibilizzami(bool visible)
+        {
+            clientiGroupBox.Width = clientiGroupBox.Width + ((visible ? 1 : -1) * listBox1.Width);
+            searchCategoria.Visible = visible;
+            listBox1.Visible = visible;
+            listBox2.Visible = visible;
+            categoriaAddButton.Visible = visible;
+            categoriaRemoveButton.Visible = visible;
+            label2.Visible = visible;
+            label3.Visible = visible;
+        }
+
         private void updateFields()
         {
             this.listInhibit = true;
@@ -122,8 +147,24 @@ namespace ProgettoCMA
         }
         private void orderList()
         {
-            base.orderList(x => x.Ragione);
+            this.orderList(x => x.Ragione, x => x.Nome);
             this.list.DataSource = this.dataSubset;
+            this.listSecondary.DataSource = this.dataSecondarySubSet;
+            this.listCombine.DataSource = this.dataCombineFull;
+            this.intersectDatas();
+        }
+        protected override void getData()
+        {
+            base.getData();
+            this.dataCombineFull = new BindingList<Categoria>(Shared.cdc.Associazione_Categoria_FornitoreSet.Join(Shared.cdc.CategoriaSet,
+                                ass => ass.Categoria.Id,
+                                cat => cat.Id,
+                                (ass, cat) => cat).ToList());
+            if (this.dataCombineFull.Count() > 0)
+            {
+                this.selectedIndexCombine = 0;
+            }
+            this.intersectDatas();
         }
 
         protected override void editButton_Click(object sender, EventArgs e)
@@ -194,7 +235,12 @@ namespace ProgettoCMA
         }
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            base.searchTextBoxFilterData(c => c.Ragione.Contains(searchTextBox.Text));
+            this.searchTextBoxFilterData(c => c.Ragione.Contains(searchTextBox.Text));
+        }
+        private void searchCategoria_TextChanged(object sender, EventArgs e)
+        {
+            this.searchTextBoxFilterData1(c => c.Nome.Contains(searchCategoria.Text));
+            this.intersectDatas();
         }
         protected override void annullaButton_Click(object sender, EventArgs e)
         {
@@ -202,6 +248,11 @@ namespace ProgettoCMA
             saveButtons();
         }
 
+        private void intersectDatas()
+        {
+            this.dataSecondary = new BindingList<Categoria>(this.dataSecondary.Except(this.dataSecondary.Intersect(this.dataCombineFull)).ToList());
+            this.dataSecondarySubSet = new BindingList<Categoria>(this.dataSecondarySubSet.Except(this.dataSecondarySubSet.Intersect(this.dataCombineFull)).ToList());
+        }
         private void categoriaAddButton_Click(object sender, EventArgs e)
         {
             if (this.listSecondary.SelectedIndex != -1)
@@ -210,7 +261,12 @@ namespace ProgettoCMA
                 acf.Categoria = (Categoria) this.listSecondary.SelectedItem;
                 acf.Fornitore = (Fornitore) this.list.SelectedItem;
                 Shared.cdc.Associazione_Categoria_FornitoreSet.Add(acf);
-                this.getData();
+                Shared.cdc.SaveChanges();
+                this.dataCombineFull.Add(acf.Categoria);
+                this.dataSecondary.Remove(acf.Categoria);
+                this.dataSecondarySubSet.Remove(acf.Categoria);
+                //this.getData();
+                this.orderList();
             }
         }
 
@@ -218,8 +274,17 @@ namespace ProgettoCMA
         {
             if (this.listCombine.SelectedIndex != -1)
             {
-                Shared.cdc.Associazione_Categoria_FornitoreSet.Remove((Associazione_Categoria_Fornitore)this.listCombine.SelectedItem);
-                this.getData();
+                Categoria cat = (Categoria)this.listCombine.SelectedItem;
+                IQueryable<Associazione_Categoria_Fornitore> categoriaFornitore = Shared.cdc.Associazione_Categoria_FornitoreSet
+                   .Where(x => (x.Fornitore.ID == ((Fornitore)this.list.SelectedItem).ID) && (x.Categoria.Id == ((Categoria)this.listCombine.SelectedItem).Id));
+                Shared.cdc.Associazione_Categoria_FornitoreSet.Remove(categoriaFornitore.First());
+                Shared.cdc.SaveChanges();
+                this.dataCombineFull.Remove(cat);
+                this.dataSecondary.Add(cat);
+                this.dataSecondarySubSet.Add(cat);
+                //this.getData();
+                searchCategoria.Text = "";
+                this.orderList();
             }
         }
     }

@@ -49,13 +49,12 @@
             this.annullaButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.annullaButton.Enabled = false;
             this.annullaButton.Location = new System.Drawing.Point(277, 211);
-            this.annullaButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.annullaButton.Margin = new System.Windows.Forms.Padding(1);
             this.annullaButton.Name = "annullaButton";
             this.annullaButton.Size = new System.Drawing.Size(147, 32);
             this.annullaButton.TabIndex = 34;
             this.annullaButton.Text = "Annulla";
             this.annullaButton.UseVisualStyleBackColor = true;
-            this.annullaButton.Click += new System.EventHandler(this.annullaButton_Click);
             // 
             // label1
             // 
@@ -70,7 +69,7 @@
             // searchTextBox
             // 
             this.searchTextBox.Location = new System.Drawing.Point(6, 18);
-            this.searchTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.searchTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(409, 20);
             this.searchTextBox.TabIndex = 32;
@@ -79,7 +78,7 @@
             // nomeValue
             // 
             this.nomeValue.Location = new System.Drawing.Point(213, 78);
-            this.nomeValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.nomeValue.Margin = new System.Windows.Forms.Padding(1);
             this.nomeValue.Name = "nomeValue";
             this.nomeValue.Size = new System.Drawing.Size(244, 20);
             this.nomeValue.TabIndex = 20;
@@ -87,7 +86,7 @@
             // idValue
             // 
             this.idValue.Location = new System.Drawing.Point(213, 48);
-            this.idValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.idValue.Margin = new System.Windows.Forms.Padding(1);
             this.idValue.Name = "idValue";
             this.idValue.Size = new System.Drawing.Size(244, 20);
             this.idValue.TabIndex = 19;
@@ -117,24 +116,22 @@
             this.deleteButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.delete_512;
             this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.deleteButton.Location = new System.Drawing.Point(239, 211);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(1);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 32);
             this.deleteButton.TabIndex = 3;
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // addButton
             // 
             this.addButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.add_user_128;
             this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.addButton.Location = new System.Drawing.Point(426, 211);
-            this.addButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.addButton.Margin = new System.Windows.Forms.Padding(1);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(30, 32);
             this.addButton.TabIndex = 3;
             this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // saveButton
             // 
@@ -142,24 +139,22 @@
             this.saveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(197, 211);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(1);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(30, 32);
             this.saveButton.TabIndex = 3;
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // editButton
             // 
             this.editButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.editor_pencil_pen_edit_write_glyph_128;
             this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.editButton.Location = new System.Drawing.Point(157, 211);
-            this.editButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.editButton.Margin = new System.Windows.Forms.Padding(1);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 32);
             this.editButton.TabIndex = 3;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // listBox
             // 
@@ -168,7 +163,6 @@
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(140, 199);
             this.listBox.TabIndex = 0;
-            this.listBox.SelectedIndexChanged += new System.EventHandler(this.clientiListBox_SelectedIndexChanged);
             // 
             // clientiGroupBox
             // 
@@ -190,14 +184,13 @@
             this.clientiGroupBox.TabIndex = 1;
             this.clientiGroupBox.TabStop = false;
             this.clientiGroupBox.Text = "Categrie";
-            this.clientiGroupBox.Enter += new System.EventHandler(this.clientiGroupBox_Enter);
             // 
             // Categorie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.clientiGroupBox);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Categorie";
             this.Size = new System.Drawing.Size(492, 265);
             this.clientiGroupBox.ResumeLayout(false);

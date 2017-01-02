@@ -159,35 +159,16 @@ namespace ProgettoCMA
         protected override void deleteButton_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Eliminare il cliente?", "Gestione clienti", MessageBoxButtons.YesNo);
-            if(dr == DialogResult.Yes)
+            if (dr == DialogResult.Yes)
             {
-                Cliente cliente;
-                int ID = Int32.Parse(idValue.Text);
-                var query = from clienteQuery in Shared.cdc.AziendaSet.OfType<Cliente>()
-                            where clienteQuery.ID == ID
-                            select clienteQuery;
-                if (query.Count() == 1)
-                {
-                    cliente = query.First();
-                }
-                else
-                {
-                    throw new Exception("Errore utente non trovato");
-                }
+                Cliente cliente = (Cliente)this.listBox.SelectedItem;
                 this.listInhibit = true;
                 Shared.cdc.AziendaSet.Remove(cliente);
                 this.data.Remove(cliente);
                 this.dataSubset.Remove(cliente);
                 this.listInhibit = false;
                 this.orderList();
-                try
-                {
-                    Shared.cdc.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
+                Shared.cdc.SaveChanges();
             }
         }
         private void searchTextBox_TextChanged(object sender, EventArgs e)

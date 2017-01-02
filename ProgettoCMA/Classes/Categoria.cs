@@ -8,8 +8,9 @@ namespace ProgettoCMA
 {
     public partial class Categoria
     {
-        public Categoria(String Nome)
+        public Categoria(int ID, String Nome)
         {
+            this.Id = ID;
             this.Nome = Nome;
         }
     }
