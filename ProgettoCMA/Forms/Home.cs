@@ -14,8 +14,8 @@ namespace ProgettoCMA
 {
     public partial class Home : Form
     {
-        public Utente utente;
         private MenuStrip menu;
+
         public Home()
         {
             InitializeComponent();
@@ -23,13 +23,12 @@ namespace ProgettoCMA
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.MinimumSize = new Size(800, 600);
-            ClassDiagramContainer cdc = new ClassDiagramContainer();
-            if(cdc.UtenteSet.Where(u => u.Username == "angelo").Count() < 1)
+            if (Shared.cdc.UtenteSet.Where(u => u.Username == "angelo").Count() < 1)
             {
                 Utente utente = new Utente("angelo", "covino", "angelo", 1, "angelo");
-                cdc.UtenteSet.Add(utente);
+                Shared.cdc.UtenteSet.Add(utente);
                 //cdc.Entry(utente).State = System.Data.Entity.EntityState.Added;
-                cdc.SaveChanges();
+                Shared.cdc.SaveChanges();
             }
         }
         public void ahsi()

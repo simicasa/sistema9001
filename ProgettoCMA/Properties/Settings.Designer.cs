@@ -31,5 +31,16 @@ namespace ProgettoCMA.Properties {
                 return ((string)(this["asd"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=CMA;Persist Security Info=True;User ID=ange" +
+            "lo;Password=Napoli1990")]
+        public string CMAConnectionString {
+            get {
+                return ((string)(this["CMAConnectionString"]));
+            }
+        }
     }
 }

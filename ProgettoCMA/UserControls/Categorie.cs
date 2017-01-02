@@ -15,7 +15,7 @@ namespace ProgettoCMA
         public Categorie(Home home) : base(home)
         {
             InitializeComponent();
-            this.dbSet = this.cdc.CategoriaSet;            
+            this.dbSet = Shared.cdc.CategoriaSet;            
             
             // LIST
             this.list = listBox;
@@ -31,7 +31,7 @@ namespace ProgettoCMA
             this.addBt = addButton;
             this.cancelBt = annullaButton;
 
-            this.textBoxesUpdate(false);
+            this.textBoxesEnable(false);
         }
 
      
@@ -39,7 +39,7 @@ namespace ProgettoCMA
 
         private void clientiListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.inhibit)
+            if (this.listInhibit)
             {
                 return;
             }
@@ -49,20 +49,20 @@ namespace ProgettoCMA
                 DialogResult dr = MessageBox.Show("Cambiare cliente e perdere il nuovo?", "Gestione Clienti", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
-                    this.inhibit = true;
+                    this.listInhibit = true;
                     this.data.Remove(this.newInstance);
                     this.dataSubset.Remove(this.newInstance);
                     //this.list.Items.Remove(this.newInstance);
                     this.orderList();
                     this.list.SetSelected(this.selectedIndex, true);
-                    this.inhibit = false;
+                    this.listInhibit = false;
                     this.newInstance = null;
                 }
                 else
                 {
-                    this.inhibit = true;
+                    this.listInhibit = true;
                     this.list.SetSelected(this.selectedIndex, true);
-                    this.inhibit = false;
+                    this.listInhibit = false;
                     return;
                 }
             }
@@ -71,12 +71,12 @@ namespace ProgettoCMA
                 DialogResult dr = MessageBox.Show("Cambiare cliente e perdere i progressi?", "Gestione Clienti", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.No)
                 {
-                    this.inhibit = true;
+                    this.listInhibit = true;
                     if (this.previousSelected != -1)
                     {
                         this.list.SetSelected(this.previousSelected, true);
                     }
-                    this.inhibit = false;
+                    this.listInhibit = false;
                     return;
                 }
             }
@@ -107,7 +107,7 @@ namespace ProgettoCMA
             searchTextBox.Enabled = false;
             this.list.Enabled = false;
 
-            this.textBoxesUpdate(true);
+            this.textBoxesEnable(true);
             idValue.Enabled = false;
         }
         private void saveButtons()
@@ -116,7 +116,7 @@ namespace ProgettoCMA
             searchTextBox.Enabled = true;
             this.list.Enabled = true;
 
-            this.textBoxesUpdate(false);
+            this.textBoxesEnable(false);
         }
         private void saveButton_Click(object sender, EventArgs e)
         {
@@ -134,7 +134,7 @@ namespace ProgettoCMA
             if (!isNew)
             {
                 int ID = Int32.Parse(idValue.Text);
-                IQueryable<Categoria> iq = this.cdc.CategoriaSet.OfType<Categoria>().Where(x => x.Id == ID);
+                IQueryable<Categoria> iq = Shared.cdc.CategoriaSet.OfType<Categoria>().Where(x => x.Id == ID);
                 iq.Select(x => x);
                 var query = iq;
                 if (query.Count() == 1)
@@ -164,11 +164,11 @@ namespace ProgettoCMA
             }
             try
             {
-                this.inhibit = true;
+                this.listInhibit = true;
                 this.orderList();
                 this.list.SelectedItem = categoria;
-                this.inhibit = false;
-                //this.cdc.SaveChanges();
+                this.listInhibit = false;
+                //Shared.cdc.SaveChanges();
                 searchTextBox.Text = "";
                 this.newInstance = null;
             }
@@ -184,7 +184,7 @@ namespace ProgettoCMA
         }
         private void addButton_Click(object sender, EventArgs e)
         {
-            this.inhibit = true;
+            this.listInhibit = true;
             this.newInstance = new Categoria("nuova categorie");
             this.data.Add(newInstance);
             this.dataSubset.Add(newInstance);
@@ -193,7 +193,7 @@ namespace ProgettoCMA
             this.selectedIndex = this.list.SelectedIndex;
             this.editButtons();
             this.updateUI(this.newInstance);
-            this.inhibit = false;
+            this.listInhibit = false;
         }
         private void deleteButton_Click(object sender, EventArgs e)
         {

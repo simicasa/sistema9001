@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.clientiGroupBox = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.clienteValue = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.annullaButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,7 +56,7 @@
             // 
             // clientiGroupBox
             // 
-            this.clientiGroupBox.Controls.Add(this.listBox1);
+            this.clientiGroupBox.Controls.Add(this.clienteValue);
             this.clientiGroupBox.Controls.Add(this.label2);
             this.clientiGroupBox.Controls.Add(this.annullaButton);
             this.clientiGroupBox.Controls.Add(this.label1);
@@ -85,13 +85,13 @@
             this.clientiGroupBox.TabStop = false;
             this.clientiGroupBox.Text = "Commesse";
             // 
-            // listBox1
+            // clienteValue
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(270, 78);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(286, 17);
-            this.listBox1.TabIndex = 36;
+            this.clienteValue.FormattingEnabled = true;
+            this.clienteValue.Location = new System.Drawing.Point(270, 78);
+            this.clienteValue.Name = "clienteValue";
+            this.clienteValue.Size = new System.Drawing.Size(286, 17);
+            this.clienteValue.TabIndex = 36;
             // 
             // label2
             // 
@@ -338,7 +338,7 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.ListBox listBox;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox clienteValue;
         private System.Windows.Forms.Label label2;
     }
 }

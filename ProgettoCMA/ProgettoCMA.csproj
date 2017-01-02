@@ -93,6 +93,7 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <Compile Include="Shared.cs" />
     <Compile Include="UserControls\Categorie.cs">
       <SubType>UserControl</SubType>
     </Compile>
