@@ -38,6 +38,7 @@
             this.fornitoriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fornitoriGestioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categorieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +81,7 @@
             // commesseGestioneToolStripMenuItem
             // 
             this.commesseGestioneToolStripMenuItem.Name = "commesseGestioneToolStripMenuItem";
-            this.commesseGestioneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.commesseGestioneToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.commesseGestioneToolStripMenuItem.Text = "Gestione";
             this.commesseGestioneToolStripMenuItem.Click += new System.EventHandler(this.commesseGestioneToolStripMenuItem_Click);
             // 
@@ -116,9 +117,18 @@
             // 
             // categorieToolStripMenuItem
             // 
+            this.categorieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gestioneToolStripMenuItem});
             this.categorieToolStripMenuItem.Name = "categorieToolStripMenuItem";
             this.categorieToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.categorieToolStripMenuItem.Text = "Categorie";
+            // 
+            // gestioneToolStripMenuItem
+            // 
+            this.gestioneToolStripMenuItem.Name = "gestioneToolStripMenuItem";
+            this.gestioneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gestioneToolStripMenuItem.Text = "Gestione";
+            this.gestioneToolStripMenuItem.Click += new System.EventHandler(this.gestioneToolStripMenuItem_Click_1);
             // 
             // Home
             // 
@@ -150,6 +160,7 @@
         private System.Windows.Forms.ToolStripMenuItem categorieToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commesseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem commesseGestioneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestioneToolStripMenuItem;
     }
 }
 
