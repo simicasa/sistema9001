@@ -69,6 +69,7 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.config
 
 # Chutzpah Test files
 _Chutzpah*
@@ -260,4 +261,4 @@ paket-files/
 __pycache__/
 *.pyc
 
-progettoCMA/App.config
+ProgettoCMA/ProgettoCMA/App.config
