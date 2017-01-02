@@ -21,34 +21,11 @@ namespace ProgettoCMA
         {
             this.Password = password;
         }
-        public static Utente checkLogin(String username, String password)
+        /*
+        public override string ToString()
         {
-            ClassDiagramContainer cdc = new ClassDiagramContainer();
-            IQueryable<Utente> utente = cdc.UtenteSet.Where(u => u.Username == username && u.Password == password);
-            int count = utente.Count();
-            if(count == 1)
-            {
-                return utente.First();
-            }
-            return null;
-            /*
-            var res = from user in cdc.UtenteSet
-                      where user.Username == username && user.Password == password
-                      select user;
-            try
-            {
-                if (res.Count() > 0)
-                {
-                    Console.WriteLine("tappost");
-                    return res.First();
-                }
-            }catch(Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            Console.WriteLine("nientaappost");
-            return null;
-            */
+            return this.Nome + " " + this.Cognome + " " + this.Username + " " + this.ID.ToString() + this.Ruolo.ID.ToString();
         }
+        */
     }
 }

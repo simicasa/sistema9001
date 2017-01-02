@@ -65,11 +65,11 @@
             this.editButton = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
             this.clientiGroupBox = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.categoriaRemoveButton = new System.Windows.Forms.Button();
+            this.categoriaAddButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listBoxAddButton = new System.Windows.Forms.Button();
-            this.listBoxRemoveButton = new System.Windows.Forms.Button();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.clientiGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,13 +78,12 @@
             this.annullaButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.annullaButton.Enabled = false;
             this.annullaButton.Location = new System.Drawing.Point(270, 445);
-            this.annullaButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.annullaButton.Margin = new System.Windows.Forms.Padding(1);
             this.annullaButton.Name = "annullaButton";
             this.annullaButton.Size = new System.Drawing.Size(246, 32);
             this.annullaButton.TabIndex = 34;
             this.annullaButton.Text = "Annulla";
             this.annullaButton.UseVisualStyleBackColor = true;
-            this.annullaButton.Click += new System.EventHandler(this.annullaButton_Click);
             // 
             // label1
             // 
@@ -99,7 +98,7 @@
             // searchTextBox
             // 
             this.searchTextBox.Location = new System.Drawing.Point(6, 18);
-            this.searchTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.searchTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(320, 20);
             this.searchTextBox.TabIndex = 32;
@@ -108,7 +107,7 @@
             // mailValue
             // 
             this.mailValue.Location = new System.Drawing.Point(270, 361);
-            this.mailValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.mailValue.Margin = new System.Windows.Forms.Padding(1);
             this.mailValue.Name = "mailValue";
             this.mailValue.Size = new System.Drawing.Size(287, 20);
             this.mailValue.TabIndex = 30;
@@ -116,7 +115,7 @@
             // telefonoValue
             // 
             this.telefonoValue.Location = new System.Drawing.Point(270, 333);
-            this.telefonoValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.telefonoValue.Margin = new System.Windows.Forms.Padding(1);
             this.telefonoValue.Name = "telefonoValue";
             this.telefonoValue.Size = new System.Drawing.Size(287, 20);
             this.telefonoValue.TabIndex = 29;
@@ -124,7 +123,7 @@
             // codFiscValue
             // 
             this.codFiscValue.Location = new System.Drawing.Point(270, 304);
-            this.codFiscValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.codFiscValue.Margin = new System.Windows.Forms.Padding(1);
             this.codFiscValue.Name = "codFiscValue";
             this.codFiscValue.Size = new System.Drawing.Size(287, 20);
             this.codFiscValue.TabIndex = 28;
@@ -132,7 +131,7 @@
             // pIvaValue
             // 
             this.pIvaValue.Location = new System.Drawing.Point(270, 276);
-            this.pIvaValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pIvaValue.Margin = new System.Windows.Forms.Padding(1);
             this.pIvaValue.Name = "pIvaValue";
             this.pIvaValue.Size = new System.Drawing.Size(287, 20);
             this.pIvaValue.TabIndex = 27;
@@ -140,7 +139,7 @@
             // nazioneValue
             // 
             this.nazioneValue.Location = new System.Drawing.Point(270, 248);
-            this.nazioneValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.nazioneValue.Margin = new System.Windows.Forms.Padding(1);
             this.nazioneValue.Name = "nazioneValue";
             this.nazioneValue.Size = new System.Drawing.Size(287, 20);
             this.nazioneValue.TabIndex = 26;
@@ -148,7 +147,7 @@
             // cittaValue
             // 
             this.cittaValue.Location = new System.Drawing.Point(270, 220);
-            this.cittaValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cittaValue.Margin = new System.Windows.Forms.Padding(1);
             this.cittaValue.Name = "cittaValue";
             this.cittaValue.Size = new System.Drawing.Size(287, 20);
             this.cittaValue.TabIndex = 25;
@@ -156,7 +155,7 @@
             // capValue
             // 
             this.capValue.Location = new System.Drawing.Point(270, 191);
-            this.capValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.capValue.Margin = new System.Windows.Forms.Padding(1);
             this.capValue.Name = "capValue";
             this.capValue.Size = new System.Drawing.Size(287, 20);
             this.capValue.TabIndex = 24;
@@ -164,7 +163,7 @@
             // provinciaValue
             // 
             this.provinciaValue.Location = new System.Drawing.Point(270, 163);
-            this.provinciaValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.provinciaValue.Margin = new System.Windows.Forms.Padding(1);
             this.provinciaValue.Name = "provinciaValue";
             this.provinciaValue.Size = new System.Drawing.Size(287, 20);
             this.provinciaValue.TabIndex = 23;
@@ -172,7 +171,7 @@
             // civicoValue
             // 
             this.civicoValue.Location = new System.Drawing.Point(270, 135);
-            this.civicoValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.civicoValue.Margin = new System.Windows.Forms.Padding(1);
             this.civicoValue.Name = "civicoValue";
             this.civicoValue.Size = new System.Drawing.Size(287, 20);
             this.civicoValue.TabIndex = 22;
@@ -180,7 +179,7 @@
             // viaValue
             // 
             this.viaValue.Location = new System.Drawing.Point(270, 107);
-            this.viaValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.viaValue.Margin = new System.Windows.Forms.Padding(1);
             this.viaValue.Name = "viaValue";
             this.viaValue.Size = new System.Drawing.Size(287, 20);
             this.viaValue.TabIndex = 21;
@@ -188,7 +187,7 @@
             // ragioneValue
             // 
             this.ragioneValue.Location = new System.Drawing.Point(270, 78);
-            this.ragioneValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ragioneValue.Margin = new System.Windows.Forms.Padding(1);
             this.ragioneValue.Name = "ragioneValue";
             this.ragioneValue.Size = new System.Drawing.Size(287, 20);
             this.ragioneValue.TabIndex = 20;
@@ -196,7 +195,7 @@
             // creazioneValue
             // 
             this.creazioneValue.Location = new System.Drawing.Point(270, 48);
-            this.creazioneValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.creazioneValue.Margin = new System.Windows.Forms.Padding(1);
             this.creazioneValue.Name = "creazioneValue";
             this.creazioneValue.Size = new System.Drawing.Size(118, 20);
             this.creazioneValue.TabIndex = 31;
@@ -204,7 +203,7 @@
             // idValue
             // 
             this.idValue.Location = new System.Drawing.Point(430, 48);
-            this.idValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.idValue.Margin = new System.Windows.Forms.Padding(1);
             this.idValue.Name = "idValue";
             this.idValue.Size = new System.Drawing.Size(127, 20);
             this.idValue.TabIndex = 19;
@@ -352,7 +351,7 @@
             // noteValue
             // 
             this.noteValue.Location = new System.Drawing.Point(270, 389);
-            this.noteValue.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.noteValue.Margin = new System.Windows.Forms.Padding(1);
             this.noteValue.Multiline = true;
             this.noteValue.Name = "noteValue";
             this.noteValue.Size = new System.Drawing.Size(287, 47);
@@ -363,24 +362,22 @@
             this.deleteButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.delete_512;
             this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.deleteButton.Location = new System.Drawing.Point(231, 445);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(1);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 32);
             this.deleteButton.TabIndex = 3;
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // addButton
             // 
             this.addButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.add_user_128;
             this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.addButton.Location = new System.Drawing.Point(526, 445);
-            this.addButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.addButton.Margin = new System.Windows.Forms.Padding(1);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(30, 32);
             this.addButton.TabIndex = 3;
             this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // saveButton
             // 
@@ -388,24 +385,22 @@
             this.saveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(194, 445);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(1);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(30, 32);
             this.saveButton.TabIndex = 3;
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // editButton
             // 
             this.editButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.editor_pencil_pen_edit_write_glyph_128;
             this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.editButton.Location = new System.Drawing.Point(157, 445);
-            this.editButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.editButton.Margin = new System.Windows.Forms.Padding(1);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(30, 32);
             this.editButton.TabIndex = 3;
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // listBox
             // 
@@ -414,12 +409,11 @@
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(140, 433);
             this.listBox.TabIndex = 0;
-            this.listBox.SelectedIndexChanged += new System.EventHandler(this.fornitoriListBox_SelectedIndexChanged);
             // 
             // clientiGroupBox
             // 
-            this.clientiGroupBox.Controls.Add(this.listBoxRemoveButton);
-            this.clientiGroupBox.Controls.Add(this.listBoxAddButton);
+            this.clientiGroupBox.Controls.Add(this.categoriaRemoveButton);
+            this.clientiGroupBox.Controls.Add(this.categoriaAddButton);
             this.clientiGroupBox.Controls.Add(this.textBox1);
             this.clientiGroupBox.Controls.Add(this.listBox2);
             this.clientiGroupBox.Controls.Add(this.listBox1);
@@ -466,21 +460,25 @@
             this.clientiGroupBox.TabStop = false;
             this.clientiGroupBox.Text = "Fornitori";
             // 
-            // listBox1
+            // categoriaRemoveButton
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(566, 46);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(140, 186);
-            this.listBox1.TabIndex = 35;
+            this.categoriaRemoveButton.Location = new System.Drawing.Point(640, 238);
+            this.categoriaRemoveButton.Name = "categoriaRemoveButton";
+            this.categoriaRemoveButton.Size = new System.Drawing.Size(24, 47);
+            this.categoriaRemoveButton.TabIndex = 39;
+            this.categoriaRemoveButton.Text = "^";
+            this.categoriaRemoveButton.UseVisualStyleBackColor = true;
+            this.categoriaRemoveButton.Click += new System.EventHandler(this.categoriaRemoveButton_Click);
             // 
-            // listBox2
+            // categoriaAddButton
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(566, 291);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(140, 186);
-            this.listBox2.TabIndex = 36;
+            this.categoriaAddButton.Location = new System.Drawing.Point(610, 238);
+            this.categoriaAddButton.Name = "categoriaAddButton";
+            this.categoriaAddButton.Size = new System.Drawing.Size(24, 47);
+            this.categoriaAddButton.TabIndex = 38;
+            this.categoriaAddButton.Text = "v";
+            this.categoriaAddButton.UseVisualStyleBackColor = true;
+            this.categoriaAddButton.Click += new System.EventHandler(this.categoriaAddButton_Click);
             // 
             // textBox1
             // 
@@ -490,23 +488,21 @@
             this.textBox1.Size = new System.Drawing.Size(320, 20);
             this.textBox1.TabIndex = 37;
             // 
-            // listBoxAddButton
+            // listBox2
             // 
-            this.listBoxAddButton.Location = new System.Drawing.Point(610, 238);
-            this.listBoxAddButton.Name = "listBoxAddButton";
-            this.listBoxAddButton.Size = new System.Drawing.Size(24, 47);
-            this.listBoxAddButton.TabIndex = 38;
-            this.listBoxAddButton.Text = "v";
-            this.listBoxAddButton.UseVisualStyleBackColor = true;
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(566, 291);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(140, 186);
+            this.listBox2.TabIndex = 36;
             // 
-            // listBoxRemoveButton
+            // listBox1
             // 
-            this.listBoxRemoveButton.Location = new System.Drawing.Point(640, 238);
-            this.listBoxRemoveButton.Name = "listBoxRemoveButton";
-            this.listBoxRemoveButton.Size = new System.Drawing.Size(24, 47);
-            this.listBoxRemoveButton.TabIndex = 39;
-            this.listBoxRemoveButton.Text = "^";
-            this.listBoxRemoveButton.UseVisualStyleBackColor = true;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(566, 46);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(140, 186);
+            this.listBox1.TabIndex = 35;
             // 
             // Fornitori
             // 
@@ -563,7 +559,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button listBoxRemoveButton;
-        private System.Windows.Forms.Button listBoxAddButton;
+        private System.Windows.Forms.Button categoriaRemoveButton;
+        private System.Windows.Forms.Button categoriaAddButton;
     }
 }

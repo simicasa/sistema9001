@@ -15,7 +15,6 @@ namespace ProgettoCMA
     public partial class UC<T> : UserControl
     {
         protected Home home = null;
-        protected ClassDiagramContainer cdc = null;
         
         protected DbSet dbSet = null;
         protected ListBox list = null;
@@ -23,7 +22,9 @@ namespace ProgettoCMA
         protected BindingList<T> dataSubset = null;
         protected int selectedIndex = -1;
 
-        protected bool inhibit = false;
+        protected String TName = null;
+
+        protected bool listInhibit = false;
         protected T newInstance;
         protected int previousSelected = -1;
 
@@ -39,10 +40,12 @@ namespace ProgettoCMA
         // TEXT BOXES
         private Dictionary<String, Control> textBoxes = null;
 
+        // CONSTRUCTORS
         public UC()
         {
-            this.cdc = new ClassDiagramContainer();
             this.textBoxes = new Dictionary<string, Control>();
+            this.listInhibit = true;
+            this.TName = typeof(T).Name;
         }
         public UC(Home home) : this()
         {
@@ -51,6 +54,75 @@ namespace ProgettoCMA
             //Console.WriteLine(qb.query().ToString());
         }
 
+        protected DialogResult messageBoxShow(String text, MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None)
+        {
+            return this.messageBoxShowFull(text, this.TName, buttons, icon);
+        }
+        private DialogResult messageBoxShowFull(String text, String caption = "MessageBox", MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None)
+        {
+            return MessageBox.Show(text, caption, buttons, icon);
+        }
+
+        public void initialize(Action orderListFunction)
+        {
+            this.defaultEnabledButtons = new Button[] { this.editBt, this.deleteBt, this.addBt };
+            this.defaultDisabledButtons = new Button[] { this.saveBt, this.cancelBt };
+            this.getData();
+            orderListFunction();
+            this.initializeTextBoxes();
+            this.textBoxesEnable(false);
+            this.listInhibit = false;
+            if(this.selectedIndex != -1)
+            {
+                this.updateUI(this.data[this.selectedIndex]);
+            }
+            this.buttonsUpdate(false);
+            this.list.SelectedIndexChanged += new EventHandler(this.listBox_SelectedIndexChangedBefore);
+            this.editBt.Click += new EventHandler(this.editButton_Click);
+            this.saveBt.Click += new EventHandler(this.saveButton_Click);
+            this.addBt.Click += new EventHandler(this.addButton_Click);
+            this.deleteBt.Click += new EventHandler(this.deleteButton_Click);
+            this.cancelBt.Click += new EventHandler(this.annullaButton_Click);
+        }
+        
+        protected virtual void listBox_SelectedIndexChangedBefore(object sender, EventArgs e)
+        {
+            if (this.listInhibit)
+            {
+                return;
+            }
+            this.selectedIndex = this.list.SelectedIndex;
+            this.listBox_SelectedIndexChanged(sender, e);
+            this.listBox_SelectedIndexChangedAfter(sender, e);
+        }
+        protected virtual void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+        protected virtual void listBox_SelectedIndexChangedAfter(object sender, EventArgs e)
+        {
+            if(this.dataSubset.Count > 0)
+            {
+                this.updateUI(this.dataSubset[this.selectedIndex]);
+            }
+            this.previousSelected = this.list.SelectedIndex;
+        }
+        protected virtual void editButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void saveButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void addButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void deleteButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void annullaButton_Click(object sender, EventArgs e)
+        {
+        }
+
+        // DATA GETTERS
         protected void getData()
         {
             this.data = this.dataSubset = new BindingList<T>(this.dbSet.OfType<T>().ToList());
@@ -60,23 +132,23 @@ namespace ProgettoCMA
             }
         }
 
+        // ENABLE/DISABLE FUNCTIONS
         protected void buttonsUpdate(bool editStatus)
         {
-            if (this.defaultEnabledButtons == null || this.defaultDisabledButtons == null)
+            if(this.selectedIndex == -1)
             {
-                this.defaultEnabledButtons = new Button[] { this.editBt, this.deleteBt, this.addBt };
-                this.defaultDisabledButtons = new Button[] { this.saveBt, this.cancelBt };
+                this.controlsEnable(this.defaultEnabledButtons, false);
+                this.controlsEnable(this.defaultDisabledButtons, false);
+                this.controlsEnable(new Control[] { this.addBt }, true);
+                return;
             }
             this.controlsEnable(this.defaultEnabledButtons, !editStatus);
             this.controlsEnable(this.defaultDisabledButtons, editStatus);
         }
-
-        protected void textBoxesUpdate(bool enabled)
+        protected void textBoxesEnable(bool enabled)
         {
-            this.initializeTextBoxes();
             this.controlsEnable(this.textBoxes.Values.OfType<TextBox>().ToArray(), enabled);
         }
-
         private void controlsEnable(Control[] controls, bool enabled)
         {
             foreach (var control in controls)
@@ -87,7 +159,7 @@ namespace ProgettoCMA
                 }
                 else
                 {
-                    throw new Exception("controllo null");
+                    Console.WriteLine("Controllo non presente");
                 }
             }
         }
@@ -178,17 +250,17 @@ namespace ProgettoCMA
             else
             {
                 unmododiverso.Indirizzo = addr;
-                this.cdc.AziendaSet.Add((Cliente)unmododiverso);
-                this.cdc.SaveChanges();
+                Shared.cdc.AziendaSet.Add((Cliente)unmododiverso);
+                Shared.cdc.SaveChanges();
             }*/
         }
+
         protected void databaseAdd(T instanceToSave)
         {
             this.databaseSave(instanceToSave);
         }
         protected void databaseSave(T instanceToSave, bool isUpdate = false)
         {
-            this.initializeTextBoxes();
             foreach (var item in typeof(T).GetRuntimeProperties())
             {
                 if (this.textBoxes.ContainsKey(item.Name.ToLower()) || item.PropertyType.IsClass)
@@ -203,11 +275,22 @@ namespace ProgettoCMA
                     }
                     else if (item.PropertyType == typeof(Cliente))
                     {
-                        IQueryable<Cliente> cliente = this.cdc.AziendaSet.OfType<Cliente>().Where(c => c.Ragione == this.textBoxes[item.Name.ToLower()].Text);
-                        if(cliente.Count() == 1)
+                        if (this.textBoxes[item.Name.ToLower()].GetType() == typeof(ListBox))
                         {
-                            item.SetValue(instanceToSave, cliente.First());
+                            item.SetValue(instanceToSave, ((ListBox)this.textBoxes[item.Name.ToLower()]).SelectedItem);
                         }
+                        else if (this.textBoxes[item.Name.ToLower()].GetType() == typeof(String))
+                        {
+                            IQueryable<Cliente> cliente = Shared.cdc.AziendaSet.OfType<Cliente>().Where(c => c.Ragione == this.textBoxes[item.Name.ToLower()].Text);
+                            if (cliente.Count() == 1)
+                            {
+                                item.SetValue(instanceToSave, cliente.First());
+                            }
+                        }
+                    }
+                    else if(item.PropertyType == typeof(Utente))
+                    {
+                        item.SetValue(instanceToSave, Shared.utente);
                     }
                     else
                     {
@@ -219,7 +302,11 @@ namespace ProgettoCMA
             {
                 this.dbSet.Add(instanceToSave);
             }
-            this.cdc.SaveChanges();
+            Shared.cdc.SaveChanges();
+            if (!isUpdate)
+            {
+                this.updateUI(instanceToSave);
+            }
         }
         protected void databaseUpdate(T instanceToSave)
         {
@@ -228,7 +315,6 @@ namespace ProgettoCMA
 
         protected void updateUI(T instanceToShow)
         {
-            this.initializeTextBoxes();
             foreach (var item in typeof(T).GetRuntimeProperties())
             {
                 if (this.textBoxes.ContainsKey(item.Name.ToLower()) || item.PropertyType == typeof(Indirizzo))
@@ -243,7 +329,14 @@ namespace ProgettoCMA
                     }
                     else if (item.PropertyType == typeof(Cliente) || item.PropertyType == typeof(Fornitore))
                     {
-                        this.textBoxes[item.Name.ToLower()].Text = ((Azienda)item.GetValue(instanceToShow)).Ragione;
+                        if (this.textBoxes[item.Name.ToLower()].GetType() == typeof(ListBox))
+                        {
+                            ((ListBox)this.textBoxes[item.Name.ToLower()]).SelectedItem = ((Azienda)item.GetValue(instanceToShow));
+                        }
+                        else if (this.textBoxes[item.Name.ToLower()].GetType() == typeof(String))
+                        {
+                            this.textBoxes[item.Name.ToLower()].Text = ((Azienda)item.GetValue(instanceToShow)).Ragione;
+                        }
                     }
                     else if (item.PropertyType == typeof(Utente))
                     {
@@ -256,6 +349,7 @@ namespace ProgettoCMA
                 }
             }
         }
+        
         // CLASSES INSTANCE
         private Indirizzo createIndirizzo(Indirizzo indirizzo = null)
         {
