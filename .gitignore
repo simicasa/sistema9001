@@ -70,6 +70,7 @@ artifacts/
 *.svclog
 *.scc
 *.config
+*.exe
 
 # Chutzpah Test files
 _Chutzpah*
@@ -260,5 +261,3 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-
-ProgettoCMA/ProgettoCMA/App.config
