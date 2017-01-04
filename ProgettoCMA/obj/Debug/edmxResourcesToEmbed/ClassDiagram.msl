@@ -34,35 +34,38 @@
     <EntitySetMapping Name="RDOSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.RDO)">
         <MappingFragment StoreEntitySet="RDOSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Codice" ColumnName="Codice" />
+          <ScalarProperty Name="Progressivo" ColumnName="Progressivo" />
+          <ScalarProperty Name="Creazione" ColumnName="Creazione" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RDO_ComposizioneSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.RDO_Composizione)">
         <MappingFragment StoreEntitySet="RDO_ComposizioneSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ODA_ComposizioneSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.ODA_Composizione)">
         <MappingFragment StoreEntitySet="ODA_ComposizioneSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ODASet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.ODA)">
         <MappingFragment StoreEntitySet="ODASet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CategoriaSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Categoria)">
         <MappingFragment StoreEntitySet="CategoriaSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -70,70 +73,70 @@
     <EntitySetMapping Name="Associazione_Categoria_FornitoreSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Associazione_Categoria_Fornitore)">
         <MappingFragment StoreEntitySet="Associazione_Categoria_FornitoreSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Ordine_ComposizioneSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Ordine_Composizione)">
         <MappingFragment StoreEntitySet="Ordine_ComposizioneSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrdineSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Ordine)">
         <MappingFragment StoreEntitySet="OrdineSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OffertaSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Offerta)">
         <MappingFragment StoreEntitySet="OffertaSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Offerta_ComposizioneSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Offerta_Composizione)">
         <MappingFragment StoreEntitySet="Offerta_ComposizioneSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Associazione_Offerta_ServizioSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Associazione_Offerta_Servizio)">
         <MappingFragment StoreEntitySet="Associazione_Offerta_ServizioSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Metodo_PagamentoSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Metodo_Pagamento)">
         <MappingFragment StoreEntitySet="Metodo_PagamentoSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Metodo_SpedizioneSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Metodo_Spedizione)">
         <MappingFragment StoreEntitySet="Metodo_SpedizioneSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ServizioSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Servizio)">
         <MappingFragment StoreEntitySet="ServizioSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ContattoSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Contatto)">
         <MappingFragment StoreEntitySet="ContattoSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="Cognome" ColumnName="Cognome" />
           <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
@@ -174,6 +177,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Lista_RDO_ComposizioneSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Lista_RDO_Composizione)">
+        <MappingFragment StoreEntitySet="Lista_RDO_ComposizioneSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+          <ScalarProperty Name="UnitaMisura" ColumnName="UnitaMisura" />
+          <ScalarProperty Name="Quantita" ColumnName="Quantita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lista_RDOSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ClassDiagram.Lista_RDO)">
+        <MappingFragment StoreEntitySet="Lista_RDOSet">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CondizioniParticolari" ColumnName="CondizioniParticolari" />
+          <ScalarProperty Name="Progressivo" ColumnName="Progressivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="UtenteCommessa" TypeName="ClassDiagram.UtenteCommessa" StoreEntitySet="CommessaSet">
       <EndProperty Name="Utente">
         <ScalarProperty Name="ID" ColumnName="Utente_ID" />
@@ -192,10 +214,10 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="CategoriaAssociazione_Categoria_Fornitore" TypeName="ClassDiagram.CategoriaAssociazione_Categoria_Fornitore" StoreEntitySet="Associazione_Categoria_FornitoreSet">
       <EndProperty Name="Categoria">
-        <ScalarProperty Name="Id" ColumnName="Categoria_Id" />
+        <ScalarProperty Name="ID" ColumnName="Categoria_ID" />
       </EndProperty>
       <EndProperty Name="Associazione_Categoria_Fornitore">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="FornitoreAssociazione_Categoria_Fornitore" TypeName="ClassDiagram.FornitoreAssociazione_Categoria_Fornitore" StoreEntitySet="Associazione_Categoria_FornitoreSet">
@@ -203,127 +225,103 @@
         <ScalarProperty Name="ID" ColumnName="Fornitore_ID" />
       </EndProperty>
       <EndProperty Name="Associazione_Categoria_Fornitore">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="CommessaRDO" TypeName="ClassDiagram.CommessaRDO" StoreEntitySet="RDOSet">
-      <EndProperty Name="Commessa">
-        <ScalarProperty Name="ID" ColumnName="Commessa_ID" />
-      </EndProperty>
-      <EndProperty Name="RDO">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="RDORDO_Composizione" TypeName="ClassDiagram.RDORDO_Composizione" StoreEntitySet="RDO_ComposizioneSet">
       <EndProperty Name="RDO">
-        <ScalarProperty Name="Id" ColumnName="RDO_Id" />
+        <ScalarProperty Name="ID" ColumnName="RDO_ID" />
       </EndProperty>
       <EndProperty Name="RDO_Composizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="RDORDA" TypeName="ClassDiagram.RDORDA" StoreEntitySet="ODASet">
-      <EndProperty Name="RDO">
-        <ScalarProperty Name="Id" ColumnName="RDO_Id" />
-      </EndProperty>
-      <EndProperty Name="RDA">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="RDARDA_Composizione" TypeName="ClassDiagram.RDARDA_Composizione" StoreEntitySet="ODA_ComposizioneSet">
       <EndProperty Name="RDA">
-        <ScalarProperty Name="Id" ColumnName="ODA_Id" />
+        <ScalarProperty Name="ID" ColumnName="ODA_ID" />
       </EndProperty>
       <EndProperty Name="RDA_Composizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="RDO_ComposizioneRDA_Composizione" TypeName="ClassDiagram.RDO_ComposizioneRDA_Composizione" StoreEntitySet="ODA_ComposizioneSet">
       <EndProperty Name="RDO_Composizione">
-        <ScalarProperty Name="Id" ColumnName="RDO_Composizione_Id" />
+        <ScalarProperty Name="ID" ColumnName="RDO_Composizione_ID" />
       </EndProperty>
       <EndProperty Name="RDA_Composizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="CategoriaRDO_Composizione" TypeName="ClassDiagram.CategoriaRDO_Composizione" StoreEntitySet="RDO_ComposizioneSet">
-      <EndProperty Name="Categoria">
-        <ScalarProperty Name="Id" ColumnName="Categoria_Id" />
-      </EndProperty>
-      <EndProperty Name="RDO_Composizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="RDA_ComposizioneOrdine_Composizione" TypeName="ClassDiagram.RDA_ComposizioneOrdine_Composizione" StoreEntitySet="Ordine_ComposizioneSet">
       <EndProperty Name="RDA_Composizione">
-        <ScalarProperty Name="Id" ColumnName="RDA_Composizione_Id" />
+        <ScalarProperty Name="ID" ColumnName="RDA_Composizione_ID" />
       </EndProperty>
       <EndProperty Name="Ordine_Composizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="OrdineOrdine_Composizione" TypeName="ClassDiagram.OrdineOrdine_Composizione" StoreEntitySet="Ordine_ComposizioneSet">
       <EndProperty Name="Ordine">
-        <ScalarProperty Name="Id" ColumnName="Ordine_Id" />
+        <ScalarProperty Name="ID" ColumnName="Ordine_ID" />
       </EndProperty>
       <EndProperty Name="Ordine_Composizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="OffertaOfferta_Composizione" TypeName="ClassDiagram.OffertaOfferta_Composizione" StoreEntitySet="Offerta_ComposizioneSet">
       <EndProperty Name="Offerta">
-        <ScalarProperty Name="Id" ColumnName="Offerta_Id" />
+        <ScalarProperty Name="ID" ColumnName="Offerta_ID" />
       </EndProperty>
       <EndProperty Name="Offerta_Composizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="CategoriaOfferta_Composizione" TypeName="ClassDiagram.CategoriaOfferta_Composizione" StoreEntitySet="Offerta_ComposizioneSet">
       <EndProperty Name="Categoria">
-        <ScalarProperty Name="Id" ColumnName="Categoria_Id" />
+        <ScalarProperty Name="ID" ColumnName="Categoria_ID" />
       </EndProperty>
       <EndProperty Name="Offerta_Composizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="OrdineOfferta" TypeName="ClassDiagram.OrdineOfferta" StoreEntitySet="OffertaSet">
       <EndProperty Name="Ordine">
-        <ScalarProperty Name="Id" ColumnName="Ordine_Id" />
+        <ScalarProperty Name="ID" ColumnName="Ordine_ID" />
       </EndProperty>
       <EndProperty Name="Offerta">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="Associazione_Offerta_ServizioServizio" TypeName="ClassDiagram.Associazione_Offerta_ServizioServizio" StoreEntitySet="ServizioSet">
       <EndProperty Name="Associazione_Offerta_Servizio">
-        <ScalarProperty Name="Id" ColumnName="Associazione_Offerta_Servizio_Id" />
+        <ScalarProperty Name="ID" ColumnName="Associazione_Offerta_Servizio_ID" />
       </EndProperty>
       <EndProperty Name="Servizio">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="Associazione_Offerta_ServizioOfferta" TypeName="ClassDiagram.Associazione_Offerta_ServizioOfferta" StoreEntitySet="OffertaSet">
       <EndProperty Name="Associazione_Offerta_Servizio">
-        <ScalarProperty Name="Id" ColumnName="Associazione_Offerta_Servizio_Id" />
+        <ScalarProperty Name="ID" ColumnName="Associazione_Offerta_Servizio_ID" />
       </EndProperty>
       <EndProperty Name="Offerta">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="OffertaMetodo_Pagamento" TypeName="ClassDiagram.OffertaMetodo_Pagamento" StoreEntitySet="Metodo_PagamentoSet">
       <EndProperty Name="Offerta">
-        <ScalarProperty Name="Id" ColumnName="Offerta_Id" />
+        <ScalarProperty Name="ID" ColumnName="Offerta_ID" />
       </EndProperty>
       <EndProperty Name="Metodo_Pagamento">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="OffertaMetodo_Spedizione" TypeName="ClassDiagram.OffertaMetodo_Spedizione" StoreEntitySet="Metodo_SpedizioneSet">
       <EndProperty Name="Offerta">
-        <ScalarProperty Name="Id" ColumnName="Offerta_Id" />
+        <ScalarProperty Name="ID" ColumnName="Offerta_ID" />
       </EndProperty>
       <EndProperty Name="Metodo_Spedizione">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+        <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="AziendaContatto" TypeName="ClassDiagram.AziendaContatto" StoreEntitySet="AziendaContatto">
@@ -331,7 +329,7 @@
         <ScalarProperty Name="ID" ColumnName="Azienda_ID" />
       </EndProperty>
       <EndProperty Name="Contatto">
-        <ScalarProperty Name="Id" ColumnName="Contatto_Id" />
+        <ScalarProperty Name="ID" ColumnName="Contatto_ID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="ClienteCommessa" TypeName="ClassDiagram.ClienteCommessa" StoreEntitySet="CommessaSet">
@@ -341,6 +339,63 @@
       <EndProperty Name="Commessa">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CommessaAssociazione_Commessa_RDO" TypeName="ClassDiagram.CommessaAssociazione_Commessa_RDO" StoreEntitySet="Lista_RDOSet">
+      <EndProperty Name="Commessa">
+        <ScalarProperty Name="ID" ColumnName="Commessa_ID" />
+      </EndProperty>
+      <EndProperty Name="Associazione_Commessa_RDO">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Associazione_Commessa_RDOCommessa_RDO_Prodotti" TypeName="ClassDiagram.Associazione_Commessa_RDOCommessa_RDO_Prodotti" StoreEntitySet="Lista_RDO_ComposizioneSet">
+      <EndProperty Name="Associazione_Commessa_RDO">
+        <ScalarProperty Name="ID" ColumnName="Associazione_Commessa_RDO_ID" />
+      </EndProperty>
+      <EndProperty Name="Commessa_RDO_Prodotti">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Commessa_RDO_ProdottiRDO_Composizione" TypeName="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" StoreEntitySet="RDO_ComposizioneSet">
+      <EndProperty Name="Commessa_RDO_Prodotti">
+        <ScalarProperty Name="ID" ColumnName="Commessa_RDO_Prodotti_ID" />
+      </EndProperty>
+      <EndProperty Name="RDO_Composizione">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Associazione_Commessa_RDORDO" TypeName="ClassDiagram.Associazione_Commessa_RDORDO" StoreEntitySet="RDOSet">
+      <EndProperty Name="Associazione_Commessa_RDO">
+        <ScalarProperty Name="ID" ColumnName="Associazione_Commessa_RDO_ID" />
+      </EndProperty>
+      <EndProperty Name="RDO">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CategoriaCommessa_RDO_Prodotti" TypeName="ClassDiagram.CategoriaCommessa_RDO_Prodotti" StoreEntitySet="Lista_RDO_ComposizioneSet">
+      <EndProperty Name="Categoria">
+        <ScalarProperty Name="ID" ColumnName="Categoria_ID" />
+      </EndProperty>
+      <EndProperty Name="Commessa_RDO_Prodotti">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FornitoreRDO" TypeName="ClassDiagram.FornitoreRDO" StoreEntitySet="RDOSet">
+      <EndProperty Name="Fornitore">
+        <ScalarProperty Name="ID" ColumnName="Fornitore_ID" />
+      </EndProperty>
+      <EndProperty Name="RDO">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CategoriaCategoria" TypeName="ClassDiagram.CategoriaCategoria" StoreEntitySet="CategoriaSet">
+      <EndProperty Name="Categoria">
+        <ScalarProperty Name="ID" ColumnName="Macro_ID" />
+      </EndProperty>
+      <EndProperty Name="Categoria1">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="Macro_ID" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

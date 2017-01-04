@@ -14,7 +14,7 @@ namespace ProgettoCMA
     
     public partial class Offerta_Composizione
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         public virtual Offerta Offerta { get; set; }
         public virtual Categoria Categoria { get; set; }

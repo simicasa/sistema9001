@@ -14,7 +14,7 @@ namespace ProgettoCMA
     
     public partial class Servizio
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         public virtual Associazione_Offerta_Servizio Associazione_Offerta_Servizio { get; set; }
     }

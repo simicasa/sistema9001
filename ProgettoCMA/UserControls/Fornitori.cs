@@ -14,7 +14,7 @@ namespace ProgettoCMA
     public partial class Fornitori : UC<Fornitore, Categoria, Associazione_Categoria_Fornitore>
     {
         BindingList<Categoria> dataCombineFull = null;
-        public Fornitori(Home home) : base(home)
+        public Fornitori() : base()
         {
             InitializeComponent();
             this.visibilizzami(false);
@@ -132,17 +132,10 @@ namespace ProgettoCMA
                 fornitore = this.newInstance;
                 this.databaseAdd(fornitore);
             }
-            try
-            {
-                this.orderList();
-                this.list.SelectedItem = fornitore;
-                searchTextBox.Text = "";
-                this.newInstance = null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            this.orderList();
+            this.list.SelectedItem = fornitore;
+            searchTextBox.Text = "";
+            this.newInstance = null;
             this.listInhibit = false;
         }
         private void orderList()
@@ -157,8 +150,8 @@ namespace ProgettoCMA
         {
             base.getData();
             this.dataCombineFull = new BindingList<Categoria>(Shared.cdc.Associazione_Categoria_FornitoreSet.Join(Shared.cdc.CategoriaSet,
-                                ass => ass.Categoria.Id,
-                                cat => cat.Id,
+                                ass => ass.Categoria.ID,
+                                cat => cat.ID,
                                 (ass, cat) => cat).ToList());
             if (this.dataCombineFull.Count() > 0)
             {
@@ -193,44 +186,16 @@ namespace ProgettoCMA
             this.orderList();
             this.list.SelectedItem = newInstance;
             this.selectedIndex = this.list.SelectedIndex;
-            Console.WriteLine("1");
             this.editButtons();
-            Console.WriteLine("2");
             this.updateUI(this.newInstance);
             this.listInhibit = false;
         }
         protected override void deleteButton_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Eliminare il fornitore?", "Gestione fornitori", MessageBoxButtons.YesNo);
-            if (dr == DialogResult.Yes)
+            if (DialogResult.Yes == this.messageBoxShow("Eliminare il fornitore?", MessageBoxButtons.YesNo))
             {
-                Fornitore fornitore;
-                int ID = Int32.Parse(idValue.Text);
-                var query = from fornitoreQuery in Shared.cdc.AziendaSet.OfType<Fornitore>()
-                            where fornitoreQuery.ID == ID
-                            select fornitoreQuery;
-                if (query.Count() == 1)
-                {
-                    fornitore = query.First();
-                }
-                else
-                {
-                    throw new Exception("Errore utente non trovato");
-                }
-                this.listInhibit = true;
-                Shared.cdc.AziendaSet.Remove(fornitore);
-                this.data.Remove(fornitore);
-                this.dataSubset.Remove(fornitore);
-                this.listInhibit = false;
+                this.databaseRemove((Fornitore)this.listBox.SelectedItem);
                 this.orderList();
-                try
-                {
-                    Shared.cdc.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
             }
         }
         private void searchTextBox_TextChanged(object sender, EventArgs e)
@@ -276,7 +241,7 @@ namespace ProgettoCMA
             {
                 Categoria cat = (Categoria)this.listCombine.SelectedItem;
                 IQueryable<Associazione_Categoria_Fornitore> categoriaFornitore = Shared.cdc.Associazione_Categoria_FornitoreSet
-                   .Where(x => (x.Fornitore.ID == ((Fornitore)this.list.SelectedItem).ID) && (x.Categoria.Id == ((Categoria)this.listCombine.SelectedItem).Id));
+                   .Where(x => (x.Fornitore.ID == ((Fornitore)this.list.SelectedItem).ID) && (x.Categoria.ID == ((Categoria)this.listCombine.SelectedItem).ID));
                 Shared.cdc.Associazione_Categoria_FornitoreSet.Remove(categoriaFornitore.First());
                 Shared.cdc.SaveChanges();
                 this.dataCombineFull.Remove(cat);

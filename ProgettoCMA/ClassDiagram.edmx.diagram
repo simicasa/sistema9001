@@ -4,41 +4,38 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f8b10c569695449081c8bd91126b2195" Name="Diagram1" ZoomLevel="93" >
-        <EntityTypeShape EntityType="ClassDiagram.Utente" Width="1.5" PointX="4.5" PointY="4.75" />
-        <EntityTypeShape EntityType="ClassDiagram.Commessa" Width="1.5" PointX="2" PointY="9.5" />
+      <Diagram DiagramId="f8b10c569695449081c8bd91126b2195" Name="Diagram1" ZoomLevel="85" >
+        <EntityTypeShape EntityType="ClassDiagram.Utente" Width="1.5" PointX="1.5" PointY="9.875" />
+        <EntityTypeShape EntityType="ClassDiagram.Commessa" Width="1.5" PointX="1.5" PointY="6.875" />
         <AssociationConnector Association="ClassDiagram.UtenteCommessa" ></AssociationConnector>
-        <EntityTypeShape EntityType="ClassDiagram.Ruolo" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ClassDiagram.Ruolo" Width="1.5" PointX="1.5" PointY="12.75" />
         <AssociationConnector Association="ClassDiagram.RuoloUtente" />
-        <EntityTypeShape EntityType="ClassDiagram.RDO" Width="1.5" PointX="5.625" PointY="7.75" />
-        <EntityTypeShape EntityType="ClassDiagram.RDO_Composizione" Width="1.5" PointX="8" PointY="7.75" />
-        <EntityTypeShape EntityType="ClassDiagram.ODA_Composizione" Width="1.5" PointX="8.125" PointY="10.625" />
-        <EntityTypeShape EntityType="ClassDiagram.ODA" Width="1.5" PointX="5.75" PointY="10.625" />
-        <EntityTypeShape EntityType="ClassDiagram.Categoria" Width="1.5" PointX="16.375" PointY="4.125" />
-        <EntityTypeShape EntityType="ClassDiagram.Fornitore" Width="1.5" PointX="11.625" PointY="4.625" />
-        <EntityTypeShape EntityType="ClassDiagram.Associazione_Categoria_Fornitore" Width="2.625" PointX="15.25" PointY="8.25" />
+        <EntityTypeShape EntityType="ClassDiagram.RDO" Width="1.5" PointX="5.375" PointY="10.625" />
+        <EntityTypeShape EntityType="ClassDiagram.RDO_Composizione" Width="1.5" PointX="10.125" PointY="10.75" />
+        <EntityTypeShape EntityType="ClassDiagram.ODA_Composizione" Width="1.5" PointX="10.125" PointY="14" />
+        <EntityTypeShape EntityType="ClassDiagram.ODA" Width="1.5" PointX="5.375" PointY="14" />
+        <EntityTypeShape EntityType="ClassDiagram.Categoria" Width="1.5" PointX="18.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassDiagram.Fornitore" Width="1.5" PointX="15" PointY="8.125" />
+        <EntityTypeShape EntityType="ClassDiagram.Associazione_Categoria_Fornitore" Width="2.625" PointX="17.375" PointY="8.625" />
         <AssociationConnector Association="ClassDiagram.CategoriaAssociazione_Categoria_Fornitore" />
         <AssociationConnector Association="ClassDiagram.FornitoreAssociazione_Categoria_Fornitore" />
-        <AssociationConnector Association="ClassDiagram.CommessaRDO" />
         <AssociationConnector Association="ClassDiagram.RDORDO_Composizione" />
-        <AssociationConnector Association="ClassDiagram.RDORDA" />
         <AssociationConnector Association="ClassDiagram.RDARDA_Composizione" />
         <AssociationConnector Association="ClassDiagram.RDO_ComposizioneRDA_Composizione" />
-        <AssociationConnector Association="ClassDiagram.CategoriaRDO_Composizione" />
-        <EntityTypeShape EntityType="ClassDiagram.Ordine_Composizione" Width="1.5" PointX="11" PointY="10.75" />
-        <EntityTypeShape EntityType="ClassDiagram.Ordine" Width="1.5" PointX="13.875" PointY="10.75" />
+        <EntityTypeShape EntityType="ClassDiagram.Ordine_Composizione" Width="1.5" PointX="13.5" PointY="14" />
+        <EntityTypeShape EntityType="ClassDiagram.Ordine" Width="1.5" PointX="13.5" PointY="10.625" />
         <AssociationConnector Association="ClassDiagram.RDA_ComposizioneOrdine_Composizione" />
         <AssociationConnector Association="ClassDiagram.OrdineOrdine_Composizione" />
-        <EntityTypeShape EntityType="ClassDiagram.Offerta" Width="1.5" PointX="17" PointY="10.75" />
-        <EntityTypeShape EntityType="ClassDiagram.Offerta_Composizione" Width="1.5" PointX="18.75" PointY="7.875" />
+        <EntityTypeShape EntityType="ClassDiagram.Offerta" Width="1.5" PointX="19.5" PointY="10.75" />
+        <EntityTypeShape EntityType="ClassDiagram.Offerta_Composizione" Width="1.5" PointX="21.25" PointY="7.875" />
         <AssociationConnector Association="ClassDiagram.OffertaOfferta_Composizione" />
         <AssociationConnector Association="ClassDiagram.CategoriaOfferta_Composizione" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="ClassDiagram.OrdineOfferta" />
-        <EntityTypeShape EntityType="ClassDiagram.Associazione_Offerta_Servizio" Width="1.5" PointX="20.125" PointY="10.875" />
-        <EntityTypeShape EntityType="ClassDiagram.Metodo_Pagamento" Width="1.5" PointX="15.75" PointY="14" />
-        <EntityTypeShape EntityType="ClassDiagram.Metodo_Spedizione" Width="1.5" PointX="18.625" PointY="14" />
-        <EntityTypeShape EntityType="ClassDiagram.Servizio" Width="1.5" PointX="22.375" PointY="11" />
+        <EntityTypeShape EntityType="ClassDiagram.Associazione_Offerta_Servizio" Width="1.5" PointX="22.625" PointY="10.875" />
+        <EntityTypeShape EntityType="ClassDiagram.Metodo_Pagamento" Width="1.5" PointX="18.25" PointY="14" />
+        <EntityTypeShape EntityType="ClassDiagram.Metodo_Spedizione" Width="1.5" PointX="21.125" PointY="14" />
+        <EntityTypeShape EntityType="ClassDiagram.Servizio" Width="1.5" PointX="24.875" PointY="11" />
         <AssociationConnector Association="ClassDiagram.Associazione_Offerta_ServizioServizio" />
         <AssociationConnector Association="ClassDiagram.Associazione_Offerta_ServizioOfferta" />
         <AssociationConnector Association="ClassDiagram.OffertaMetodo_Pagamento" />
@@ -50,6 +47,16 @@
         <EntityTypeShape EntityType="ClassDiagram.Cliente" PointX="1.5" PointY="5.125" Width="1.5" FillColor="0, 122, 204" />
         <InheritanceConnector EntityType="ClassDiagram.Cliente" />
         <AssociationConnector Association="ClassDiagram.ClienteCommessa" />
+        <EntityTypeShape EntityType="ClassDiagram.Lista_RDO_Composizione" Width="2.125" PointX="9.75" PointY="7.5" />
+        <EntityTypeShape EntityType="ClassDiagram.Lista_RDO" Width="2.25" PointX="5" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="ClassDiagram.CommessaAssociazione_Commessa_RDO" />
+        <AssociationConnector Association="ClassDiagram.Associazione_Commessa_RDOCommessa_RDO_Prodotti" />
+        <AssociationConnector Association="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" />
+        <AssociationConnector Association="ClassDiagram.Associazione_Commessa_RDORDO" />
+        <AssociationConnector Association="ClassDiagram.CategoriaCommessa_RDO_Prodotti" />
+        <AssociationConnector Association="ClassDiagram.FornitoreRDO" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="ClassDiagram.CategoriaCategoria" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

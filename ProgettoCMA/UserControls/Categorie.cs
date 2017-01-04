@@ -13,7 +13,7 @@ namespace ProgettoCMA
 {
     public partial class Categorie : UC<Categoria>
     {
-        public Categorie(Home home) : base(home)
+        public Categorie() : base()
         {
             InitializeComponent();
 
@@ -32,9 +32,56 @@ namespace ProgettoCMA
             this.addBt = addButton;
             this.cancelBt = annullaButton;
 
-            this.initialize(this.orderList);
+            microValue1.Enabled = false;
+            this.initialize(this.orderList, null, new Control[] { macroValue, hasMacro });
         }
-
+        protected override void updateUIbefore(Categoria instanceToShow)
+        {
+            if(instanceToShow != null)
+            {
+                //List<Categoria> temp = new List<Categoria>() { new Categoria(-1, "- Nessuna", null) };
+                //macroValue.DataSource = temp.Union(Shared.cdc.CategoriaSet.Where(c => c.Macro == null && c.ID != instanceToShow.ID)).ToList();
+                macroValue.DataSource = Shared.cdc.CategoriaSet.Where(c => c.Macro == null && c.ID != instanceToShow.ID).ToList();
+                macroValue.ValueMember = "Nome";
+                macroValue.DropDownStyle = ComboBoxStyle.DropDownList;
+                if (instanceToShow.Micro != null && instanceToShow.Micro.Count() > 0)
+                {
+                    panelMacro.Visible = false;
+                    panelMicro.Visible = true;
+                    microValue1.Clear();
+                    /*
+                    IEnumerator<Categoria> cc = instanceToShow.Micro.GetEnumerator();
+                    while (cc.MoveNext())
+                    {
+                        microValue1.Text = cc.Current.Nome + ", ";
+                    }
+                    */
+                    foreach (var item in instanceToShow.Micro)
+                    {
+                        if (microValue1.TextLength > 0)
+                        {
+                            microValue1.Text += "\r\n";
+                        }
+                        microValue1.Text += item.Nome;
+                    }
+                }
+                else
+                {
+                    panelMacro.Visible = true;
+                    panelMicro.Visible = false;
+                    if (instanceToShow.Macro != null)
+                    {
+                        macroValue.SelectedItem = instanceToShow.Macro;
+                        hasMacro.CheckState = CheckState.Checked;
+                    }
+                    else
+                    {
+                        macroValue.SelectedIndex = -1;
+                        hasMacro.CheckState = CheckState.Unchecked;
+                    }
+                }
+            }
+        }
         protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.newInstance != null)
@@ -70,6 +117,15 @@ namespace ProgettoCMA
         }
         private void editButtons()
         {
+            this.controlsUpdate(true);
+            if (macroValue.SelectedIndex != -1)
+            {
+                macroValue.Enabled = true;
+            }
+            else
+            {
+                macroValue.Enabled = false;
+            }
             this.buttonsUpdate(true);
             searchTextBox.Enabled = false;
             this.list.Enabled = false;
@@ -79,6 +135,7 @@ namespace ProgettoCMA
         }
         private void saveButtons()
         {
+            this.controlsUpdate(false);
             this.buttonsUpdate(false);
             searchTextBox.Enabled = true;
             this.list.Enabled = true;
@@ -93,7 +150,7 @@ namespace ProgettoCMA
             if (!isNew)
             {
                 int ID = Int32.Parse(idValue.Text);
-                categoria = Shared.cdc.CategoriaSet.Where(x => x.Id == ID).First();
+                categoria = Shared.cdc.CategoriaSet.Where(x => x.ID == ID).First();
                 this.databaseUpdate(categoria);
                 Categoria old = this.dataSubset[this.selectedIndex];
                 this.dataSubset[this.selectedIndex] = categoria;
@@ -104,17 +161,10 @@ namespace ProgettoCMA
                 categoria = this.newInstance;
                 this.databaseAdd(categoria);
             }
-            try
-            {
-                this.orderList();
-                this.list.SelectedItem = categoria;
-                searchTextBox.Text = "";
-                this.newInstance = null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            this.orderList();
+            this.list.SelectedItem = categoria;
+            searchTextBox.Text = "";
+            this.newInstance = null;
             this.listInhibit = false;
         }
         private void orderList()
@@ -143,15 +193,13 @@ namespace ProgettoCMA
         protected override void addButton_Click(object sender, EventArgs e)
         {
             this.listInhibit = true;
-            this.newInstance = new Categoria(-1, "");
+            this.newInstance = new Categoria(-1, "", null);
             this.data.Add(newInstance);
             this.dataSubset.Add(newInstance);
             this.orderList();
             this.list.SelectedItem = newInstance;
             this.selectedIndex = this.list.SelectedIndex;
-            Console.WriteLine("1");
             this.editButtons();
-            Console.WriteLine("2");
             this.updateUI(this.newInstance);
             this.listInhibit = false;
         }
@@ -178,6 +226,22 @@ namespace ProgettoCMA
         {
             updateUI(this.dataSubset[this.selectedIndex]);
             saveButtons();
+        }
+
+        private void hasMacro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.saveBt.Enabled)
+            {
+                if (((CheckBox)sender).Checked)
+                {
+                    macroValue.Enabled = true;
+                }
+                else
+                {
+                    macroValue.Enabled = false;
+                    macroValue.SelectedIndex = -1;
+                }
+            }
         }
     }
 }

@@ -12,20 +12,22 @@ namespace ProgettoCMA
     using System;
     using System.Collections.Generic;
     
-    public partial class Ordine
+    public partial class Lista_RDO_Composizione
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ordine()
+        public Lista_RDO_Composizione()
         {
-            this.Ordine_Composizione = new HashSet<Ordine_Composizione>();
-            this.Offerta = new HashSet<Offerta>();
+            this.RDO_Composizione = new HashSet<RDO_Composizione>();
         }
     
         public int ID { get; set; }
+        public string Descrizione { get; set; }
+        public string UnitaMisura { get; set; }
+        public decimal Quantita { get; set; }
     
+        public virtual Lista_RDO Associazione_Commessa_RDO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ordine_Composizione> Ordine_Composizione { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Offerta> Offerta { get; set; }
+        public virtual ICollection<RDO_Composizione> RDO_Composizione { get; set; }
+        public virtual Categoria Categoria { get; set; }
     }
 }

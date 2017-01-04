@@ -20,6 +20,8 @@
     <EntitySet Name="ServizioSet" EntityType="ClassDiagram.Store.ServizioSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ContattoSet" EntityType="ClassDiagram.Store.ContattoSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AziendaSet" EntityType="ClassDiagram.Store.AziendaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Lista_RDO_ComposizioneSet" EntityType="ClassDiagram.Store.Lista_RDO_ComposizioneSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Lista_RDOSet" EntityType="ClassDiagram.Store.Lista_RDOSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AziendaSet_Fornitore" EntityType="ClassDiagram.Store.AziendaSet_Fornitore" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AziendaSet_Cliente" EntityType="ClassDiagram.Store.AziendaSet_Cliente" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="AziendaContatto" EntityType="ClassDiagram.Store.AziendaContatto" store:Type="Tables" Schema="dbo" />
@@ -39,17 +41,9 @@
       <End Role="Fornitore" EntitySet="AziendaSet_Fornitore" />
       <End Role="Associazione_Categoria_Fornitore" EntitySet="Associazione_Categoria_FornitoreSet" />
     </AssociationSet>
-    <AssociationSet Name="CommessaRDO" Association="ClassDiagram.Store.CommessaRDO">
-      <End Role="Commessa" EntitySet="CommessaSet" />
-      <End Role="RDO" EntitySet="RDOSet" />
-    </AssociationSet>
     <AssociationSet Name="RDORDO_Composizione" Association="ClassDiagram.Store.RDORDO_Composizione">
       <End Role="RDO" EntitySet="RDOSet" />
       <End Role="RDO_Composizione" EntitySet="RDO_ComposizioneSet" />
-    </AssociationSet>
-    <AssociationSet Name="RDORDA" Association="ClassDiagram.Store.RDORDA">
-      <End Role="RDO" EntitySet="RDOSet" />
-      <End Role="RDA" EntitySet="ODASet" />
     </AssociationSet>
     <AssociationSet Name="RDARDA_Composizione" Association="ClassDiagram.Store.RDARDA_Composizione">
       <End Role="RDA" EntitySet="ODASet" />
@@ -58,10 +52,6 @@
     <AssociationSet Name="RDO_ComposizioneRDA_Composizione" Association="ClassDiagram.Store.RDO_ComposizioneRDA_Composizione">
       <End Role="RDO_Composizione" EntitySet="RDO_ComposizioneSet" />
       <End Role="RDA_Composizione" EntitySet="ODA_ComposizioneSet" />
-    </AssociationSet>
-    <AssociationSet Name="CategoriaRDO_Composizione" Association="ClassDiagram.Store.CategoriaRDO_Composizione">
-      <End Role="Categoria" EntitySet="CategoriaSet" />
-      <End Role="RDO_Composizione" EntitySet="RDO_ComposizioneSet" />
     </AssociationSet>
     <AssociationSet Name="RDA_ComposizioneOrdine_Composizione" Association="ClassDiagram.Store.RDA_ComposizioneOrdine_Composizione">
       <End Role="RDA_Composizione" EntitySet="ODA_ComposizioneSet" />
@@ -111,6 +101,34 @@
       <End Role="Cliente" EntitySet="AziendaSet_Cliente" />
       <End Role="Commessa" EntitySet="CommessaSet" />
     </AssociationSet>
+    <AssociationSet Name="CommessaAssociazione_Commessa_RDO" Association="ClassDiagram.Store.CommessaAssociazione_Commessa_RDO">
+      <End Role="Commessa" EntitySet="CommessaSet" />
+      <End Role="Associazione_Commessa_RDO" EntitySet="Lista_RDOSet" />
+    </AssociationSet>
+    <AssociationSet Name="Associazione_Commessa_RDOCommessa_RDO_Prodotti" Association="ClassDiagram.Store.Associazione_Commessa_RDOCommessa_RDO_Prodotti">
+      <End Role="Associazione_Commessa_RDO" EntitySet="Lista_RDOSet" />
+      <End Role="Commessa_RDO_Prodotti" EntitySet="Lista_RDO_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="Commessa_RDO_ProdottiRDO_Composizione" Association="ClassDiagram.Store.Commessa_RDO_ProdottiRDO_Composizione">
+      <End Role="Commessa_RDO_Prodotti" EntitySet="Lista_RDO_ComposizioneSet" />
+      <End Role="RDO_Composizione" EntitySet="RDO_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="Associazione_Commessa_RDORDO" Association="ClassDiagram.Store.Associazione_Commessa_RDORDO">
+      <End Role="Associazione_Commessa_RDO" EntitySet="Lista_RDOSet" />
+      <End Role="RDO" EntitySet="RDOSet" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriaCommessa_RDO_Prodotti" Association="ClassDiagram.Store.CategoriaCommessa_RDO_Prodotti">
+      <End Role="Categoria" EntitySet="CategoriaSet" />
+      <End Role="Commessa_RDO_Prodotti" EntitySet="Lista_RDO_ComposizioneSet" />
+    </AssociationSet>
+    <AssociationSet Name="FornitoreRDO" Association="ClassDiagram.Store.FornitoreRDO">
+      <End Role="Fornitore" EntitySet="AziendaSet_Fornitore" />
+      <End Role="RDO" EntitySet="RDOSet" />
+    </AssociationSet>
+    <AssociationSet Name="CategoriaCategoria" Association="ClassDiagram.Store.CategoriaCategoria">
+      <End Role="Categoria" EntitySet="CategoriaSet" />
+      <End Role="Categoria1" EntitySet="CategoriaSet" />
+    </AssociationSet>
     <AssociationSet Name="FK_Fornitore_inherits_Azienda" Association="ClassDiagram.Store.FK_Fornitore_inherits_Azienda">
       <End Role="Azienda" EntitySet="AziendaSet" />
       <End Role="Fornitore" EntitySet="AziendaSet_Fornitore" />
@@ -152,111 +170,115 @@
   </EntityType>
   <EntityType Name="RDOSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Commessa_ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codice" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Progressivo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Creazione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Associazione_Commessa_RDO_ID" Type="int" Nullable="false" />
+    <Property Name="Fornitore_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RDO_ComposizioneSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RDO_Id" Type="int" Nullable="false" />
-    <Property Name="Categoria_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RDO_ID" Type="int" Nullable="false" />
+    <Property Name="Commessa_RDO_Prodotti_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ODA_ComposizioneSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ODA_Id" Type="int" Nullable="false" />
-    <Property Name="RDO_Composizione_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ODA_ID" Type="int" Nullable="false" />
+    <Property Name="RDO_Composizione_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ODASet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RDO_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="CategoriaSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Macro_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Associazione_Categoria_FornitoreSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Categoria_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Categoria_ID" Type="int" Nullable="false" />
     <Property Name="Fornitore_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Ordine_ComposizioneSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RDA_Composizione_Id" Type="int" Nullable="false" />
-    <Property Name="Ordine_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RDA_Composizione_ID" Type="int" Nullable="false" />
+    <Property Name="Ordine_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="OrdineSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="OffertaSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Ordine_Id" Type="int" Nullable="false" />
-    <Property Name="Associazione_Offerta_Servizio_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ordine_ID" Type="int" Nullable="false" />
+    <Property Name="Associazione_Offerta_Servizio_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Offerta_ComposizioneSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Offerta_Id" Type="int" Nullable="false" />
-    <Property Name="Categoria_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Offerta_ID" Type="int" Nullable="false" />
+    <Property Name="Categoria_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Associazione_Offerta_ServizioSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Metodo_PagamentoSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Offerta_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Offerta_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Metodo_SpedizioneSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Offerta_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Offerta_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ServizioSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Associazione_Offerta_Servizio_Id" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Associazione_Offerta_Servizio_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ContattoSet">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Cognome" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
@@ -282,6 +304,26 @@
     <Property Name="Note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Creazione" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Lista_RDO_ComposizioneSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UnitaMisura" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Quantita" Type="decimal" Nullable="false" />
+    <Property Name="Associazione_Commessa_RDO_ID" Type="int" Nullable="false" />
+    <Property Name="Categoria_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Lista_RDOSet">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CondizioniParticolari" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Progressivo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Commessa_ID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="AziendaSet_Fornitore">
     <Key>
       <PropertyRef Name="ID" />
@@ -297,10 +339,10 @@
   <EntityType Name="AziendaContatto">
     <Key>
       <PropertyRef Name="Azienda_ID" />
-      <PropertyRef Name="Contatto_Id" />
+      <PropertyRef Name="Contatto_ID" />
     </Key>
     <Property Name="Azienda_ID" Type="int" Nullable="false" />
-    <Property Name="Contatto_Id" Type="int" Nullable="false" />
+    <Property Name="Contatto_ID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UtenteCommessa">
     <End Role="Utente" Type="ClassDiagram.Store.UtenteSet" Multiplicity="1" />
@@ -331,10 +373,10 @@
     <End Role="Associazione_Categoria_Fornitore" Type="ClassDiagram.Store.Associazione_Categoria_FornitoreSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Categoria">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Associazione_Categoria_Fornitore">
-        <PropertyRef Name="Categoria_Id" />
+        <PropertyRef Name="Categoria_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -350,39 +392,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CommessaRDO">
-    <End Role="Commessa" Type="ClassDiagram.Store.CommessaSet" Multiplicity="1" />
-    <End Role="RDO" Type="ClassDiagram.Store.RDOSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Commessa">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="RDO">
-        <PropertyRef Name="Commessa_ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="RDORDO_Composizione">
     <End Role="RDO" Type="ClassDiagram.Store.RDOSet" Multiplicity="1" />
     <End Role="RDO_Composizione" Type="ClassDiagram.Store.RDO_ComposizioneSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RDO">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="RDO_Composizione">
-        <PropertyRef Name="RDO_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RDORDA">
-    <End Role="RDO" Type="ClassDiagram.Store.RDOSet" Multiplicity="1" />
-    <End Role="RDA" Type="ClassDiagram.Store.ODASet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RDO">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RDA">
-        <PropertyRef Name="RDO_Id" />
+        <PropertyRef Name="RDO_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -391,10 +409,10 @@
     <End Role="RDA_Composizione" Type="ClassDiagram.Store.ODA_ComposizioneSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RDA">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="RDA_Composizione">
-        <PropertyRef Name="ODA_Id" />
+        <PropertyRef Name="ODA_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -403,22 +421,10 @@
     <End Role="RDA_Composizione" Type="ClassDiagram.Store.ODA_ComposizioneSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RDO_Composizione">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="RDA_Composizione">
-        <PropertyRef Name="RDO_Composizione_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CategoriaRDO_Composizione">
-    <End Role="Categoria" Type="ClassDiagram.Store.CategoriaSet" Multiplicity="1" />
-    <End Role="RDO_Composizione" Type="ClassDiagram.Store.RDO_ComposizioneSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categoria">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RDO_Composizione">
-        <PropertyRef Name="Categoria_Id" />
+        <PropertyRef Name="RDO_Composizione_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -427,10 +433,10 @@
     <End Role="Ordine_Composizione" Type="ClassDiagram.Store.Ordine_ComposizioneSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RDA_Composizione">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Ordine_Composizione">
-        <PropertyRef Name="RDA_Composizione_Id" />
+        <PropertyRef Name="RDA_Composizione_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -439,10 +445,10 @@
     <End Role="Ordine_Composizione" Type="ClassDiagram.Store.Ordine_ComposizioneSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ordine">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Ordine_Composizione">
-        <PropertyRef Name="Ordine_Id" />
+        <PropertyRef Name="Ordine_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -451,10 +457,10 @@
     <End Role="Offerta_Composizione" Type="ClassDiagram.Store.Offerta_ComposizioneSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Offerta">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Offerta_Composizione">
-        <PropertyRef Name="Offerta_Id" />
+        <PropertyRef Name="Offerta_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -463,10 +469,10 @@
     <End Role="Offerta_Composizione" Type="ClassDiagram.Store.Offerta_ComposizioneSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Categoria">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Offerta_Composizione">
-        <PropertyRef Name="Categoria_Id" />
+        <PropertyRef Name="Categoria_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -475,10 +481,10 @@
     <End Role="Offerta" Type="ClassDiagram.Store.OffertaSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ordine">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Offerta">
-        <PropertyRef Name="Ordine_Id" />
+        <PropertyRef Name="Ordine_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -487,10 +493,10 @@
     <End Role="Servizio" Type="ClassDiagram.Store.ServizioSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Associazione_Offerta_Servizio">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Servizio">
-        <PropertyRef Name="Associazione_Offerta_Servizio_Id" />
+        <PropertyRef Name="Associazione_Offerta_Servizio_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -499,10 +505,10 @@
     <End Role="Offerta" Type="ClassDiagram.Store.OffertaSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Associazione_Offerta_Servizio">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Offerta">
-        <PropertyRef Name="Associazione_Offerta_Servizio_Id" />
+        <PropertyRef Name="Associazione_Offerta_Servizio_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -511,10 +517,10 @@
     <End Role="Metodo_Pagamento" Type="ClassDiagram.Store.Metodo_PagamentoSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Offerta">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Metodo_Pagamento">
-        <PropertyRef Name="Offerta_Id" />
+        <PropertyRef Name="Offerta_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -523,10 +529,10 @@
     <End Role="Metodo_Spedizione" Type="ClassDiagram.Store.Metodo_SpedizioneSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Offerta">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Metodo_Spedizione">
-        <PropertyRef Name="Offerta_Id" />
+        <PropertyRef Name="Offerta_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -539,6 +545,90 @@
       </Principal>
       <Dependent Role="Commessa">
         <PropertyRef Name="Cliente_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CommessaAssociazione_Commessa_RDO">
+    <End Role="Commessa" Type="ClassDiagram.Store.CommessaSet" Multiplicity="1" />
+    <End Role="Associazione_Commessa_RDO" Type="ClassDiagram.Store.Lista_RDOSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commessa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Associazione_Commessa_RDO">
+        <PropertyRef Name="Commessa_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Associazione_Commessa_RDOCommessa_RDO_Prodotti">
+    <End Role="Associazione_Commessa_RDO" Type="ClassDiagram.Store.Lista_RDOSet" Multiplicity="1" />
+    <End Role="Commessa_RDO_Prodotti" Type="ClassDiagram.Store.Lista_RDO_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Associazione_Commessa_RDO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Commessa_RDO_Prodotti">
+        <PropertyRef Name="Associazione_Commessa_RDO_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Commessa_RDO_ProdottiRDO_Composizione">
+    <End Role="Commessa_RDO_Prodotti" Type="ClassDiagram.Store.Lista_RDO_ComposizioneSet" Multiplicity="1" />
+    <End Role="RDO_Composizione" Type="ClassDiagram.Store.RDO_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commessa_RDO_Prodotti">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RDO_Composizione">
+        <PropertyRef Name="Commessa_RDO_Prodotti_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Associazione_Commessa_RDORDO">
+    <End Role="Associazione_Commessa_RDO" Type="ClassDiagram.Store.Lista_RDOSet" Multiplicity="1" />
+    <End Role="RDO" Type="ClassDiagram.Store.RDOSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Associazione_Commessa_RDO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RDO">
+        <PropertyRef Name="Associazione_Commessa_RDO_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriaCommessa_RDO_Prodotti">
+    <End Role="Categoria" Type="ClassDiagram.Store.CategoriaSet" Multiplicity="1" />
+    <End Role="Commessa_RDO_Prodotti" Type="ClassDiagram.Store.Lista_RDO_ComposizioneSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Commessa_RDO_Prodotti">
+        <PropertyRef Name="Categoria_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FornitoreRDO">
+    <End Role="Fornitore" Type="ClassDiagram.Store.AziendaSet_Fornitore" Multiplicity="1" />
+    <End Role="RDO" Type="ClassDiagram.Store.RDOSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornitore">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RDO">
+        <PropertyRef Name="Fornitore_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategoriaCategoria">
+    <End Role="Categoria" Type="ClassDiagram.Store.CategoriaSet" Multiplicity="0..1" />
+    <End Role="Categoria1" Type="ClassDiagram.Store.CategoriaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Categoria1">
+        <PropertyRef Name="Macro_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -559,10 +649,10 @@
     <End Role="Contatto" Type="ClassDiagram.Store.ContattoSet" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Contatto">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="AziendaContatto">
-        <PropertyRef Name="Contatto_Id" />
+        <PropertyRef Name="Contatto_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

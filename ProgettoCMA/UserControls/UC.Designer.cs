@@ -1,6 +1,6 @@
 ﻿namespace ProgettoCMA
 {
-    partial class UC<T>
+    partial class UC
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.

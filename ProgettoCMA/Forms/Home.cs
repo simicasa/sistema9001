@@ -18,6 +18,7 @@ namespace ProgettoCMA
 
         public Home()
         {
+            Shared.home = this;
             InitializeComponent();
             this.menu = menuStrip1;
             this.AutoSize = true;
@@ -47,26 +48,29 @@ namespace ProgettoCMA
         }
         private void Home_Shown(object sender, EventArgs e)
         {
-            Login login = new Login(this);
+            Login login = new Login();
             login.StartPosition = FormStartPosition.CenterParent;
-            login.ShowDialog();
+            if(login.ShowDialog() != DialogResult.OK)
+            {
+                Application.Exit();
+            }
         }
 
         private void clientiGestioneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.controlsAdd(new Clienti(this));
+            this.controlsAdd(new Clienti());
         }
         private void fornitoriGestioneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.controlsAdd(new Fornitori(this));
+            this.controlsAdd(new Fornitori());
 
         }
         private void commesseGestioneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.controlsAdd(new Commesse(this));
+            this.controlsAdd(new Commesse());
         }
 
-        private void controlsAdd(UserControl uc)
+        public void controlsAdd(UserControl uc)
         {
             uc.Top = 30;
             this.controlsClear();
@@ -87,11 +91,15 @@ namespace ProgettoCMA
         {
 
         }
-
         private void gestioneToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Categorie categoria = new Categorie(this);
+            Categorie categoria = new Categorie();
             this.controlsAdd(categoria);
+        }
+
+        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

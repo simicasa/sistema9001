@@ -22,7 +22,7 @@ namespace ProgettoCMA
             this.Metodo_Spedizione = new HashSet<Metodo_Spedizione>();
         }
     
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Offerta_Composizione> Offerta_Composizione { get; set; }

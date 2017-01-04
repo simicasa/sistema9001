@@ -11,19 +11,19 @@ using System.Reflection;
 
 namespace ProgettoCMA
 {
-    partial class Clienti
+    public partial class Liste_RDO_Composizione : UC<Lista_RDO_Composizione>
     {
-        public Clienti() : base()
+        public Liste_RDO_Composizione() : base()
         {
             InitializeComponent();
-            
+
             // DB SET
-            this.dbSet = Shared.cdc.AziendaSet;
+            this.dbSet = Shared.cdc.Lista_RDO_ComposizioneSet;
 
             // LIST
             this.list = listBox;
-            this.list.DisplayMember = "Ragione";
-            this.list.ValueMember = "Ragione";
+            this.list.DisplayMember = "Categoria";
+            this.list.ValueMember = "Categoria";
 
             // BUTTONS
             this.editBt = editButton;
@@ -34,12 +34,11 @@ namespace ProgettoCMA
 
             this.initialize(this.orderList);
         }
-
         protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.newInstance != null)
             {
-                if (DialogResult.Yes == this.messageBoxShow("Cambiare cliente e perdere il nuovo?", MessageBoxButtons.YesNo))
+                if (DialogResult.Yes == this.messageBoxShow("Cambiare commessa_RDO_Categoria e perdere il nuovo?", MessageBoxButtons.YesNo))
                 {
                     this.listInhibit = true;
                     this.data.Remove(this.newInstance);
@@ -60,7 +59,7 @@ namespace ProgettoCMA
             }
             if (this.selectedIndex == -1)
             {
-                if(this.data.Count() == 0)
+                if (this.data.Count() == 0)
                 {
                     MessageBox.Show("L'elenco e' vuoto");
                     editButton.Enabled = false;
@@ -75,8 +74,8 @@ namespace ProgettoCMA
             this.list.Enabled = false;
 
             this.textBoxesEnable(true);
-            idValue.Enabled = false;
-            creazioneValue.Enabled = false;
+            umValue.Enabled = false;
+            quantitaValue.Enabled = false;
         }
         private void saveButtons()
         {
@@ -90,45 +89,45 @@ namespace ProgettoCMA
         {
             this.listInhibit = true;
             bool isNew = (this.newInstance == null) ? false : true;
-            Cliente cliente;
+            Lista_RDO_Composizione commessa_RDO_Categoria;
             if (!isNew)
             {
-                int ID = Int32.Parse(idValue.Text);
-                cliente = Shared.cdc.AziendaSet.OfType<Cliente>().Where(x => x.ID == ID).First();
-                this.databaseUpdate(cliente);
-                Cliente old = this.dataSubset[this.selectedIndex];
-                this.dataSubset[this.selectedIndex] = cliente;
-                this.data[this.data.IndexOf(old)] = cliente;
+                int ID = Int32.Parse(umValue.Text);
+                commessa_RDO_Categoria = Shared.cdc.Lista_RDO_ComposizioneSet.OfType<Lista_RDO_Composizione>().Where(x => x.ID == ID).First();
+                this.databaseUpdate(commessa_RDO_Categoria);
+                Lista_RDO_Composizione old = this.dataSubset[this.selectedIndex];
+                this.dataSubset[this.selectedIndex] = commessa_RDO_Categoria;
+                this.data[this.data.IndexOf(old)] = commessa_RDO_Categoria;
             }
             else
             {
-                cliente = this.newInstance;
-                this.databaseAdd(cliente);
+                commessa_RDO_Categoria = this.newInstance;
+                this.databaseAdd(commessa_RDO_Categoria);
             }
             this.orderList();
-            this.list.SelectedItem = cliente;
+            this.list.SelectedItem = commessa_RDO_Categoria;
             searchTextBox.Text = "";
             this.newInstance = null;
             this.listInhibit = false;
         }
         private void orderList()
         {
-            base.orderList(x => x.Ragione);
+            base.orderList(x => x.ID);
             this.list.DataSource = this.dataSubset;
         }
-        
+
         protected override void editButton_Click(object sender, EventArgs e)
         {
             if (this.selectedIndex == -1)
             {
-                MessageBox.Show("Nessun cliente presente", "Gestione Clienti", MessageBoxButtons.OK);
+                MessageBox.Show("Nessun commessa_RDO_Categoria presente", "Gestione Commessa_RDO_Categorie", MessageBoxButtons.OK);
                 return;
             }
             this.editButtons();
         }
         protected override void saveButton_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Continuare con il salvataggio?", "Aggiunta Cliente", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show("Continuare con il salvataggio?", "Aggiunta RDO", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 this.saveButtons();
                 this.updateFields();
@@ -137,7 +136,7 @@ namespace ProgettoCMA
         protected override void addButton_Click(object sender, EventArgs e)
         {
             this.listInhibit = true;
-            this.newInstance = new Cliente(-1, "", new Indirizzo(), "", "", "", "Nuovo Cliente", "");
+            this.newInstance = new Lista_RDO_Composizione(-1, null, null, "", 0, "");
             this.data.Add(newInstance);
             this.dataSubset.Add(newInstance);
             this.orderList();
@@ -149,15 +148,15 @@ namespace ProgettoCMA
         }
         protected override void deleteButton_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == this.messageBoxShow("Eliminare il cliente?", MessageBoxButtons.YesNo))
+            if (DialogResult.Yes == this.messageBoxShow("Eliminare il commessa_RDO_Categoria?", MessageBoxButtons.YesNo))
             {
-                this.databaseRemove((Cliente)this.listBox.SelectedItem);
+                this.databaseRemove((Lista_RDO_Composizione)this.listBox.SelectedItem);
                 this.orderList();
             }
         }
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            base.searchTextBoxFilterData(c => c.Ragione.IndexOf(searchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            //base.searchTextBoxFilterData(c => c.Id.IndexOf(searchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
         protected override void annullaButton_Click(object sender, EventArgs e)
         {

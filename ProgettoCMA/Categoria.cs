@@ -18,18 +18,22 @@ namespace ProgettoCMA
         public Categoria()
         {
             this.Associazione_Categoria_Fornitore = new HashSet<Associazione_Categoria_Fornitore>();
-            this.RDO_Composizione = new HashSet<RDO_Composizione>();
             this.Offerta_Composizione = new HashSet<Offerta_Composizione>();
+            this.Commessa_RDO_Prodotti = new HashSet<Lista_RDO_Composizione>();
+            this.Micro = new HashSet<Categoria>();
         }
     
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Nome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Associazione_Categoria_Fornitore> Associazione_Categoria_Fornitore { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RDO_Composizione> RDO_Composizione { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Offerta_Composizione> Offerta_Composizione { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Lista_RDO_Composizione> Commessa_RDO_Prodotti { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Categoria> Micro { get; set; }
+        public virtual Categoria Macro { get; set; }
     }
 }

@@ -18,15 +18,16 @@ namespace ProgettoCMA
         public RDO()
         {
             this.RDO_Composizione = new HashSet<RDO_Composizione>();
-            this.ODA = new HashSet<ODA>();
         }
     
-        public int Id { get; set; }
+        public int ID { get; set; }
+        public string Codice { get; set; }
+        public string Progressivo { get; set; }
+        public string Creazione { get; set; }
     
-        public virtual Commessa Commessa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RDO_Composizione> RDO_Composizione { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ODA> ODA { get; set; }
+        public virtual Lista_RDO Associazione_Commessa_RDO { get; set; }
+        public virtual Fornitore Fornitore { get; set; }
     }
 }

@@ -8,10 +8,11 @@ namespace ProgettoCMA
 {
     public partial class Categoria
     {
-        public Categoria(int ID, String Nome)
+        public Categoria(int ID, String nome, Categoria macro)
         {
-            this.Id = ID;
-            this.Nome = Nome;
+            this.ID = ID;
+            this.Macro = macro;
+            this.Nome = nome;
         }
     }
 }

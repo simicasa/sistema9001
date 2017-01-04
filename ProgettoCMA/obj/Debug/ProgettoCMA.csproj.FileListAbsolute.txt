@@ -37,24 +37,25 @@ C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.exe
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
+C:\Users\simic\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.dll
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.exe.config
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.exe
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.pdb
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.dll
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.xml
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\it\EntityFramework.resources.dll
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Categorie.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Clienti.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Home.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Login.resources
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Liste_RDO_Composizione.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Commesse.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Fornitori.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Properties.Resources.resources
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.GestioneCommessa.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.UC.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.exe
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
-C:\Users\simic\Documents\Visual Studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache

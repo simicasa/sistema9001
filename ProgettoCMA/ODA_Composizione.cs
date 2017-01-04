@@ -20,7 +20,7 @@ namespace ProgettoCMA
             this.Ordine_Composizione = new HashSet<Ordine_Composizione>();
         }
     
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         public virtual ODA ODA { get; set; }
         public virtual RDO_Composizione RDO_Composizione { get; set; }

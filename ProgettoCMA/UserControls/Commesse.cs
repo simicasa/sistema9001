@@ -13,10 +13,15 @@ namespace ProgettoCMA
 {
     public partial class Commesse : UC<Commessa, Cliente>
     {
-
-        public Commesse(Home home) : base(home)
+        public Commesse() : base()
         {
             InitializeComponent();
+            List<Cliente> asd = Shared.cdc.AziendaSet.OfType<Cliente>().ToList();
+            clienteValue.DataSource = asd;
+            clienteValue.ValueMember = "Ragione";
+            clienteValue.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // DB SET
             this.dbSet = Shared.cdc.CommessaSet;
             this.dbSetSecondary = Shared.cdc.AziendaSet;
 
@@ -24,11 +29,11 @@ namespace ProgettoCMA
             this.list = listBox;
             this.list.DisplayMember = "Codice";
             this.list.ValueMember = "Codice";
-            this.listSecondary = clienteValue;
+            /*
+            this.listSecondary = clienteValue1;
             this.listSecondary.DisplayMember = "Ragione";
             this.listSecondary.ValueMember = "Ragione";
-            this.getData();
-            this.orderList();
+            */
 
             // BUTTONS
             this.editBt = editButton;
@@ -36,77 +41,16 @@ namespace ProgettoCMA
             this.deleteBt = deleteButton;
             this.addBt = addButton;
             this.cancelBt = annullaButton;
-
-            this.textBoxesEnable(false);
+            this.initialize(this.orderList, null, new Control[] { clienteValue }, new Control[] { usaButton });
         }
 
+        protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-        private void commesseListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.listInhibit)
-            {
-                return;
-            }
-            this.selectedIndex = this.list.SelectedIndex;
-            if (this.newInstance != null)
-            {
-                DialogResult dr = MessageBox.Show("Cambiare commessa e perdere il nuovo?", "Gestione Commesse", MessageBoxButtons.YesNo);
-                if (dr == DialogResult.Yes)
-                {
-                    this.listInhibit = true;
-                    this.data.Remove(this.newInstance);
-                    this.dataSubset.Remove(this.newInstance);
-                    //this.list.Items.Remove(this.newInstance);
-                    this.orderList();
-                    this.list.SetSelected(this.selectedIndex, true);
-                    this.listInhibit = false;
-                    this.newInstance = null;
-                }
-                else
-                {
-                    this.listInhibit = true;
-                    this.list.SetSelected(this.selectedIndex, true);
-                    this.listInhibit = false;
-                    return;
-                }
-            }
-            else if (saveButton.Enabled)
-            {
-                DialogResult dr = MessageBox.Show("Cambiare commessa e perdere i progressi?", "Gestione Commesse", MessageBoxButtons.YesNo);
-                if (dr == DialogResult.No)
-                {
-                    this.listInhibit = true;
-                    if (this.previousSelected != -1)
-                    {
-                        this.list.SetSelected(this.previousSelected, true);
-                    }
-                    this.listInhibit = false;
-                    return;
-                }
-            }
-            if (this.selectedIndex == -1)
-            {
-                if (this.data.Count() == 0)
-                {
-                    MessageBox.Show("L'elenco e' vuoto");
-                    editButton.Enabled = false;
-                }
-                return;
-            }
-            this.updateUI(this.dataSubset[this.selectedIndex]);
-            this.previousSelected = this.list.SelectedIndex;
-        }
-        private void editButton_Click(object sender, EventArgs e)
-        {
-            if (this.selectedIndex == -1)
-            {
-                MessageBox.Show("Nessun commessa presente", "Gestione Commesse", MessageBoxButtons.OK);
-                return;
-            }
-            this.editButtons();
         }
         private void editButtons()
         {
+            this.controlsUpdate(true);
             this.buttonsUpdate(true);
             searchTextBox.Enabled = false;
             this.list.Enabled = false;
@@ -117,13 +61,54 @@ namespace ProgettoCMA
         }
         private void saveButtons()
         {
+            this.controlsUpdate(false);
             this.buttonsUpdate(false);
             searchTextBox.Enabled = true;
             this.list.Enabled = true;
 
             this.textBoxesEnable(false);
         }
-        private void saveButton_Click(object sender, EventArgs e)
+        private void updateFields()
+        {
+            this.listInhibit = true;
+            bool isNew = (this.newInstance == null) ? false : true;
+            Commessa commessa;
+            if (!isNew)
+            {
+                int ID = Int32.Parse(idValue.Text);
+                commessa = Shared.cdc.CommessaSet.OfType<Commessa>().Where(x => x.ID == ID).First();
+                this.databaseUpdate(commessa);
+                Commessa old = this.dataSubset[this.selectedIndex];
+                this.dataSubset[this.selectedIndex] = commessa;
+                this.data[this.data.IndexOf(old)] = commessa;
+            }
+            else
+            {
+                commessa = this.newInstance;
+                this.databaseAdd(commessa);
+            }
+            this.orderList();
+            this.list.SelectedItem = commessa;
+            searchTextBox.Text = "";
+            this.newInstance = null;
+            this.listInhibit = false;
+        }
+        private void orderList()
+        {
+            base.orderList(x => x.Codice, x => x.Ragione);
+            this.list.DataSource = this.dataSubset;
+            //this.listSecondary.DataSource = this.dataSecondary;
+        }
+        protected override void editButton_Click(object sender, EventArgs e)
+        {
+            if (this.selectedIndex == -1)
+            {
+                MessageBox.Show("Nessun Commessa presente", "Gestione Commesse", MessageBoxButtons.OK);
+                return;
+            }
+            this.editButtons();
+        }
+        protected override void saveButton_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Continuare con il salvataggio?", "Aggiunta Commessa", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
@@ -131,88 +116,7 @@ namespace ProgettoCMA
                 this.updateFields();
             }
         }
-        private void updateFields()
-        {
-            bool isNew = (this.newInstance == null) ? false : true;
-            //ClassDiagramContainer cdc = new ClassDiagramContainer();
-            Commessa commessa;
-            if (!isNew)
-            {
-                int ID = Int32.Parse(idValue.Text);
-                IQueryable<Commessa> iq = Shared.cdc.CommessaSet.Where(x => x.ID == ID);
-                iq.Select(x => x);
-                var query = iq;
-                /*
-                var query = from commessaQuery in iq
-                            //where this.giggi(commessaQuery.Ragione) && commessaQuery.ID == ID
-                            select commessaQuery;
-                */
-                if (query.Count() == 1)
-                {
-                    commessa = query.First();
-                    //commessa = (Commessa)this.list.SelectedItem;
-                }
-                else
-                {
-                    throw new Exception("Errore utente non trovato");
-                }
-                //commessa = this.dataSubset[this.list.SelectedIndex];
-            }
-            else
-            {
-                commessa = this.newInstance;
-            }
-
-            if (isNew)
-            {
-                commessa.Chiusura = chiusuraValue.Text;
-                commessa.Cliente = Shared.cdc.AziendaSet.OfType<Cliente>().Where(c => c.ID == 1).First();
-                commessa.Note = noteValue.Text;
-                /*
-                commessa.Utente = Shared.cdc.UtenteSet.Where(u => u.ID == 1).First();
-                Console.WriteLine(commessa.Utente.ToString());
-                */
-                commessa.Utente = Shared.utente;
-                commessa.ID = Int32.Parse(idValue.Text);
-                commessa.Codice = codiceValue.Text;
-                commessa.Creazione = DateTime.Now.ToShortDateString();
-                commessa.RDO = new HashSet<RDO>();
-                commessa.Note = noteValue.Text;
-                //this.databaseAdd(commessa);
-                //Shared.cdc.Entry(commessa).State = System.Data.Entity.EntityState.Added;
-                Shared.cdc.CommessaSet.Add(commessa);
-                Shared.cdc.SaveChanges();
-                //cdc.Entry(commessa).State = System.Data.Entity.EntityState.Added;
-            }
-            else
-            {
-                this.databaseUpdate(commessa);
-                Commessa old = this.dataSubset[this.selectedIndex];
-                this.dataSubset[this.selectedIndex] = commessa;
-                this.data[this.data.IndexOf(old)] = commessa;
-            }
-            try
-            {
-                this.listInhibit = true;
-                this.orderList();
-                this.list.SelectedItem = commessa;
-                this.listInhibit = false;
-                //Shared.cdc.SaveChanges();
-                searchTextBox.Text = "";
-                this.newInstance = null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-        private void orderList()
-        {
-            base.orderList(x => x.Codice, x => x.Ragione);
-            this.list.DataSource = this.dataSubset;
-            this.listSecondary.DataSource = this.dataSecondary;
-        }
-        private void addButton_Click(object sender, EventArgs e)
+        protected override void addButton_Click(object sender, EventArgs e)
         {
             this.listInhibit = true;
             this.newInstance = new Commessa(-1, new Cliente(), "Nuovo Codice", Shared.utente, "");
@@ -225,50 +129,28 @@ namespace ProgettoCMA
             this.updateUI(this.newInstance);
             this.listInhibit = false;
         }
-        private void deleteButton_Click(object sender, EventArgs e)
+        protected override void deleteButton_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Eliminare il commessa?", "Gestione commesse", MessageBoxButtons.YesNo);
-            if (dr == DialogResult.Yes)
+            if (DialogResult.Yes == this.messageBoxShow("Eliminare il commessa?", MessageBoxButtons.YesNo))
             {
-                Commessa commessa;
-                int ID = Int32.Parse(idValue.Text);
-                var query = from commessaQuery in Shared.cdc.AziendaSet.OfType<Commessa>()
-                            where commessaQuery.ID == ID
-                            select commessaQuery;
-                if (query.Count() == 1)
-                {
-                    commessa = query.First();
-                }
-                else
-                {
-                    throw new Exception("Errore utente non trovato");
-                }
-                this.listInhibit = true;
-                Shared.cdc.CommessaSet.Remove(commessa);
-                this.data.Remove(commessa);
-                this.dataSubset.Remove(commessa);
-                this.listInhibit = false;
+                this.databaseRemove((Commessa)this.listBox.SelectedItem);
                 this.orderList();
-                try
-                {
-                    Shared.cdc.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
             }
         }
-
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            base.searchTextBoxFilterData(c => c.Codice.Contains(searchTextBox.Text));
+            base.searchTextBoxFilterData(c => c.Codice.IndexOf(searchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
-
-        private void annullaButton_Click(object sender, EventArgs e)
+        protected override void annullaButton_Click(object sender, EventArgs e)
         {
             updateUI(this.dataSubset[this.selectedIndex]);
             saveButtons();
+        }
+
+        private void usaButton_Click(object sender, EventArgs e)
+        {
+            Shared.commessaAttiva = (Commessa)this.list.SelectedItem;
+            Shared.home.controlsAdd(new GestioneCommessa());
         }
     }
 }

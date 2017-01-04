@@ -14,7 +14,7 @@ namespace ProgettoCMA
     
     public partial class Metodo_Pagamento
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         public virtual Offerta Offerta { get; set; }
     }

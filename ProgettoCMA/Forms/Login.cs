@@ -12,12 +12,9 @@ namespace ProgettoCMA
 {
     public partial class Login : Form
     {
-        private Home home;
-
-        public Login(Home home)
+        public Login()
         {
             InitializeComponent();
-            this.home = home;
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -31,6 +28,7 @@ namespace ProgettoCMA
             Shared.utente = this.checkLogin(usernameTextBox.Text, passwordTextBox.Text);
             if (Shared.utente != null)
             {
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
@@ -42,24 +40,6 @@ namespace ProgettoCMA
                 return utente.First();
             }
             return null;
-            /*
-            var res = from user in cdc.UtenteSet
-                      where user.Username == username && user.Password == password
-                      select user;
-            try
-            {
-                if (res.Count() > 0)
-                {
-                    Console.WriteLine("tappost");
-                    return res.First();
-                }
-            }catch(Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            Console.WriteLine("nientaappost");
-            return null;
-            */
         }
     }
 }
