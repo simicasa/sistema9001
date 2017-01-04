@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/04/2017 12:29:51
+-- Date Created: 01/04/2017 13:11:47
 -- Generated from EDMX file: C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\ClassDiagram.edmx
 -- --------------------------------------------------
 
@@ -75,10 +75,10 @@ IF OBJECT_ID(N'[dbo].[FK_ClienteCommessa]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CommessaSet] DROP CONSTRAINT [FK_ClienteCommessa];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CommessaAssociazione_Commessa_RDO]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Associazione_Commessa_RDOSet] DROP CONSTRAINT [FK_CommessaAssociazione_Commessa_RDO];
+    ALTER TABLE [dbo].[Lista_RDOSet] DROP CONSTRAINT [FK_CommessaAssociazione_Commessa_RDO];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Commessa_RDO_CategoriaSet] DROP CONSTRAINT [FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti];
+    ALTER TABLE [dbo].[Lista_RDO_ComposizioneSet] DROP CONSTRAINT [FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Commessa_RDO_ProdottiRDO_Composizione]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RDO_ComposizioneSet] DROP CONSTRAINT [FK_Commessa_RDO_ProdottiRDO_Composizione];
@@ -87,7 +87,7 @@ IF OBJECT_ID(N'[dbo].[FK_Associazione_Commessa_RDORDO]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RDOSet] DROP CONSTRAINT [FK_Associazione_Commessa_RDORDO];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CategoriaCommessa_RDO_Prodotti]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Commessa_RDO_CategoriaSet] DROP CONSTRAINT [FK_CategoriaCommessa_RDO_Prodotti];
+    ALTER TABLE [dbo].[Lista_RDO_ComposizioneSet] DROP CONSTRAINT [FK_CategoriaCommessa_RDO_Prodotti];
 GO
 IF OBJECT_ID(N'[dbo].[FK_FornitoreRDO]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RDOSet] DROP CONSTRAINT [FK_FornitoreRDO];
@@ -163,11 +163,11 @@ GO
 IF OBJECT_ID(N'[dbo].[AziendaSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AziendaSet];
 GO
-IF OBJECT_ID(N'[dbo].[Commessa_RDO_CategoriaSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Commessa_RDO_CategoriaSet];
+IF OBJECT_ID(N'[dbo].[Lista_RDO_ComposizioneSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Lista_RDO_ComposizioneSet];
 GO
-IF OBJECT_ID(N'[dbo].[Associazione_Commessa_RDOSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Associazione_Commessa_RDOSet];
+IF OBJECT_ID(N'[dbo].[Lista_RDOSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Lista_RDOSet];
 GO
 IF OBJECT_ID(N'[dbo].[AziendaSet_Fornitore]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AziendaSet_Fornitore];
@@ -219,7 +219,7 @@ CREATE TABLE [dbo].[RDOSet] (
     [Codice] nvarchar(max)  NOT NULL,
     [Progressivo] nvarchar(max)  NOT NULL,
     [Creazione] nvarchar(max)  NOT NULL,
-    [Associazione_Commessa_RDO_ID] int  NOT NULL,
+    [Lista_RDO_ID] int  NOT NULL,
     [Fornitore_ID] int  NOT NULL
 );
 GO
@@ -355,7 +355,7 @@ CREATE TABLE [dbo].[Lista_RDO_ComposizioneSet] (
     [Descrizione] nvarchar(max)  NOT NULL,
     [UnitaMisura] nvarchar(max)  NOT NULL,
     [Quantita] decimal(18,0)  NOT NULL,
-    [Associazione_Commessa_RDO_ID] int  NOT NULL,
+    [Lista_RDO_ID] int  NOT NULL,
     [Categoria_ID] int  NOT NULL
 );
 GO
@@ -834,10 +834,10 @@ ON [dbo].[Lista_RDOSet]
     ([Commessa_ID]);
 GO
 
--- Creating foreign key on [Associazione_Commessa_RDO_ID] in table 'Lista_RDO_ComposizioneSet'
+-- Creating foreign key on [Lista_RDO_ID] in table 'Lista_RDO_ComposizioneSet'
 ALTER TABLE [dbo].[Lista_RDO_ComposizioneSet]
 ADD CONSTRAINT [FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti]
-    FOREIGN KEY ([Associazione_Commessa_RDO_ID])
+    FOREIGN KEY ([Lista_RDO_ID])
     REFERENCES [dbo].[Lista_RDOSet]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -846,7 +846,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti'
 CREATE INDEX [IX_FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti]
 ON [dbo].[Lista_RDO_ComposizioneSet]
-    ([Associazione_Commessa_RDO_ID]);
+    ([Lista_RDO_ID]);
 GO
 
 -- Creating foreign key on [Commessa_RDO_Prodotti_ID] in table 'RDO_ComposizioneSet'
@@ -864,10 +864,10 @@ ON [dbo].[RDO_ComposizioneSet]
     ([Commessa_RDO_Prodotti_ID]);
 GO
 
--- Creating foreign key on [Associazione_Commessa_RDO_ID] in table 'RDOSet'
+-- Creating foreign key on [Lista_RDO_ID] in table 'RDOSet'
 ALTER TABLE [dbo].[RDOSet]
 ADD CONSTRAINT [FK_Associazione_Commessa_RDORDO]
-    FOREIGN KEY ([Associazione_Commessa_RDO_ID])
+    FOREIGN KEY ([Lista_RDO_ID])
     REFERENCES [dbo].[Lista_RDOSet]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -876,7 +876,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_Associazione_Commessa_RDORDO'
 CREATE INDEX [IX_FK_Associazione_Commessa_RDORDO]
 ON [dbo].[RDOSet]
-    ([Associazione_Commessa_RDO_ID]);
+    ([Lista_RDO_ID]);
 GO
 
 -- Creating foreign key on [Categoria_ID] in table 'Lista_RDO_ComposizioneSet'

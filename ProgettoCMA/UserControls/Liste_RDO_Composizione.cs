@@ -163,5 +163,28 @@ namespace ProgettoCMA
             updateUI(this.dataSubset[this.selectedIndex]);
             saveButtons();
         }
+
+        private void generaRDOButton_Click(object sender, EventArgs e)
+        {
+            this.simoneVuoleLaFunzione(new Lista_RDO());
+        }
+
+        private void simoneVuoleLaFunzione(Lista_RDO listaRDO)
+        {
+            // prendi quello che ti serve
+            // esempi:
+            string codiceCommessa = listaRDO.Commessa.Codice;
+            // FORMATO RIFERIMENTO INTERNO:
+            // RDO_YYYY_CodiceCommessa_ProgressivoLista_ProgressivoRDOGenerata
+            string nostroRiferimentoInterno = "RDO_" + DateTime.Now.Year + "_" + listaRDO.Commessa.Codice + "_" + listaRDO.Progressivo.ToString().PadLeft(4, '0') + "_" + "ProgressivoRDOGenerata";
+            foreach (var item in listaRDO.Lista_RDO_Composizione)
+            {
+                //item.Quantita
+                //item.UnitaMisura
+                //item.Descrizione
+                //item.Categoria.Nome
+                //item.Categoria.Macro.Nome
+            }
+        }
     }
 }

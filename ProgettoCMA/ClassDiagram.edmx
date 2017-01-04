@@ -181,7 +181,7 @@
     <Property Name="Codice" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Progressivo" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Creazione" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Associazione_Commessa_RDO_ID" Type="int" Nullable="false" />
+    <Property Name="Lista_RDO_ID" Type="int" Nullable="false" />
     <Property Name="Fornitore_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RDO_ComposizioneSet">
@@ -317,7 +317,7 @@
     <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UnitaMisura" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Quantita" Type="decimal" Nullable="false" />
-    <Property Name="Associazione_Commessa_RDO_ID" Type="int" Nullable="false" />
+    <Property Name="Lista_RDO_ID" Type="int" Nullable="false" />
     <Property Name="Categoria_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Lista_RDOSet">
@@ -573,7 +573,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Commessa_RDO_Prodotti">
-        <PropertyRef Name="Associazione_Commessa_RDO_ID" />
+        <PropertyRef Name="Lista_RDO_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -597,7 +597,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="RDO">
-        <PropertyRef Name="Associazione_Commessa_RDO_ID" />
+        <PropertyRef Name="Lista_RDO_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -839,7 +839,7 @@
           <Property Name="Creazione" Type="String" Nullable="false" />
           <Property Name="Chiusura" Type="String" Nullable="false" />
           <Property Name="Note" Type="String" Nullable="false" />
-          <NavigationProperty Name="Associazione_Commessa_RDO" Relationship="ClassDiagram.CommessaAssociazione_Commessa_RDO" FromRole="Commessa" ToRole="Associazione_Commessa_RDO" />
+          <NavigationProperty Name="Lista_RDO" Relationship="ClassDiagram.CommessaAssociazione_Commessa_RDO" FromRole="Commessa" ToRole="Associazione_Commessa_RDO" />
         </EntityType>
         <Association Name="UtenteCommessa">
           <End Type="ClassDiagram.Utente" Role="Utente" Multiplicity="1" />
@@ -863,7 +863,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="RDO_Composizione" Relationship="ClassDiagram.RDORDO_Composizione" FromRole="RDO" ToRole="RDO_Composizione" />
-          <NavigationProperty Name="Associazione_Commessa_RDO" Relationship="ClassDiagram.Associazione_Commessa_RDORDO" FromRole="RDO" ToRole="Associazione_Commessa_RDO" />
+          <NavigationProperty Name="Lista_RDO" Relationship="ClassDiagram.Associazione_Commessa_RDORDO" FromRole="RDO" ToRole="Associazione_Commessa_RDO" />
           <Property Name="Codice" Type="String" Nullable="false" />
           <Property Name="Progressivo" Type="String" Nullable="false" />
           <Property Name="Creazione" Type="String" Nullable="false" />
@@ -1090,7 +1090,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Associazione_Commessa_RDO" Relationship="ClassDiagram.Associazione_Commessa_RDOCommessa_RDO_Prodotti" FromRole="Commessa_RDO_Prodotti" ToRole="Associazione_Commessa_RDO" />
+          <NavigationProperty Name="Lista_RDO" Relationship="ClassDiagram.Associazione_Commessa_RDOCommessa_RDO_Prodotti" FromRole="Commessa_RDO_Prodotti" ToRole="Associazione_Commessa_RDO" />
           <NavigationProperty Name="RDO_Composizione" Relationship="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" FromRole="Commessa_RDO_Prodotti" ToRole="RDO_Composizione" />
           <NavigationProperty Name="Categoria" Relationship="ClassDiagram.CategoriaCommessa_RDO_Prodotti" FromRole="Commessa_RDO_Prodotti" ToRole="Categoria" />
           <Property Name="Descrizione" Type="String" Nullable="false" />
@@ -1103,7 +1103,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Commessa" Relationship="ClassDiagram.CommessaAssociazione_Commessa_RDO" FromRole="Associazione_Commessa_RDO" ToRole="Commessa" />
-          <NavigationProperty Name="Commessa_RDO_Prodotti" Relationship="ClassDiagram.Associazione_Commessa_RDOCommessa_RDO_Prodotti" FromRole="Associazione_Commessa_RDO" ToRole="Commessa_RDO_Prodotti" />
+          <NavigationProperty Name="Lista_RDO_Composizione" Relationship="ClassDiagram.Associazione_Commessa_RDOCommessa_RDO_Prodotti" FromRole="Associazione_Commessa_RDO" ToRole="Commessa_RDO_Prodotti" />
           <NavigationProperty Name="RDO" Relationship="ClassDiagram.Associazione_Commessa_RDORDO" FromRole="Associazione_Commessa_RDO" ToRole="RDO" />
           <Property Name="CondizioniParticolari" Type="String" Nullable="false" />
           <Property Name="Progressivo" Type="String" Nullable="false" />
@@ -1491,7 +1491,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="Associazione_Commessa_RDOCommessa_RDO_Prodotti" TypeName="ClassDiagram.Associazione_Commessa_RDOCommessa_RDO_Prodotti" StoreEntitySet="Lista_RDO_ComposizioneSet">
       <EndProperty Name="Associazione_Commessa_RDO">
-        <ScalarProperty Name="ID" ColumnName="Associazione_Commessa_RDO_ID" />
+        <ScalarProperty Name="ID" ColumnName="Lista_RDO_ID" />
       </EndProperty>
       <EndProperty Name="Commessa_RDO_Prodotti">
         <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1507,7 +1507,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="Associazione_Commessa_RDORDO" TypeName="ClassDiagram.Associazione_Commessa_RDORDO" StoreEntitySet="RDOSet">
       <EndProperty Name="Associazione_Commessa_RDO">
-        <ScalarProperty Name="ID" ColumnName="Associazione_Commessa_RDO_ID" />
+        <ScalarProperty Name="ID" ColumnName="Lista_RDO_ID" />
       </EndProperty>
       <EndProperty Name="RDO">
         <ScalarProperty Name="ID" ColumnName="ID" />

@@ -176,7 +176,7 @@
     <Property Name="Codice" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Progressivo" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Creazione" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Associazione_Commessa_RDO_ID" Type="int" Nullable="false" />
+    <Property Name="Lista_RDO_ID" Type="int" Nullable="false" />
     <Property Name="Fornitore_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RDO_ComposizioneSet">
@@ -312,7 +312,7 @@
     <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
     <Property Name="UnitaMisura" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Quantita" Type="decimal" Nullable="false" />
-    <Property Name="Associazione_Commessa_RDO_ID" Type="int" Nullable="false" />
+    <Property Name="Lista_RDO_ID" Type="int" Nullable="false" />
     <Property Name="Categoria_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Lista_RDOSet">
@@ -568,7 +568,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Commessa_RDO_Prodotti">
-        <PropertyRef Name="Associazione_Commessa_RDO_ID" />
+        <PropertyRef Name="Lista_RDO_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -592,7 +592,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="RDO">
-        <PropertyRef Name="Associazione_Commessa_RDO_ID" />
+        <PropertyRef Name="Lista_RDO_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

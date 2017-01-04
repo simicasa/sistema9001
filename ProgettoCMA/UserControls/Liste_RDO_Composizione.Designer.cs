@@ -47,6 +47,7 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
+            this.generaRDOButton = new System.Windows.Forms.Button();
             this.clientiGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,6 +151,7 @@
             this.clientiGroupBox.Controls.Add(this.label2);
             this.clientiGroupBox.Controls.Add(this.microValue);
             this.clientiGroupBox.Controls.Add(this.macroValue);
+            this.clientiGroupBox.Controls.Add(this.generaRDOButton);
             this.clientiGroupBox.Controls.Add(this.annullaButton);
             this.clientiGroupBox.Controls.Add(this.label1);
             this.clientiGroupBox.Controls.Add(this.searchTextBox);
@@ -167,7 +169,7 @@
             this.clientiGroupBox.Controls.Add(this.listBox);
             this.clientiGroupBox.Location = new System.Drawing.Point(3, 3);
             this.clientiGroupBox.Name = "clientiGroupBox";
-            this.clientiGroupBox.Size = new System.Drawing.Size(566, 251);
+            this.clientiGroupBox.Size = new System.Drawing.Size(566, 290);
             this.clientiGroupBox.TabIndex = 2;
             this.clientiGroupBox.TabStop = false;
             this.clientiGroupBox.Text = "Richiesta di Offerta";
@@ -248,16 +250,29 @@
             this.listBox.FormattingEnabled = true;
             this.listBox.Location = new System.Drawing.Point(6, 46);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(140, 199);
+            this.listBox.Size = new System.Drawing.Size(140, 238);
             this.listBox.TabIndex = 0;
             // 
-            // Commessa_RDO_Categorie
+            // generaRDOButton
+            // 
+            this.generaRDOButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.generaRDOButton.Enabled = false;
+            this.generaRDOButton.Location = new System.Drawing.Point(156, 253);
+            this.generaRDOButton.Margin = new System.Windows.Forms.Padding(1);
+            this.generaRDOButton.Name = "generaRDOButton";
+            this.generaRDOButton.Size = new System.Drawing.Size(401, 32);
+            this.generaRDOButton.TabIndex = 34;
+            this.generaRDOButton.Text = "Genera Documenti Richiesta";
+            this.generaRDOButton.UseVisualStyleBackColor = true;
+            this.generaRDOButton.Click += new System.EventHandler(this.generaRDOButton_Click);
+            // 
+            // Liste_RDO_Composizione
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.clientiGroupBox);
-            this.Name = "Commessa_RDO_Categorie";
-            this.Size = new System.Drawing.Size(573, 256);
+            this.Name = "Liste_RDO_Composizione";
+            this.Size = new System.Drawing.Size(573, 296);
             this.clientiGroupBox.ResumeLayout(false);
             this.clientiGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -285,5 +300,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox microValue;
         private System.Windows.Forms.ComboBox macroValue;
+        private System.Windows.Forms.Button generaRDOButton;
     }
 }

@@ -17,7 +17,7 @@ namespace ProgettoCMA
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Lista_RDO()
         {
-            this.Commessa_RDO_Prodotti = new HashSet<Lista_RDO_Composizione>();
+            this.Lista_RDO_Composizione = new HashSet<Lista_RDO_Composizione>();
             this.RDO = new HashSet<RDO>();
         }
     
@@ -27,7 +27,7 @@ namespace ProgettoCMA
     
         public virtual Commessa Commessa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lista_RDO_Composizione> Commessa_RDO_Prodotti { get; set; }
+        public virtual ICollection<Lista_RDO_Composizione> Lista_RDO_Composizione { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RDO> RDO { get; set; }
     }

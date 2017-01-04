@@ -27,7 +27,7 @@ namespace ProgettoCMA
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RDO_Composizione> RDO_Composizione { get; set; }
-        public virtual Lista_RDO Associazione_Commessa_RDO { get; set; }
+        public virtual Lista_RDO Lista_RDO { get; set; }
         public virtual Fornitore Fornitore { get; set; }
     }
 }

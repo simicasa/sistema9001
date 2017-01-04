@@ -59,3 +59,4 @@ C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.UC.
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.exe
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache

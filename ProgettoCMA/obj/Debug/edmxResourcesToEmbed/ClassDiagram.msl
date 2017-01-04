@@ -350,7 +350,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="Associazione_Commessa_RDOCommessa_RDO_Prodotti" TypeName="ClassDiagram.Associazione_Commessa_RDOCommessa_RDO_Prodotti" StoreEntitySet="Lista_RDO_ComposizioneSet">
       <EndProperty Name="Associazione_Commessa_RDO">
-        <ScalarProperty Name="ID" ColumnName="Associazione_Commessa_RDO_ID" />
+        <ScalarProperty Name="ID" ColumnName="Lista_RDO_ID" />
       </EndProperty>
       <EndProperty Name="Commessa_RDO_Prodotti">
         <ScalarProperty Name="ID" ColumnName="ID" />
@@ -366,7 +366,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="Associazione_Commessa_RDORDO" TypeName="ClassDiagram.Associazione_Commessa_RDORDO" StoreEntitySet="RDOSet">
       <EndProperty Name="Associazione_Commessa_RDO">
-        <ScalarProperty Name="ID" ColumnName="Associazione_Commessa_RDO_ID" />
+        <ScalarProperty Name="ID" ColumnName="Lista_RDO_ID" />
       </EndProperty>
       <EndProperty Name="RDO">
         <ScalarProperty Name="ID" ColumnName="ID" />
