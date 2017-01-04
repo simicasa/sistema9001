@@ -45,7 +45,10 @@ namespace ProgettoCMA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Shared.home.controlsAdd(new Liste_RDO_Composizione());
+            Lista_RDO newLista = new Lista_RDO(-1, Shared.commessaAttiva, "", "");
+            Shared.cdc.Lista_RDOSet.Add(newLista);
+            Shared.cdc.SaveChanges();
+            Shared.home.controlsAdd(new Liste_RDO_Composizione(newLista));
         }
     }
 }

@@ -33,7 +33,7 @@
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.descrizioneValue = new System.Windows.Forms.TextBox();
             this.quantitaValue = new System.Windows.Forms.TextBox();
-            this.umValue = new System.Windows.Forms.TextBox();
+            this.unitaMisuraValue = new System.Windows.Forms.TextBox();
             this.dataCreazioneLabel = new System.Windows.Forms.Label();
             this.viaLabel = new System.Windows.Forms.Label();
             this.ragioneSocialeLabel = new System.Windows.Forms.Label();
@@ -42,12 +42,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.microValue = new System.Windows.Forms.ComboBox();
             this.macroValue = new System.Windows.Forms.ComboBox();
+            this.generaRDOButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
-            this.generaRDOButton = new System.Windows.Forms.Button();
             this.clientiGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,13 +98,13 @@
             this.quantitaValue.Size = new System.Drawing.Size(118, 20);
             this.quantitaValue.TabIndex = 31;
             // 
-            // umValue
+            // unitaMisuraValue
             // 
-            this.umValue.Location = new System.Drawing.Point(430, 183);
-            this.umValue.Margin = new System.Windows.Forms.Padding(1);
-            this.umValue.Name = "umValue";
-            this.umValue.Size = new System.Drawing.Size(127, 20);
-            this.umValue.TabIndex = 19;
+            this.unitaMisuraValue.Location = new System.Drawing.Point(430, 183);
+            this.unitaMisuraValue.Margin = new System.Windows.Forms.Padding(1);
+            this.unitaMisuraValue.Name = "unitaMisuraValue";
+            this.unitaMisuraValue.Size = new System.Drawing.Size(127, 20);
+            this.unitaMisuraValue.TabIndex = 19;
             // 
             // dataCreazioneLabel
             // 
@@ -157,7 +157,7 @@
             this.clientiGroupBox.Controls.Add(this.searchTextBox);
             this.clientiGroupBox.Controls.Add(this.descrizioneValue);
             this.clientiGroupBox.Controls.Add(this.quantitaValue);
-            this.clientiGroupBox.Controls.Add(this.umValue);
+            this.clientiGroupBox.Controls.Add(this.unitaMisuraValue);
             this.clientiGroupBox.Controls.Add(this.dataCreazioneLabel);
             this.clientiGroupBox.Controls.Add(this.viaLabel);
             this.clientiGroupBox.Controls.Add(this.ragioneSocialeLabel);
@@ -199,6 +199,19 @@
             this.macroValue.Name = "macroValue";
             this.macroValue.Size = new System.Drawing.Size(287, 21);
             this.macroValue.TabIndex = 35;
+            // 
+            // generaRDOButton
+            // 
+            this.generaRDOButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.generaRDOButton.Enabled = false;
+            this.generaRDOButton.Location = new System.Drawing.Point(156, 253);
+            this.generaRDOButton.Margin = new System.Windows.Forms.Padding(1);
+            this.generaRDOButton.Name = "generaRDOButton";
+            this.generaRDOButton.Size = new System.Drawing.Size(401, 32);
+            this.generaRDOButton.TabIndex = 34;
+            this.generaRDOButton.Text = "Genera Documenti Richiesta";
+            this.generaRDOButton.UseVisualStyleBackColor = true;
+            this.generaRDOButton.Click += new System.EventHandler(this.generaRDOButton_Click);
             // 
             // deleteButton
             // 
@@ -253,19 +266,6 @@
             this.listBox.Size = new System.Drawing.Size(140, 238);
             this.listBox.TabIndex = 0;
             // 
-            // generaRDOButton
-            // 
-            this.generaRDOButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.generaRDOButton.Enabled = false;
-            this.generaRDOButton.Location = new System.Drawing.Point(156, 253);
-            this.generaRDOButton.Margin = new System.Windows.Forms.Padding(1);
-            this.generaRDOButton.Name = "generaRDOButton";
-            this.generaRDOButton.Size = new System.Drawing.Size(401, 32);
-            this.generaRDOButton.TabIndex = 34;
-            this.generaRDOButton.Text = "Genera Documenti Richiesta";
-            this.generaRDOButton.UseVisualStyleBackColor = true;
-            this.generaRDOButton.Click += new System.EventHandler(this.generaRDOButton_Click);
-            // 
             // Liste_RDO_Composizione
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,7 +286,7 @@
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.TextBox descrizioneValue;
         private System.Windows.Forms.TextBox quantitaValue;
-        private System.Windows.Forms.TextBox umValue;
+        private System.Windows.Forms.TextBox unitaMisuraValue;
         private System.Windows.Forms.Label dataCreazioneLabel;
         private System.Windows.Forms.Label viaLabel;
         private System.Windows.Forms.Label ragioneSocialeLabel;
