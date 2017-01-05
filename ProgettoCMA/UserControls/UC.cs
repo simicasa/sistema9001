@@ -65,6 +65,8 @@ namespace ProgettoCMA
         protected T newInstance;
         protected int previousSelected = -1;
 
+        protected bool isDataNotEmpty;
+
         // CONSTRUCTORS
         public UC() : base()
         {
@@ -72,9 +74,9 @@ namespace ProgettoCMA
             this.TName = typeof(T).Name;
         }
         // ENABLE/DISABLE FUNCTIONS
-        protected void buttonsUpdate(bool editStatus)
+        protected void buttonsUpdate(bool editStatus = false, bool forceDisabled = false)
         {
-            if (this.selectedIndex == -1)
+            if (this.selectedIndex == -1 || forceDisabled)
             {
                 this.controlsEnable(this.defaultEnabledButtons, false);
                 this.controlsEnable(this.defaultDisabledButtons, false);
@@ -93,14 +95,17 @@ namespace ProgettoCMA
             this.controlsEnable(this.defaultEnabledControls, !editStatus);
             this.controlsEnable(this.defaultDisabledControls, editStatus);
         }
-        private void controlsEnable(Control[] controls, bool enabled, bool forceAlwaysEnabled = false)
+        private void controlsEnable(Control[] controls, bool enabled)
         {
             if (controls != null)
             {
                 Control[] controlsToUse = controls;
-                if (this.alwaysEnabledControls != null && !forceAlwaysEnabled)
+                if (this.alwaysEnabledControls != null)
                 {
-                    controlsToUse = (controls.Except(this.alwaysEnabledControls).ToArray());
+                    if (!this.isDataNotEmpty)
+                    {
+                        controlsToUse = (controls.Except(this.alwaysEnabledControls).ToArray());
+                    }
                 }
                 foreach (var control in controlsToUse)
                 {
@@ -144,9 +149,10 @@ namespace ProgettoCMA
             {
                 this.updateUI(this.data[this.selectedIndex]);
             }
+            this.isDataNotEmpty = this.selectedIndex != -1;
             if (alwaysEnabledControls != null)
             {
-                this.controlsEnable(this.alwaysEnabledControls = alwaysEnabledControls, true, (this.selectedIndex != -1));
+                this.controlsEnable(this.alwaysEnabledControls = alwaysEnabledControls, true);
             }
             this.buttonsUpdate(false);
             this.list.SelectedIndexChanged += new EventHandler(this.listBox_SelectedIndexChangedBefore);
@@ -257,6 +263,11 @@ namespace ProgettoCMA
         protected void databaseAdd(T instanceToSave)
         {
             this.databaseSave(instanceToSave);
+            if (!this.isDataNotEmpty)
+            {
+                this.isDataNotEmpty = true;
+                this.controlsEnable(this.alwaysEnabledControls, true);
+            }
         }
         protected void databaseSave(T instanceToSave, bool isUpdate = false)
         {
@@ -345,6 +356,12 @@ namespace ProgettoCMA
             if (this.data.Count() <= 0)
             {
                 this.eraseTextBoxes();
+            }
+            if (this.data.Count() <= 0)
+            {
+                this.controlsEnable(this.alwaysEnabledControls, false);
+                this.isDataNotEmpty = false;
+                this.buttonsUpdate(false, true);
             }
         }
 

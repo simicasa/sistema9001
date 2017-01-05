@@ -13,17 +13,20 @@ namespace ProgettoCMA
 {
     public partial class Liste_RDO_Composizione : UC<Lista_RDO_Composizione>
     {
-        public Liste_RDO_Composizione() : base()
+        Lista_RDO listaRDO;
+
+        public Liste_RDO_Composizione(Lista_RDO lista) : base()
         {
+            this.listaRDO = lista;
+
             InitializeComponent();
 
             // DB SET
             this.dbSet = Shared.cdc.Lista_RDO_ComposizioneSet;
-
             // LIST
             this.list = listBox;
-            this.list.DisplayMember = "Categoria";
-            this.list.ValueMember = "Categoria";
+            this.list.DisplayMember = "Descrizione";
+            this.list.ValueMember = "Descrizione";
 
             // BUTTONS
             this.editBt = editButton;
@@ -32,7 +35,7 @@ namespace ProgettoCMA
             this.addBt = addButton;
             this.cancelBt = annullaButton;
 
-            this.initialize(this.orderList);
+            this.initialize(this.orderList, null, new Control[] { microValue, macroValue }, new Control[] { generaRDOButton });
         }
         protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -74,7 +77,7 @@ namespace ProgettoCMA
             this.list.Enabled = false;
 
             this.textBoxesEnable(true);
-            umValue.Enabled = false;
+            unitaMisuraValue.Enabled = false;
             quantitaValue.Enabled = false;
         }
         private void saveButtons()
@@ -92,7 +95,7 @@ namespace ProgettoCMA
             Lista_RDO_Composizione commessa_RDO_Categoria;
             if (!isNew)
             {
-                int ID = Int32.Parse(umValue.Text);
+                int ID = Int32.Parse(unitaMisuraValue.Text);
                 commessa_RDO_Categoria = Shared.cdc.Lista_RDO_ComposizioneSet.OfType<Lista_RDO_Composizione>().Where(x => x.ID == ID).First();
                 this.databaseUpdate(commessa_RDO_Categoria);
                 Lista_RDO_Composizione old = this.dataSubset[this.selectedIndex];
@@ -136,7 +139,7 @@ namespace ProgettoCMA
         protected override void addButton_Click(object sender, EventArgs e)
         {
             this.listInhibit = true;
-            this.newInstance = new Lista_RDO_Composizione(-1, null, null, "", 0, "");
+            this.newInstance = new Lista_RDO_Composizione(-1, this.listaRDO, null, "", 0, "");
             this.data.Add(newInstance);
             this.dataSubset.Add(newInstance);
             this.orderList();
@@ -186,6 +189,8 @@ namespace ProgettoCMA
                 //item.Categoria.Nome
                 //item.Categoria.Macro.Nome
             }
+            // git prova
+            
         }
     }
 }

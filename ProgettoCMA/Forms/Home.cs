@@ -67,7 +67,14 @@ namespace ProgettoCMA
         }
         private void commesseGestioneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.controlsAdd(new Commesse());
+            if(Shared.cdc.AziendaSet.OfType<Cliente>().Count() > 0)
+            {
+                this.controlsAdd(new Commesse());
+            }
+            else
+            {
+                Shared.messageBox("Non sono presenti clienti per creare una commessa.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         public void controlsAdd(UserControl uc)

@@ -87,6 +87,7 @@
     <Compile Include="Classes\Categoria.cs" />
     <Compile Include="Classes\Cliente.cs" />
     <Compile Include="Classes\Commessa.cs" />
+    <Compile Include="Classes\Lista_RDO.cs" />
     <Compile Include="Classes\Lista_RDO_Composizione.cs" />
     <Compile Include="Classes\Fornitore.cs" />
     <Compile Include="Classes\Indirizzo.cs" />
