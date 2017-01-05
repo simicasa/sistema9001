@@ -27,11 +27,6 @@ namespace ProgettoCMA
                 item.BorderStyle = BorderStyle.None;
                 item.BackColor = SystemColors.Control;
             }
-            foreach (var item in panel2.Controls.OfType<TextBox>())
-            {
-                item.BorderStyle = BorderStyle.None;
-                item.BackColor = SystemColors.Control;
-            }
             // LIST
             /*
             this.list = listBox;
@@ -58,16 +53,12 @@ namespace ProgettoCMA
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            var dsa = from c in Shared.cdc.CategoriaSet
-                      where c.Macro == null
-                      group c by c.ID into grouped
-                      where grouped.Count() > 0
-                      select grouped.Key;
-
-            var asd = from c in Shared.cdc.CategoriaSet
-                      where c.Macro != null && dsa.ToList().Contains(c.Macro.ID)
-                      select c;
-            if (asd.Count() <= 0)
+            var speriamoBBene = from c in Shared.cdc.CategoriaSet
+                                where c.Macro != null
+                                group c by c.Macro.ID into gruppoMacro
+                                where gruppoMacro.Count() > 0
+                                select gruppoMacro.Key;
+            if (speriamoBBene.Count() <= 0)
             {
                 Shared.messageBox("Non sono presenti categorie.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -76,6 +67,9 @@ namespace ProgettoCMA
             Shared.cdc.Lista_RDOSet.Add(newLista);
             Shared.cdc.SaveChanges();
             Shared.home.controlsAdd(new Liste_RDO_Composizione(newLista));
+        }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 }

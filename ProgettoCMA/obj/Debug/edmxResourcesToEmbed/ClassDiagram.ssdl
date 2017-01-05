@@ -185,7 +185,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RDO_ID" Type="int" Nullable="false" />
-    <Property Name="Commessa_RDO_Prodotti_ID" Type="int" Nullable="false" />
+    <Property Name="Lista_RDO_Composizione_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ODA_ComposizioneSet">
     <Key>
@@ -580,7 +580,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="RDO_Composizione">
-        <PropertyRef Name="Commessa_RDO_Prodotti_ID" />
+        <PropertyRef Name="Lista_RDO_Composizione_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

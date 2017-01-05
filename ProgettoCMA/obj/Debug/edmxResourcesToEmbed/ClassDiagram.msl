@@ -358,7 +358,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="Commessa_RDO_ProdottiRDO_Composizione" TypeName="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" StoreEntitySet="RDO_ComposizioneSet">
       <EndProperty Name="Commessa_RDO_Prodotti">
-        <ScalarProperty Name="ID" ColumnName="Commessa_RDO_Prodotti_ID" />
+        <ScalarProperty Name="ID" ColumnName="Lista_RDO_Composizione_ID" />
       </EndProperty>
       <EndProperty Name="RDO_Composizione">
         <ScalarProperty Name="ID" ColumnName="ID" />

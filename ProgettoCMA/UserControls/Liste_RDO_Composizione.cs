@@ -20,22 +20,18 @@ namespace ProgettoCMA
             this.listaRDO = lista;
 
             InitializeComponent();
-
-            var dsa = from c in Shared.cdc.CategoriaSet
-                      where c.Macro == null
-                      group c by c.ID into grouped
-                      where grouped.Count() > 0
-                      select grouped.Key;
-
-            var asd = from c in Shared.cdc.CategoriaSet
-                      where c.Macro != null && dsa.ToList().Contains(c.Macro.ID)
-                      select c;
-
-            var sss = from c in Shared.cdc.CategoriaSet
-                      where asd.ToList().Contains(c)
-                      select c.Macro;
+            
+            var macroCategorie = from c in Shared.cdc.CategoriaSet
+                                 where (
+                                        from cc in Shared.cdc.CategoriaSet
+                                        where cc.Macro != null
+                                        group cc by cc.Macro.ID into gruppoMacro
+                                        where gruppoMacro.Count() > 0
+                                        select gruppoMacro.Key
+                                        ).ToList().Contains(c.ID)
+                                 select c;
             //List<Categoria> macroCategorie = Shared.cdc.CategoriaSet.Where(c => c.Macro == null).ToList();
-            macroValue.DataSource = sss.Distinct().ToList();
+            macroValue.DataSource = macroCategorie.ToList();
             macroValue.ValueMember = "Nome";
             macroValue.DropDownStyle = ComboBoxStyle.DropDownList;
 
@@ -187,28 +183,28 @@ namespace ProgettoCMA
 
         private void generaRDOButton_Click(object sender, EventArgs e)
         {
-            this.simoneVuoleLaFunzione(new Lista_RDO());
-        }
-
-        private void simoneVuoleLaFunzione(Lista_RDO listaRDO)
-        {
-            // prendi quello che ti serve
-            // esempi:
-            string codiceCommessa = listaRDO.Commessa.Codice;
-            // FORMATO RIFERIMENTO INTERNO:
-            // RDO_YYYY_CodiceCommessa_ProgressivoLista_ProgressivoRDOGenerata
-            string nostroRiferimentoInterno = "RDO_" + DateTime.Now.Year + "_" + listaRDO.Commessa.Codice + "_" +
-                listaRDO.Progressivo.ToString().PadLeft(4, '0') + "_" + "ProgressivoRDOGenerata";
-            foreach (var item in listaRDO.Lista_RDO_Composizione)
+            var vai = from ll in Shared.cdc.Lista_RDO_ComposizioneSet
+                      join c in Shared.cdc.CategoriaSet on ll.Categoria.ID equals c.ID
+                      join acf in Shared.cdc.Associazione_Categoria_FornitoreSet on c.ID equals acf.Categoria.ID
+                      join f in Shared.cdc.AziendaSet.OfType<Fornitore>() on acf.Fornitore.ID equals f.ID
+                      orderby f.ID
+                      select new { Fornitore = f, ListaRDOComposizione = ll};
+            Fornitore fornitore, fornitoreOld = null;
+            RDO rdo = null;
+            foreach (var item in vai)
             {
-                //item.Quantita
-                //item.UnitaMisura
-                //item.Descrizione
-                //item.Categoria.Nome
-                //item.Categoria.Macro.Nome
+                fornitore = item.Fornitore;
+                if (fornitoreOld == null || fornitoreOld.ID != fornitore.ID)
+                {
+                    rdo = new RDO(-1, this.listaRDO, fornitore, "", DateTime.Now.Year.ToString(), "");
+                    Shared.cdc.RDOSet.Add(rdo);
+                    Shared.cdc.SaveChanges();
+                }
+                Shared.cdc.RDO_ComposizioneSet.Add(new RDO_Composizione(-1, item.ListaRDOComposizione, rdo));
+                fornitoreOld = fornitore;
             }
-            // git prova
-            
+            Shared.cdc.SaveChanges();
+            //string nostroRiferimentoInterno = "RDO_" + DateTime.Now.Year + "_" + listaRDO.Commessa.Codice + "_" + listaRDO.Progressivo.ToString().PadLeft(4, '0') + "_" + "ProgressivoRDOGenerata";
         }
 
         private void macroValue_SelectedIndexChanged(object sender, EventArgs e)

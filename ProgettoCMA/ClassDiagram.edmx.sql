@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/04/2017 13:11:47
+-- Date Created: 01/05/2017 16:29:11
 -- Generated from EDMX file: C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\ClassDiagram.edmx
 -- --------------------------------------------------
 
@@ -228,7 +228,7 @@ GO
 CREATE TABLE [dbo].[RDO_ComposizioneSet] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [RDO_ID] int  NOT NULL,
-    [Commessa_RDO_Prodotti_ID] int  NOT NULL
+    [Lista_RDO_Composizione_ID] int  NOT NULL
 );
 GO
 
@@ -849,10 +849,10 @@ ON [dbo].[Lista_RDO_ComposizioneSet]
     ([Lista_RDO_ID]);
 GO
 
--- Creating foreign key on [Commessa_RDO_Prodotti_ID] in table 'RDO_ComposizioneSet'
+-- Creating foreign key on [Lista_RDO_Composizione_ID] in table 'RDO_ComposizioneSet'
 ALTER TABLE [dbo].[RDO_ComposizioneSet]
 ADD CONSTRAINT [FK_Commessa_RDO_ProdottiRDO_Composizione]
-    FOREIGN KEY ([Commessa_RDO_Prodotti_ID])
+    FOREIGN KEY ([Lista_RDO_Composizione_ID])
     REFERENCES [dbo].[Lista_RDO_ComposizioneSet]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -861,7 +861,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_Commessa_RDO_ProdottiRDO_Composizione'
 CREATE INDEX [IX_FK_Commessa_RDO_ProdottiRDO_Composizione]
 ON [dbo].[RDO_ComposizioneSet]
-    ([Commessa_RDO_Prodotti_ID]);
+    ([Lista_RDO_Composizione_ID]);
 GO
 
 -- Creating foreign key on [Lista_RDO_ID] in table 'RDOSet'
