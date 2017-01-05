@@ -176,7 +176,8 @@ namespace ProgettoCMA
             string codiceCommessa = listaRDO.Commessa.Codice;
             // FORMATO RIFERIMENTO INTERNO:
             // RDO_YYYY_CodiceCommessa_ProgressivoLista_ProgressivoRDOGenerata
-            string nostroRiferimentoInterno = "RDO_" + DateTime.Now.Year + "_" + listaRDO.Commessa.Codice + "_" + listaRDO.Progressivo.ToString().PadLeft(4, '0') + "_" + "ProgressivoRDOGenerata";
+            string nostroRiferimentoInterno = "RDO_" + DateTime.Now.Year + "_" + listaRDO.Commessa.Codice + "_" +
+                listaRDO.Progressivo.ToString().PadLeft(4, '0') + "_" + "ProgressivoRDOGenerata";
             foreach (var item in listaRDO.Lista_RDO_Composizione)
             {
                 //item.Quantita
