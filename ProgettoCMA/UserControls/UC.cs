@@ -26,28 +26,12 @@ namespace ProgettoCMA
         protected Button deleteBt = null;
         protected Button addBt = null;
         protected Button cancelBt = null;
-        protected Button[] defaultEnabledButtons = null;
-        protected Button[] defaultDisabledButtons = null;
+        protected Control[] defaultEnabledButtons = null;
+        protected Control[] defaultDisabledButtons = null;
 
         public UC()
         {
             this.controls = new Dictionary<string, Control>();
-        }
-
-        protected virtual void editButton_Click(object sender, EventArgs e)
-        {
-        }
-        protected virtual void saveButton_Click(object sender, EventArgs e)
-        {
-        }
-        protected virtual void addButton_Click(object sender, EventArgs e)
-        {
-        }
-        protected virtual void deleteButton_Click(object sender, EventArgs e)
-        {
-        }
-        protected virtual void annullaButton_Click(object sender, EventArgs e)
-        {
         }
     }
 
@@ -109,7 +93,10 @@ namespace ProgettoCMA
                 }
                 foreach (var control in controlsToUse)
                 {
-                    control.Enabled = enabled;
+                    if(control != null)
+                    {
+                        control.Enabled = enabled;
+                    }
                 }
             }
         }
@@ -131,17 +118,18 @@ namespace ProgettoCMA
             if (defaultEnabledControls != null)
             {
                 this.defaultEnabledControls = defaultEnabledControls;
-                this.defaultEnabledButtons = (Button[])(this.defaultEnabledButtons.Union(defaultEnabledControls.OfType<Button>()).ToArray());
+                this.defaultEnabledButtons = (this.defaultEnabledButtons.Union(defaultEnabledControls).ToArray());
             }
             if (defaultDisabledControls != null)
             {
                 this.defaultDisabledControls = defaultDisabledControls;
-                this.defaultDisabledButtons = (Button[])(this.defaultDisabledButtons.Union(defaultDisabledControls.OfType<Button>()).ToArray());
+                this.defaultDisabledButtons = (this.defaultDisabledButtons.Union(defaultDisabledControls).ToArray());
             }
             this.controlsUpdate(false);
 
-            getDataFunction();
-            orderListFunction();
+            getDataFunction?.Invoke();
+            orderListFunction?.Invoke();
+
             this.initializeTextBoxes();
             this.textBoxesEnable(false);
             this.listInhibit = false;
@@ -155,12 +143,30 @@ namespace ProgettoCMA
                 this.controlsEnable(this.alwaysEnabledControls = alwaysEnabledControls, true);
             }
             this.buttonsUpdate(false);
-            this.list.SelectedIndexChanged += new EventHandler(this.listBox_SelectedIndexChangedBefore);
-            this.editBt.Click += new EventHandler(this.editButton_Click);
-            this.saveBt.Click += new EventHandler(this.saveButton_Click);
-            this.addBt.Click += new EventHandler(this.addButton_Click);
-            this.deleteBt.Click += new EventHandler(this.deleteButton_Click);
-            this.cancelBt.Click += new EventHandler(this.annullaButton_Click);
+            if(this.list != null)
+            {
+                this.list.SelectedIndexChanged += new EventHandler(this.listBox_SelectedIndexChangedBefore);
+            }
+            if (this.editBt != null)
+            {
+                this.editBt.Click += new EventHandler(this.editButton_Click);
+            }
+            if (this.saveBt != null)
+            {
+                this.saveBt.Click += new EventHandler(this.saveButton_Click);
+            }
+            if (this.addBt != null)
+            {
+                this.addBt.Click += new EventHandler(this.addButton_Click);
+            }
+            if (this.deleteBt != null)
+            {
+                this.deleteBt.Click += new EventHandler(this.deleteButton_Click);
+            }
+            if (this.cancelBt != null)
+            {
+                this.cancelBt.Click += new EventHandler(this.annullaButtonFull_Click);
+            }
         }
         
         protected virtual void listBox_SelectedIndexChangedBefore(object sender, EventArgs e)
@@ -325,9 +331,16 @@ namespace ProgettoCMA
                     {
                         item.SetValue(instanceToSave, Shared.utente);
                     }
+                    else if(item.PropertyType == typeof(decimal))
+                    {
+                        item.SetValue(instanceToSave, decimal.Parse(this.controls[item.Name.ToLower()].Text));
+                    }
                     else
                     {
-                        item.SetValue(instanceToSave, this.controls[item.Name.ToLower()].Text);
+                        if (item.PropertyType == typeof(string))
+                        {
+                            item.SetValue(instanceToSave, this.controls[item.Name.ToLower()].Text);
+                        }
                     }
                 }
             }
@@ -448,6 +461,28 @@ namespace ProgettoCMA
                 }
             }
             return indirizzo;
+        }
+
+        // BUTTON EVENTS
+        protected virtual void editButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void saveButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void addButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void deleteButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void annullaButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void annullaButtonFull_Click(object sender, EventArgs e)
+        {
+            if (this.newInstance != null)
+            this.annullaButton_Click(sender, e);
         }
     }
 

@@ -40,7 +40,7 @@
             this.idLabel = new System.Windows.Forms.Label();
             this.clientiGroupBox = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.microValue = new System.Windows.Forms.ComboBox();
+            this.categoriaValue = new System.Windows.Forms.ComboBox();
             this.macroValue = new System.Windows.Forms.ComboBox();
             this.generaRDOButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
@@ -149,7 +149,7 @@
             // clientiGroupBox
             // 
             this.clientiGroupBox.Controls.Add(this.label2);
-            this.clientiGroupBox.Controls.Add(this.microValue);
+            this.clientiGroupBox.Controls.Add(this.categoriaValue);
             this.clientiGroupBox.Controls.Add(this.macroValue);
             this.clientiGroupBox.Controls.Add(this.generaRDOButton);
             this.clientiGroupBox.Controls.Add(this.annullaButton);
@@ -184,13 +184,13 @@
             this.label2.TabIndex = 37;
             this.label2.Text = "MacroCategoria";
             // 
-            // microValue
+            // categoriaValue
             // 
-            this.microValue.FormattingEnabled = true;
-            this.microValue.Location = new System.Drawing.Point(270, 77);
-            this.microValue.Name = "microValue";
-            this.microValue.Size = new System.Drawing.Size(287, 21);
-            this.microValue.TabIndex = 36;
+            this.categoriaValue.FormattingEnabled = true;
+            this.categoriaValue.Location = new System.Drawing.Point(270, 77);
+            this.categoriaValue.Name = "categoriaValue";
+            this.categoriaValue.Size = new System.Drawing.Size(287, 21);
+            this.categoriaValue.TabIndex = 36;
             // 
             // macroValue
             // 
@@ -199,6 +199,7 @@
             this.macroValue.Name = "macroValue";
             this.macroValue.Size = new System.Drawing.Size(287, 21);
             this.macroValue.TabIndex = 35;
+            this.macroValue.SelectedIndexChanged += new System.EventHandler(this.macroValue_SelectedIndexChanged);
             // 
             // generaRDOButton
             // 
@@ -298,7 +299,7 @@
         private System.Windows.Forms.GroupBox clientiGroupBox;
         private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox microValue;
+        private System.Windows.Forms.ComboBox categoriaValue;
         private System.Windows.Forms.ComboBox macroValue;
         private System.Windows.Forms.Button generaRDOButton;
     }

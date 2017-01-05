@@ -21,6 +21,24 @@ namespace ProgettoCMA
 
             InitializeComponent();
 
+            var dsa = from c in Shared.cdc.CategoriaSet
+                      where c.Macro == null
+                      group c by c.ID into grouped
+                      where grouped.Count() > 0
+                      select grouped.Key;
+
+            var asd = from c in Shared.cdc.CategoriaSet
+                      where c.Macro != null && dsa.ToList().Contains(c.Macro.ID)
+                      select c;
+
+            var sss = from c in Shared.cdc.CategoriaSet
+                      where asd.ToList().Contains(c)
+                      select c.Macro;
+            //List<Categoria> macroCategorie = Shared.cdc.CategoriaSet.Where(c => c.Macro == null).ToList();
+            macroValue.DataSource = sss.Distinct().ToList();
+            macroValue.ValueMember = "Nome";
+            macroValue.DropDownStyle = ComboBoxStyle.DropDownList;
+
             // DB SET
             this.dbSet = Shared.cdc.Lista_RDO_ComposizioneSet;
             // LIST
@@ -35,7 +53,7 @@ namespace ProgettoCMA
             this.addBt = addButton;
             this.cancelBt = annullaButton;
 
-            this.initialize(this.orderList, null, new Control[] { microValue, macroValue }, new Control[] { generaRDOButton });
+            this.initialize(this.orderList, null, new Control[] { categoriaValue, macroValue }, new Control[] { generaRDOButton });
         }
         protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -72,16 +90,16 @@ namespace ProgettoCMA
         }
         private void editButtons()
         {
+            this.controlsUpdate(true);
             this.buttonsUpdate(true);
             searchTextBox.Enabled = false;
             this.list.Enabled = false;
 
             this.textBoxesEnable(true);
-            unitaMisuraValue.Enabled = false;
-            quantitaValue.Enabled = false;
         }
         private void saveButtons()
         {
+            this.controlsUpdate(false);
             this.buttonsUpdate(false);
             searchTextBox.Enabled = true;
             this.list.Enabled = true;
@@ -115,7 +133,7 @@ namespace ProgettoCMA
         }
         private void orderList()
         {
-            base.orderList(x => x.ID);
+            base.orderList(x => x.Descrizione);
             this.list.DataSource = this.dataSubset;
         }
 
@@ -191,6 +209,18 @@ namespace ProgettoCMA
             }
             // git prova
             
+        }
+
+        private void macroValue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.microValueUpdate();
+        }
+        private void microValueUpdate()
+        {
+            List<Categoria> microCategorie = Shared.cdc.CategoriaSet.Where(c => c.Macro != null && c.Macro.ID == ((Categoria)macroValue.SelectedItem).ID).ToList();
+            categoriaValue.DataSource = microCategorie;
+            categoriaValue.ValueMember = "Nome";
+            categoriaValue.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }
