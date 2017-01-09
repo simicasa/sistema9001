@@ -44,5 +44,7 @@ namespace ProgettoCMA
         public virtual DbSet<Servizio> ServizioSet { get; set; }
         public virtual DbSet<Contatto> ContattoSet { get; set; }
         public virtual DbSet<Azienda> AziendaSet { get; set; }
+        public virtual DbSet<Lista_RDO_Composizione> Lista_RDO_ComposizioneSet { get; set; }
+        public virtual DbSet<Lista_RDO> Lista_RDOSet { get; set; }
     }
 }

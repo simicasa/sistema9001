@@ -14,7 +14,7 @@ namespace ProgettoCMA
     
     public partial class Ordine_Composizione
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         public virtual ODA_Composizione RDA_Composizione { get; set; }
         public virtual Ordine Ordine { get; set; }

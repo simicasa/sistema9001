@@ -14,7 +14,7 @@ namespace ProgettoCMA
     
     public partial class Associazione_Categoria_Fornitore
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         public virtual Fornitore Fornitore { get; set; }

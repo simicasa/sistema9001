@@ -15,15 +15,8 @@ namespace ProgettoCMA
             this.Cliente = cliente;
             this.Codice = codice;
             this.Creazione = DateTime.Now.ToShortDateString();
-            this.RDO = new HashSet<RDO>();
             this.Utente = utente;
             this.Note = note;
-        }
-        public override string ToString()
-        {
-            return (this.Cliente.ID 
-                + " - " + this.Utente.ID + " - " + 
-                this.RDO.Count().ToString());
         }
     }
 }

@@ -21,7 +21,7 @@ namespace ProgettoCMA
             this.Offerta = new HashSet<Offerta>();
         }
     
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordine_Composizione> Ordine_Composizione { get; set; }

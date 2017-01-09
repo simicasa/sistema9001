@@ -18,10 +18,13 @@ namespace ProgettoCMA
         public Fornitore()
         {
             this.Associazione_Categoria_Fornitore = new HashSet<Associazione_Categoria_Fornitore>();
+            this.RDO = new HashSet<RDO>();
         }
     
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Associazione_Categoria_Fornitore> Associazione_Categoria_Fornitore { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RDO> RDO { get; set; }
     }
 }

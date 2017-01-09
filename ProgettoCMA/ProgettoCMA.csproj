@@ -87,13 +87,30 @@
     <Compile Include="Classes\Categoria.cs" />
     <Compile Include="Classes\Cliente.cs" />
     <Compile Include="Classes\Commessa.cs" />
+    <Compile Include="Classes\Lista_RDO.cs" />
+    <Compile Include="Classes\Lista_RDO_Composizione.cs" />
     <Compile Include="Classes\Fornitore.cs" />
     <Compile Include="Classes\Indirizzo.cs" />
+    <Compile Include="Classes\RDO.cs" />
+    <Compile Include="Classes\RDO_Composizione.cs" />
     <Compile Include="Classes\Ruolo.cs" />
     <Compile Include="Cliente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <Compile Include="Shared.cs" />
+    <Compile Include="Forms\newODA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\newODA.Designer.cs">
+      <DependentUpon>newODA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lista_RDO.cs">
+      <DependentUpon>ClassDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lista_RDO_Composizione.cs">
+      <DependentUpon>ClassDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Shared.cs" />
+    <Compile Include="Shared\Validator.cs" />
     <Compile Include="UserControls\Categorie.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,6 +143,12 @@
     </Compile>
     <Compile Include="Fornitore.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Liste_RDO_Composizione.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Liste_RDO_Composizione.Designer.cs">
+      <DependentUpon>Liste_RDO_Composizione.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Commesse.cs">
       <SubType>UserControl</SubType>
@@ -166,10 +189,10 @@
     <Compile Include="Ordine_Composizione.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Shared\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Utente.cs" />
-    <Compile Include="QueryBuilder.cs" />
+    <Compile Include="Shared\QueryBuilder.cs" />
     <Compile Include="RDO.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
@@ -182,6 +205,18 @@
     <Compile Include="Servizio.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\GestioneCommessa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\GestioneCommessa.Designer.cs">
+      <DependentUpon>GestioneCommessa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ODA_Composizioni.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ODA_Composizioni.Designer.cs">
+      <DependentUpon>ODA_Composizioni.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -191,6 +226,9 @@
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\newODA.resx">
+      <DependentUpon>newODA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Categorie.resx">
       <DependentUpon>Categorie.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Liste_RDO_Composizione.resx">
+      <DependentUpon>Liste_RDO_Composizione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Commesse.resx">
       <DependentUpon>Commesse.cs</DependentUpon>
@@ -219,6 +260,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserControls\GestioneCommessa.resx">
+      <DependentUpon>GestioneCommessa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ODA_Composizioni.resx">
+      <DependentUpon>ODA_Composizioni.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC.resx">
       <DependentUpon>UC.cs</DependentUpon>
     </EmbeddedResource>
@@ -258,6 +305,8 @@
       <LastGenOutput>ClassDiagram.cs</LastGenOutput>
       <DependentUpon>ClassDiagram.edmx</DependentUpon>
     </Content>
+    <None Include="Resources\arrow-top-c.png" />
+    <None Include="Resources\arrow-down-c.png" />
     <None Include="Resources\delete-512.png" />
     <None Include="Resources\add_user-128.png" />
     <None Include="Resources\floppy-disk-icon-8284.png" />

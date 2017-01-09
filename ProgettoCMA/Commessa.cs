@@ -17,7 +17,7 @@ namespace ProgettoCMA
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Commessa()
         {
-            this.RDO = new HashSet<RDO>();
+            this.Lista_RDO = new HashSet<Lista_RDO>();
         }
     
         public int ID { get; set; }
@@ -27,8 +27,8 @@ namespace ProgettoCMA
         public string Note { get; set; }
     
         public virtual Utente Utente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RDO> RDO { get; set; }
         public virtual Cliente Cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Lista_RDO> Lista_RDO { get; set; }
     }
 }

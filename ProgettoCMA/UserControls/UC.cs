@@ -12,10 +12,31 @@ using System.Reflection;
 
 namespace ProgettoCMA
 {
-    public partial class UC<T> : UserControl
+    public partial class UC : UserControl
     {
-        protected Home home = null;
-        
+        // CONTROLS
+        protected Control[] defaultEnabledControls = null;
+        protected Control[] defaultDisabledControls = null;
+        protected Control[] alwaysEnabledControls = null;
+        protected Dictionary<String, Control> controls = null;
+
+        // BUTTONS
+        protected Button editBt = null;
+        protected Button saveBt = null;
+        protected Button deleteBt = null;
+        protected Button addBt = null;
+        protected Button cancelBt = null;
+        protected Control[] defaultEnabledButtons = null;
+        protected Control[] defaultDisabledButtons = null;
+
+        public UC()
+        {
+            this.controls = new Dictionary<string, Control>();
+        }
+    }
+
+    public class UC<T> : UC
+    {
         protected DbSet dbSet = null;
         protected ListBox list = null;
         protected BindingList<T> data = null;
@@ -28,61 +49,125 @@ namespace ProgettoCMA
         protected T newInstance;
         protected int previousSelected = -1;
 
-        // BUTTONS
-        protected Button editBt = null;
-        protected Button saveBt = null;
-        protected Button deleteBt = null;
-        protected Button addBt = null;
-        protected Button cancelBt = null;
-        private Button[] defaultEnabledButtons  = null;
-        private Button[] defaultDisabledButtons = null;
-
-        // TEXT BOXES
-        private Dictionary<String, Control> textBoxes = null;
+        protected bool isDataNotEmpty;
+        protected bool forceRemove = false;
 
         // CONSTRUCTORS
-        public UC()
+        public UC() : base()
         {
-            this.textBoxes = new Dictionary<string, Control>();
             this.listInhibit = true;
             this.TName = typeof(T).Name;
         }
-        public UC(Home home) : this()
+        // ENABLE/DISABLE FUNCTIONS
+        protected void buttonsUpdate(bool editStatus = false, bool forceDisabled = false)
         {
-            this.home = home;
-            //QueryBuilder<T> qb = QueryBuilder<T>.from(this.dbSet);
-            //Console.WriteLine(qb.query().ToString());
+            if (this.selectedIndex == -1 || forceDisabled)
+            {
+                this.controlsEnable(this.defaultEnabledButtons, false);
+                this.controlsEnable(this.defaultDisabledButtons, false);
+                this.controlsEnable(new Control[] { this.addBt }, true);
+                return;
+            }
+            this.controlsEnable(this.defaultEnabledButtons, !editStatus);
+            this.controlsEnable(this.defaultDisabledButtons, editStatus);
         }
+        protected void textBoxesEnable(bool enabled)
+        {
+            this.controlsEnable(this.controls.Values.OfType<TextBox>().ToArray(), enabled);
+        }
+        protected void controlsUpdate(bool editStatus)
+        {
+            this.controlsEnable(this.defaultEnabledControls, !editStatus);
+            this.controlsEnable(this.defaultDisabledControls, editStatus);
+        }
+        private void controlsEnable(Control[] controls, bool enabled)
+        {
+            if (controls != null)
+            {
+                Control[] controlsToUse = controls;
+                if (this.alwaysEnabledControls != null)
+                {
+                    if (!this.isDataNotEmpty)
+                    {
+                        controlsToUse = (controls.Except(this.alwaysEnabledControls).ToArray());
+                    }
+                }
+                foreach (var control in controlsToUse)
+                {
+                    if(control != null)
+                    {
+                        control.Enabled = enabled;
+                    }
+                }
+            }
+        }
+
 
         protected DialogResult messageBoxShow(String text, MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None)
         {
-            return this.messageBoxShowFull(text, this.TName, buttons, icon);
-        }
-        private DialogResult messageBoxShowFull(String text, String caption = "MessageBox", MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None)
-        {
-            return MessageBox.Show(text, caption, buttons, icon);
+            return Shared.messageBox(text, this.TName, buttons, icon);
         }
 
-        public void initialize(Action orderListFunction)
+        protected void initialize(Action orderListFunction, Control[] defaultEnabledControls = null, Control[] defaultDisabledControls = null, Control[] alwaysEnabledControls = null)
+        {
+            this.initializeFull(orderListFunction, this.getData, defaultEnabledControls, defaultDisabledControls, alwaysEnabledControls);
+        }
+        protected void initializeFull(Action orderListFunction, Action getDataFunction, Control[] defaultEnabledControls, Control[] defaultDisabledControls, Control[] alwaysEnabledControls)
         {
             this.defaultEnabledButtons = new Button[] { this.editBt, this.deleteBt, this.addBt };
             this.defaultDisabledButtons = new Button[] { this.saveBt, this.cancelBt };
-            this.getData();
-            orderListFunction();
+            if (defaultEnabledControls != null)
+            {
+                this.defaultEnabledControls = defaultEnabledControls;
+                this.defaultEnabledButtons = (this.defaultEnabledButtons.Union(defaultEnabledControls).ToArray());
+            }
+            if (defaultDisabledControls != null)
+            {
+                this.defaultDisabledControls = defaultDisabledControls;
+                this.defaultDisabledButtons = (this.defaultDisabledButtons.Union(defaultDisabledControls).ToArray());
+            }
+            this.controlsUpdate(false);
+
+            getDataFunction?.Invoke();
+            orderListFunction?.Invoke();
+
             this.initializeTextBoxes();
             this.textBoxesEnable(false);
             this.listInhibit = false;
-            if(this.selectedIndex != -1)
+            if (this.selectedIndex != -1)
             {
                 this.updateUI(this.data[this.selectedIndex]);
             }
+            this.isDataNotEmpty = this.selectedIndex != -1;
+            if (alwaysEnabledControls != null)
+            {
+                this.controlsEnable(this.alwaysEnabledControls = alwaysEnabledControls, true);
+            }
             this.buttonsUpdate(false);
-            this.list.SelectedIndexChanged += new EventHandler(this.listBox_SelectedIndexChangedBefore);
-            this.editBt.Click += new EventHandler(this.editButton_Click);
-            this.saveBt.Click += new EventHandler(this.saveButton_Click);
-            this.addBt.Click += new EventHandler(this.addButton_Click);
-            this.deleteBt.Click += new EventHandler(this.deleteButton_Click);
-            this.cancelBt.Click += new EventHandler(this.annullaButton_Click);
+            if(this.list != null)
+            {
+                this.list.SelectedIndexChanged += new EventHandler(this.listBox_SelectedIndexChangedBefore);
+            }
+            if (this.editBt != null)
+            {
+                this.editBt.Click += new EventHandler(this.editButton_Click);
+            }
+            if (this.saveBt != null)
+            {
+                this.saveBt.Click += new EventHandler(this.saveButton_Click);
+            }
+            if (this.addBt != null)
+            {
+                this.addBt.Click += new EventHandler(this.addButton_Click);
+            }
+            if (this.deleteBt != null)
+            {
+                this.deleteBt.Click += new EventHandler(this.deleteButton_Click);
+            }
+            if (this.cancelBt != null)
+            {
+                this.cancelBt.Click += new EventHandler(this.annullaButtonFull_Click);
+            }
         }
         
         protected virtual void listBox_SelectedIndexChangedBefore(object sender, EventArgs e)
@@ -106,22 +191,7 @@ namespace ProgettoCMA
             }
             this.previousSelected = this.list.SelectedIndex;
         }
-        protected virtual void editButton_Click(object sender, EventArgs e)
-        {
-        }
-        protected virtual void saveButton_Click(object sender, EventArgs e)
-        {
-        }
-        protected virtual void addButton_Click(object sender, EventArgs e)
-        {
-        }
-        protected virtual void deleteButton_Click(object sender, EventArgs e)
-        {
-        }
-        protected virtual void annullaButton_Click(object sender, EventArgs e)
-        {
-        }
-
+        
         // DATA GETTERS
         protected void getData()
         {
@@ -129,38 +199,6 @@ namespace ProgettoCMA
             if (this.data.Count() > 0)
             {
                 this.selectedIndex = 0;
-            }
-        }
-
-        // ENABLE/DISABLE FUNCTIONS
-        protected void buttonsUpdate(bool editStatus)
-        {
-            if(this.selectedIndex == -1)
-            {
-                this.controlsEnable(this.defaultEnabledButtons, false);
-                this.controlsEnable(this.defaultDisabledButtons, false);
-                this.controlsEnable(new Control[] { this.addBt }, true);
-                return;
-            }
-            this.controlsEnable(this.defaultEnabledButtons, !editStatus);
-            this.controlsEnable(this.defaultDisabledButtons, editStatus);
-        }
-        protected void textBoxesEnable(bool enabled)
-        {
-            this.controlsEnable(this.textBoxes.Values.OfType<TextBox>().ToArray(), enabled);
-        }
-        private void controlsEnable(Control[] controls, bool enabled)
-        {
-            foreach (var control in controls)
-            {
-                if (control != null)
-                {
-                    control.Enabled = enabled;
-                }
-                else
-                {
-                    Console.WriteLine("Controllo non presente");
-                }
             }
         }
 
@@ -180,7 +218,7 @@ namespace ProgettoCMA
             this.list.DataSource = dataFull;
         }
 
-        private void initializeTextBoxes(bool isIndirizzo = false)
+        protected void initializeTextBoxes(bool isIndirizzo = false)
         {
             Type a;
             PropertyInfo[] properties;
@@ -206,85 +244,87 @@ namespace ProgettoCMA
                     {
                         if (typeof(Indirizzo).GetRuntimeProperties().Contains(item))
                         {
-                            this.textBoxes["indirizzo_" + item.Name.ToLower()] = ss.First();
+                            this.controls["indirizzo_" + item.Name.ToLower()] = ss.First();
                         }
                         else
                         {
-                            this.textBoxes[item.Name.ToLower()] = ss.First();
+                            this.controls[item.Name.ToLower()] = ss.First();
                         }
                     }
                 }
             }
             /*
-            foreach (var item in this.textBoxes)
-            {
-                //Console.WriteLine(item.Value.Name + " " + item.Value.Text);
-            }
-            */
-
-            /*
             Object unmododiverso = new Object();
             unmododiverso = a.InvokeMember("", BindingFlags.CreateInstance, null, unmododiverso, null);
-            foreach (var item in typeof(T).GetRuntimeProperties())
-            {
-                Console.WriteLine(item.Name + item.PropertyType.ToString());
-                if (this.textBoxes.ContainsKey(item.Name.ToLower()))
-                {
-                    if (item.PropertyType == typeof(Int32))
-                    {
-                        item.SetValue(unmododiverso, Int32.Parse(this.textBoxes[item.Name.ToLower()].Text));
-                    }
-                    else
-                    {
-                        item.SetValue(unmododiverso, this.textBoxes[item.Name.ToLower()].Text);
-                    }
-                }
-            }
             */
-
-            /*
-            if(a == typeof(Indirizzo))
+        }
+        protected void eraseTextBoxes()
+        {
+            foreach (var textbox in this.controls.Values.OfType<TextBox>())
             {
-                return (Indirizzo)unmododiverso;
+                textbox.Clear();
             }
-            else
-            {
-                unmododiverso.Indirizzo = addr;
-                Shared.cdc.AziendaSet.Add((Cliente)unmododiverso);
-                Shared.cdc.SaveChanges();
-            }*/
         }
 
+        // DATABASE FUNCTIONS
         protected void databaseAdd(T instanceToSave)
         {
             this.databaseSave(instanceToSave);
+            if (!this.isDataNotEmpty)
+            {
+                this.isDataNotEmpty = true;
+                this.controlsEnable(this.alwaysEnabledControls, true);
+            }
         }
         protected void databaseSave(T instanceToSave, bool isUpdate = false)
         {
             foreach (var item in typeof(T).GetRuntimeProperties())
             {
-                if (this.textBoxes.ContainsKey(item.Name.ToLower()) || item.PropertyType.IsClass)
+                if (this.controls.ContainsKey(item.Name.ToLower()) || item.PropertyType.IsClass)
                 {
                     if (item.PropertyType == typeof(Int32))
                     {
-                        item.SetValue(instanceToSave, Int32.Parse(this.textBoxes[item.Name.ToLower()].Text));
+                        item.SetValue(instanceToSave, Int32.Parse(this.controls[item.Name.ToLower()].Text));
                     }
                     else if (item.PropertyType == typeof(Indirizzo))
                     {
                         item.SetValue(instanceToSave, this.createIndirizzo());
                     }
-                    else if (item.PropertyType == typeof(Cliente))
+                    else if (item.PropertyType == typeof(Cliente) || item.PropertyType == typeof(Categoria))
                     {
-                        if (this.textBoxes[item.Name.ToLower()].GetType() == typeof(ListBox))
+                        if (this.controls[item.Name.ToLower()].GetType() == typeof(ListBox))
                         {
-                            item.SetValue(instanceToSave, ((ListBox)this.textBoxes[item.Name.ToLower()]).SelectedItem);
+                            item.SetValue(instanceToSave, ((ListBox)this.controls[item.Name.ToLower()]).SelectedItem);
                         }
-                        else if (this.textBoxes[item.Name.ToLower()].GetType() == typeof(String))
+                        else if (this.controls[item.Name.ToLower()].GetType() == typeof(ComboBox))
                         {
-                            IQueryable<Cliente> cliente = Shared.cdc.AziendaSet.OfType<Cliente>().Where(c => c.Ragione == this.textBoxes[item.Name.ToLower()].Text);
-                            if (cliente.Count() == 1)
+                            item.SetValue(instanceToSave, ((ComboBox)this.controls[item.Name.ToLower()]).SelectedItem);
+                        }
+                        else if (this.controls[item.Name.ToLower()].GetType() == typeof(TextBox))
+                        {
+                            if (item.PropertyType == typeof(Cliente))
                             {
-                                item.SetValue(instanceToSave, cliente.First());
+                                IQueryable<Cliente> var = Shared.cdc.AziendaSet.OfType<Cliente>().Where(c => c.Ragione == this.controls[item.Name.ToLower()].Text);
+                                if (var.Count() == 1)
+                                {
+                                    item.SetValue(instanceToSave, var.First());
+                                }
+                                else
+                                {
+                                    item.SetValue(instanceToSave, null);
+                                }
+                            }
+                            else if (item.PropertyType == typeof(Categoria))
+                            {
+                                IQueryable<Categoria> var = Shared.cdc.CategoriaSet.OfType<Categoria>().Where(c => c.Nome == this.controls[item.Name.ToLower()].Text);
+                                if (var.Count() == 1)
+                                {
+                                    item.SetValue(instanceToSave, var.First());
+                                }
+                                else
+                                {
+                                    item.SetValue(instanceToSave, null);
+                                }
                             }
                         }
                     }
@@ -292,9 +332,16 @@ namespace ProgettoCMA
                     {
                         item.SetValue(instanceToSave, Shared.utente);
                     }
+                    else if(item.PropertyType == typeof(decimal))
+                    {
+                        item.SetValue(instanceToSave, decimal.Parse(this.controls[item.Name.ToLower()].Text));
+                    }
                     else
                     {
-                        item.SetValue(instanceToSave, this.textBoxes[item.Name.ToLower()].Text);
+                        if (item.PropertyType == typeof(string))
+                        {
+                            item.SetValue(instanceToSave, this.controls[item.Name.ToLower()].Text);
+                        }
                     }
                 }
             }
@@ -312,44 +359,94 @@ namespace ProgettoCMA
         {
             this.databaseSave(instanceToSave, true);
         }
+        protected void databaseRemove(T instanceToSave)
+        {
+            this.listInhibit = true;
+            this.dbSet.Remove(instanceToSave);
+            this.data.Remove(instanceToSave);
+            this.dataSubset.Remove(instanceToSave);
+            this.listInhibit = false;
+            Shared.cdc.SaveChanges();
+            if (this.data.Count() <= 0)
+            {
+                this.eraseTextBoxes();
+            }
+            if (this.data.Count() <= 0)
+            {
+                this.controlsEnable(this.alwaysEnabledControls, false);
+                this.isDataNotEmpty = false;
+                this.buttonsUpdate(false, true);
+            }
+        }
 
         protected void updateUI(T instanceToShow)
         {
+            this.updateUIbeforeFull(instanceToShow);
             foreach (var item in typeof(T).GetRuntimeProperties())
             {
-                if (this.textBoxes.ContainsKey(item.Name.ToLower()) || item.PropertyType == typeof(Indirizzo))
+                if (this.controls.ContainsKey(item.Name.ToLower()) || item.PropertyType == typeof(Indirizzo))
                 {
                     if (item.PropertyType == typeof(Indirizzo))
                     {
                         Indirizzo temp = (Indirizzo) item.GetValue(instanceToShow);
                         foreach (var itemm in typeof(Indirizzo).GetRuntimeProperties())
                         {
-                            this.textBoxes["indirizzo_" + itemm.Name.ToLower()].Text = itemm.GetValue(temp).ToString();
+                            this.controls["indirizzo_" + itemm.Name.ToLower()].Text = itemm.GetValue(temp).ToString();
+                        }
+                    }
+                    else if (item.PropertyType == typeof(Categoria))
+                    {
+                        if(((Categoria)item.GetValue(instanceToShow)) != null)
+                        {
+                            this.controls[item.Name.ToLower()].Text = ((Categoria)item.GetValue(instanceToShow)).Nome;
+                        }
+                        else
+                        {
+                            this.controls[item.Name.ToLower()].Text = "";
                         }
                     }
                     else if (item.PropertyType == typeof(Cliente) || item.PropertyType == typeof(Fornitore))
                     {
-                        if (this.textBoxes[item.Name.ToLower()].GetType() == typeof(ListBox))
+                        if (this.controls[item.Name.ToLower()].GetType() == typeof(ListBox))
                         {
-                            ((ListBox)this.textBoxes[item.Name.ToLower()]).SelectedItem = ((Azienda)item.GetValue(instanceToShow));
+                            ((ListBox)this.controls[item.Name.ToLower()]).SelectedItem = ((Azienda)item.GetValue(instanceToShow));
                         }
-                        else if (this.textBoxes[item.Name.ToLower()].GetType() == typeof(String))
+                        else if (this.controls[item.Name.ToLower()].GetType() == typeof(ComboBox))
                         {
-                            this.textBoxes[item.Name.ToLower()].Text = ((Azienda)item.GetValue(instanceToShow)).Ragione;
+                            ((ComboBox)this.controls[item.Name.ToLower()]).SelectedItem = ((Azienda)item.GetValue(instanceToShow));
+                        }
+                        else if (this.controls[item.Name.ToLower()].GetType() == typeof(TextBox))
+                        {
+                            this.controls[item.Name.ToLower()].Text = ((Azienda)item.GetValue(instanceToShow)).Ragione;
                         }
                     }
                     else if (item.PropertyType == typeof(Utente))
                     {
-                        this.textBoxes[item.Name.ToLower()].Text = ((Utente)item.GetValue(instanceToShow)).Username;
+                        this.controls[item.Name.ToLower()].Text = ((Utente)item.GetValue(instanceToShow)).Username;
                     }
                     else
                     {
-                        this.textBoxes[item.Name.ToLower()].Text = item.GetValue(instanceToShow).ToString();
+                        this.controls[item.Name.ToLower()].Text = item.GetValue(instanceToShow).ToString();
                     }
                 }
             }
+            this.updateUIafterFull(instanceToShow);
         }
-        
+        private void updateUIbeforeFull(T instanceToShow)
+        {
+            this.updateUIbefore(instanceToShow);
+        }
+        protected virtual void updateUIbefore(T instanceToShow)
+        {
+        }
+        private void updateUIafterFull(T instanceToShow)
+        {
+            this.updateUIafter(instanceToShow);
+        }
+        protected virtual void updateUIafter(T instanceToShow)
+        {
+        }
+
         // CLASSES INSTANCE
         private Indirizzo createIndirizzo(Indirizzo indirizzo = null)
         {
@@ -359,12 +456,38 @@ namespace ProgettoCMA
             }
             foreach (var item in typeof(Indirizzo).GetRuntimeProperties())
             {
-                if (this.textBoxes.ContainsKey("indirizzo_" + item.Name.ToLower()))
+                if (this.controls.ContainsKey("indirizzo_" + item.Name.ToLower()))
                 {
-                    item.SetValue(indirizzo, this.textBoxes["indirizzo_" + item.Name.ToLower()].Text);
+                    item.SetValue(indirizzo, this.controls["indirizzo_" + item.Name.ToLower()].Text);
                 }
             }
             return indirizzo;
+        }
+        
+        // BUTTON EVENTS
+        protected virtual void editButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void saveButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void addButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void deleteButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void annullaButton_Click(object sender, EventArgs e)
+        {
+        }
+        protected virtual void annullaButtonFull_Click(object sender, EventArgs e)
+        {
+            if (this.newInstance != null)
+            {
+                this.forceRemove = true;
+                this.list.SelectedIndex = -1;
+            }
+            this.annullaButton_Click(sender, e);
         }
     }
 
@@ -373,21 +496,29 @@ namespace ProgettoCMA
         protected DbSet dbSetSecondary = null;
         protected ListBox listSecondary = null;
         protected BindingList<T1> dataSecondary = null;
+        protected BindingList<T1> dataSecondarySubSet = null;
         protected int selectedIndexSecondary = -1;
 
         public UC() : base()
         {
 
         }
-        public UC(Home home) : base(home)
-        {
 
+        protected void searchTextBoxFilterData1(Func<T1, bool> filter1)
+        {
+            IEnumerable<T1> dataFull = this.dataSecondary.Where(filter1).ToList();
+            this.dataSecondarySubSet = new BindingList<T1>(dataFull.ToList());
+            this.listSecondary.DataSource = dataFull;
         }
 
+        protected new void initialize(Action orderListFunction, Control[] defaultEnabledControls = null, Control[] defaultDisabledControls = null, Control[] alwaysEnabledControls = null)
+        {
+            this.initializeFull(orderListFunction, this.getData, defaultEnabledControls, defaultDisabledControls, alwaysEnabledControls);
+        }
         protected new void getData()
         {
             base.getData();
-            this.dataSecondary = new BindingList<T1>(this.dbSetSecondary.OfType<T1>().ToList());
+            this.dataSecondary = this.dataSecondarySubSet = new BindingList<T1>(this.dbSetSecondary.OfType<T1>().ToList());
             if (this.dataSecondary.Count() > 0)
             {
                 this.selectedIndexSecondary = 0;
@@ -396,9 +527,10 @@ namespace ProgettoCMA
         protected void orderList(Func<T, Object> orderBy, Func<T1, Object> orderBy1)
         {
             base.orderList(orderBy);
-            if (this.dataSecondary != null)
+            if (this.dataSecondary != null && this.dataSecondarySubSet != null)
             {
                 this.dataSecondary = new BindingList<T1>(this.dataSecondary.OrderBy(orderBy1).ToList());
+                this.dataSecondarySubSet = new BindingList<T1>(this.dataSecondarySubSet.OrderBy(orderBy1).ToList());
             }
         }
     }
@@ -414,12 +546,12 @@ namespace ProgettoCMA
         {
 
         }
-        public UC(Home home) : base(home)
+
+        protected new void initialize(Action orderListFunction, Control[] defaultEnabledControls = null, Control[] defaultDisabledControls = null, Control[] alwaysEnabledControls = null)
         {
-
+            this.initializeFull(orderListFunction, this.getData, defaultEnabledControls, defaultDisabledControls, alwaysEnabledControls);
         }
-
-        protected new void getData()
+        protected virtual new void getData()
         {
             base.getData();
             this.dataCombine = new BindingList<T2>(this.dbSetCombine.OfType<T2>().ToList());

@@ -20,11 +20,11 @@ namespace ProgettoCMA
             this.ODA_Composizione = new HashSet<ODA_Composizione>();
         }
     
-        public int Id { get; set; }
+        public int ID { get; set; }
     
         public virtual RDO RDO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ODA_Composizione> ODA_Composizione { get; set; }
-        public virtual Categoria Categoria { get; set; }
+        public virtual Lista_RDO_Composizione Lista_RDO_Composizione { get; set; }
     }
 }

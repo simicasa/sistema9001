@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/30/2016 17:37:24
+-- Date Created: 01/09/2017 12:15:59
 -- Generated from EDMX file: C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\ClassDiagram.edmx
 -- --------------------------------------------------
 
@@ -29,23 +29,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_FornitoreAssociazione_Categoria_Fornitore]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Associazione_Categoria_FornitoreSet] DROP CONSTRAINT [FK_FornitoreAssociazione_Categoria_Fornitore];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CommessaRDO]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RDOSet] DROP CONSTRAINT [FK_CommessaRDO];
-GO
 IF OBJECT_ID(N'[dbo].[FK_RDORDO_Composizione]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[RDO_ComposizioneSet] DROP CONSTRAINT [FK_RDORDO_Composizione];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RDORDA]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ODASet] DROP CONSTRAINT [FK_RDORDA];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RDARDA_Composizione]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ODA_ComposizioneSet] DROP CONSTRAINT [FK_RDARDA_Composizione];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RDO_ComposizioneRDA_Composizione]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ODA_ComposizioneSet] DROP CONSTRAINT [FK_RDO_ComposizioneRDA_Composizione];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CategoriaRDO_Composizione]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RDO_ComposizioneSet] DROP CONSTRAINT [FK_CategoriaRDO_Composizione];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RDA_ComposizioneOrdine_Composizione]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Ordine_ComposizioneSet] DROP CONSTRAINT [FK_RDA_ComposizioneOrdine_Composizione];
@@ -82,6 +73,27 @@ IF OBJECT_ID(N'[dbo].[FK_AziendaContatto_Contatto]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ClienteCommessa]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[CommessaSet] DROP CONSTRAINT [FK_ClienteCommessa];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CommessaAssociazione_Commessa_RDO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Lista_RDOSet] DROP CONSTRAINT [FK_CommessaAssociazione_Commessa_RDO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Lista_RDO_ComposizioneSet] DROP CONSTRAINT [FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Commessa_RDO_ProdottiRDO_Composizione]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RDO_ComposizioneSet] DROP CONSTRAINT [FK_Commessa_RDO_ProdottiRDO_Composizione];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Associazione_Commessa_RDORDO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RDOSet] DROP CONSTRAINT [FK_Associazione_Commessa_RDORDO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CategoriaCommessa_RDO_Prodotti]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Lista_RDO_ComposizioneSet] DROP CONSTRAINT [FK_CategoriaCommessa_RDO_Prodotti];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FornitoreRDO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RDOSet] DROP CONSTRAINT [FK_FornitoreRDO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CategoriaCategoria]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CategoriaSet] DROP CONSTRAINT [FK_CategoriaCategoria];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Fornitore_inherits_Azienda]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AziendaSet_Fornitore] DROP CONSTRAINT [FK_Fornitore_inherits_Azienda];
@@ -151,6 +163,12 @@ GO
 IF OBJECT_ID(N'[dbo].[AziendaSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AziendaSet];
 GO
+IF OBJECT_ID(N'[dbo].[Lista_RDO_ComposizioneSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Lista_RDO_ComposizioneSet];
+GO
+IF OBJECT_ID(N'[dbo].[Lista_RDOSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Lista_RDOSet];
+GO
 IF OBJECT_ID(N'[dbo].[AziendaSet_Fornitore]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AziendaSet_Fornitore];
 GO
@@ -197,109 +215,113 @@ GO
 
 -- Creating table 'RDOSet'
 CREATE TABLE [dbo].[RDOSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Commessa_ID] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Codice] nvarchar(max)  NOT NULL,
+    [Progressivo] nvarchar(max)  NOT NULL,
+    [Creazione] nvarchar(max)  NOT NULL,
+    [Lista_RDO_ID] int  NOT NULL,
+    [Fornitore_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'RDO_ComposizioneSet'
 CREATE TABLE [dbo].[RDO_ComposizioneSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [RDO_Id] int  NOT NULL,
-    [Categoria_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [RDO_ID] int  NOT NULL,
+    [Lista_RDO_Composizione_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'ODA_ComposizioneSet'
 CREATE TABLE [dbo].[ODA_ComposizioneSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [ODA_Id] int  NOT NULL,
-    [RDO_Composizione_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [ODA_ID] int  NOT NULL,
+    [RDO_Composizione_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'ODASet'
 CREATE TABLE [dbo].[ODASet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [RDO_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL
 );
 GO
 
 -- Creating table 'CategoriaSet'
 CREATE TABLE [dbo].[CategoriaSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Nome] nvarchar(max)  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Nome] nvarchar(max)  NOT NULL,
+    [Macro_ID] int  NULL
 );
 GO
 
 -- Creating table 'Associazione_Categoria_FornitoreSet'
 CREATE TABLE [dbo].[Associazione_Categoria_FornitoreSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Categoria_Id] int  NOT NULL,
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Categoria_ID] int  NOT NULL,
     [Fornitore_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'Ordine_ComposizioneSet'
 CREATE TABLE [dbo].[Ordine_ComposizioneSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [RDA_Composizione_Id] int  NOT NULL,
-    [Ordine_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [RDA_Composizione_ID] int  NOT NULL,
+    [Ordine_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'OrdineSet'
 CREATE TABLE [dbo].[OrdineSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL
 );
 GO
 
 -- Creating table 'OffertaSet'
 CREATE TABLE [dbo].[OffertaSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Ordine_Id] int  NOT NULL,
-    [Associazione_Offerta_Servizio_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Ordine_ID] int  NOT NULL,
+    [Associazione_Offerta_Servizio_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'Offerta_ComposizioneSet'
 CREATE TABLE [dbo].[Offerta_ComposizioneSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Offerta_Id] int  NOT NULL,
-    [Categoria_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Offerta_ID] int  NOT NULL,
+    [Categoria_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'Associazione_Offerta_ServizioSet'
 CREATE TABLE [dbo].[Associazione_Offerta_ServizioSet] (
-    [Id] int IDENTITY(1,1) NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL
 );
 GO
 
 -- Creating table 'Metodo_PagamentoSet'
 CREATE TABLE [dbo].[Metodo_PagamentoSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Offerta_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Offerta_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'Metodo_SpedizioneSet'
 CREATE TABLE [dbo].[Metodo_SpedizioneSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Offerta_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Offerta_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'ServizioSet'
 CREATE TABLE [dbo].[ServizioSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Associazione_Offerta_Servizio_Id] int  NOT NULL
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Associazione_Offerta_Servizio_ID] int  NOT NULL
 );
 GO
 
 -- Creating table 'ContattoSet'
 CREATE TABLE [dbo].[ContattoSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
+    [ID] int IDENTITY(1,1) NOT NULL,
     [Nome] nvarchar(max)  NOT NULL,
     [Cognome] nvarchar(max)  NOT NULL,
     [Descrizione] nvarchar(max)  NOT NULL,
@@ -318,12 +340,34 @@ CREATE TABLE [dbo].[AziendaSet] (
     [Indirizzo_Citta] nvarchar(max)  NULL,
     [Indirizzo_Via] nvarchar(max)  NOT NULL,
     [Indirizzo_Nazione] nvarchar(max)  NOT NULL,
+    [Indirizzo_ProvinciaSigla] nvarchar(max)  NOT NULL,
     [Piva] nvarchar(max)  NULL,
     [CodFisc] nvarchar(max)  NULL,
     [Telefono] nvarchar(max)  NULL,
     [Mail] nvarchar(max)  NULL,
     [Note] nvarchar(max)  NULL,
     [Creazione] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Lista_RDO_ComposizioneSet'
+CREATE TABLE [dbo].[Lista_RDO_ComposizioneSet] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Descrizione] nvarchar(max)  NOT NULL,
+    [UnitaMisura] nvarchar(max)  NOT NULL,
+    [Quantita] decimal(18,0)  NOT NULL,
+    [Lista_RDO_ID] int  NOT NULL,
+    [Categoria_ID] int  NOT NULL
+);
+GO
+
+-- Creating table 'Lista_RDOSet'
+CREATE TABLE [dbo].[Lista_RDOSet] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [CondizioniParticolari] nvarchar(max)  NOT NULL,
+    [Progressivo] nvarchar(max)  NOT NULL,
+    [Creazione] nvarchar(max)  NOT NULL,
+    [Commessa_ID] int  NOT NULL
 );
 GO
 
@@ -342,7 +386,7 @@ GO
 -- Creating table 'AziendaContatto'
 CREATE TABLE [dbo].[AziendaContatto] (
     [Azienda_ID] int  NOT NULL,
-    [Contatto_Id] int  NOT NULL
+    [Contatto_ID] int  NOT NULL
 );
 GO
 
@@ -368,99 +412,111 @@ ADD CONSTRAINT [PK_RuoloSet]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'RDOSet'
+-- Creating primary key on [ID] in table 'RDOSet'
 ALTER TABLE [dbo].[RDOSet]
 ADD CONSTRAINT [PK_RDOSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'RDO_ComposizioneSet'
+-- Creating primary key on [ID] in table 'RDO_ComposizioneSet'
 ALTER TABLE [dbo].[RDO_ComposizioneSet]
 ADD CONSTRAINT [PK_RDO_ComposizioneSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ODA_ComposizioneSet'
+-- Creating primary key on [ID] in table 'ODA_ComposizioneSet'
 ALTER TABLE [dbo].[ODA_ComposizioneSet]
 ADD CONSTRAINT [PK_ODA_ComposizioneSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ODASet'
+-- Creating primary key on [ID] in table 'ODASet'
 ALTER TABLE [dbo].[ODASet]
 ADD CONSTRAINT [PK_ODASet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'CategoriaSet'
+-- Creating primary key on [ID] in table 'CategoriaSet'
 ALTER TABLE [dbo].[CategoriaSet]
 ADD CONSTRAINT [PK_CategoriaSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Associazione_Categoria_FornitoreSet'
+-- Creating primary key on [ID] in table 'Associazione_Categoria_FornitoreSet'
 ALTER TABLE [dbo].[Associazione_Categoria_FornitoreSet]
 ADD CONSTRAINT [PK_Associazione_Categoria_FornitoreSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Ordine_ComposizioneSet'
+-- Creating primary key on [ID] in table 'Ordine_ComposizioneSet'
 ALTER TABLE [dbo].[Ordine_ComposizioneSet]
 ADD CONSTRAINT [PK_Ordine_ComposizioneSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'OrdineSet'
+-- Creating primary key on [ID] in table 'OrdineSet'
 ALTER TABLE [dbo].[OrdineSet]
 ADD CONSTRAINT [PK_OrdineSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'OffertaSet'
+-- Creating primary key on [ID] in table 'OffertaSet'
 ALTER TABLE [dbo].[OffertaSet]
 ADD CONSTRAINT [PK_OffertaSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Offerta_ComposizioneSet'
+-- Creating primary key on [ID] in table 'Offerta_ComposizioneSet'
 ALTER TABLE [dbo].[Offerta_ComposizioneSet]
 ADD CONSTRAINT [PK_Offerta_ComposizioneSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Associazione_Offerta_ServizioSet'
+-- Creating primary key on [ID] in table 'Associazione_Offerta_ServizioSet'
 ALTER TABLE [dbo].[Associazione_Offerta_ServizioSet]
 ADD CONSTRAINT [PK_Associazione_Offerta_ServizioSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Metodo_PagamentoSet'
+-- Creating primary key on [ID] in table 'Metodo_PagamentoSet'
 ALTER TABLE [dbo].[Metodo_PagamentoSet]
 ADD CONSTRAINT [PK_Metodo_PagamentoSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Metodo_SpedizioneSet'
+-- Creating primary key on [ID] in table 'Metodo_SpedizioneSet'
 ALTER TABLE [dbo].[Metodo_SpedizioneSet]
 ADD CONSTRAINT [PK_Metodo_SpedizioneSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ServizioSet'
+-- Creating primary key on [ID] in table 'ServizioSet'
 ALTER TABLE [dbo].[ServizioSet]
 ADD CONSTRAINT [PK_ServizioSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Id] in table 'ContattoSet'
+-- Creating primary key on [ID] in table 'ContattoSet'
 ALTER TABLE [dbo].[ContattoSet]
 ADD CONSTRAINT [PK_ContattoSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
+    PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
 -- Creating primary key on [ID] in table 'AziendaSet'
 ALTER TABLE [dbo].[AziendaSet]
 ADD CONSTRAINT [PK_AziendaSet]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Lista_RDO_ComposizioneSet'
+ALTER TABLE [dbo].[Lista_RDO_ComposizioneSet]
+ADD CONSTRAINT [PK_Lista_RDO_ComposizioneSet]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'Lista_RDOSet'
+ALTER TABLE [dbo].[Lista_RDOSet]
+ADD CONSTRAINT [PK_Lista_RDOSet]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -476,10 +532,10 @@ ADD CONSTRAINT [PK_AziendaSet_Cliente]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [Azienda_ID], [Contatto_Id] in table 'AziendaContatto'
+-- Creating primary key on [Azienda_ID], [Contatto_ID] in table 'AziendaContatto'
 ALTER TABLE [dbo].[AziendaContatto]
 ADD CONSTRAINT [PK_AziendaContatto]
-    PRIMARY KEY CLUSTERED ([Azienda_ID], [Contatto_Id] ASC);
+    PRIMARY KEY CLUSTERED ([Azienda_ID], [Contatto_ID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -516,19 +572,19 @@ ON [dbo].[UtenteSet]
     ([Ruolo_ID]);
 GO
 
--- Creating foreign key on [Categoria_Id] in table 'Associazione_Categoria_FornitoreSet'
+-- Creating foreign key on [Categoria_ID] in table 'Associazione_Categoria_FornitoreSet'
 ALTER TABLE [dbo].[Associazione_Categoria_FornitoreSet]
 ADD CONSTRAINT [FK_CategoriaAssociazione_Categoria_Fornitore]
-    FOREIGN KEY ([Categoria_Id])
+    FOREIGN KEY ([Categoria_ID])
     REFERENCES [dbo].[CategoriaSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CategoriaAssociazione_Categoria_Fornitore'
 CREATE INDEX [IX_FK_CategoriaAssociazione_Categoria_Fornitore]
 ON [dbo].[Associazione_Categoria_FornitoreSet]
-    ([Categoria_Id]);
+    ([Categoria_ID]);
 GO
 
 -- Creating foreign key on [Fornitore_ID] in table 'Associazione_Categoria_FornitoreSet'
@@ -546,229 +602,184 @@ ON [dbo].[Associazione_Categoria_FornitoreSet]
     ([Fornitore_ID]);
 GO
 
--- Creating foreign key on [Commessa_ID] in table 'RDOSet'
-ALTER TABLE [dbo].[RDOSet]
-ADD CONSTRAINT [FK_CommessaRDO]
-    FOREIGN KEY ([Commessa_ID])
-    REFERENCES [dbo].[CommessaSet]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CommessaRDO'
-CREATE INDEX [IX_FK_CommessaRDO]
-ON [dbo].[RDOSet]
-    ([Commessa_ID]);
-GO
-
--- Creating foreign key on [RDO_Id] in table 'RDO_ComposizioneSet'
+-- Creating foreign key on [RDO_ID] in table 'RDO_ComposizioneSet'
 ALTER TABLE [dbo].[RDO_ComposizioneSet]
 ADD CONSTRAINT [FK_RDORDO_Composizione]
-    FOREIGN KEY ([RDO_Id])
+    FOREIGN KEY ([RDO_ID])
     REFERENCES [dbo].[RDOSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RDORDO_Composizione'
 CREATE INDEX [IX_FK_RDORDO_Composizione]
 ON [dbo].[RDO_ComposizioneSet]
-    ([RDO_Id]);
+    ([RDO_ID]);
 GO
 
--- Creating foreign key on [RDO_Id] in table 'ODASet'
-ALTER TABLE [dbo].[ODASet]
-ADD CONSTRAINT [FK_RDORDA]
-    FOREIGN KEY ([RDO_Id])
-    REFERENCES [dbo].[RDOSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_RDORDA'
-CREATE INDEX [IX_FK_RDORDA]
-ON [dbo].[ODASet]
-    ([RDO_Id]);
-GO
-
--- Creating foreign key on [ODA_Id] in table 'ODA_ComposizioneSet'
+-- Creating foreign key on [ODA_ID] in table 'ODA_ComposizioneSet'
 ALTER TABLE [dbo].[ODA_ComposizioneSet]
 ADD CONSTRAINT [FK_RDARDA_Composizione]
-    FOREIGN KEY ([ODA_Id])
+    FOREIGN KEY ([ODA_ID])
     REFERENCES [dbo].[ODASet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RDARDA_Composizione'
 CREATE INDEX [IX_FK_RDARDA_Composizione]
 ON [dbo].[ODA_ComposizioneSet]
-    ([ODA_Id]);
+    ([ODA_ID]);
 GO
 
--- Creating foreign key on [RDO_Composizione_Id] in table 'ODA_ComposizioneSet'
+-- Creating foreign key on [RDO_Composizione_ID] in table 'ODA_ComposizioneSet'
 ALTER TABLE [dbo].[ODA_ComposizioneSet]
 ADD CONSTRAINT [FK_RDO_ComposizioneRDA_Composizione]
-    FOREIGN KEY ([RDO_Composizione_Id])
+    FOREIGN KEY ([RDO_Composizione_ID])
     REFERENCES [dbo].[RDO_ComposizioneSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RDO_ComposizioneRDA_Composizione'
 CREATE INDEX [IX_FK_RDO_ComposizioneRDA_Composizione]
 ON [dbo].[ODA_ComposizioneSet]
-    ([RDO_Composizione_Id]);
+    ([RDO_Composizione_ID]);
 GO
 
--- Creating foreign key on [Categoria_Id] in table 'RDO_ComposizioneSet'
-ALTER TABLE [dbo].[RDO_ComposizioneSet]
-ADD CONSTRAINT [FK_CategoriaRDO_Composizione]
-    FOREIGN KEY ([Categoria_Id])
-    REFERENCES [dbo].[CategoriaSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CategoriaRDO_Composizione'
-CREATE INDEX [IX_FK_CategoriaRDO_Composizione]
-ON [dbo].[RDO_ComposizioneSet]
-    ([Categoria_Id]);
-GO
-
--- Creating foreign key on [RDA_Composizione_Id] in table 'Ordine_ComposizioneSet'
+-- Creating foreign key on [RDA_Composizione_ID] in table 'Ordine_ComposizioneSet'
 ALTER TABLE [dbo].[Ordine_ComposizioneSet]
 ADD CONSTRAINT [FK_RDA_ComposizioneOrdine_Composizione]
-    FOREIGN KEY ([RDA_Composizione_Id])
+    FOREIGN KEY ([RDA_Composizione_ID])
     REFERENCES [dbo].[ODA_ComposizioneSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RDA_ComposizioneOrdine_Composizione'
 CREATE INDEX [IX_FK_RDA_ComposizioneOrdine_Composizione]
 ON [dbo].[Ordine_ComposizioneSet]
-    ([RDA_Composizione_Id]);
+    ([RDA_Composizione_ID]);
 GO
 
--- Creating foreign key on [Ordine_Id] in table 'Ordine_ComposizioneSet'
+-- Creating foreign key on [Ordine_ID] in table 'Ordine_ComposizioneSet'
 ALTER TABLE [dbo].[Ordine_ComposizioneSet]
 ADD CONSTRAINT [FK_OrdineOrdine_Composizione]
-    FOREIGN KEY ([Ordine_Id])
+    FOREIGN KEY ([Ordine_ID])
     REFERENCES [dbo].[OrdineSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_OrdineOrdine_Composizione'
 CREATE INDEX [IX_FK_OrdineOrdine_Composizione]
 ON [dbo].[Ordine_ComposizioneSet]
-    ([Ordine_Id]);
+    ([Ordine_ID]);
 GO
 
--- Creating foreign key on [Offerta_Id] in table 'Offerta_ComposizioneSet'
+-- Creating foreign key on [Offerta_ID] in table 'Offerta_ComposizioneSet'
 ALTER TABLE [dbo].[Offerta_ComposizioneSet]
 ADD CONSTRAINT [FK_OffertaOfferta_Composizione]
-    FOREIGN KEY ([Offerta_Id])
+    FOREIGN KEY ([Offerta_ID])
     REFERENCES [dbo].[OffertaSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_OffertaOfferta_Composizione'
 CREATE INDEX [IX_FK_OffertaOfferta_Composizione]
 ON [dbo].[Offerta_ComposizioneSet]
-    ([Offerta_Id]);
+    ([Offerta_ID]);
 GO
 
--- Creating foreign key on [Categoria_Id] in table 'Offerta_ComposizioneSet'
+-- Creating foreign key on [Categoria_ID] in table 'Offerta_ComposizioneSet'
 ALTER TABLE [dbo].[Offerta_ComposizioneSet]
 ADD CONSTRAINT [FK_CategoriaOfferta_Composizione]
-    FOREIGN KEY ([Categoria_Id])
+    FOREIGN KEY ([Categoria_ID])
     REFERENCES [dbo].[CategoriaSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CategoriaOfferta_Composizione'
 CREATE INDEX [IX_FK_CategoriaOfferta_Composizione]
 ON [dbo].[Offerta_ComposizioneSet]
-    ([Categoria_Id]);
+    ([Categoria_ID]);
 GO
 
--- Creating foreign key on [Ordine_Id] in table 'OffertaSet'
+-- Creating foreign key on [Ordine_ID] in table 'OffertaSet'
 ALTER TABLE [dbo].[OffertaSet]
 ADD CONSTRAINT [FK_OrdineOfferta]
-    FOREIGN KEY ([Ordine_Id])
+    FOREIGN KEY ([Ordine_ID])
     REFERENCES [dbo].[OrdineSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_OrdineOfferta'
 CREATE INDEX [IX_FK_OrdineOfferta]
 ON [dbo].[OffertaSet]
-    ([Ordine_Id]);
+    ([Ordine_ID]);
 GO
 
--- Creating foreign key on [Associazione_Offerta_Servizio_Id] in table 'ServizioSet'
+-- Creating foreign key on [Associazione_Offerta_Servizio_ID] in table 'ServizioSet'
 ALTER TABLE [dbo].[ServizioSet]
 ADD CONSTRAINT [FK_Associazione_Offerta_ServizioServizio]
-    FOREIGN KEY ([Associazione_Offerta_Servizio_Id])
+    FOREIGN KEY ([Associazione_Offerta_Servizio_ID])
     REFERENCES [dbo].[Associazione_Offerta_ServizioSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Associazione_Offerta_ServizioServizio'
 CREATE INDEX [IX_FK_Associazione_Offerta_ServizioServizio]
 ON [dbo].[ServizioSet]
-    ([Associazione_Offerta_Servizio_Id]);
+    ([Associazione_Offerta_Servizio_ID]);
 GO
 
--- Creating foreign key on [Associazione_Offerta_Servizio_Id] in table 'OffertaSet'
+-- Creating foreign key on [Associazione_Offerta_Servizio_ID] in table 'OffertaSet'
 ALTER TABLE [dbo].[OffertaSet]
 ADD CONSTRAINT [FK_Associazione_Offerta_ServizioOfferta]
-    FOREIGN KEY ([Associazione_Offerta_Servizio_Id])
+    FOREIGN KEY ([Associazione_Offerta_Servizio_ID])
     REFERENCES [dbo].[Associazione_Offerta_ServizioSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Associazione_Offerta_ServizioOfferta'
 CREATE INDEX [IX_FK_Associazione_Offerta_ServizioOfferta]
 ON [dbo].[OffertaSet]
-    ([Associazione_Offerta_Servizio_Id]);
+    ([Associazione_Offerta_Servizio_ID]);
 GO
 
--- Creating foreign key on [Offerta_Id] in table 'Metodo_PagamentoSet'
+-- Creating foreign key on [Offerta_ID] in table 'Metodo_PagamentoSet'
 ALTER TABLE [dbo].[Metodo_PagamentoSet]
 ADD CONSTRAINT [FK_OffertaMetodo_Pagamento]
-    FOREIGN KEY ([Offerta_Id])
+    FOREIGN KEY ([Offerta_ID])
     REFERENCES [dbo].[OffertaSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_OffertaMetodo_Pagamento'
 CREATE INDEX [IX_FK_OffertaMetodo_Pagamento]
 ON [dbo].[Metodo_PagamentoSet]
-    ([Offerta_Id]);
+    ([Offerta_ID]);
 GO
 
--- Creating foreign key on [Offerta_Id] in table 'Metodo_SpedizioneSet'
+-- Creating foreign key on [Offerta_ID] in table 'Metodo_SpedizioneSet'
 ALTER TABLE [dbo].[Metodo_SpedizioneSet]
 ADD CONSTRAINT [FK_OffertaMetodo_Spedizione]
-    FOREIGN KEY ([Offerta_Id])
+    FOREIGN KEY ([Offerta_ID])
     REFERENCES [dbo].[OffertaSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_OffertaMetodo_Spedizione'
 CREATE INDEX [IX_FK_OffertaMetodo_Spedizione]
 ON [dbo].[Metodo_SpedizioneSet]
-    ([Offerta_Id]);
+    ([Offerta_ID]);
 GO
 
 -- Creating foreign key on [Azienda_ID] in table 'AziendaContatto'
@@ -780,19 +791,19 @@ ADD CONSTRAINT [FK_AziendaContatto_Azienda]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Contatto_Id] in table 'AziendaContatto'
+-- Creating foreign key on [Contatto_ID] in table 'AziendaContatto'
 ALTER TABLE [dbo].[AziendaContatto]
 ADD CONSTRAINT [FK_AziendaContatto_Contatto]
-    FOREIGN KEY ([Contatto_Id])
+    FOREIGN KEY ([Contatto_ID])
     REFERENCES [dbo].[ContattoSet]
-        ([Id])
+        ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_AziendaContatto_Contatto'
 CREATE INDEX [IX_FK_AziendaContatto_Contatto]
 ON [dbo].[AziendaContatto]
-    ([Contatto_Id]);
+    ([Contatto_ID]);
 GO
 
 -- Creating foreign key on [Cliente_ID] in table 'CommessaSet'
@@ -808,6 +819,111 @@ GO
 CREATE INDEX [IX_FK_ClienteCommessa]
 ON [dbo].[CommessaSet]
     ([Cliente_ID]);
+GO
+
+-- Creating foreign key on [Commessa_ID] in table 'Lista_RDOSet'
+ALTER TABLE [dbo].[Lista_RDOSet]
+ADD CONSTRAINT [FK_CommessaAssociazione_Commessa_RDO]
+    FOREIGN KEY ([Commessa_ID])
+    REFERENCES [dbo].[CommessaSet]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CommessaAssociazione_Commessa_RDO'
+CREATE INDEX [IX_FK_CommessaAssociazione_Commessa_RDO]
+ON [dbo].[Lista_RDOSet]
+    ([Commessa_ID]);
+GO
+
+-- Creating foreign key on [Lista_RDO_ID] in table 'Lista_RDO_ComposizioneSet'
+ALTER TABLE [dbo].[Lista_RDO_ComposizioneSet]
+ADD CONSTRAINT [FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti]
+    FOREIGN KEY ([Lista_RDO_ID])
+    REFERENCES [dbo].[Lista_RDOSet]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti'
+CREATE INDEX [IX_FK_Associazione_Commessa_RDOCommessa_RDO_Prodotti]
+ON [dbo].[Lista_RDO_ComposizioneSet]
+    ([Lista_RDO_ID]);
+GO
+
+-- Creating foreign key on [Lista_RDO_Composizione_ID] in table 'RDO_ComposizioneSet'
+ALTER TABLE [dbo].[RDO_ComposizioneSet]
+ADD CONSTRAINT [FK_Commessa_RDO_ProdottiRDO_Composizione]
+    FOREIGN KEY ([Lista_RDO_Composizione_ID])
+    REFERENCES [dbo].[Lista_RDO_ComposizioneSet]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Commessa_RDO_ProdottiRDO_Composizione'
+CREATE INDEX [IX_FK_Commessa_RDO_ProdottiRDO_Composizione]
+ON [dbo].[RDO_ComposizioneSet]
+    ([Lista_RDO_Composizione_ID]);
+GO
+
+-- Creating foreign key on [Lista_RDO_ID] in table 'RDOSet'
+ALTER TABLE [dbo].[RDOSet]
+ADD CONSTRAINT [FK_Associazione_Commessa_RDORDO]
+    FOREIGN KEY ([Lista_RDO_ID])
+    REFERENCES [dbo].[Lista_RDOSet]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Associazione_Commessa_RDORDO'
+CREATE INDEX [IX_FK_Associazione_Commessa_RDORDO]
+ON [dbo].[RDOSet]
+    ([Lista_RDO_ID]);
+GO
+
+-- Creating foreign key on [Categoria_ID] in table 'Lista_RDO_ComposizioneSet'
+ALTER TABLE [dbo].[Lista_RDO_ComposizioneSet]
+ADD CONSTRAINT [FK_CategoriaCommessa_RDO_Prodotti]
+    FOREIGN KEY ([Categoria_ID])
+    REFERENCES [dbo].[CategoriaSet]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CategoriaCommessa_RDO_Prodotti'
+CREATE INDEX [IX_FK_CategoriaCommessa_RDO_Prodotti]
+ON [dbo].[Lista_RDO_ComposizioneSet]
+    ([Categoria_ID]);
+GO
+
+-- Creating foreign key on [Fornitore_ID] in table 'RDOSet'
+ALTER TABLE [dbo].[RDOSet]
+ADD CONSTRAINT [FK_FornitoreRDO]
+    FOREIGN KEY ([Fornitore_ID])
+    REFERENCES [dbo].[AziendaSet_Fornitore]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_FornitoreRDO'
+CREATE INDEX [IX_FK_FornitoreRDO]
+ON [dbo].[RDOSet]
+    ([Fornitore_ID]);
+GO
+
+-- Creating foreign key on [Macro_ID] in table 'CategoriaSet'
+ALTER TABLE [dbo].[CategoriaSet]
+ADD CONSTRAINT [FK_CategoriaCategoria]
+    FOREIGN KEY ([Macro_ID])
+    REFERENCES [dbo].[CategoriaSet]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CategoriaCategoria'
+CREATE INDEX [IX_FK_CategoriaCategoria]
+ON [dbo].[CategoriaSet]
+    ([Macro_ID]);
 GO
 
 -- Creating foreign key on [ID] in table 'AziendaSet_Fornitore'

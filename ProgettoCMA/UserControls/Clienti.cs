@@ -11,9 +11,9 @@ using System.Reflection;
 
 namespace ProgettoCMA
 {
-    public partial class Clienti : UC<Cliente>
+    partial class Clienti
     {
-        public Clienti(Home home) : base(home)
+        public Clienti() : base()
         {
             InitializeComponent();
             
@@ -39,23 +39,16 @@ namespace ProgettoCMA
         {
             if (this.newInstance != null)
             {
-                if (DialogResult.Yes == this.messageBoxShow("Cambiare cliente e perdere il nuovo?", MessageBoxButtons.YesNo))
-                {
+                if (this.forceRemove) {
                     this.listInhibit = true;
                     this.data.Remove(this.newInstance);
                     this.dataSubset.Remove(this.newInstance);
-                    //this.list.Items.Remove(this.newInstance);
                     this.orderList();
+                    this.selectedIndex = 0;
                     this.list.SetSelected(this.selectedIndex, true);
                     this.listInhibit = false;
                     this.newInstance = null;
-                }
-                else
-                {
-                    this.listInhibit = true;
-                    this.list.SetSelected(this.selectedIndex, true);
-                    this.listInhibit = false;
-                    return;
+                    this.forceRemove = false;
                 }
             }
             if (this.selectedIndex == -1)
@@ -105,17 +98,10 @@ namespace ProgettoCMA
                 cliente = this.newInstance;
                 this.databaseAdd(cliente);
             }
-            try
-            {
-                this.orderList();
-                this.list.SelectedItem = cliente;
-                searchTextBox.Text = "";
-                this.newInstance = null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            this.orderList();
+            this.list.SelectedItem = cliente;
+            searchTextBox.Text = "";
+            this.newInstance = null;
             this.listInhibit = false;
         }
         private void orderList()
@@ -150,49 +136,21 @@ namespace ProgettoCMA
             this.orderList();
             this.list.SelectedItem = newInstance;
             this.selectedIndex = this.list.SelectedIndex;
-            Console.WriteLine("1");
             this.editButtons();
-            Console.WriteLine("2");
             this.updateUI(this.newInstance);
             this.listInhibit = false;
         }
         protected override void deleteButton_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Eliminare il cliente?", "Gestione clienti", MessageBoxButtons.YesNo);
-            if(dr == DialogResult.Yes)
+            if (DialogResult.Yes == this.messageBoxShow("Eliminare il cliente?", MessageBoxButtons.YesNo))
             {
-                Cliente cliente;
-                int ID = Int32.Parse(idValue.Text);
-                var query = from clienteQuery in Shared.cdc.AziendaSet.OfType<Cliente>()
-                            where clienteQuery.ID == ID
-                            select clienteQuery;
-                if (query.Count() == 1)
-                {
-                    cliente = query.First();
-                }
-                else
-                {
-                    throw new Exception("Errore utente non trovato");
-                }
-                this.listInhibit = true;
-                Shared.cdc.AziendaSet.Remove(cliente);
-                this.data.Remove(cliente);
-                this.dataSubset.Remove(cliente);
-                this.listInhibit = false;
+                this.databaseRemove((Cliente)this.listBox.SelectedItem);
                 this.orderList();
-                try
-                {
-                    Shared.cdc.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
             }
         }
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            base.searchTextBoxFilterData(c => c.Ragione.Contains(searchTextBox.Text));
+            base.searchTextBoxFilterData(c => c.Ragione.IndexOf(searchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
         protected override void annullaButton_Click(object sender, EventArgs e)
         {
