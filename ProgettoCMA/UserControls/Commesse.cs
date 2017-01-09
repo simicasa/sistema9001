@@ -41,6 +41,10 @@ namespace ProgettoCMA
             this.deleteBt = deleteButton;
             this.addBt = addButton;
             this.cancelBt = annullaButton;
+
+            idValue.Enabled = false;
+            creazioneValue.Enabled = false;
+
             this.initialize(this.orderList, null, new Control[] { clienteValue }, new Control[] { usaButton });
         }
 
@@ -56,8 +60,6 @@ namespace ProgettoCMA
             this.list.Enabled = false;
 
             this.textBoxesEnable(true);
-            idValue.Enabled = false;
-            creazioneValue.Enabled = false;
         }
         private void saveButtons()
         {

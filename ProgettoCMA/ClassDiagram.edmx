@@ -190,7 +190,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RDO_ID" Type="int" Nullable="false" />
-    <Property Name="Commessa_RDO_Prodotti_ID" Type="int" Nullable="false" />
+    <Property Name="Lista_RDO_Composizione_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ODA_ComposizioneSet">
     <Key>
@@ -585,7 +585,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="RDO_Composizione">
-        <PropertyRef Name="Commessa_RDO_Prodotti_ID" />
+        <PropertyRef Name="Lista_RDO_Composizione_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -876,7 +876,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="RDO" Relationship="ClassDiagram.RDORDO_Composizione" FromRole="RDO_Composizione" ToRole="RDO" />
           <NavigationProperty Name="ODA_Composizione" Relationship="ClassDiagram.RDO_ComposizioneRDA_Composizione" FromRole="RDO_Composizione" ToRole="RDA_Composizione" />
-          <NavigationProperty Name="Commessa_RDO_Prodotti" Relationship="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" FromRole="RDO_Composizione" ToRole="Commessa_RDO_Prodotti" />
+          <NavigationProperty Name="Lista_RDO_Composizione" Relationship="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" FromRole="RDO_Composizione" ToRole="Commessa_RDO_Prodotti" />
         </EntityType>
         <EntityType Name="ODA_Composizione">
           <Key>
@@ -1499,7 +1499,7 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="Commessa_RDO_ProdottiRDO_Composizione" TypeName="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" StoreEntitySet="RDO_ComposizioneSet">
       <EndProperty Name="Commessa_RDO_Prodotti">
-        <ScalarProperty Name="ID" ColumnName="Commessa_RDO_Prodotti_ID" />
+        <ScalarProperty Name="ID" ColumnName="Lista_RDO_Composizione_ID" />
       </EndProperty>
       <EndProperty Name="RDO_Composizione">
         <ScalarProperty Name="ID" ColumnName="ID" />

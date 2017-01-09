@@ -183,7 +183,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="RDO" Relationship="ClassDiagram.RDORDO_Composizione" FromRole="RDO_Composizione" ToRole="RDO" />
     <NavigationProperty Name="ODA_Composizione" Relationship="ClassDiagram.RDO_ComposizioneRDA_Composizione" FromRole="RDO_Composizione" ToRole="RDA_Composizione" />
-    <NavigationProperty Name="Commessa_RDO_Prodotti" Relationship="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" FromRole="RDO_Composizione" ToRole="Commessa_RDO_Prodotti" />
+    <NavigationProperty Name="Lista_RDO_Composizione" Relationship="ClassDiagram.Commessa_RDO_ProdottiRDO_Composizione" FromRole="RDO_Composizione" ToRole="Commessa_RDO_Prodotti" />
   </EntityType>
   <EntityType Name="ODA_Composizione">
     <Key>
