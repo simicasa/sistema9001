@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using ProgettoCMA.Classes.PDF;
 
 namespace ProgettoCMA
 {

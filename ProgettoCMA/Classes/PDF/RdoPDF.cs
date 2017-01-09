@@ -9,7 +9,7 @@ using System.IO;
 using static iTextSharp.text.Font;
 using System.Diagnostics;
 
-namespace ProgettoCMA
+namespace ProgettoCMA.Classes.PDF
 {
     class RdoPDF
     {
