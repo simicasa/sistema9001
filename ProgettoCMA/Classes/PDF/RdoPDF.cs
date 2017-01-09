@@ -9,7 +9,7 @@ using System.IO;
 using static iTextSharp.text.Font;
 using System.Diagnostics;
 
-namespace ProgettoCMA.Classes.PDF
+namespace ProgettoCMA
 {
     class RdoPDF
     {
@@ -17,7 +17,8 @@ namespace ProgettoCMA.Classes.PDF
         public RdoPDF(RDO rdo)
         {
             Document doc = new Document(PageSize.A4, 30, 30, 290, 220);
-            FileStream f = File.Create("RDO_" + rdo.Codice + ".pdf");
+            String name = "RDO_" + rdo.Codice + ".pdf";
+            FileStream f = File.Create(name);
             PdfWriter wrt = PdfWriter.GetInstance(doc, f);
             PDFGestioneTabelle mainTable = new PDFGestioneTabelle();
             float[] dim = { 1, 5, 1, 2 };
@@ -41,7 +42,7 @@ namespace ProgettoCMA.Classes.PDF
 
             doc.Add(mainTable.CreaTabella(dim));
             doc.Close();
-            Process.Start("test.pdf");
+            Process.Start(name);
         }
 
     }

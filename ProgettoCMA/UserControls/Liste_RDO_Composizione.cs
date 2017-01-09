@@ -259,20 +259,8 @@ namespace ProgettoCMA
         {
             foreach (RDO rdo in this.listBox1.SelectedItems)
             {
-                this.latuafunzione(rdo);
+                RdoPDF pdf = new RdoPDF(rdo);
             }
-        }
-        private void latuafunzione(RDO rdo)
-        {
-            /*
-            rdo.Codice;
-            rdo.Fornitore;
-            foreach (var item in rdo.RDO_Composizione)
-            {
-                item.Lista_RDO_Composizione;
-            }
-            rdo.Lista_RDO.Commessa.Utente;
-            */
         }
     }
 }

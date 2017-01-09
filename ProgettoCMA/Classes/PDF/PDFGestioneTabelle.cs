@@ -8,7 +8,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using static iTextSharp.text.Font;
 
-namespace ProgettoCMA.Classes.PDF
+namespace ProgettoCMA
 {
     public class PDFGestioneTabelle
     {

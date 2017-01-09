@@ -88,3 +88,5 @@ C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.Liste_RDO_Composizione.resources
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.GestioneCommessa.resources
 C:\Users\simic\documents\visual studio 2017\Projects\ProgettoCMA\ProgettoCMA\obj\Debug\ProgettoCMA.ODA_Composizioni.resources
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\itextsharp.dll
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\bin\Debug\itextsharp.xml

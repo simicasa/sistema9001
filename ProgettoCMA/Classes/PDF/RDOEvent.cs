@@ -8,7 +8,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using static iTextSharp.text.Font;
 
-namespace ProgettoCMA.Classes.PDF
+namespace ProgettoCMA
 {
     class RDOEvent : iTextSharp.text.pdf.PdfPageEventHelper
     {
@@ -32,7 +32,7 @@ namespace ProgettoCMA.Classes.PDF
             ColumnText ct = new ColumnText(writer.DirectContent);
             Rectangle r = new Rectangle(30, PageSize.A4.Height - 40, PageSize.A4.Width - 30, PageSize.A4.Height - 320);
             ct.SetSimpleColumn(r);
-            Image img = Image.GetInstance(new Uri("c:\\users\\simic\\documents\\visual studio 2017\\Projects\\test pdf\\test pdf\\Immagine.png"));
+            Image img = Image.GetInstance(new Uri("C:\\Users\\angelotm\\Source\\Repos\\sistema9001\\Immagine.png"));
 
 
 
