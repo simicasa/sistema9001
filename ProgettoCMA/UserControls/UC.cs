@@ -100,8 +100,7 @@ namespace ProgettoCMA
                 }
             }
         }
-
-
+        
         protected DialogResult messageBoxShow(String text, MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None)
         {
             return Shared.messageBox(text, this.TName, buttons, icon);
@@ -168,7 +167,8 @@ namespace ProgettoCMA
                 this.cancelBt.Click += new EventHandler(this.annullaButtonFull_Click);
             }
         }
-        
+
+        #region listBox_SelectedIndexChanged
         protected virtual void listBox_SelectedIndexChangedBefore(object sender, EventArgs e)
         {
             if (this.listInhibit)
@@ -190,7 +190,8 @@ namespace ProgettoCMA
             }
             this.previousSelected = this.list.SelectedIndex;
         }
-        
+        #endregion
+
         // DATA GETTERS
         protected void getData()
         {
@@ -265,7 +266,7 @@ namespace ProgettoCMA
             }
         }
 
-        // DATABASE FUNCTIONS
+        #region Database CRUD
         protected void databaseAdd(T instanceToSave)
         {
             this.databaseSave(instanceToSave);
@@ -327,11 +328,11 @@ namespace ProgettoCMA
                             }
                         }
                     }
-                    else if(item.PropertyType == typeof(Utente))
+                    else if (item.PropertyType == typeof(Utente))
                     {
                         item.SetValue(instanceToSave, Shared.utente);
                     }
-                    else if(item.PropertyType == typeof(decimal))
+                    else if (item.PropertyType == typeof(decimal))
                     {
                         item.SetValue(instanceToSave, decimal.Parse(this.controls[item.Name.ToLower()].Text));
                     }
@@ -377,6 +378,7 @@ namespace ProgettoCMA
                 this.buttonsUpdate(false, true);
             }
         }
+        #endregion
 
         protected void updateUI(T instanceToShow)
         {
@@ -462,8 +464,8 @@ namespace ProgettoCMA
             }
             return indirizzo;
         }
-
-        // BUTTON EVENTS
+        
+        #region Button events
         protected virtual void editButton_Click(object sender, EventArgs e)
         {
         }
@@ -482,8 +484,15 @@ namespace ProgettoCMA
         protected virtual void annullaButtonFull_Click(object sender, EventArgs e)
         {
             if (this.newInstance != null)
-            this.annullaButton_Click(sender, e);
+            {
+
+            }
+            else
+            {
+                this.annullaButton_Click(sender, e);
+            }
         }
+        #endregion
     }
 
     public class UC<T, T1> : UC<T>

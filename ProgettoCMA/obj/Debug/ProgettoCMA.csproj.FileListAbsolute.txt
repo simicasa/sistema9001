@@ -82,3 +82,4 @@ C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\Progett
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.exe
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
+C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA._CategorieOverview.resources

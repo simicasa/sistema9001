@@ -105,6 +105,12 @@
     </Compile>
     <Compile Include="Shared\Shared.cs" />
     <Compile Include="Shared\Validator.cs" />
+    <Compile Include="UserControls\_DoubleListSwitch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\_DoubleListSwitch.Designer.cs">
+      <DependentUpon>_DoubleListSwitch.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Categorie.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,6 +220,9 @@
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\_DoubleListSwitch.resx">
+      <DependentUpon>_DoubleListSwitch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Categorie.resx">
       <DependentUpon>Categorie.cs</DependentUpon>
     </EmbeddedResource>
