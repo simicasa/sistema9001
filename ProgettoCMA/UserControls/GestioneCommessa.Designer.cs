@@ -33,6 +33,8 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.addButton = new System.Windows.Forms.Button();
+            this.visualizzaButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -48,9 +50,6 @@
             this.ragioneSocialeLabel = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
-            this.editButton = new System.Windows.Forms.Button();
             this.clientiGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -101,8 +100,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.addButton);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.editButton);
+            this.groupBox2.Controls.Add(this.visualizzaButton);
             this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Location = new System.Drawing.Point(273, 19);
             this.groupBox2.Name = "groupBox2";
@@ -110,6 +108,28 @@
             this.groupBox2.TabIndex = 60;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Richieste di Offerta";
+            // 
+            // addButton
+            // 
+            this.addButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.add_user_128;
+            this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.addButton.Location = new System.Drawing.Point(164, 193);
+            this.addButton.Margin = new System.Windows.Forms.Padding(1);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(30, 32);
+            this.addButton.TabIndex = 61;
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // visualizzaButton
+            // 
+            this.visualizzaButton.Location = new System.Drawing.Point(6, 193);
+            this.visualizzaButton.Name = "visualizzaButton";
+            this.visualizzaButton.Size = new System.Drawing.Size(154, 32);
+            this.visualizzaButton.TabIndex = 2;
+            this.visualizzaButton.Text = "Visualizza";
+            this.visualizzaButton.UseVisualStyleBackColor = true;
+            this.visualizzaButton.Click += new System.EventHandler(this.visualizzaButton_Click);
             // 
             // listBox1
             // 
@@ -258,38 +278,6 @@
             this.label12.TabIndex = 40;
             this.label12.Text = "Data Creazione";
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(40, 193);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(120, 32);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Visualizza";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // addButton
-            // 
-            this.addButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.add_user_128;
-            this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.addButton.Location = new System.Drawing.Point(164, 193);
-            this.addButton.Margin = new System.Windows.Forms.Padding(1);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(30, 32);
-            this.addButton.TabIndex = 61;
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // editButton
-            // 
-            this.editButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.editor_pencil_pen_edit_write_glyph_128;
-            this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.editButton.Location = new System.Drawing.Point(6, 193);
-            this.editButton.Margin = new System.Windows.Forms.Padding(1);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(30, 32);
-            this.editButton.TabIndex = 62;
-            this.editButton.UseVisualStyleBackColor = true;
-            // 
             // GestioneCommessa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,8 +317,7 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button visualizzaButton;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Button editButton;
     }
 }

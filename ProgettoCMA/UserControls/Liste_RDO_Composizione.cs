@@ -14,10 +14,13 @@ namespace ProgettoCMA
     public partial class Liste_RDO_Composizione : UC<Lista_RDO_Composizione>
     {
         Lista_RDO listaRDO;
+        Lista_RDO_Composizione composizioneAttuale;
+        bool isNew;
 
-        public Liste_RDO_Composizione(Lista_RDO lista) : base()
+        public Liste_RDO_Composizione(Lista_RDO lista, bool isNew = true) : base()
         {
             this.listaRDO = lista;
+            this.isNew = isNew;
 
             InitializeComponent();
             
@@ -50,6 +53,14 @@ namespace ProgettoCMA
             this.cancelBt = annullaButton;
 
             this.initialize(this.orderList, null, new Control[] { categoriaValue, macroValue }, new Control[] { generaRDOButton });
+
+            this.composizioneAttuale = this.data.First();
+            if (!this.isNew)
+            {
+                annullaButton.Width = annullaButton.Width + addButton.Width + 10;
+                addButton.Visible = false;
+            }
+            this.panel1.Visible = false;
         }
         protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -83,6 +94,7 @@ namespace ProgettoCMA
                 }
                 return;
             }
+            this.composizioneAttuale = (Lista_RDO_Composizione)this.list.SelectedItem;
         }
         private void editButtons()
         {
@@ -92,6 +104,10 @@ namespace ProgettoCMA
             this.list.Enabled = false;
 
             this.textBoxesEnable(true);
+            if (!this.isNew)
+            {
+                addButton.Visible = false;
+            }
         }
         private void saveButtons()
         {
@@ -101,6 +117,10 @@ namespace ProgettoCMA
             this.list.Enabled = true;
 
             this.textBoxesEnable(false);
+            if (!this.isNew)
+            {
+                addButton.Visible = false;
+            }
         }
         private void updateFields()
         {
@@ -109,7 +129,7 @@ namespace ProgettoCMA
             Lista_RDO_Composizione commessa_RDO_Categoria;
             if (!isNew)
             {
-                int ID = Int32.Parse(unitaMisuraValue.Text);
+                int ID = this.composizioneAttuale.ID;
                 commessa_RDO_Categoria = Shared.cdc.Lista_RDO_ComposizioneSet.OfType<Lista_RDO_Composizione>().Where(x => x.ID == ID).First();
                 this.databaseUpdate(commessa_RDO_Categoria);
                 Lista_RDO_Composizione old = this.dataSubset[this.selectedIndex];
@@ -130,7 +150,7 @@ namespace ProgettoCMA
         private void orderList()
         {
             base.orderList(x => x.Descrizione);
-            this.list.DataSource = this.dataSubset;
+            this.list.DataSource = new BindingList<Lista_RDO_Composizione>(this.dataSubset.Where(l => l.Lista_RDO.ID == this.listaRDO.ID).ToList());
         }
 
         protected override void editButton_Click(object sender, EventArgs e)
@@ -183,28 +203,42 @@ namespace ProgettoCMA
 
         private void generaRDOButton_Click(object sender, EventArgs e)
         {
-            var vai = from ll in Shared.cdc.Lista_RDO_ComposizioneSet
-                      join c in Shared.cdc.CategoriaSet on ll.Categoria.ID equals c.ID
-                      join acf in Shared.cdc.Associazione_Categoria_FornitoreSet on c.ID equals acf.Categoria.ID
-                      join f in Shared.cdc.AziendaSet.OfType<Fornitore>() on acf.Fornitore.ID equals f.ID
-                      orderby f.ID
-                      select new { Fornitore = f, ListaRDOComposizione = ll};
-            Fornitore fornitore, fornitoreOld = null;
-            RDO rdo = null;
-            foreach (var item in vai)
+            int count;
+            if ((count = Shared.cdc.RDOSet.Where(r => r.Lista_RDO.ID == this.listaRDO.ID).Count()) <= 0)
             {
-                fornitore = item.Fornitore;
-                if (fornitoreOld == null || fornitoreOld.ID != fornitore.ID)
+                this.messageBoxShow("qualcosa che non va");
+                string progressivo, codice;
+                var vai = from ll in Shared.cdc.Lista_RDO_ComposizioneSet
+                          join c in Shared.cdc.CategoriaSet on ll.Categoria.ID equals c.ID
+                          join acf in Shared.cdc.Associazione_Categoria_FornitoreSet on c.ID equals acf.Categoria.ID
+                          join f in Shared.cdc.AziendaSet.OfType<Fornitore>() on acf.Fornitore.ID equals f.ID
+                          where ll.Lista_RDO.ID == this.listaRDO.ID
+                          orderby f.ID
+                          select new { Fornitore = f, ListaRDOComposizione = ll };
+                Fornitore fornitore, fornitoreOld = null;
+                RDO rdo = null;
+                foreach (var item in vai)
                 {
-                    rdo = new RDO(-1, this.listaRDO, fornitore, "", DateTime.Now.Year.ToString(), "");
-                    Shared.cdc.RDOSet.Add(rdo);
-                    Shared.cdc.SaveChanges();
+                    fornitore = item.Fornitore;
+                    if (fornitoreOld == null || fornitoreOld.ID != fornitore.ID)
+                    {
+                        progressivo = (count++).ToString().PadLeft(4, '0');
+                        codice = Shared.commessaAttiva.Codice + "_" + this.listaRDO.Progressivo + "_" + progressivo;
+                        rdo = new RDO(-1, this.listaRDO, fornitore, codice, DateTime.Now.Year.ToString(), progressivo);
+                        Shared.cdc.RDOSet.Add(rdo);
+                    }
+                    Shared.cdc.RDO_ComposizioneSet.Add(new RDO_Composizione(-1, item.ListaRDOComposizione, rdo));
+                    fornitoreOld = fornitore;
                 }
-                Shared.cdc.RDO_ComposizioneSet.Add(new RDO_Composizione(-1, item.ListaRDOComposizione, rdo));
-                fornitoreOld = fornitore;
+                Shared.cdc.SaveChanges();
             }
-            Shared.cdc.SaveChanges();
-            //string nostroRiferimentoInterno = "RDO_" + DateTime.Now.Year + "_" + listaRDO.Commessa.Codice + "_" + listaRDO.Progressivo.ToString().PadLeft(4, '0') + "_" + "ProgressivoRDOGenerata";
+
+            // GENERA RDO SOTTO
+            this.listBox1.DataSource = new BindingList<RDO>(Shared.cdc.RDOSet.Where(r => r.Lista_RDO.ID == this.listaRDO.ID).ToList());
+            this.listBox1.DisplayMember = "Progressivo";
+            this.listBox1.ValueMember = "Progressivo";
+            this.panel1.Visible = true;
+            this.button1.Enabled = true;
         }
 
         private void macroValue_SelectedIndexChanged(object sender, EventArgs e)
@@ -217,6 +251,26 @@ namespace ProgettoCMA
             categoriaValue.DataSource = microCategorie;
             categoriaValue.ValueMember = "Nome";
             categoriaValue.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (RDO rdo in this.listBox1.SelectedItems)
+            {
+                this.latuafunzione(rdo);
+            }
+        }
+        private void latuafunzione(RDO rdo)
+        {
+            /*
+            rdo.Codice;
+            rdo.Fornitore;
+            foreach (var item in rdo.RDO_Composizione)
+            {
+                item.Lista_RDO_Composizione;
+            }
+            rdo.Lista_RDO.Commessa.Utente;
+            */
         }
     }
 }

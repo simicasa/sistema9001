@@ -60,6 +60,7 @@ namespace ProgettoCMA
             this.list.Enabled = false;
 
             this.textBoxesEnable(true);
+            codiceValue.Enabled = false;
         }
         private void saveButtons()
         {
@@ -69,6 +70,7 @@ namespace ProgettoCMA
             this.list.Enabled = true;
 
             this.textBoxesEnable(false);
+            codiceValue.Enabled = false;
         }
         private void updateFields()
         {
@@ -121,7 +123,9 @@ namespace ProgettoCMA
         protected override void addButton_Click(object sender, EventArgs e)
         {
             this.listInhibit = true;
-            this.newInstance = new Commessa(-1, new Cliente(), "Nuovo Codice", Shared.utente, "");
+            string year2cifer = DateTime.Now.Year.ToString().Substring(2, 2);
+            string progressivo = (Shared.cdc.CommessaSet.Count() + 1).ToString().PadLeft(4, '0');
+            this.newInstance = new Commessa(-1, new Cliente(), "C"+ year2cifer+"_"+progressivo, Shared.utente, "");
             this.data.Add(newInstance);
             this.dataSubset.Add(newInstance);
             this.orderList();
