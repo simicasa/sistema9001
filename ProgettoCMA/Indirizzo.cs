@@ -19,5 +19,6 @@ namespace ProgettoCMA
         public string Citta { get; set; }
         public string Via { get; set; }
         public string Nazione { get; set; }
+        public string ProvinciaSigla { get; set; }
     }
 }

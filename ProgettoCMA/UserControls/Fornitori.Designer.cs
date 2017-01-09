@@ -38,7 +38,6 @@
             this.nazioneValue = new System.Windows.Forms.TextBox();
             this.cittaValue = new System.Windows.Forms.TextBox();
             this.capValue = new System.Windows.Forms.TextBox();
-            this.provinciaValue = new System.Windows.Forms.TextBox();
             this.civicoValue = new System.Windows.Forms.TextBox();
             this.viaValue = new System.Windows.Forms.TextBox();
             this.ragioneValue = new System.Windows.Forms.TextBox();
@@ -72,6 +71,9 @@
             this.addButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
+            this.provinciaSiglaValue = new System.Windows.Forms.TextBox();
+            this.provinciaValue = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.clientiGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -161,14 +163,6 @@
             this.capValue.Name = "capValue";
             this.capValue.Size = new System.Drawing.Size(287, 20);
             this.capValue.TabIndex = 24;
-            // 
-            // provinciaValue
-            // 
-            this.provinciaValue.Location = new System.Drawing.Point(270, 163);
-            this.provinciaValue.Margin = new System.Windows.Forms.Padding(1);
-            this.provinciaValue.Name = "provinciaValue";
-            this.provinciaValue.Size = new System.Drawing.Size(287, 20);
-            this.provinciaValue.TabIndex = 23;
             // 
             // civicoValue
             // 
@@ -369,6 +363,9 @@
             // 
             // clientiGroupBox
             // 
+            this.clientiGroupBox.Controls.Add(this.provinciaSiglaValue);
+            this.clientiGroupBox.Controls.Add(this.provinciaValue);
+            this.clientiGroupBox.Controls.Add(this.label4);
             this.clientiGroupBox.Controls.Add(this.searchCategoria);
             this.clientiGroupBox.Controls.Add(this.listBox2);
             this.clientiGroupBox.Controls.Add(this.listBox1);
@@ -382,7 +379,6 @@
             this.clientiGroupBox.Controls.Add(this.nazioneValue);
             this.clientiGroupBox.Controls.Add(this.cittaValue);
             this.clientiGroupBox.Controls.Add(this.capValue);
-            this.clientiGroupBox.Controls.Add(this.provinciaValue);
             this.clientiGroupBox.Controls.Add(this.civicoValue);
             this.clientiGroupBox.Controls.Add(this.viaValue);
             this.clientiGroupBox.Controls.Add(this.ragioneValue);
@@ -533,6 +529,32 @@
             this.editButton.TabIndex = 3;
             this.editButton.UseVisualStyleBackColor = true;
             // 
+            // provinciaSiglaValue
+            // 
+            this.provinciaSiglaValue.Location = new System.Drawing.Point(517, 163);
+            this.provinciaSiglaValue.Margin = new System.Windows.Forms.Padding(1);
+            this.provinciaSiglaValue.Name = "provinciaSiglaValue";
+            this.provinciaSiglaValue.Size = new System.Drawing.Size(41, 20);
+            this.provinciaSiglaValue.TabIndex = 40;
+            // 
+            // provinciaValue
+            // 
+            this.provinciaValue.Location = new System.Drawing.Point(270, 163);
+            this.provinciaValue.Margin = new System.Windows.Forms.Padding(1);
+            this.provinciaValue.Name = "provinciaValue";
+            this.provinciaValue.Size = new System.Drawing.Size(207, 20);
+            this.provinciaValue.TabIndex = 39;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(482, 166);
+            this.label4.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(30, 13);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "Sigla";
+            // 
             // Fornitori
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -558,7 +580,6 @@
         private System.Windows.Forms.TextBox nazioneValue;
         private System.Windows.Forms.TextBox cittaValue;
         private System.Windows.Forms.TextBox capValue;
-        private System.Windows.Forms.TextBox provinciaValue;
         private System.Windows.Forms.TextBox civicoValue;
         private System.Windows.Forms.TextBox viaValue;
         private System.Windows.Forms.TextBox ragioneValue;
@@ -592,5 +613,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button categoriaAddButton;
         private System.Windows.Forms.Button categoriaRemoveButton;
+        private System.Windows.Forms.TextBox provinciaSiglaValue;
+        private System.Windows.Forms.TextBox provinciaValue;
+        private System.Windows.Forms.Label label4;
     }
 }

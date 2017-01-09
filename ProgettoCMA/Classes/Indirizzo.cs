@@ -15,16 +15,18 @@ namespace ProgettoCMA
             this.Civico = "";
             this.Nazione = "";
             this.Provincia = "";
+            this.ProvinciaSigla = "";
             this.Via = "";
 
         }
-        public Indirizzo(String via, String civico, String citta, String provincia, String cap, String nazione)
+        public Indirizzo(String via, String civico, String citta, String provincia, String provinciaSigla, String cap, String nazione)
         {
             this.Cap = cap;
             this.Citta = citta;
             this.Civico = civico;
             this.Nazione = nazione;
             this.Provincia = provincia;
+            this.ProvinciaSigla = provinciaSigla;
             this.Via = via;
         }
     }

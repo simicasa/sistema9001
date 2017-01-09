@@ -38,6 +38,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -91,11 +94,20 @@
     <Compile Include="Classes\Lista_RDO_Composizione.cs" />
     <Compile Include="Classes\Fornitore.cs" />
     <Compile Include="Classes\Indirizzo.cs" />
+    <Compile Include="Classes\PDF\PDFGestioneTabelle.cs" />
+    <Compile Include="Classes\PDF\RDOEvent.cs" />
+    <Compile Include="Classes\PDF\RdoPDF.cs" />
     <Compile Include="Classes\RDO.cs" />
     <Compile Include="Classes\RDO_Composizione.cs" />
     <Compile Include="Classes\Ruolo.cs" />
     <Compile Include="Cliente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\newODA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\newODA.Designer.cs">
+      <DependentUpon>newODA.cs</DependentUpon>
     </Compile>
     <Compile Include="Lista_RDO.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
@@ -105,12 +117,6 @@
     </Compile>
     <Compile Include="Shared\Shared.cs" />
     <Compile Include="Shared\Validator.cs" />
-    <Compile Include="UserControls\_DoubleListSwitch.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\_DoubleListSwitch.Designer.cs">
-      <DependentUpon>_DoubleListSwitch.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Categorie.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -211,6 +217,12 @@
     <Compile Include="UserControls\GestioneCommessa.Designer.cs">
       <DependentUpon>GestioneCommessa.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ODA_Composizioni.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ODA_Composizioni.Designer.cs">
+      <DependentUpon>ODA_Composizioni.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -220,8 +232,8 @@
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\_DoubleListSwitch.resx">
-      <DependentUpon>_DoubleListSwitch.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\newODA.resx">
+      <DependentUpon>newODA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Categorie.resx">
       <DependentUpon>Categorie.cs</DependentUpon>
@@ -256,6 +268,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\GestioneCommessa.resx">
       <DependentUpon>GestioneCommessa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ODA_Composizioni.resx">
+      <DependentUpon>ODA_Composizioni.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC.resx">
       <DependentUpon>UC.cs</DependentUpon>

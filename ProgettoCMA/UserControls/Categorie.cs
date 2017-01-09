@@ -202,6 +202,8 @@ namespace ProgettoCMA
             this.editButtons();
             this.updateUI(this.newInstance);
             this.listInhibit = false;
+            macroValue.Enabled = false;
+            hasMacro.Checked = false;
         }
         protected override void deleteButton_Click(object sender, EventArgs e)
         {

@@ -39,6 +39,10 @@
             this.ragioneSocialeLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
             this.clientiGroupBox = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.categoriaValue = new System.Windows.Forms.ComboBox();
             this.macroValue = new System.Windows.Forms.ComboBox();
@@ -49,6 +53,7 @@
             this.editButton = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
             this.clientiGroupBox.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // annullaButton
@@ -148,6 +153,7 @@
             // 
             // clientiGroupBox
             // 
+            this.clientiGroupBox.Controls.Add(this.panel1);
             this.clientiGroupBox.Controls.Add(this.label2);
             this.clientiGroupBox.Controls.Add(this.categoriaValue);
             this.clientiGroupBox.Controls.Add(this.macroValue);
@@ -169,10 +175,52 @@
             this.clientiGroupBox.Controls.Add(this.listBox);
             this.clientiGroupBox.Location = new System.Drawing.Point(3, 3);
             this.clientiGroupBox.Name = "clientiGroupBox";
-            this.clientiGroupBox.Size = new System.Drawing.Size(566, 290);
+            this.clientiGroupBox.Size = new System.Drawing.Size(566, 506);
             this.clientiGroupBox.TabIndex = 2;
             this.clientiGroupBox.TabStop = false;
             this.clientiGroupBox.Text = "Richiesta di Offerta";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.listBox1);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Location = new System.Drawing.Point(0, 295);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(560, 206);
+            this.panel1.TabIndex = 39;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(6, 16);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBox1.Size = new System.Drawing.Size(140, 186);
+            this.listBox1.TabIndex = 38;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Descrizione";
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(156, 16);
+            this.button1.Margin = new System.Windows.Forms.Padding(1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(401, 32);
+            this.button1.TabIndex = 34;
+            this.button1.Text = "Salva e Visualizza Selezionati";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -273,9 +321,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.clientiGroupBox);
             this.Name = "Liste_RDO_Composizione";
-            this.Size = new System.Drawing.Size(573, 296);
+            this.Size = new System.Drawing.Size(573, 511);
             this.clientiGroupBox.ResumeLayout(false);
             this.clientiGroupBox.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -302,5 +352,9 @@
         private System.Windows.Forms.ComboBox categoriaValue;
         private System.Windows.Forms.ComboBox macroValue;
         private System.Windows.Forms.Button generaRDOButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
     }
 }
