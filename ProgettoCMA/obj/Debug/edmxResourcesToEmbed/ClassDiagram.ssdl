@@ -297,6 +297,7 @@
     <Property Name="Indirizzo_Citta" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Indirizzo_Via" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Indirizzo_Nazione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Indirizzo_ProvinciaSigla" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Piva" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CodFisc" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Telefono" Type="nvarchar(max)" Nullable="true" />
@@ -322,6 +323,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CondizioniParticolari" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Progressivo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Creazione" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Commessa_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AziendaSet_Fornitore">

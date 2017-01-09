@@ -379,6 +379,7 @@
     <Property Type="String" Name="Citta" Nullable="true" />
     <Property Type="String" Name="Via" Nullable="false" />
     <Property Type="String" Name="Nazione" Nullable="false" />
+    <Property Type="String" Name="ProvinciaSigla" Nullable="false" />
   </ComplexType>
   <Association Name="AziendaContatto">
     <End Type="ClassDiagram.Azienda" Role="Azienda" Multiplicity="*" />
@@ -413,6 +414,7 @@
     <NavigationProperty Name="RDO" Relationship="ClassDiagram.Associazione_Commessa_RDORDO" FromRole="Associazione_Commessa_RDO" ToRole="RDO" />
     <Property Name="CondizioniParticolari" Type="String" Nullable="false" />
     <Property Name="Progressivo" Type="String" Nullable="false" />
+    <Property Name="Creazione" Type="String" Nullable="false" />
   </EntityType>
   <Association Name="CommessaAssociazione_Commessa_RDO">
     <End Type="ClassDiagram.Commessa" Role="Commessa" Multiplicity="1" />

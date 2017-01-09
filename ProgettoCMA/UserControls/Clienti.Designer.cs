@@ -67,11 +67,14 @@ namespace ProgettoCMA
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
+            this.provinciaSiglaValue = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.clientiGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // clientiGroupBox
             // 
+            this.clientiGroupBox.Controls.Add(this.provinciaSiglaValue);
             this.clientiGroupBox.Controls.Add(this.annullaButton);
             this.clientiGroupBox.Controls.Add(this.label1);
             this.clientiGroupBox.Controls.Add(this.searchTextBox);
@@ -101,6 +104,7 @@ namespace ProgettoCMA
             this.clientiGroupBox.Controls.Add(this.civicoLabel);
             this.clientiGroupBox.Controls.Add(this.viaLabel);
             this.clientiGroupBox.Controls.Add(this.ragioneSocialeLabel);
+            this.clientiGroupBox.Controls.Add(this.label2);
             this.clientiGroupBox.Controls.Add(this.idLabel);
             this.clientiGroupBox.Controls.Add(this.noteValue);
             this.clientiGroupBox.Controls.Add(this.deleteButton);
@@ -207,7 +211,7 @@ namespace ProgettoCMA
             this.provinciaValue.Location = new System.Drawing.Point(270, 163);
             this.provinciaValue.Margin = new System.Windows.Forms.Padding(1);
             this.provinciaValue.Name = "provinciaValue";
-            this.provinciaValue.Size = new System.Drawing.Size(287, 20);
+            this.provinciaValue.Size = new System.Drawing.Size(207, 20);
             this.provinciaValue.TabIndex = 23;
             // 
             // civicoValue
@@ -239,7 +243,7 @@ namespace ProgettoCMA
             this.creazioneValue.Location = new System.Drawing.Point(270, 48);
             this.creazioneValue.Margin = new System.Windows.Forms.Padding(1);
             this.creazioneValue.Name = "creazioneValue";
-            this.creazioneValue.Size = new System.Drawing.Size(118, 20);
+            this.creazioneValue.Size = new System.Drawing.Size(129, 20);
             this.creazioneValue.TabIndex = 31;
             // 
             // idValue
@@ -452,6 +456,24 @@ namespace ProgettoCMA
             this.listBox.Size = new System.Drawing.Size(140, 433);
             this.listBox.TabIndex = 0;
             // 
+            // provinciaSiglaValue
+            // 
+            this.provinciaSiglaValue.Location = new System.Drawing.Point(517, 163);
+            this.provinciaSiglaValue.Margin = new System.Windows.Forms.Padding(1);
+            this.provinciaSiglaValue.Name = "provinciaSiglaValue";
+            this.provinciaSiglaValue.Size = new System.Drawing.Size(41, 20);
+            this.provinciaSiglaValue.TabIndex = 35;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(482, 166);
+            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Sigla";
+            // 
             // Clienti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,5 +526,7 @@ namespace ProgettoCMA
         private TextBox searchTextBox;
         private Label label1;
         private Button annullaButton;
+        private TextBox provinciaSiglaValue;
+        private Label label2;
     }
 }

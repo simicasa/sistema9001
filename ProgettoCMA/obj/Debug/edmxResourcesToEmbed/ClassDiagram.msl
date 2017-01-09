@@ -157,6 +157,7 @@
             <ScalarProperty Name="Citta" ColumnName="Indirizzo_Citta" />
             <ScalarProperty Name="Via" ColumnName="Indirizzo_Via" />
             <ScalarProperty Name="Nazione" ColumnName="Indirizzo_Nazione" />
+            <ScalarProperty Name="ProvinciaSigla" ColumnName="Indirizzo_ProvinciaSigla" />
           </ComplexProperty>
           <ScalarProperty Name="Piva" ColumnName="Piva" />
           <ScalarProperty Name="CodFisc" ColumnName="CodFisc" />
@@ -193,6 +194,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CondizioniParticolari" ColumnName="CondizioniParticolari" />
           <ScalarProperty Name="Progressivo" ColumnName="Progressivo" />
+          <ScalarProperty Name="Creazione" ColumnName="Creazione" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

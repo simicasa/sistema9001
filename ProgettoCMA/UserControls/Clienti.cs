@@ -39,23 +39,16 @@ namespace ProgettoCMA
         {
             if (this.newInstance != null)
             {
-                if (DialogResult.Yes == this.messageBoxShow("Cambiare cliente e perdere il nuovo?", MessageBoxButtons.YesNo))
-                {
+                if (this.forceRemove) {
                     this.listInhibit = true;
                     this.data.Remove(this.newInstance);
                     this.dataSubset.Remove(this.newInstance);
-                    //this.list.Items.Remove(this.newInstance);
                     this.orderList();
+                    this.selectedIndex = 0;
                     this.list.SetSelected(this.selectedIndex, true);
                     this.listInhibit = false;
                     this.newInstance = null;
-                }
-                else
-                {
-                    this.listInhibit = true;
-                    this.list.SetSelected(this.selectedIndex, true);
-                    this.listInhibit = false;
-                    return;
+                    this.forceRemove = false;
                 }
             }
             if (this.selectedIndex == -1)

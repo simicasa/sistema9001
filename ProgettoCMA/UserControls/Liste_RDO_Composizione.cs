@@ -54,7 +54,10 @@ namespace ProgettoCMA
 
             this.initialize(this.orderList, null, new Control[] { categoriaValue, macroValue }, new Control[] { generaRDOButton });
 
-            this.composizioneAttuale = this.data.First();
+            if(this.data.Count() > 0)
+            {
+                this.composizioneAttuale = this.data.First();
+            }
             if (!this.isNew)
             {
                 annullaButton.Width = annullaButton.Width + addButton.Width + 10;
@@ -206,7 +209,6 @@ namespace ProgettoCMA
             int count;
             if ((count = Shared.cdc.RDOSet.Where(r => r.Lista_RDO.ID == this.listaRDO.ID).Count()) <= 0)
             {
-                this.messageBoxShow("qualcosa che non va");
                 string progressivo, codice;
                 var vai = from ll in Shared.cdc.Lista_RDO_ComposizioneSet
                           join c in Shared.cdc.CategoriaSet on ll.Categoria.ID equals c.ID

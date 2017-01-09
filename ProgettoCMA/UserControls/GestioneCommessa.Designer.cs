@@ -64,7 +64,7 @@
             this.clientiGroupBox.Controls.Add(this.groupBox1);
             this.clientiGroupBox.Location = new System.Drawing.Point(3, 3);
             this.clientiGroupBox.Name = "clientiGroupBox";
-            this.clientiGroupBox.Size = new System.Drawing.Size(789, 527);
+            this.clientiGroupBox.Size = new System.Drawing.Size(479, 524);
             this.clientiGroupBox.TabIndex = 1;
             this.clientiGroupBox.TabStop = false;
             this.clientiGroupBox.Text = "Commessa";
@@ -96,6 +96,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Nuovo Ordine";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox2
             // 
@@ -284,7 +285,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.clientiGroupBox);
             this.Name = "GestioneCommessa";
-            this.Size = new System.Drawing.Size(800, 534);
+            this.Size = new System.Drawing.Size(487, 546);
             this.clientiGroupBox.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

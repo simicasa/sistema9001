@@ -50,6 +50,7 @@ namespace ProgettoCMA
         protected int previousSelected = -1;
 
         protected bool isDataNotEmpty;
+        protected bool forceRemove = false;
 
         // CONSTRUCTORS
         public UC() : base()
@@ -462,7 +463,7 @@ namespace ProgettoCMA
             }
             return indirizzo;
         }
-
+        
         // BUTTON EVENTS
         protected virtual void editButton_Click(object sender, EventArgs e)
         {
@@ -482,6 +483,10 @@ namespace ProgettoCMA
         protected virtual void annullaButtonFull_Click(object sender, EventArgs e)
         {
             if (this.newInstance != null)
+            {
+                this.forceRemove = true;
+                this.list.SelectedIndex = -1;
+            }
             this.annullaButton_Click(sender, e);
         }
     }

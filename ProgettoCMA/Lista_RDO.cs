@@ -24,6 +24,7 @@ namespace ProgettoCMA
         public int ID { get; set; }
         public string CondizioniParticolari { get; set; }
         public string Progressivo { get; set; }
+        public string Creazione { get; set; }
     
         public virtual Commessa Commessa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

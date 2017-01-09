@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/05/2017 16:29:11
+-- Date Created: 01/09/2017 12:15:59
 -- Generated from EDMX file: C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\ClassDiagram.edmx
 -- --------------------------------------------------
 
@@ -340,6 +340,7 @@ CREATE TABLE [dbo].[AziendaSet] (
     [Indirizzo_Citta] nvarchar(max)  NULL,
     [Indirizzo_Via] nvarchar(max)  NOT NULL,
     [Indirizzo_Nazione] nvarchar(max)  NOT NULL,
+    [Indirizzo_ProvinciaSigla] nvarchar(max)  NOT NULL,
     [Piva] nvarchar(max)  NULL,
     [CodFisc] nvarchar(max)  NULL,
     [Telefono] nvarchar(max)  NULL,
@@ -365,6 +366,7 @@ CREATE TABLE [dbo].[Lista_RDOSet] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [CondizioniParticolari] nvarchar(max)  NOT NULL,
     [Progressivo] nvarchar(max)  NOT NULL,
+    [Creazione] nvarchar(max)  NOT NULL,
     [Commessa_ID] int  NOT NULL
 );
 GO

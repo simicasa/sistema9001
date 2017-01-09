@@ -46,6 +46,8 @@ namespace ProgettoCMA
             //this.cancelBt = annullaButton;
 
             this.initialize(this.orderList);
+
+            //this.groupBox3.Visible = false;
         }
         private void emptyListClean()
         {
@@ -57,7 +59,6 @@ namespace ProgettoCMA
                           select listaa;
             foreach (var item in provola)
             {
-                this.messageBoxShow(item.ID.ToString());
                 Shared.cdc.Lista_RDOSet.Remove(item);
             }
             Shared.cdc.SaveChanges();
@@ -80,7 +81,7 @@ namespace ProgettoCMA
                 return;
             }
             string progressivo = (Shared.cdc.Lista_RDOSet.Count() + 1).ToString().PadLeft(4, '0');
-            Lista_RDO newLista = new Lista_RDO(-1, Shared.commessaAttiva, "", progressivo);
+            Lista_RDO newLista = new Lista_RDO(-1, Shared.commessaAttiva, "", progressivo, DateTime.Now.Year.ToString());
             Shared.cdc.Lista_RDOSet.Add(newLista);
             Shared.cdc.SaveChanges();
             Shared.home.controlsAdd(new Liste_RDO_Composizione(newLista));
@@ -95,6 +96,17 @@ namespace ProgettoCMA
             {
                 Shared.home.controlsAdd(new Liste_RDO_Composizione((Lista_RDO)this.listSecondary.SelectedItem, false));
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Shared.home.controlsAdd(new ODA_Composizioni());
+            /*
+            newODA newoda = new newODA();
+            newoda.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            newoda.FormBorderStyle = FormBorderStyle.FixedSingle;
+            newoda.ShowDialog();
+            */
         }
     }
 }

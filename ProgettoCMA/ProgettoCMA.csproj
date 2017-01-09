@@ -97,6 +97,12 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <Compile Include="Forms\newODA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\newODA.Designer.cs">
+      <DependentUpon>newODA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lista_RDO.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
@@ -205,6 +211,12 @@
     <Compile Include="UserControls\GestioneCommessa.Designer.cs">
       <DependentUpon>GestioneCommessa.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ODA_Composizioni.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ODA_Composizioni.Designer.cs">
+      <DependentUpon>ODA_Composizioni.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,6 +226,9 @@
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\newODA.resx">
+      <DependentUpon>newODA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Categorie.resx">
       <DependentUpon>Categorie.cs</DependentUpon>
     </EmbeddedResource>
@@ -247,6 +262,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\GestioneCommessa.resx">
       <DependentUpon>GestioneCommessa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ODA_Composizioni.resx">
+      <DependentUpon>ODA_Composizioni.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC.resx">
       <DependentUpon>UC.cs</DependentUpon>
