@@ -8,42 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProgettoCMA.Nuova
+namespace ProgettoCMA
 {
-    public partial class ListUC<T> : Class1
+    public partial class ListUC<T> : UserControl
     {
-        public ListBox listBox;
-        public event EventHandler selectedIndexChanged;
-        public ListUC(List<T> list)
+        public Action<object, EventArgs, Categoria> selectedIndexChanged;
+
+        public ListUC()//List<T> list)
         {
             InitializeComponent();
-            //this.SuspendLayout();
-            // 
-            // listBox1
-            // 
-            this.listBox = new ListBox();
-            this.listBox.FormattingEnabled = true;
-            this.listBox.Location = new Point(0, 0);
-            this.listBox.Name = "listBox1";
-            this.listBox.Size = new Size(120, 120);
-            this.listBox.TabIndex = 0;
-
-            this.Controls.Add(this.listBox);
-            this.listBox.DataSource = new BindingList<T>(list);
-            //this.listBox.SelectedIndexChanged += new EventHandler(this.listBoxSelectedIndexChanged);
-        }
-        public virtual void listBoxSelectedIndexChanged(object sender, EventArgs e)
-        {
-            Shared.messageBox("a");
-            this.selectedIndexChanged?.Invoke(this, e);
+            //this.class21.asd<Categoria>(Shared.cdc.CategoriaSet);
+            this.class21.dsa(typeof(Categoria));
+            //this.listBox.DataSource = new BindingList<T>(list);
+            //this.listBox.SelectedIndexChanged += new EventHandler((sender, e) => listBoxSelectedIndexChanged(sender, e, new Categoria()));
+            //this.listBox1.SelectedIndexChanged += this.listBoxSelectedIndexChanged;
         }
 
-        public delegate void TestDelegate(Categoria c);
-        public virtual void asd(/*Action<object, EventArgs> dsa, */TestDelegate testDelB)
+        public void listBoxSelectedIndexChanged(object o, EventArgs e)
         {
-            //testDelB("asd");
-            testDelB(new Categoria());
-            //this.listBox.SelectedIndexChanged += new EventHandler(dsa);
+            //this.selectedIndexChanged?.Invoke(this, e, (Categoria)this.listBox1.SelectedItem);
         }
     }
 }
