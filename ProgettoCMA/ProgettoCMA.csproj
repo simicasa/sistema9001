@@ -118,6 +118,12 @@
     <Compile Include="Nuova\Class1.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Nuova\Class2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Nuova\Class3.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Nuova\ListUC.cs">
       <SubType>UserControl</SubType>
     </Compile>

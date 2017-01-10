@@ -59,7 +59,6 @@ C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.UC.
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.exe
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
-C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.exe.config
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.exe
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.pdb
@@ -95,3 +94,5 @@ C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\bin\Debug\itextsh
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.newODA.resources
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ODA_Composizioni.resources
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Nuova.ListUC.resources
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache

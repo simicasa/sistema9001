@@ -1,4 +1,8 @@
-﻿namespace ProgettoCMA.Nuova
+﻿using iTextSharp.awt.geom;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace ProgettoCMA
 {
     partial class ListUC<T>
     {
@@ -28,18 +32,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.class21 = new ProgettoCMA.Class2();
             this.SuspendLayout();
+            // 
+            // class21
+            // 
+            this.class21.FormattingEnabled = true;
+            this.class21.Location = new System.Drawing.Point(3, 3);
+            this.class21.Name = "class21";
+            this.class21.Size = new System.Drawing.Size(136, 121);
+            this.class21.TabIndex = 0;
             // 
             // ListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.class21);
             this.Name = "ListUC";
-            this.Size = new System.Drawing.Size(196, 182);
+            this.Size = new System.Drawing.Size(416, 337);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private Class2 class21;
     }
 }
