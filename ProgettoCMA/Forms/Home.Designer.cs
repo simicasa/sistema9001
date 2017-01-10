@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.esciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.amministrazioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commesseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commesseGestioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,7 +40,7 @@
             this.fornitoriGestioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.categorieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestioneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.esciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.provaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@
             this.commesseToolStripMenuItem,
             this.clientiToolStripMenuItem,
             this.fornitoriToolStripMenuItem,
-            this.categorieToolStripMenuItem});
+            this.categorieToolStripMenuItem,
+            this.provaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(703, 24);
@@ -66,6 +68,13 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // esciToolStripMenuItem
+            // 
+            this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
+            this.esciToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.esciToolStripMenuItem.Text = "Esci";
+            this.esciToolStripMenuItem.Click += new System.EventHandler(this.esciToolStripMenuItem_Click);
             // 
             // amministrazioneToolStripMenuItem
             // 
@@ -84,7 +93,7 @@
             // commesseGestioneToolStripMenuItem
             // 
             this.commesseGestioneToolStripMenuItem.Name = "commesseGestioneToolStripMenuItem";
-            this.commesseGestioneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.commesseGestioneToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.commesseGestioneToolStripMenuItem.Text = "Gestione";
             this.commesseGestioneToolStripMenuItem.Click += new System.EventHandler(this.commesseGestioneToolStripMenuItem_Click);
             // 
@@ -99,7 +108,7 @@
             // clientiGestioneToolStripMenuItem
             // 
             this.clientiGestioneToolStripMenuItem.Name = "clientiGestioneToolStripMenuItem";
-            this.clientiGestioneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clientiGestioneToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.clientiGestioneToolStripMenuItem.Text = "Gestione";
             this.clientiGestioneToolStripMenuItem.Click += new System.EventHandler(this.clientiGestioneToolStripMenuItem_Click);
             // 
@@ -114,7 +123,7 @@
             // fornitoriGestioneToolStripMenuItem
             // 
             this.fornitoriGestioneToolStripMenuItem.Name = "fornitoriGestioneToolStripMenuItem";
-            this.fornitoriGestioneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fornitoriGestioneToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.fornitoriGestioneToolStripMenuItem.Text = "Gestione";
             this.fornitoriGestioneToolStripMenuItem.Click += new System.EventHandler(this.fornitoriGestioneToolStripMenuItem_Click);
             // 
@@ -129,16 +138,16 @@
             // gestioneToolStripMenuItem
             // 
             this.gestioneToolStripMenuItem.Name = "gestioneToolStripMenuItem";
-            this.gestioneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gestioneToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.gestioneToolStripMenuItem.Text = "Gestione";
             this.gestioneToolStripMenuItem.Click += new System.EventHandler(this.gestioneToolStripMenuItem_Click_1);
             // 
-            // esciToolStripMenuItem
+            // provaToolStripMenuItem
             // 
-            this.esciToolStripMenuItem.Name = "esciToolStripMenuItem";
-            this.esciToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.esciToolStripMenuItem.Text = "Esci";
-            this.esciToolStripMenuItem.Click += new System.EventHandler(this.esciToolStripMenuItem_Click);
+            this.provaToolStripMenuItem.Name = "provaToolStripMenuItem";
+            this.provaToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.provaToolStripMenuItem.Text = "prova";
+            this.provaToolStripMenuItem.Click += new System.EventHandler(this.provaToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -172,6 +181,7 @@
         private System.Windows.Forms.ToolStripMenuItem commesseGestioneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestioneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem esciToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem provaToolStripMenuItem;
     }
 }
 

@@ -115,6 +115,15 @@
     <Compile Include="Lista_RDO_Composizione.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <Compile Include="Nuova\Class1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Nuova\ListUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Nuova\ListUC.Designer.cs">
+      <DependentUpon>ListUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Shared\Shared.cs" />
     <Compile Include="Shared\Validator.cs" />
     <Compile Include="UserControls\Categorie.cs">
@@ -150,6 +159,7 @@
     <Compile Include="Fornitore.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <Compile Include="Nuova\ControllerInterface.cs" />
     <Compile Include="UserControls\Liste_RDO_Composizione.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -234,6 +244,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\newODA.resx">
       <DependentUpon>newODA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nuova\ListUC.resx">
+      <DependentUpon>ListUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Categorie.resx">
       <DependentUpon>Categorie.cs</DependentUpon>
