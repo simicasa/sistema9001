@@ -93,6 +93,6 @@ C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\bin\Debug\itextsh
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\bin\Debug\itextsharp.xml
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.newODA.resources
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ODA_Composizioni.resources
-C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Nuova.ListUC.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
+C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources

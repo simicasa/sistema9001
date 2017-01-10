@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace ProgettoCMA
 {
-    class Class2 : ListBox
+    class ListBoxUC : ListBox
     {
-        dynamic variabile;
+        dynamic source;
         public void asd<T>(DbSet dbSet)
         {
             this.DataSource = new BindingList<T>(dbSet.OfType<T>().ToList());
             this.ValueMember = "Nome";
             this.DisplayMember = "Nome";
         }
-        public void dsa(Type tipo)
+        public void dsa(Type tipo, DbSet dbSet)
         {
             //variabile = Activator.CreateInstance(tipo);
-            var t = typeof(BindingList<>).MakeGenericType(tipo);
+            dynamic t = typeof(BindingList<>).MakeGenericType(tipo);
             //var lista = Activator.CreateInstance(t);
             var lista = Activator.CreateInstance(t, new Object[] { Shared.cdc.CategoriaSet.ToList() });
 

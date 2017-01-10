@@ -18,7 +18,7 @@ namespace ProgettoCMA
         {
             InitializeComponent();
             //this.class21.asd<Categoria>(Shared.cdc.CategoriaSet);
-            this.class21.dsa(typeof(Categoria));
+            this.class21.dsa(typeof(Categoria), Shared.cdc.CategoriaSet);
             //this.listBox.DataSource = new BindingList<T>(list);
             //this.listBox.SelectedIndexChanged += new EventHandler((sender, e) => listBoxSelectedIndexChanged(sender, e, new Categoria()));
             //this.listBox1.SelectedIndexChanged += this.listBoxSelectedIndexChanged;

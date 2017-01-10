@@ -103,6 +103,11 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\IController.cs" />
+    <Compile Include="Controller\ListBoxUC.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\newODA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,9 +119,6 @@
     </Compile>
     <Compile Include="Lista_RDO_Composizione.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Nuova\Class1.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Nuova\Class2.cs">
       <SubType>Component</SubType>
@@ -165,7 +167,6 @@
     <Compile Include="Fornitore.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <Compile Include="Nuova\ControllerInterface.cs" />
     <Compile Include="UserControls\Liste_RDO_Composizione.cs">
       <SubType>UserControl</SubType>
     </Compile>
