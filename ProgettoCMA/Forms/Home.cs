@@ -108,5 +108,18 @@ namespace ProgettoCMA
         {
             Application.Exit();
         }
+
+        private void provaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Nuova.ListUC<Categoria> l = new Nuova.ListUC<Categoria>(Shared.cdc.CategoriaSet.ToList());
+            //l.selectedIndexChanged += new EventHandler(this.UserControl_ButtonClick);
+            //l.asd(this.UserControl_ButtonClick);
+            l.asd(delegate (Categoria c) { Console.WriteLine(c.ID.ToString()); });
+            this.controlsAdd(l);
+        }
+        protected void UserControl_ButtonClick(object sender, EventArgs e, Categoria c)
+        {
+            Shared.messageBox("button click");
+        }
     }
 }
