@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="Controller\Generic.cs" />
+    <Compile Include="Controller\GenericFactory.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\ListBoxUC.cs">
       <SubType>Component</SubType>
@@ -246,6 +247,12 @@
     </Compile>
     <Compile Include="UserControls\UC.Designer.cs">
       <DependentUpon>UC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCNew.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCNew.Designer.cs">
+      <DependentUpon>UCNew.cs</DependentUpon>
     </Compile>
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>

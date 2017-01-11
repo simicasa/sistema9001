@@ -19,7 +19,7 @@ namespace ProgettoCMA
             InitializeComponent();
             //this.class21.asd<Categoria>(Shared.cdc.CategoriaSet);
 
-            this.listBoxUC1.Initialize(typeof(Categoria), Shared.cdc.CategoriaSet.ToList(), "Nome");
+            this.listBoxUC1.Initialize(typeof(Categoria), "Nome");
 
             //this.class21.dsa(typeof(Categoria), Shared.cdc.CategoriaSet);
 

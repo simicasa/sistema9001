@@ -19,7 +19,9 @@ namespace ProgettoCMA.Controller
         }
         public void bindingListCreate(dynamic list)
         {
-            this.bindingList = Generic.createInstance(typeof(BindingList<>), this.type, new Object[] { list });
+            GenericFactory g = new GenericFactory(typeof(Enumerable));
+            list = g.invokeMethod("ToList", null, this.type, new Object[] { list });
+            this.bindingList = GenericFactory.createInstance(typeof(BindingList<>), new Object[] { list }, this.type);
         }
         public dynamic bindingListGet()
         {

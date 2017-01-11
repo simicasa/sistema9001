@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace ProgettoCMA
 {
-    partial class Clienti
+    partial class Clienti : UC<Cliente>
     {
         public Clienti() : base()
         {
@@ -33,6 +33,7 @@ namespace ProgettoCMA
             this.cancelBt = annullaButton;
 
             this.initialize(this.orderList);
+            this.listBoxUC1.Initialize(typeof(Cliente), "Ragione");
         }
 
         protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,6 +157,16 @@ namespace ProgettoCMA
         {
             updateUI(this.dataSubset[this.selectedIndex]);
             saveButtons();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBoxUC1.Find(searchTextBox.Text);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listBoxUC1.asd();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ProgettoCMA
 {
-    public partial class Clienti : UC<Cliente>
+    public partial class Clienti
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
@@ -69,6 +69,9 @@ namespace ProgettoCMA
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
+            this.listBoxUC1 = new ProgettoCMA.Controller.ListBoxUC();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.clientiGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -474,13 +477,44 @@ namespace ProgettoCMA
             this.listBox.Size = new System.Drawing.Size(140, 433);
             this.listBox.TabIndex = 0;
             // 
+            // listBoxUC1
+            // 
+            this.listBoxUC1.FormattingEnabled = true;
+            this.listBoxUC1.Location = new System.Drawing.Point(575, 49);
+            this.listBoxUC1.Name = "listBoxUC1";
+            this.listBoxUC1.Size = new System.Drawing.Size(132, 368);
+            this.listBoxUC1.TabIndex = 36;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(595, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 37;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(610, 448);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 38;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Clienti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listBoxUC1);
             this.Controls.Add(this.clientiGroupBox);
             this.Name = "Clienti";
-            this.Size = new System.Drawing.Size(570, 489);
+            this.Size = new System.Drawing.Size(712, 489);
             this.clientiGroupBox.ResumeLayout(false);
             this.clientiGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -528,5 +562,8 @@ namespace ProgettoCMA
         private Button annullaButton;
         private TextBox provinciaSiglaValue;
         private Label label2;
+        private Controller.ListBoxUC listBoxUC1;
+        private Button button1;
+        private Button button2;
     }
 }
