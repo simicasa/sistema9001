@@ -31,6 +31,7 @@ namespace ProgettoCMA
         private void InitializeComponent()
         {
             this.clientiGroupBox = new System.Windows.Forms.GroupBox();
+            this.provinciaSiglaValue = new System.Windows.Forms.TextBox();
             this.annullaButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
@@ -60,6 +61,7 @@ namespace ProgettoCMA
             this.civicoLabel = new System.Windows.Forms.Label();
             this.viaLabel = new System.Windows.Forms.Label();
             this.ragioneSocialeLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
             this.noteValue = new System.Windows.Forms.TextBox();
             this.deleteButton = new System.Windows.Forms.Button();
@@ -67,8 +69,6 @@ namespace ProgettoCMA
             this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
-            this.provinciaSiglaValue = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.clientiGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,6 +118,14 @@ namespace ProgettoCMA
             this.clientiGroupBox.TabIndex = 0;
             this.clientiGroupBox.TabStop = false;
             this.clientiGroupBox.Text = "Clienti";
+            // 
+            // provinciaSiglaValue
+            // 
+            this.provinciaSiglaValue.Location = new System.Drawing.Point(517, 163);
+            this.provinciaSiglaValue.Margin = new System.Windows.Forms.Padding(1);
+            this.provinciaSiglaValue.Name = "provinciaSiglaValue";
+            this.provinciaSiglaValue.Size = new System.Drawing.Size(41, 20);
+            this.provinciaSiglaValue.TabIndex = 35;
             // 
             // annullaButton
             // 
@@ -384,6 +392,16 @@ namespace ProgettoCMA
             this.ragioneSocialeLabel.TabIndex = 18;
             this.ragioneSocialeLabel.Text = "Ragione Sociale";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(482, 166);
+            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Sigla";
+            // 
             // idLabel
             // 
             this.idLabel.AutoSize = true;
@@ -455,24 +473,6 @@ namespace ProgettoCMA
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(140, 433);
             this.listBox.TabIndex = 0;
-            // 
-            // provinciaSiglaValue
-            // 
-            this.provinciaSiglaValue.Location = new System.Drawing.Point(517, 163);
-            this.provinciaSiglaValue.Margin = new System.Windows.Forms.Padding(1);
-            this.provinciaSiglaValue.Name = "provinciaSiglaValue";
-            this.provinciaSiglaValue.Size = new System.Drawing.Size(41, 20);
-            this.provinciaSiglaValue.TabIndex = 35;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(482, 166);
-            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Sigla";
             // 
             // Clienti
             // 

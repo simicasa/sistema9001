@@ -104,6 +104,7 @@
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\Generic.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\ListBoxUC.cs">
       <SubType>Component</SubType>

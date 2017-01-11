@@ -32,22 +32,22 @@ namespace ProgettoCMA
         /// </summary>
         private void InitializeComponent()
         {
-            this.class21 = new ProgettoCMA.ListBoxUC();
+            this.listBoxUC1 = new ProgettoCMA.Controller.ListBoxUC();
             this.SuspendLayout();
             // 
-            // class21
+            // listBoxUC1
             // 
-            this.class21.FormattingEnabled = true;
-            this.class21.Location = new System.Drawing.Point(3, 3);
-            this.class21.Name = "class21";
-            this.class21.Size = new System.Drawing.Size(136, 121);
-            this.class21.TabIndex = 0;
+            this.listBoxUC1.FormattingEnabled = true;
+            this.listBoxUC1.Location = new System.Drawing.Point(56, 33);
+            this.listBoxUC1.Name = "listBoxUC1";
+            this.listBoxUC1.Size = new System.Drawing.Size(115, 82);
+            this.listBoxUC1.TabIndex = 0;
             // 
             // ListUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.class21);
+            this.Controls.Add(this.listBoxUC1);
             this.Name = "ListUC";
             this.Size = new System.Drawing.Size(416, 337);
             this.ResumeLayout(false);
@@ -56,6 +56,6 @@ namespace ProgettoCMA
 
         #endregion
 
-        private ListBoxUC class21;
+        private Controller.ListBoxUC listBoxUC1;
     }
 }
