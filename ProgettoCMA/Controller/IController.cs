@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgettoCMA.Nuova
+namespace ProgettoCMA.Controller
 {
-    interface ControllerInterface
+    interface IController
     {
-        void carica();
     }
 }

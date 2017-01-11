@@ -32,7 +32,7 @@ namespace ProgettoCMA
         /// </summary>
         private void InitializeComponent()
         {
-            this.class21 = new ProgettoCMA.Class2();
+            this.class21 = new ProgettoCMA.ListBoxUC();
             this.SuspendLayout();
             // 
             // class21
@@ -56,6 +56,6 @@ namespace ProgettoCMA
 
         #endregion
 
-        private Class2 class21;
+        private ListBoxUC class21;
     }
 }

@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProgettoCMA.Nuova
+namespace ProgettoCMA.Controller
 {
-    public abstract class Class1 : UserControl, ControllerInterface
+    class ListBoxUC : ListBox
     {
-        public void carica()
+        private Controller controller;
+
+        public ListBoxUC()
         {
-            throw new NotImplementedException();
+            this.controller = new Controller();
         }
     }
 }
