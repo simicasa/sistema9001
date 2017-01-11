@@ -1,10 +1,8 @@
-﻿using iTextSharp.awt.geom;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace ProgettoCMA
+namespace ProgettoCMA.UserControls
 {
-    partial class ListUC<T>
+    partial class UCNew<T> : UserControl
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
@@ -32,30 +30,10 @@ namespace ProgettoCMA
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBoxUC1 = new ProgettoCMA.Controller.ListBoxUC();
-            this.SuspendLayout();
-            // 
-            // listBoxUC1
-            // 
-            this.listBoxUC1.FormattingEnabled = true;
-            this.listBoxUC1.Location = new System.Drawing.Point(56, 33);
-            this.listBoxUC1.Name = "listBoxUC1";
-            this.listBoxUC1.Size = new System.Drawing.Size(115, 82);
-            this.listBoxUC1.TabIndex = 0;
-            // 
-            // ListUC
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listBoxUC1);
-            this.Name = "ListUC";
-            this.Size = new System.Drawing.Size(416, 337);
-            this.ResumeLayout(false);
-
         }
 
         #endregion
-
-        private Controller.ListBoxUC listBoxUC1;
     }
 }

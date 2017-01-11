@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ProgettoCMA
 {
-    class ListBoxUC : ListBox
+    class ListBoxUCOld : ListBox
     {
         dynamic source;
         public void asd<T>(DbSet dbSet)

@@ -11,25 +11,21 @@ namespace ProgettoCMA.Controller
     class Controller : IController
     {
         private dynamic bindingList { get; set; }
-        private dynamic bindingListType { get; set; }
-        private Type type { get; set; }
+        public Type type { get; set; }
 
-        protected void bindingListCreate()
+        public Controller()
         {
-            this.bindingListType = typeof(BindingList<>).MakeGenericType(this.type);
-            this.bindingList = Activator.CreateInstance(this.bindingListType, new Object[] { Shared.cdc.CategoriaSet.ToList() });
-            
-            foreach (MethodInfo item in this.bindingListType.GetMethods())
-            {
-                Console.WriteLine(item.Name);
-            }
-            if(this.bindingListType.GetMethod("ToString") != null)
-            {
 
-            }
-            string str = this.bindingListType.GetMethod("ToString").Invoke(this.bindingList, null).ToString();
-            Shared.messageBox(str);
         }
-
+        public void bindingListCreate(dynamic list)
+        {
+            GenericFactory g = new GenericFactory(typeof(Enumerable));
+            list = g.invokeMethod("ToList", null, this.type, new Object[] { list });
+            this.bindingList = GenericFactory.createInstance(typeof(BindingList<>), new Object[] { list }, this.type);
+        }
+        public dynamic bindingListGet()
+        {
+            return this.bindingList;
+        }
     }
 }
