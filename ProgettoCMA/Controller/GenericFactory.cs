@@ -73,6 +73,10 @@ namespace ProgettoCMA.Controller
             var dsa = asd.Invoke(instance, methodParameters);
             return dsa;
         }
+        public static Type MakeGenericType(Type typeToGeneralize, Type[] generalizationTypes)
+        {
+            return typeToGeneralize.MakeGenericType(generalizationTypes);
+        }
         public static dynamic createInstance(Type type, Type[] genericType = null, Object[] parameters = null)
         {
             if (genericType != null)
