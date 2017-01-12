@@ -169,6 +169,12 @@
     <Compile Include="Fornitore.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ControllerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ControllerUC.Designer.cs">
+      <DependentUpon>ControllerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Liste_RDO_Composizione.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -247,12 +253,6 @@
     </Compile>
     <Compile Include="UserControls\UC.Designer.cs">
       <DependentUpon>UC.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCNew.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\UCNew.Designer.cs">
-      <DependentUpon>UCNew.cs</DependentUpon>
     </Compile>
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
