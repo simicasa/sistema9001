@@ -1,8 +1,6 @@
-﻿using System.Windows.Forms;
-
-namespace ProgettoCMA.UserControls
+﻿namespace ProgettoCMA.UserControls
 {
-    partial class UCNew<T> : UserControl
+    partial class ControllerUC
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
