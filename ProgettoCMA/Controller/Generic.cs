@@ -19,6 +19,11 @@ namespace ProgettoCMA.Controller
             GenericFactory g = new GenericFactory(parentType);
             return g.getGenericMethod(methodName, genericMethodType, bindingFlags, func);
         }
+        public static MethodInfo getGenericMethod(Type parentType, string methodName, Type[] genericMethodTypes, BindingFlags bindingFlags = BindingFlags.Default, Func<MethodInfo, bool> func = null)
+        {
+            GenericFactory g = new GenericFactory(parentType);
+            return g.getGenericMethod(methodName, genericMethodTypes, bindingFlags, func);
+        }
         /*
         public static dynamic invokeMethod(dynamic instance, Type instanceType, string methodName, Type genericType = null, Object[] parameters = null)
         {

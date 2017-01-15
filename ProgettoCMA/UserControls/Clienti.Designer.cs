@@ -31,6 +31,7 @@ namespace ProgettoCMA
         private void InitializeComponent()
         {
             this.clientiGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.clientePanel = new System.Windows.Forms.Panel();
             this.indirizzoPanel = new System.Windows.Forms.Panel();
             this.via = new System.Windows.Forms.TextBox();
@@ -63,36 +64,51 @@ namespace ProgettoCMA
             this.ragione = new System.Windows.Forms.TextBox();
             this.id = new System.Windows.Forms.TextBox();
             this.creazione = new System.Windows.Forms.TextBox();
-            this.listBoxUC1 = new ProgettoCMA.Controller.ListBoxUC();
-            this.annullaButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.annullaButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.listBoxUC1 = new ProgettoCMA.Controller.ListBoxUC();
             this.clientiGroupBox.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.clientePanel.SuspendLayout();
             this.indirizzoPanel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // clientiGroupBox
             // 
-            this.clientiGroupBox.Controls.Add(this.clientePanel);
+            this.clientiGroupBox.Controls.Add(this.groupBox2);
+            this.clientiGroupBox.Controls.Add(this.groupBox1);
             this.clientiGroupBox.Controls.Add(this.listBoxUC1);
-            this.clientiGroupBox.Controls.Add(this.annullaButton);
-            this.clientiGroupBox.Controls.Add(this.label1);
-            this.clientiGroupBox.Controls.Add(this.searchTextBox);
-            this.clientiGroupBox.Controls.Add(this.deleteButton);
-            this.clientiGroupBox.Controls.Add(this.addButton);
-            this.clientiGroupBox.Controls.Add(this.saveButton);
-            this.clientiGroupBox.Controls.Add(this.editButton);
             this.clientiGroupBox.Location = new System.Drawing.Point(3, 3);
             this.clientiGroupBox.Name = "clientiGroupBox";
-            this.clientiGroupBox.Size = new System.Drawing.Size(565, 485);
+            this.clientiGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.clientiGroupBox.Size = new System.Drawing.Size(636, 473);
             this.clientiGroupBox.TabIndex = 0;
             this.clientiGroupBox.TabStop = false;
             this.clientiGroupBox.Text = "Clienti";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.clientePanel);
+            this.groupBox2.Controls.Add(this.editButton);
+            this.groupBox2.Controls.Add(this.saveButton);
+            this.groupBox2.Controls.Add(this.addButton);
+            this.groupBox2.Controls.Add(this.annullaButton);
+            this.groupBox2.Controls.Add(this.deleteButton);
+            this.groupBox2.Location = new System.Drawing.Point(210, 19);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(419, 449);
+            this.groupBox2.TabIndex = 38;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Cliente selezionato";
             // 
             // clientePanel
             // 
@@ -113,9 +129,9 @@ namespace ProgettoCMA
             this.clientePanel.Controls.Add(this.ragione);
             this.clientePanel.Controls.Add(this.id);
             this.clientePanel.Controls.Add(this.creazione);
-            this.clientePanel.Location = new System.Drawing.Point(153, 42);
+            this.clientePanel.Location = new System.Drawing.Point(6, 19);
             this.clientePanel.Name = "clientePanel";
-            this.clientePanel.Size = new System.Drawing.Size(406, 397);
+            this.clientePanel.Size = new System.Drawing.Size(406, 390);
             this.clientePanel.TabIndex = 1;
             // 
             // indirizzoPanel
@@ -134,7 +150,7 @@ namespace ProgettoCMA
             this.indirizzoPanel.Controls.Add(this.civicoLabel);
             this.indirizzoPanel.Controls.Add(this.capLabel);
             this.indirizzoPanel.Controls.Add(this.provinciaLabel);
-            this.indirizzoPanel.Location = new System.Drawing.Point(0, 62);
+            this.indirizzoPanel.Location = new System.Drawing.Point(1, 57);
             this.indirizzoPanel.Name = "indirizzoPanel";
             this.indirizzoPanel.Size = new System.Drawing.Size(405, 164);
             this.indirizzoPanel.TabIndex = 1;
@@ -216,7 +232,7 @@ namespace ProgettoCMA
             // viaLabel
             // 
             this.viaLabel.AutoSize = true;
-            this.viaLabel.Location = new System.Drawing.Point(1, 2);
+            this.viaLabel.Location = new System.Drawing.Point(1, 4);
             this.viaLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.viaLabel.Name = "viaLabel";
             this.viaLabel.Size = new System.Drawing.Size(22, 13);
@@ -235,7 +251,7 @@ namespace ProgettoCMA
             // cittaLabel
             // 
             this.cittaLabel.AutoSize = true;
-            this.cittaLabel.Location = new System.Drawing.Point(1, 115);
+            this.cittaLabel.Location = new System.Drawing.Point(1, 117);
             this.cittaLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.cittaLabel.Name = "cittaLabel";
             this.cittaLabel.Size = new System.Drawing.Size(28, 13);
@@ -245,7 +261,7 @@ namespace ProgettoCMA
             // civicoLabel
             // 
             this.civicoLabel.AutoSize = true;
-            this.civicoLabel.Location = new System.Drawing.Point(1, 30);
+            this.civicoLabel.Location = new System.Drawing.Point(1, 32);
             this.civicoLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.civicoLabel.Name = "civicoLabel";
             this.civicoLabel.Size = new System.Drawing.Size(36, 13);
@@ -255,7 +271,7 @@ namespace ProgettoCMA
             // capLabel
             // 
             this.capLabel.AutoSize = true;
-            this.capLabel.Location = new System.Drawing.Point(1, 87);
+            this.capLabel.Location = new System.Drawing.Point(1, 88);
             this.capLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.capLabel.Name = "capLabel";
             this.capLabel.Size = new System.Drawing.Size(28, 13);
@@ -265,7 +281,7 @@ namespace ProgettoCMA
             // provinciaLabel
             // 
             this.provinciaLabel.AutoSize = true;
-            this.provinciaLabel.Location = new System.Drawing.Point(1, 59);
+            this.provinciaLabel.Location = new System.Drawing.Point(1, 60);
             this.provinciaLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.provinciaLabel.Name = "provinciaLabel";
             this.provinciaLabel.Size = new System.Drawing.Size(51, 13);
@@ -275,7 +291,7 @@ namespace ProgettoCMA
             // dataCreazioneLabel
             // 
             this.dataCreazioneLabel.AutoSize = true;
-            this.dataCreazioneLabel.Location = new System.Drawing.Point(1, 7);
+            this.dataCreazioneLabel.Location = new System.Drawing.Point(2, 4);
             this.dataCreazioneLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.dataCreazioneLabel.Name = "dataCreazioneLabel";
             this.dataCreazioneLabel.Size = new System.Drawing.Size(80, 13);
@@ -284,7 +300,7 @@ namespace ProgettoCMA
             // 
             // note
             // 
-            this.note.Location = new System.Drawing.Point(116, 347);
+            this.note.Location = new System.Drawing.Point(117, 340);
             this.note.Margin = new System.Windows.Forms.Padding(1);
             this.note.Multiline = true;
             this.note.Name = "note";
@@ -295,7 +311,7 @@ namespace ProgettoCMA
             // idLabel
             // 
             this.idLabel.AutoSize = true;
-            this.idLabel.Location = new System.Drawing.Point(259, 7);
+            this.idLabel.Location = new System.Drawing.Point(341, 4);
             this.idLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.idLabel.Name = "idLabel";
             this.idLabel.Size = new System.Drawing.Size(18, 13);
@@ -305,7 +321,7 @@ namespace ProgettoCMA
             // ragioneSocialeLabel
             // 
             this.ragioneSocialeLabel.AutoSize = true;
-            this.ragioneSocialeLabel.Location = new System.Drawing.Point(1, 38);
+            this.ragioneSocialeLabel.Location = new System.Drawing.Point(2, 32);
             this.ragioneSocialeLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.ragioneSocialeLabel.Name = "ragioneSocialeLabel";
             this.ragioneSocialeLabel.Size = new System.Drawing.Size(85, 13);
@@ -314,7 +330,7 @@ namespace ProgettoCMA
             // 
             // mail
             // 
-            this.mail.Location = new System.Drawing.Point(116, 319);
+            this.mail.Location = new System.Drawing.Point(117, 312);
             this.mail.Margin = new System.Windows.Forms.Padding(1);
             this.mail.Name = "mail";
             this.mail.Size = new System.Drawing.Size(287, 20);
@@ -323,7 +339,7 @@ namespace ProgettoCMA
             // 
             // telefono
             // 
-            this.telefono.Location = new System.Drawing.Point(116, 291);
+            this.telefono.Location = new System.Drawing.Point(117, 284);
             this.telefono.Margin = new System.Windows.Forms.Padding(1);
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(287, 20);
@@ -332,7 +348,7 @@ namespace ProgettoCMA
             // 
             // codFisc
             // 
-            this.codFisc.Location = new System.Drawing.Point(116, 262);
+            this.codFisc.Location = new System.Drawing.Point(117, 255);
             this.codFisc.Margin = new System.Windows.Forms.Padding(1);
             this.codFisc.Name = "codFisc";
             this.codFisc.Size = new System.Drawing.Size(287, 20);
@@ -341,7 +357,7 @@ namespace ProgettoCMA
             // 
             // pIva
             // 
-            this.pIva.Location = new System.Drawing.Point(116, 234);
+            this.pIva.Location = new System.Drawing.Point(117, 227);
             this.pIva.Margin = new System.Windows.Forms.Padding(1);
             this.pIva.Name = "pIva";
             this.pIva.Size = new System.Drawing.Size(287, 20);
@@ -351,7 +367,7 @@ namespace ProgettoCMA
             // partitaIvaLabel
             // 
             this.partitaIvaLabel.AutoSize = true;
-            this.partitaIvaLabel.Location = new System.Drawing.Point(1, 235);
+            this.partitaIvaLabel.Location = new System.Drawing.Point(2, 230);
             this.partitaIvaLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.partitaIvaLabel.Name = "partitaIvaLabel";
             this.partitaIvaLabel.Size = new System.Drawing.Size(57, 13);
@@ -361,7 +377,7 @@ namespace ProgettoCMA
             // codiceFiscaleLabel
             // 
             this.codiceFiscaleLabel.AutoSize = true;
-            this.codiceFiscaleLabel.Location = new System.Drawing.Point(1, 264);
+            this.codiceFiscaleLabel.Location = new System.Drawing.Point(2, 258);
             this.codiceFiscaleLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.codiceFiscaleLabel.Name = "codiceFiscaleLabel";
             this.codiceFiscaleLabel.Size = new System.Drawing.Size(76, 13);
@@ -371,7 +387,7 @@ namespace ProgettoCMA
             // telefonoLabel
             // 
             this.telefonoLabel.AutoSize = true;
-            this.telefonoLabel.Location = new System.Drawing.Point(1, 292);
+            this.telefonoLabel.Location = new System.Drawing.Point(2, 287);
             this.telefonoLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.telefonoLabel.Name = "telefonoLabel";
             this.telefonoLabel.Size = new System.Drawing.Size(49, 13);
@@ -381,7 +397,7 @@ namespace ProgettoCMA
             // emailLabel
             // 
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(1, 320);
+            this.emailLabel.Location = new System.Drawing.Point(2, 315);
             this.emailLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(32, 13);
@@ -391,7 +407,7 @@ namespace ProgettoCMA
             // noteLabel
             // 
             this.noteLabel.AutoSize = true;
-            this.noteLabel.Location = new System.Drawing.Point(1, 348);
+            this.noteLabel.Location = new System.Drawing.Point(2, 343);
             this.noteLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.noteLabel.Name = "noteLabel";
             this.noteLabel.Size = new System.Drawing.Size(30, 13);
@@ -400,7 +416,7 @@ namespace ProgettoCMA
             // 
             // ragione
             // 
-            this.ragione.Location = new System.Drawing.Point(116, 36);
+            this.ragione.Location = new System.Drawing.Point(117, 29);
             this.ragione.Margin = new System.Windows.Forms.Padding(1);
             this.ragione.Name = "ragione";
             this.ragione.Size = new System.Drawing.Size(287, 20);
@@ -409,34 +425,59 @@ namespace ProgettoCMA
             // 
             // id
             // 
-            this.id.Location = new System.Drawing.Point(276, 6);
+            this.id.Location = new System.Drawing.Point(364, 1);
             this.id.Margin = new System.Windows.Forms.Padding(1);
             this.id.Name = "id";
-            this.id.Size = new System.Drawing.Size(127, 20);
+            this.id.Size = new System.Drawing.Size(40, 20);
             this.id.TabIndex = 19;
             this.id.Text = "-1";
             // 
             // creazione
             // 
-            this.creazione.Location = new System.Drawing.Point(116, 6);
+            this.creazione.Location = new System.Drawing.Point(117, 1);
             this.creazione.Margin = new System.Windows.Forms.Padding(1);
             this.creazione.Name = "creazione";
-            this.creazione.Size = new System.Drawing.Size(129, 20);
+            this.creazione.Size = new System.Drawing.Size(207, 20);
             this.creazione.TabIndex = 31;
             this.creazione.Text = "a";
             // 
-            // listBoxUC1
+            // editButton
             // 
-            this.listBoxUC1.FormattingEnabled = true;
-            this.listBoxUC1.Location = new System.Drawing.Point(6, 49);
-            this.listBoxUC1.Name = "listBoxUC1";
-            this.listBoxUC1.Size = new System.Drawing.Size(145, 420);
-            this.listBoxUC1.TabIndex = 36;
+            this.editButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.editor_pencil_pen_edit_write_glyph_128;
+            this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.editButton.Location = new System.Drawing.Point(10, 413);
+            this.editButton.Margin = new System.Windows.Forms.Padding(1);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(30, 32);
+            this.editButton.TabIndex = 3;
+            this.editButton.UseVisualStyleBackColor = true;
+            // 
+            // saveButton
+            // 
+            this.saveButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.floppy_disk_icon_8284;
+            this.saveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.saveButton.Location = new System.Drawing.Point(47, 413);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(1);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(30, 32);
+            this.saveButton.TabIndex = 3;
+            this.saveButton.UseVisualStyleBackColor = true;
+            // 
+            // addButton
+            // 
+            this.addButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.add_user_128;
+            this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.addButton.Location = new System.Drawing.Point(379, 413);
+            this.addButton.Margin = new System.Windows.Forms.Padding(1);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(30, 32);
+            this.addButton.TabIndex = 3;
+            this.addButton.UseVisualStyleBackColor = true;
             // 
             // annullaButton
             // 
             this.annullaButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.annullaButton.Location = new System.Drawing.Point(270, 445);
+            this.annullaButton.Location = new System.Drawing.Point(123, 413);
             this.annullaButton.Margin = new System.Windows.Forms.Padding(1);
             this.annullaButton.Name = "annullaButton";
             this.annullaButton.Size = new System.Drawing.Size(246, 32);
@@ -444,67 +485,73 @@ namespace ProgettoCMA
             this.annullaButton.Text = "Annulla";
             this.annullaButton.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(514, 19);
-            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Ricerca";
-            // 
-            // searchTextBox
-            // 
-            this.searchTextBox.Location = new System.Drawing.Point(6, 18);
-            this.searchTextBox.Margin = new System.Windows.Forms.Padding(1);
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(503, 20);
-            this.searchTextBox.TabIndex = 32;
-            // 
             // deleteButton
             // 
             this.deleteButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.delete_512;
             this.deleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.deleteButton.Location = new System.Drawing.Point(231, 445);
+            this.deleteButton.Location = new System.Drawing.Point(84, 413);
             this.deleteButton.Margin = new System.Windows.Forms.Padding(1);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(30, 32);
             this.deleteButton.TabIndex = 3;
             this.deleteButton.UseVisualStyleBackColor = true;
             // 
-            // addButton
+            // groupBox1
             // 
-            this.addButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.add_user_128;
-            this.addButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.addButton.Location = new System.Drawing.Point(526, 445);
-            this.addButton.Margin = new System.Windows.Forms.Padding(1);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(30, 32);
-            this.addButton.TabIndex = 3;
-            this.addButton.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.searchTextBox);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(6, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(198, 75);
+            this.groupBox1.TabIndex = 37;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtri";
             // 
-            // saveButton
+            // searchTextBox
             // 
-            this.saveButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.floppy_disk_icon_8284;
-            this.saveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.saveButton.Location = new System.Drawing.Point(194, 445);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(1);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(30, 32);
-            this.saveButton.TabIndex = 3;
-            this.saveButton.UseVisualStyleBackColor = true;
+            this.searchTextBox.Location = new System.Drawing.Point(66, 20);
+            this.searchTextBox.Margin = new System.Windows.Forms.Padding(1);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(121, 20);
+            this.searchTextBox.TabIndex = 32;
             // 
-            // editButton
+            // comboBox1
             // 
-            this.editButton.BackgroundImage = global::ProgettoCMA.Properties.Resources.editor_pencil_pen_edit_write_glyph_128;
-            this.editButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.editButton.Location = new System.Drawing.Point(157, 445);
-            this.editButton.Margin = new System.Windows.Forms.Padding(1);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(30, 32);
-            this.editButton.TabIndex = 3;
-            this.editButton.UseVisualStyleBackColor = true;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(66, 43);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 46);
+            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.TabIndex = 33;
+            this.label3.Text = "Ordina per";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Ricerca";
+            // 
+            // listBoxUC1
+            // 
+            this.listBoxUC1.FormattingEnabled = true;
+            this.listBoxUC1.Location = new System.Drawing.Point(6, 100);
+            this.listBoxUC1.Name = "listBoxUC1";
+            this.listBoxUC1.Size = new System.Drawing.Size(198, 368);
+            this.listBoxUC1.TabIndex = 36;
             // 
             // Clienti
             // 
@@ -512,13 +559,15 @@ namespace ProgettoCMA
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.clientiGroupBox);
             this.Name = "Clienti";
-            this.Size = new System.Drawing.Size(884, 489);
+            this.Size = new System.Drawing.Size(641, 477);
             this.clientiGroupBox.ResumeLayout(false);
-            this.clientiGroupBox.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.clientePanel.ResumeLayout(false);
             this.clientePanel.PerformLayout();
             this.indirizzoPanel.ResumeLayout(false);
             this.indirizzoPanel.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -566,5 +615,9 @@ namespace ProgettoCMA
         private Controller.ListBoxUC listBoxUC1;
         private Panel clientePanel;
         private Panel indirizzoPanel;
+        private ComboBox comboBox1;
+        private GroupBox groupBox2;
+        private GroupBox groupBox1;
+        private Label label3;
     }
 }

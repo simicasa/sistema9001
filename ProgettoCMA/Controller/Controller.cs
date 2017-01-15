@@ -10,22 +10,16 @@ namespace ProgettoCMA.Controller
 {
     class Controller : IController
     {
-        private dynamic bindingList { get; set; }
-        public Type type { get; set; }
 
         public Controller()
         {
 
         }
-        public void bindingListCreate(dynamic list)
+        public dynamic bindingListCreate(dynamic list, Type type)
         {
             GenericFactory g = new GenericFactory(typeof(Enumerable));
-            list = g.invokeMethod("ToList", null, this.type, new Object[] { list });
-            this.bindingList = GenericFactory.createInstance(typeof(BindingList<>), new Object[] { list }, this.type);
-        }
-        public dynamic bindingListGet()
-        {
-            return this.bindingList;
+            list = g.invokeMethod("ToList", null, type, new Object[] { list });
+            return GenericFactory.createInstance(typeof(BindingList<>), new Object[] { list }, type);
         }
     }
 }

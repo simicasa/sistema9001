@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace ProgettoCMA.Controller
 {
-    class ListBoxUC : ListBox, IController
+    class ComboBoxUC : ComboBox, IController
     {
         private Controller controller;
         private string memberToShow;
         private Type type;
         private dynamic findComparisonFunc;
 
-        public ListBoxUC()
+        public ComboBoxUC()
         {
             this.controller = new Controller();
         }
@@ -36,31 +36,32 @@ namespace ProgettoCMA.Controller
         }
         private dynamic CreateFindComparisonFunc(String fieldToSearch)
         {
-            ParameterExpression parameterExp = Expression.Parameter(this.type, "type");
-            ParameterExpression parameterText = Expression.Parameter(typeof(String), "searchText");
-            MemberExpression propertyExp = Expression.Property(parameterExp, fieldToSearch);
-            
+            var parameterExp = Expression.Parameter(typeof(Cliente), "type");
+            var parameterText = Expression.Parameter(typeof(String), "searchText");
+            var propertyExp = Expression.Property(parameterExp, fieldToSearch);
+
             UnaryExpression convertToObjectExpr = Expression.Convert(propertyExp, typeof(object));
-            MethodCallExpression convertedExpression = Expression.Call(convertToObjectExpr, typeof(object).GetMethod("ToString"));
-            
+            var convertedExpression = Expression.Call(convertToObjectExpr, typeof(object).GetMethod("ToString"));
+
             MethodInfo indexOfMethod = typeof(string).GetMethod("IndexOf", new Type[] { typeof(string), typeof(StringComparison) });
-            ConstantExpression strComparison = Expression.Constant(StringComparison.OrdinalIgnoreCase, typeof(StringComparison));
-            MethodCallExpression containsMethodExp = Expression.Call(convertedExpression, indexOfMethod, new Expression[] { parameterText, strComparison });
-            BinaryExpression containsMethodExp2 = Expression.GreaterThanOrEqual(containsMethodExp, Expression.Constant(0, typeof(int)));
-            Delegate casa = Expression.Lambda(containsMethodExp2, new ParameterExpression[] { parameterExp, parameterText }).Compile();
+            var strComparison = Expression.Constant(StringComparison.OrdinalIgnoreCase, typeof(StringComparison));
+            var containsMethodExp = Expression.Call(convertedExpression, indexOfMethod, new Expression[] { parameterText, strComparison });
+            var containsMethodExp2 = Expression.GreaterThanOrEqual(containsMethodExp, Expression.Constant(0, typeof(int)));
+            var casa = Expression.Lambda(containsMethodExp2, new ParameterExpression[] { parameterExp, parameterText }).Compile();
             return casa;
         }
-        private dynamic CreateOrderByFunc(Type instanceType, String fieldToOrder)
+        private dynamic CreateOrderByFunc(String fieldToOrder)
         {
-            ParameterExpression instanceParameter = Expression.Parameter(instanceType, "instance");
-            MemberExpression instanceProperty = Expression.Property(instanceParameter, fieldToOrder);
-            return Expression.Lambda(instanceProperty, new ParameterExpression[] { instanceParameter }).Compile();
+            var parameterExp = Expression.Parameter(typeof(Cliente), "type");
+            var propertyExp = Expression.Property(parameterExp, fieldToOrder);
+            var casa = Expression.Lambda(propertyExp, new ParameterExpression[] { parameterExp }).Compile();
+            return casa;
         }
         private void DataSourceFindAndUpdate(dynamic func)
         {
             MethodInfo setMethod = Generic.getGenericMethod(typeof(DbContext), "Set", this.type, BindingFlags.Default, new Func<MethodInfo, bool>(set => set.IsGenericMethod));
             MethodInfo whereMethod = Generic.getGenericMethod(typeof(Enumerable), "Where", this.type, BindingFlags.Static | BindingFlags.Public, new Func<MethodInfo, bool>(where => where.GetParameters()[1].ParameterType.GetGenericArguments().Count() == 2));
-            
+
             var dbSet = setMethod.Invoke(Shared.cdc, null);
             var list = whereMethod.Invoke(dbSet, new Object[] { dbSet, func });
             this.DataSourceUpdate(list);
@@ -76,12 +77,12 @@ namespace ProgettoCMA.Controller
             this.findComparisonFunc = this.CreateFindComparisonFunc(fieldToOrder.ToString());
             dynamic selectedItem = this.SelectedItem;
             PropertyInfo fieldInfo = this.type.BaseType.GetProperty(fieldToOrder, BindingFlags.IgnoreCase | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
-            if(fieldInfo == null)
+            if (fieldInfo == null)
             {
                 throw new Exception("non esiste la property " + fieldToOrder);
             }
             MethodInfo orderByMethod = Generic.getGenericMethod(typeof(Enumerable), "OrderBy", new Type[] { this.type, typeof(Object) }, BindingFlags.Static | BindingFlags.Public, new Func<MethodInfo, bool>(orderby => orderby.GetParameters().Count() == 2));
-            var list = orderByMethod.Invoke(this.DataSource, new Object[] { this.DataSource, new Func<dynamic, Object>(instance => this.CreateOrderByFunc(this.type, fieldToOrder)(instance)) });
+            var list = orderByMethod.Invoke(this.DataSource, new Object[] { this.DataSource, new Func<dynamic, Object>(instance => this.CreateOrderByFunc(fieldToOrder)(instance)) });
             this.DataSourceUpdate(list);
             if (savePreviousSelected)
             {

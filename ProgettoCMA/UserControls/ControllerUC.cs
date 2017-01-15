@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Data.Entity.Core.Objects.DataClasses;
 
 namespace ProgettoCMA.UserControls
 {
@@ -22,33 +23,6 @@ namespace ProgettoCMA.UserControls
         {
             this.subUC = subUC;
             this.type = type;
-        }
-        protected List<T> CreateInstanceFromUI<T>()
-        {
-            Type classType;
-            List<T> instance = new List<T>();
-            List<Panel> controls = new List<Panel>();
-            classType = Type.GetType("ProgettoCMA." + this.type.Name);
-            if (classType != null && classType.IsClass)
-            {
-                foreach (Control item in this.subUC.Controls)
-                {
-                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
-                }
-                foreach (Control item in controls)
-                {
-                    if ((item.GetType() == typeof(Panel)) && item.Name.StartsWith(this.type.Name.ToLower()))
-                    {
-                        instance.Add(this.fillInstance<T>(item.Controls));
-                        /*
-                        instance.Add(this.GetType().GetMethod("fillInstance")
-                            .MakeGenericMethod(new Type[] { classType })
-                            .Invoke(this, new Object[] { item.Controls }));
-                        */
-                    }
-                }
-            }
-            return instance;
         }
         public static List<T> GetAllControlsRecusrvive<T>(Control control) where T : Control
         {
@@ -72,8 +46,82 @@ namespace ProgettoCMA.UserControls
             return rtn;
         }
 
-        #region fillInstance functions
-        private T fillInstanceBody<T>(ControlCollection controls, T newInstance)
+        #region Create/Update Instance from UI
+        protected List<T> CreateInstanceFromUI<T>()
+        {
+            List<T> instance = new List<T>();
+            Type classType = Type.GetType("ProgettoCMA." + typeof(T).Name);
+            if (classType?.IsClass ?? false)
+            {
+                List<Panel> controls = new List<Panel>();
+                foreach (Control item in this.subUC.Controls)
+                {
+                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
+                }
+                foreach (Panel item in controls)
+                {
+                    if (item.Name.StartsWith(typeof(T).Name.ToLower()))
+                    {
+                        instance.Add(this.CreateInstanceFromUI<T>(item.Controls));
+                        /*
+                        instance.Add(this.GetType().GetMethod("CreateInstanceFromUI")
+                            .MakeGenericMethod(new Type[] { classType })
+                            .Invoke(this, new Object[] { item.Controls }));
+                        */
+                    }
+                }
+            }
+            return instance;
+        }
+        private T CreateInstanceFromUI<T>(ControlCollection controls)
+        {
+            T newInstance = (T)Activator.CreateInstance(typeof(T));
+            return (this.FillInstanceFromUI<T>(controls, newInstance));
+        }
+
+        protected T UpdateInstanceFromUI<T>(T instanceToUpdate)
+        {
+            //List<T> instance = new List<T>();
+            Type classType = Type.GetType("ProgettoCMA." + typeof(T).Name);
+            if (classType != null && classType.IsClass)
+            {
+                List<Panel> controls = new List<Panel>();
+                foreach (Control item in this.subUC.Controls)
+                {
+                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
+                }
+                foreach (Panel item in controls.ToList())
+                {
+                    if (!item.Name.StartsWith(typeof(T).Name.ToLower()))
+                    {
+                        controls.Remove(item);
+                    }
+                }
+                if (controls.Count == 1)
+                {
+                    Panel panel = controls.First();
+                //foreach (Panel item in controls)
+                //{
+                    if (panel.Name.StartsWith(typeof(T).Name.ToLower()))
+                    {
+                        //instance.Add(this.UpdateInstanceFromUI<T>(panel.Controls, instanceToUpdate));
+                        instanceToUpdate = this.UpdateInstanceFromUI<T>(panel.Controls, instanceToUpdate);
+                        /*
+                        instance.Add(this.GetType().GetMethod("CreateInstanceFromUI")
+                            .MakeGenericMethod(new Type[] { classType })
+                            .Invoke(this, new Object[] { item.Controls }));
+                        */
+                    }
+                }
+            }
+            return instanceToUpdate;
+        }
+        private T UpdateInstanceFromUI<T>(ControlCollection controls, T instanceToUpdate)
+        {
+            return (this.FillInstanceFromUI<T>(controls, instanceToUpdate));
+        }
+
+        private T FillInstanceFromUI<T>(ControlCollection controls, T newInstance)
         {
             Control controlTemp;
             Control[] controlsArray;
@@ -85,7 +133,9 @@ namespace ProgettoCMA.UserControls
                     Control[] subPanels = controls.Find(property.PropertyType.Name + "Panel", false);
                     if (subPanels.Count() == 1)
                     {
-                        instance = this.GetType().GetMethod("fillInstance", new Type[] { typeof(ControlCollection) })
+                        instance =
+                            typeof(ControllerUC)
+                            .GetMethod("CreateInstanceFromUI", BindingFlags.NonPublic | BindingFlags.Instance, Type.DefaultBinder, new Type[] { typeof(ControlCollection) }, new ParameterModifier[] { })
                             .MakeGenericMethod(new Type[] { property.PropertyType })
                             .Invoke(this, new Object[] { subPanels.First().Controls });
                         property.SetValue(newInstance, instance);
@@ -101,7 +151,7 @@ namespace ProgettoCMA.UserControls
                     if (controlsArray.Count() == 1)
                     {
                         controlTemp = controlsArray.First();
-                        this.controlGet<T>(ref newInstance, property.Name, controlTemp);
+                        this.ControlGet<T>(ref newInstance, property.Name, controlTemp);
                     }
                     else
                     {
@@ -111,18 +161,9 @@ namespace ProgettoCMA.UserControls
             }
             return newInstance;
         }
-        public T fillInstance<T>(ControlCollection controls)
-        {
-            T newInstance = (T)Activator.CreateInstance(typeof(T));
-            return (this.fillInstanceBody<T>(controls, newInstance));
-        }
-        public T fillInstance<T>(ControlCollection controls, T oldInstance)
-        {
-            return (this.fillInstanceBody<T>(controls, oldInstance));
-        }
         #endregion
 
-        #region UpdateUI functions
+        #region Update UI using T instance
         protected void UpdateUIFromInstance<T>(T instance)
         {
             Type classType;
@@ -143,7 +184,7 @@ namespace ProgettoCMA.UserControls
                 }
             }
         }
-        public void UpdateUI<T>(ControlCollection controls, T newInstance)
+        private void UpdateUI<T>(ControlCollection controls, T newInstance)
         {
             Control controlTemp;
             Control[] controlsArray;
@@ -154,7 +195,8 @@ namespace ProgettoCMA.UserControls
                     Control[] subPanels = controls.Find(property.PropertyType.Name + "Panel", false);
                     if (subPanels.Count() == 1)
                     {
-                        this.GetType().GetMethod("UpdateUI")
+                        typeof(ControllerUC)
+                            .GetMethod("UpdateUI", BindingFlags.NonPublic | BindingFlags.Instance)
                             .MakeGenericMethod(new Type[] { property.PropertyType })
                             .Invoke(this, new Object[] { subPanels.First().Controls, property.GetValue(newInstance) });
                     }
@@ -169,7 +211,7 @@ namespace ProgettoCMA.UserControls
                     if (controlsArray.Count() == 1)
                     {
                         controlTemp = controlsArray.First();
-                        this.controlSet<T>(ref newInstance, property.Name, controlTemp);
+                        this.ControlSet<T>(ref newInstance, property.Name, controlTemp);
                     }
                     else
                     {
@@ -180,13 +222,13 @@ namespace ProgettoCMA.UserControls
         }
         #endregion
 
-        #region controlPanelInstance functions
-        private void controlSet<T>(ref T instance, String fieldName, Control control)
+        #region Control get/set
+        private void ControlSet<T>(ref T instance, String fieldName, Control control)
         {
             PropertyInfo field = typeof(T).GetProperty(fieldName);
-            control.Text = this.setValue<T>(ref instance, field, control.GetType());
+            control.Text = this.ControlSetValue<T>(ref instance, field, control.GetType());
         }
-        private dynamic setValue<T>(ref T instance, PropertyInfo field, Type destinationType)
+        private dynamic ControlSetValue<T>(ref T instance, PropertyInfo field, Type destinationType)
         {
             // CONTROLS HAVING .TEXT
             if (destinationType == typeof(TextBox))
@@ -198,12 +240,12 @@ namespace ProgettoCMA.UserControls
             }
             return null;
         }
-        private void controlGet<T>(ref T instance, String fieldName, Control control)
+        private void ControlGet<T>(ref T instance, String fieldName, Control control)
         {
             PropertyInfo field = typeof(T).GetProperty(fieldName);
-            field.SetValue(instance, this.getValue(control, field.PropertyType));
+            field.SetValue(instance, this.ControlGetValue(control, field.PropertyType));
         }
-        private dynamic getValue(Control control, Type destinationType)
+        private dynamic ControlGetValue(Control control, Type destinationType)
         {
             // CONTROLS HAVING .TEXT
             if(control.GetType() == typeof(TextBox))
@@ -220,5 +262,19 @@ namespace ProgettoCMA.UserControls
             return null;
         }
         #endregion
+
+        protected List<String> GetPropertiesName(Type classType = null)
+        {
+            classType = classType ?? this.type;
+            List <String> propertyNames = new List<String>();
+            foreach (var property in classType.BaseType.GetProperties())
+            {
+                if (!property.PropertyType.Namespace.StartsWith("ProgettoCMA") && !property.PropertyType.IsGenericType)
+                {
+                    propertyNames.Add(property.Name);
+                }
+            }
+            return propertyNames;
+        }
     }
 }

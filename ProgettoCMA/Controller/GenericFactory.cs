@@ -35,6 +35,7 @@ namespace ProgettoCMA.Controller
                 methods = this.type.GetMethods(bindingFlags);
             }
             var filteredMethods = methods.Where(mi => mi.Name == methodName).Where(whereClause);
+            /*
             foreach (var item in filteredMethods)
             {
                 foreach (var itemm in item.GetParameters())
@@ -43,29 +44,32 @@ namespace ProgettoCMA.Controller
                 }
                 Console.WriteLine(" " + item.ReturnType.ToString());
             }
+            */
             int methodsCount;
             if ((methodsCount = filteredMethods.Count()) != 1)
             {
+                /*
+                foreach (var item in filteredMethods)
+                {
+                    Console.WriteLine(item.GetParameters().Count().ToString());
+                    foreach(var itemm in item.GetParameters())
+                    {
+                        Console.WriteLine(itemm.Name + " " + itemm.ParameterType.Name);
+                    }
+                }
+                */
                 throw new Exception("GetMethod dopo la clausola where ha " + methodsCount + " risultati per la funzione " + methodName);
             }
             return (filteredMethods.First());
         }
         public MethodInfo getGenericMethod(String methodName, Type genericMethodType, BindingFlags bindingFlags = BindingFlags.Default, Func<MethodInfo, bool> func = null)
         {
-            MethodInfo method;
-            if (func != null)
-            {
-                method = this.GetMethod(methodName, func, bindingFlags);
-            }
-            else
-            {
-                method = this.GetMethod(methodName, bindingFlags);
-            }
-            if(genericMethodType == null)
-            {
-                return method;
-            }
-            return method.MakeGenericMethod(new Type[] { genericMethodType });
+            return this.getGenericMethod(methodName, new Type[] { genericMethodType }, bindingFlags, func);
+        }
+        public MethodInfo getGenericMethod(String methodName, Type[] genericMethodTypes, BindingFlags bindingFlags = BindingFlags.Default, Func<MethodInfo, bool> func = null)
+        {
+            MethodInfo method = (func != null) ? this.GetMethod(methodName, func, bindingFlags) : method = this.GetMethod(methodName, bindingFlags);
+            return (genericMethodTypes == null) ? method : method.MakeGenericMethod(genericMethodTypes);
         }
         public dynamic invokeMethod(String methodName, dynamic instance, Type genericMethodType = null, Object[] methodParameters = null)
         {
