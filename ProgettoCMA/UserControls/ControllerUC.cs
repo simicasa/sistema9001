@@ -24,7 +24,16 @@ namespace ProgettoCMA.UserControls
             this.subUC = subUC;
             this.type = type;
         }
-        public static List<T> GetAllControlsRecusrvive<T>(Control control) where T : Control
+        public static List<T> GetAllControlsRecursive<T>(ControlCollection controls) where T : Control
+        {
+            List<T> controlsList = new List<T>();
+            foreach (Control item in controls)
+            {
+                controlsList.AddRange(GetAllControlsRecursive<T>(item));
+            }
+            return controlsList;
+        }
+        public static List<T> GetAllControlsRecursive<T>(Control control) where T : Control
         {
             var rtn = new List<T>();
             foreach (Control item in control.Controls)
@@ -35,12 +44,12 @@ namespace ProgettoCMA.UserControls
                     rtn.Add(ctr);
                     if (ctr.HasChildren)
                     {
-                        rtn.AddRange(GetAllControlsRecusrvive<T>(item));
+                        rtn.AddRange(GetAllControlsRecursive<T>(item));
                     }
                 }
                 else
                 {
-                    rtn.AddRange(GetAllControlsRecusrvive<T>(item));
+                    rtn.AddRange(GetAllControlsRecursive<T>(item));
                 }
             }
             return rtn;
@@ -53,12 +62,7 @@ namespace ProgettoCMA.UserControls
             Type classType = Type.GetType("ProgettoCMA." + typeof(T).Name);
             if (classType?.IsClass ?? false)
             {
-                List<Panel> controls = new List<Panel>();
-                foreach (Control item in this.subUC.Controls)
-                {
-                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
-                }
-                foreach (Panel item in controls)
+                foreach (Panel item in GetAllControlsRecursive<Panel>(this.subUC.Controls))
                 {
                     if (item.Name.StartsWith(typeof(T).Name.ToLower()))
                     {
@@ -85,11 +89,7 @@ namespace ProgettoCMA.UserControls
             Type classType = Type.GetType("ProgettoCMA." + typeof(T).Name);
             if (classType != null && classType.IsClass)
             {
-                List<Panel> controls = new List<Panel>();
-                foreach (Control item in this.subUC.Controls)
-                {
-                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
-                }
+                List<Panel> controls = GetAllControlsRecursive<Panel>(this.subUC.Controls);
                 foreach (Panel item in controls.ToList())
                 {
                     if (!item.Name.StartsWith(typeof(T).Name.ToLower()))
@@ -167,15 +167,10 @@ namespace ProgettoCMA.UserControls
         protected void UpdateUIFromInstance<T>(T instance)
         {
             Type classType;
-            List<Panel> controls = new List<Panel>();
             classType = Type.GetType("ProgettoCMA." + this.type.Name);
             if (classType != null && classType.IsClass)
             {
-                foreach (Control item in this.subUC.Controls)
-                {
-                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
-                }
-                foreach (Control item in controls)
+                foreach (Control item in GetAllControlsRecursive<Panel>(this.subUC.Controls))
                 {
                     if ((item.GetType() == typeof(Panel)) && item.Name.StartsWith(this.type.Name.ToLower()))
                     {

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace ProgettoCMA.Controller
 {
-    class ListBoxUC : ListBox, IController
+    public class ListBoxUC : ListBox, IController
     {
         private Controller controller;
         private string memberToShow;

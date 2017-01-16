@@ -11,13 +11,38 @@ using System.Reflection;
 using ProgettoCMA.UserControls;
 using ProgettoCMA.Controller;
 using static ProgettoCMA.Controller.Authentication;
+using static ProgettoCMA.Controller.StateController;
 
 namespace ProgettoCMA
 {
     partial class Clienti : ControllerUC
     {
+        StateController sc;
+        /*
+        private State choose(int choosingValue)
+        {
+            Dictionary<Func<int, bool>, State> dict = new Dictionary<Func<int, bool>, State>();
+            dict.Add(a => a < 0, new State());
+            dict.Add(a => a == 0, new State());
+            dict.Add(a => a > 0, new State());
+
+            Func<int, bool> ff = a => a > 0;
+            List<Func<int, Func<int, bool>, State, State, State>> funcList = new List<Func<int, Func<int, bool>, State, State, State>>();
+            funcList.Add((i, fff, s1, s2) => fff(i) ? s1 : s2);
+
+            foreach (var item in dict)
+            {
+                if (item.Key(choosingValue))
+                {
+                    return item.Value;
+                }
+            }
+            return null;
+        }
+        */
         public Clienti() : base()
         {
+            
             InitializeComponent();
             this.Initialize(this, typeof(Cliente));
             this.listBoxUC1.Initialize(typeof(Cliente), "Ragione");
@@ -34,11 +59,27 @@ namespace ProgettoCMA
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.SelectedItem = "Ragione";
+
+
+            this.sc = new StateController(GetAllControlsRecursive<Control>(this.Controls));
+            //this.sc.AddState("edit", editButton, this.listBoxUC1.SelectedIndex != -1);
+            //this.sc.SetState(new String[] { "init", "edit" });
+
+            int blabla = 0;
+            this.sc.AddState("cEqualZero", addButton, true);
+            this.sc.AddState("cGreatherThanZero", new Control[] { listBoxUC1, searchTextBox, editButton, addButton, comboBox1 }, true);
+            this.sc.AddStateAdjacentFunc("init", "cEqualZero", i => i == 0);
+            this.sc.AddStateAdjacentFunc("init", "cGreatherThanZero", i => i > 0);
+            this.sc.ChooseAndSetState(blabla);
+
+            /*
             Dictionary<Control, AuthRule> controls = new Dictionary<Control, AuthRule>();
             controls.Add(this.addButton, AuthRule.Create);
             controls.Add(this.saveButton, AuthRule.Update);
             controls.Add(this.deleteButton, AuthRule.Delete);
             Authentication.SetControlsVisibility(controls, AuthRule.clienti, AuthRule.Employee, AuthRule.clienti);
+            */
+            //Authentication auth = new Authentication();
         }
         private void listBoxUC1_DataSourceChanged(object sender, EventArgs e)
         {

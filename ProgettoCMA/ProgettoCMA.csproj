@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -110,10 +111,13 @@
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="Controller\Generic.cs" />
     <Compile Include="Controller\GenericFactory.cs" />
+    <Compile Include="Controller\StateGraph.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\ListBoxUC.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controller\State.cs" />
+    <Compile Include="Controller\StateController.cs" />
     <Compile Include="Forms\newODA.cs">
       <SubType>Form</SubType>
     </Compile>
