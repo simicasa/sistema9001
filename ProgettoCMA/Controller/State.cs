@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProgettoCMA.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,26 +26,21 @@ namespace ProgettoCMA.Controller
         }
         public void Activate()
         {
-            Console.WriteLine(this.name + " " + this.defaultEnabled.ToString());
+            /*
             if (this.name.Equals("init"))
             {
-                this.controls.RemoveAll(
-                    item =>
-                    item.GetType() == typeof(Panel) ||
-                    item.GetType() == typeof(GroupBox) ||
-                    item.GetType() == typeof(Label)
-                );
+                this.controls.RemoveAll(item => new Type[]{ typeof(Panel), typeof(GroupBox), typeof(Label)}.Contains(item.GetType()));
             }
+            */
             foreach (var control in this.controls)
             {
-                if (control.Name.StartsWith("add"))
-                {
-                    Console.WriteLine(control.Name + " " + control.Enabled.ToString());
-                }
                 control.Enabled = this.defaultEnabled;
-                if (!this.name.Equals("init"))
+                if (new Type[] { typeof(Panel), typeof(GroupBox) }.Contains(control.GetType()))
                 {
-                    Console.WriteLine(control.Name + " " + control.Enabled.ToString());
+                    foreach (var subControl in ControllerUC.GetAllControlsRecursive<Control>(control))
+                    {
+                        subControl.Enabled = this.defaultEnabled;
+                    }
                 }
             }
         }

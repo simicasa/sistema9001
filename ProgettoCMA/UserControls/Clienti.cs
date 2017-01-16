@@ -52,6 +52,7 @@ namespace ProgettoCMA
             this.saveButton.Click += saveButton_Click;
             this.deleteButton.Click += deleteButton_Click;
             this.annullaButton.Click += annullaButton_Click;
+            this.editButton.Click += editButton_Click;
             this.listBoxUC1.SelectedIndexChanged += listBoxUC1_SelectedIndexChanged;
             this.listBoxUC1.DataSourceChanged += listBoxUC1_DataSourceChanged;
             this.searchTextBox.TextChanged += searchTextBox_TextChanged;
@@ -61,16 +62,13 @@ namespace ProgettoCMA
             comboBox1.SelectedItem = "Ragione";
 
 
-            this.sc = new StateController(GetAllControlsRecursive<Control>(this.Controls));
-            //this.sc.AddState("edit", editButton, this.listBoxUC1.SelectedIndex != -1);
-            //this.sc.SetState(new String[] { "init", "edit" });
-
-            int blabla = 0;
-            this.sc.AddState("cEqualZero", addButton, true);
-            this.sc.AddState("cGreatherThanZero", new Control[] { listBoxUC1, searchTextBox, editButton, addButton, comboBox1 }, true);
-            this.sc.AddStateAdjacentFunc("init", "cEqualZero", i => i == 0);
-            this.sc.AddStateAdjacentFunc("init", "cGreatherThanZero", i => i > 0);
-            this.sc.ChooseAndSetState(blabla);
+            this.sc = new StateController(GetAllControlsRecursive<Control>(this.Controls, new Type[] { typeof(Panel), typeof(GroupBox), typeof(Label) }));
+            this.sc.AddState("noItems", addButton);
+            this.sc.AddState("moreThanZeroItems", new Control[] { listBoxUC1, searchTextBox, editButton, addButton, comboBox1 });
+            this.sc.AddState("edit", new Control[] { saveButton, annullaButton, clientePanel });
+            this.sc.AddStateAdjacentFunc("init", "noItems", i => i == 0);
+            this.sc.AddStateAdjacentFunc("init", "moreThanZeroItems", i => i > 0);
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
 
             /*
             Dictionary<Control, AuthRule> controls = new Dictionary<Control, AuthRule>();
@@ -137,6 +135,10 @@ namespace ProgettoCMA
                 this.listBoxUC1.Find(this.searchTextBox.Text);
                 this.listBoxUC1.SelectedItem = list.First();
             }
+        }
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState("edit");
         }
     }
 }

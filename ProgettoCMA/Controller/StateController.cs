@@ -82,10 +82,9 @@ namespace ProgettoCMA.Controller
             this.ResetActiveStates();
             foreach (var name in names)
             {
-                Console.Write(this.GetState(name).GetName());
                 if (this.ExistsState(name))
                 {
-                    Console.WriteLine(" found and setted");
+                    Debug.ConsoleWriteLine(this.GetState(name).GetName() + " found and setted");
                     this.activeState.Add(this.GetState(name));
                     this.GetState(name).Activate();
                 }

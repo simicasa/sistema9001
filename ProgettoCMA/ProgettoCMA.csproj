@@ -109,6 +109,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\Debug.cs" />
     <Compile Include="Controller\Generic.cs" />
     <Compile Include="Controller\GenericFactory.cs" />
     <Compile Include="Controller\StateGraph.cs" />

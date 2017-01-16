@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Data.Entity.Core.Objects.DataClasses;
+using ProgettoCMA.Controller;
 
 namespace ProgettoCMA.UserControls
 {
@@ -24,16 +25,16 @@ namespace ProgettoCMA.UserControls
             this.subUC = subUC;
             this.type = type;
         }
-        public static List<T> GetAllControlsRecursive<T>(ControlCollection controls) where T : Control
+        public static List<T> GetAllControlsRecursive<T>(ControlCollection controls, Type[] notToTakeTypes = null) where T : Control
         {
             List<T> controlsList = new List<T>();
             foreach (Control item in controls)
             {
-                controlsList.AddRange(GetAllControlsRecursive<T>(item));
+                controlsList.AddRange(GetAllControlsRecursive<T>(item, notToTakeTypes));
             }
             return controlsList;
         }
-        public static List<T> GetAllControlsRecursive<T>(Control control) where T : Control
+        public static List<T> GetAllControlsRecursive<T>(Control control, Type[] notToTakeTypes = null) where T : Control
         {
             var rtn = new List<T>();
             foreach (Control item in control.Controls)
@@ -41,7 +42,10 @@ namespace ProgettoCMA.UserControls
                 var ctr = item as T;
                 if (ctr != null)
                 {
-                    rtn.Add(ctr);
+                    if(!notToTakeTypes?.Contains(ctr.GetType()) ?? true)
+                    {
+                        rtn.Add(ctr);
+                    }
                     if (ctr.HasChildren)
                     {
                         rtn.AddRange(GetAllControlsRecursive<T>(item));
@@ -197,7 +201,7 @@ namespace ProgettoCMA.UserControls
                     }
                     else
                     {
-                        Console.WriteLine("Istanza " + property.Name + " non trovata e non assegnata alla classe principale [" + typeof(T).Name + "]");
+                        Debug.ConsoleWriteLine("Istanza " + property.Name + " non trovata e non assegnata alla classe principale [" + typeof(T).Name + "]");
                     }
                 }
                 else
@@ -210,7 +214,7 @@ namespace ProgettoCMA.UserControls
                     }
                     else
                     {
-                        Console.WriteLine("Controllo " + property.Name + " non trovato e non assegnato");
+                        Debug.ConsoleWriteLine("Controllo " + property.Name + " non trovato e non assegnato");
                     }
                 }
             }
