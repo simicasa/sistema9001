@@ -96,3 +96,4 @@ C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\Progett
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Controller.prova.resources

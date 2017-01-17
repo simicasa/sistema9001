@@ -63,11 +63,21 @@ namespace ProgettoCMA
 
 
             this.sc = new StateController(GetAllControlsRecursive<Control>(this.Controls, new Type[] { typeof(Panel), typeof(GroupBox), typeof(Label) }));
-            this.sc.AddState("noItems", addButton);
-            this.sc.AddState("moreThanZeroItems", new Control[] { listBoxUC1, searchTextBox, editButton, addButton, comboBox1 });
-            this.sc.AddState("edit", new Control[] { saveButton, annullaButton, clientePanel });
-            this.sc.AddStateAdjacentFunc("init", "noItems", i => i == 0);
-            this.sc.AddStateAdjacentFunc("init", "moreThanZeroItems", i => i > 0);
+            this.sc.SetPersistentDisabledControls(id, creazione);
+            this.sc.AddState("noItems", true, addButton);
+            this.sc.AddState("moreThanZeroItems", true, listBoxUC1, searchTextBox, editButton, addButton, deleteButton, comboBox1);
+            this.sc.AddStateAdjacentFunc(StateController.INITIAL_STATE_NAME, "noItems", i => i == 0);
+            this.sc.AddStateAdjacentFunc(StateController.INITIAL_STATE_NAME, "moreThanZeroItems", i => i > 0);
+            this.sc.AddState("edit", true, saveButton, annullaButton, clientePanel);
+            this.sc.AddStateAdjacent("moreThanZeroItems", "edit", true);
+            this.sc.AddState("delete", true, "moreThanZeroItems");
+            this.sc.AddStateAdjacent("moreThanZeroItems", "delete");
+            this.sc.AddStateAdjacent("delete", StateController.INITIAL_STATE_NAME);
+            this.sc.AddState("add", true, "edit");
+            this.sc.AddStateAdjacent("noItems", "add");
+            this.sc.AddStateAdjacent("moreThanZeroItems", "add");
+            this.sc.AddStateAdjacent("add", StateController.INITIAL_STATE_NAME);
+
             this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
 
             /*
@@ -104,37 +114,53 @@ namespace ProgettoCMA
         }
         private void annullaButton_Click(object sender, EventArgs e)
         {
+            this.sc.SetState(StateController.INITIAL_STATE_NAME);
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
         }
         private void deleteButton_Click(object sender, EventArgs e)
         {
+            this.sc.SetState("delete");
             if (DialogResult.Yes == Shared.messageBox("Sicuro di voler eliminare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 Shared.cdc.AziendaSet.Remove((Cliente)this.listBoxUC1.SelectedItem);
                 Shared.cdc.SaveChanges();
                 this.listBoxUC1.Find(this.searchTextBox.Text);
             }
+            this.sc.SetState(StateController.INITIAL_STATE_NAME);
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
         }
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == Shared.messageBox("Sicuro di voler salvare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (this.sc.IsActiveState("edit"))
             {
-                Cliente cliente = this.UpdateInstanceFromUI<Cliente>((Cliente)this.listBoxUC1.SelectedItem);
-                //Shared.cdc.AziendaSet.AddRange(list);
-                Shared.cdc.SaveChanges();
-                this.listBoxUC1.Find(this.searchTextBox.Text);
-                this.listBoxUC1.SelectedItem = cliente;
+                if (DialogResult.Yes == Shared.messageBox("Sicuro di voler salvare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    Cliente cliente = this.UpdateInstanceFromUI<Cliente>((Cliente)this.listBoxUC1.SelectedItem);
+                    //Shared.cdc.AziendaSet.AddRange(list);
+                    Shared.cdc.SaveChanges();
+                    this.listBoxUC1.Find(this.searchTextBox.Text);
+                    this.listBoxUC1.SelectedItem = cliente;
+                }
+                this.sc.SetState("moreThanZeroItems");
+            }
+            else if (this.sc.IsActiveState("add"))
+            {
+                if (DialogResult.Yes == Shared.messageBox("Sicuro di voler salvare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    List<Cliente> list = this.CreateInstanceFromUI<Cliente>();
+                    Shared.cdc.AziendaSet.AddRange(list);
+                    Shared.cdc.SaveChanges();
+                    this.listBoxUC1.Find(this.searchTextBox.Text);
+                    this.listBoxUC1.SelectedItem = list.First();
+                }
+                this.sc.SetState(StateController.INITIAL_STATE_NAME);
+                this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
             }
         }
         private void addButton_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == Shared.messageBox("Sicuro di voler salvare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-            {
-                List<Cliente> list = this.CreateInstanceFromUI<Cliente>();
-                Shared.cdc.AziendaSet.AddRange(list);
-                Shared.cdc.SaveChanges();
-                this.listBoxUC1.Find(this.searchTextBox.Text);
-                this.listBoxUC1.SelectedItem = list.First();
-            }
+            this.sc.SetState("add");
+            this.CleanUI(clientePanel);
         }
         private void editButton_Click(object sender, EventArgs e)
         {

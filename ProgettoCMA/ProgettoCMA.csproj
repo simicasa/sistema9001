@@ -112,6 +112,12 @@
     <Compile Include="Controller\Debug.cs" />
     <Compile Include="Controller\Generic.cs" />
     <Compile Include="Controller\GenericFactory.cs" />
+    <Compile Include="Controller\prova.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controller\prova.Designer.cs">
+      <DependentUpon>prova.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller\StateGraph.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\ListBoxUC.cs">
@@ -266,6 +272,9 @@
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controller\prova.resx">
+      <DependentUpon>prova.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\newODA.resx">
       <DependentUpon>newODA.cs</DependentUpon>
     </EmbeddedResource>

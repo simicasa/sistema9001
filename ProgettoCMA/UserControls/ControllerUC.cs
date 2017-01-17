@@ -221,6 +221,35 @@ namespace ProgettoCMA.UserControls
         }
         #endregion
 
+        #region Clean UI
+        protected void CleanUI(params Control[] parentControl)
+        {
+            List<Control> controls;
+            if(parentControl.Count() > 0)
+            {
+                controls = new List<Control>();
+                foreach (var control in parentControl)
+                {
+                    controls.AddRange(ControllerUC.GetAllControlsRecursive<Control>(control));
+                }
+            }
+            else
+            {
+                controls = ControllerUC.GetAllControlsRecursive<Control>(this.subUC.Controls);
+            }
+            foreach (Control control in controls)
+            {
+                if (
+                    control.GetType().GetRuntimeProperty("Text") != null &&
+                    new Type[] { typeof(TextBox) }.Contains(control.GetType())
+                    )
+                {
+                    control.Text = "";
+                }
+            }
+        }
+        #endregion
+
         #region Control get/set
         private void ControlSet<T>(ref T instance, String fieldName, Control control)
         {
@@ -255,7 +284,15 @@ namespace ProgettoCMA.UserControls
                 }
                 else if (new Type[] { typeof(int), typeof(Int32) }.Contains(destinationType))
                 {
-                    return int.Parse(control.Text);
+                    try
+                    {
+                        return int.Parse(control.Text);
+                    }
+                    catch (FormatException fe)
+                    {
+                        Debug.ConsoleWriteLine(fe.ToString());
+                        return -1;
+                    }
                 }
             }
             return null;

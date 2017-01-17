@@ -24,30 +24,30 @@ namespace ProgettoCMA.Controller
         {
             return new State(name, controls, defaultEnabled);
         }
-        public void Activate()
+        public void Activate(List<Control> controlsToAvoid = null)
         {
-            /*
-            if (this.name.Equals("init"))
-            {
-                this.controls.RemoveAll(item => new Type[]{ typeof(Panel), typeof(GroupBox), typeof(Label)}.Contains(item.GetType()));
-            }
-            */
             foreach (var control in this.controls)
             {
-                control.Enabled = this.defaultEnabled;
+                if((!controlsToAvoid?.Contains(control) ?? true) && typeof(Label) != control.GetType())
+                {
+                    control.Enabled = this.defaultEnabled;
+                }
                 if (new Type[] { typeof(Panel), typeof(GroupBox) }.Contains(control.GetType()))
                 {
                     foreach (var subControl in ControllerUC.GetAllControlsRecursive<Control>(control))
                     {
-                        subControl.Enabled = this.defaultEnabled;
+                        if ((!controlsToAvoid?.Contains(subControl) ?? true) && typeof(Label) != control.GetType())
+                        {
+                            subControl.Enabled = this.defaultEnabled;
+                        }
                     }
                 }
             }
         }
-        public void Deactivate()
+        public void Deactivate(List<Control> controlsToAvoid = null)
         {
             this.Invert();
-            this.Activate();
+            this.Activate(controlsToAvoid);
             this.Invert();
         }
         private void Invert()
