@@ -70,8 +70,8 @@ namespace ProgettoCMA
             this.annullaButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxUC1 = new ProgettoCMA.Controller.ComboBoxUC();
             this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxUC1 = new ProgettoCMA.Controller.ListBoxUC();
@@ -162,7 +162,6 @@ namespace ProgettoCMA
             this.via.Name = "via";
             this.via.Size = new System.Drawing.Size(287, 20);
             this.via.TabIndex = 21;
-            this.via.Text = "d";
             // 
             // provinciaSigla
             // 
@@ -171,7 +170,6 @@ namespace ProgettoCMA
             this.provinciaSigla.Name = "provinciaSigla";
             this.provinciaSigla.Size = new System.Drawing.Size(41, 20);
             this.provinciaSigla.TabIndex = 35;
-            this.provinciaSigla.Text = "h";
             // 
             // civico
             // 
@@ -180,7 +178,6 @@ namespace ProgettoCMA
             this.civico.Name = "civico";
             this.civico.Size = new System.Drawing.Size(287, 20);
             this.civico.TabIndex = 22;
-            this.civico.Text = "f";
             // 
             // provincia
             // 
@@ -189,7 +186,6 @@ namespace ProgettoCMA
             this.provincia.Name = "provincia";
             this.provincia.Size = new System.Drawing.Size(207, 20);
             this.provincia.TabIndex = 23;
-            this.provincia.Text = "g";
             // 
             // cap
             // 
@@ -198,7 +194,6 @@ namespace ProgettoCMA
             this.cap.Name = "cap";
             this.cap.Size = new System.Drawing.Size(287, 20);
             this.cap.TabIndex = 24;
-            this.cap.Text = "j";
             // 
             // label2
             // 
@@ -217,7 +212,6 @@ namespace ProgettoCMA
             this.citta.Name = "citta";
             this.citta.Size = new System.Drawing.Size(287, 20);
             this.citta.TabIndex = 25;
-            this.citta.Text = "k";
             // 
             // nazioneLabel
             // 
@@ -246,7 +240,6 @@ namespace ProgettoCMA
             this.nazione.Name = "nazione";
             this.nazione.Size = new System.Drawing.Size(287, 20);
             this.nazione.TabIndex = 26;
-            this.nazione.Text = "l";
             // 
             // cittaLabel
             // 
@@ -306,7 +299,6 @@ namespace ProgettoCMA
             this.note.Name = "note";
             this.note.Size = new System.Drawing.Size(287, 47);
             this.note.TabIndex = 4;
-            this.note.Text = "t";
             // 
             // idLabel
             // 
@@ -335,7 +327,6 @@ namespace ProgettoCMA
             this.mail.Name = "mail";
             this.mail.Size = new System.Drawing.Size(287, 20);
             this.mail.TabIndex = 30;
-            this.mail.Text = "r";
             // 
             // telefono
             // 
@@ -344,7 +335,6 @@ namespace ProgettoCMA
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(287, 20);
             this.telefono.TabIndex = 29;
-            this.telefono.Text = "e";
             // 
             // codFisc
             // 
@@ -353,7 +343,6 @@ namespace ProgettoCMA
             this.codFisc.Name = "codFisc";
             this.codFisc.Size = new System.Drawing.Size(287, 20);
             this.codFisc.TabIndex = 28;
-            this.codFisc.Text = "w";
             // 
             // pIva
             // 
@@ -362,7 +351,6 @@ namespace ProgettoCMA
             this.pIva.Name = "pIva";
             this.pIva.Size = new System.Drawing.Size(287, 20);
             this.pIva.TabIndex = 27;
-            this.pIva.Text = "q";
             // 
             // partitaIvaLabel
             // 
@@ -421,7 +409,6 @@ namespace ProgettoCMA
             this.ragione.Name = "ragione";
             this.ragione.Size = new System.Drawing.Size(287, 20);
             this.ragione.TabIndex = 20;
-            this.ragione.Text = "s";
             // 
             // id
             // 
@@ -430,7 +417,6 @@ namespace ProgettoCMA
             this.id.Name = "id";
             this.id.Size = new System.Drawing.Size(40, 20);
             this.id.TabIndex = 19;
-            this.id.Text = "-1";
             // 
             // creazione
             // 
@@ -439,7 +425,6 @@ namespace ProgettoCMA
             this.creazione.Name = "creazione";
             this.creazione.Size = new System.Drawing.Size(207, 20);
             this.creazione.TabIndex = 31;
-            this.creazione.Text = "a";
             // 
             // editButton
             // 
@@ -498,8 +483,8 @@ namespace ProgettoCMA
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBoxUC1);
             this.groupBox1.Controls.Add(this.searchTextBox);
-            this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(6, 19);
@@ -509,6 +494,14 @@ namespace ProgettoCMA
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtri";
             // 
+            // comboBoxUC1
+            // 
+            this.comboBoxUC1.FormattingEnabled = true;
+            this.comboBoxUC1.Location = new System.Drawing.Point(66, 43);
+            this.comboBoxUC1.Name = "comboBoxUC1";
+            this.comboBoxUC1.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxUC1.TabIndex = 34;
+            // 
             // searchTextBox
             // 
             this.searchTextBox.Location = new System.Drawing.Point(66, 20);
@@ -516,14 +509,6 @@ namespace ProgettoCMA
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(121, 20);
             this.searchTextBox.TabIndex = 32;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(66, 43);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 2;
             // 
             // label3
             // 
@@ -615,9 +600,9 @@ namespace ProgettoCMA
         private Controller.ListBoxUC listBoxUC1;
         private Panel clientePanel;
         private Panel indirizzoPanel;
-        private ComboBox comboBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox1;
         private Label label3;
+        private Controller.ComboBoxUC comboBoxUC1;
     }
 }

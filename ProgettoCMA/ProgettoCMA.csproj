@@ -125,6 +125,10 @@
     </Compile>
     <Compile Include="Controller\State.cs" />
     <Compile Include="Controller\StateController.cs" />
+    <Compile Include="Controller\TreeViewUC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controller\TreeViewUCDouble.cs" />
     <Compile Include="Forms\newODA.cs">
       <SubType>Form</SubType>
     </Compile>

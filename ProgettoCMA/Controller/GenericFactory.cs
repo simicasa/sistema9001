@@ -71,17 +71,26 @@ namespace ProgettoCMA.Controller
             MethodInfo method = (func != null) ? this.GetMethod(methodName, func, bindingFlags) : method = this.GetMethod(methodName, bindingFlags);
             return (genericMethodTypes == null) ? method : method.MakeGenericMethod(genericMethodTypes);
         }
-        public dynamic invokeMethod(String methodName, dynamic instance, Type genericMethodType = null, Object[] methodParameters = null)
+        public dynamic invokeMethod(String methodName, dynamic instance, Type genericMethodType = null, params Object[] methodParameters)
         {
             MethodInfo asd = this.getGenericMethod(methodName, genericMethodType);
-            var dsa = asd.Invoke(instance, methodParameters);
-            return dsa;
+            if(methodParameters.Length == 0)
+            {
+                methodParameters = null;
+            }
+            return asd.Invoke(instance, methodParameters);
         }
-        public static Type MakeGenericType(Type typeToGeneralize, Type[] generalizationTypes)
+
+        public Type MakeGenericType(params Type[] generalizationTypes)
+        {
+            return GenericFactory.MakeGenericType(this.type, generalizationTypes);
+        }
+        public static Type MakeGenericType(Type typeToGeneralize, params Type[] generalizationTypes)
         {
             return typeToGeneralize.MakeGenericType(generalizationTypes);
         }
-        public static dynamic createInstance(Type type, Type[] genericType = null, Object[] parameters = null)
+
+        public static dynamic createInstance(Type type, Type[] genericType = null, params Object[] parameters)
         {
             if (genericType != null)
             {

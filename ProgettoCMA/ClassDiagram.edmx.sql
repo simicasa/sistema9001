@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/09/2017 12:15:59
--- Generated from EDMX file: C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\ClassDiagram.edmx
+-- Date Created: 01/19/2017 10:08:52
+-- Generated from EDMX file: C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\ClassDiagram.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [CMA];
+USE [database];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO

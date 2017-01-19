@@ -20,7 +20,7 @@ namespace ProgettoCMA.Controller
 
         public ListBoxUC()
         {
-            this.controller = new Controller();
+            this.controller = new Controller(true);
         }
         public void Initialize(Type type, string memberToShow)
         {
@@ -67,7 +67,7 @@ namespace ProgettoCMA.Controller
         }
         private void DataSourceUpdate(dynamic list)
         {
-            this.DataSource = this.controller.bindingListCreate(list, this.type);
+            this.DataSource = this.controller.DataSourceUpdate(list, this.type);
         }
         public void OrderBy(String fieldToOrder, bool savePreviousSelected = true)
         {

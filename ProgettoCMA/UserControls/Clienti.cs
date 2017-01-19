@@ -56,16 +56,16 @@ namespace ProgettoCMA
             this.listBoxUC1.SelectedIndexChanged += listBoxUC1_SelectedIndexChanged;
             this.listBoxUC1.DataSourceChanged += listBoxUC1_DataSourceChanged;
             this.searchTextBox.TextChanged += searchTextBox_TextChanged;
-            comboBox1.DataSource = this.GetPropertiesName();
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.SelectedItem = "Ragione";
+
+            this.comboBoxUC1.Initialize(typeof(String), this.GetPropertiesName());
+            this.comboBoxUC1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            this.comboBoxUC1.SelectedItem = "Ragione";
 
 
             this.sc = new StateController(GetAllControlsRecursive<Control>(this.Controls, new Type[] { typeof(Panel), typeof(GroupBox), typeof(Label) }));
             this.sc.SetPersistentDisabledControls(id, creazione);
             this.sc.AddState("noItems", true, addButton);
-            this.sc.AddState("moreThanZeroItems", true, listBoxUC1, searchTextBox, editButton, addButton, deleteButton, comboBox1);
+            this.sc.AddState("moreThanZeroItems", true, listBoxUC1, searchTextBox, editButton, addButton, deleteButton, this.comboBoxUC1);
             this.sc.AddStateAdjacentFunc(StateController.INITIAL_STATE_NAME, "noItems", i => i == 0);
             this.sc.AddStateAdjacentFunc(StateController.INITIAL_STATE_NAME, "moreThanZeroItems", i => i > 0);
             this.sc.AddState("edit", true, saveButton, annullaButton, clientePanel);
@@ -110,7 +110,7 @@ namespace ProgettoCMA
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.listBoxUC1.OrderBy(comboBox1.SelectedItem.ToString());
+            this.listBoxUC1.OrderBy(this.comboBoxUC1.SelectedItem.ToString());
         }
         private void annullaButton_Click(object sender, EventArgs e)
         {

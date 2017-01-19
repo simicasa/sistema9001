@@ -15,13 +15,11 @@ namespace ProgettoCMA.Controller
     {
         private Controller controller;
         private Type type;
-        private dynamic dataSource;
 
         public ComboBoxUC()
         {
-            this.controller = new Controller();
+            this.controller = new Controller(true);
             this.type = null;
-            this.dataSource = null;
         }
         public void Initialize(Type type, dynamic list, ComboBoxStyle style = ComboBoxStyle.DropDownList)
         {
@@ -31,7 +29,12 @@ namespace ProgettoCMA.Controller
         }
         private void DataSourceUpdate(dynamic list)
         {
-            this.DataSource = this.controller.bindingListCreate(list, this.type);
+            this.DataSource = this.CreateBindingList(list);
+        }
+        private dynamic CreateBindingList(dynamic list, Type type = null)
+        {
+            Type bindingListType = (type != null) ? type : this.type;
+            return this.controller.bindingListCreate(list, bindingListType);
         }
         public void StyleUpdate(ComboBoxStyle style)
         {
@@ -39,10 +42,10 @@ namespace ProgettoCMA.Controller
         }
         public void Sort()
         {
-            this.dataSource = this.DataSource;
-            MethodInfo sortMethod = typeof(List<>).GetMethods().Where(mi => mi.GetParameters().Count() == 0).First();
-            //MethodInfo sortMethod = Generic.getGenericMethod(typeof(List<>), "Sort", new Type[] { }, BindingFlags.Default, new Func<MethodInfo, bool>(set => set.GetParameters().Count() == 0));
-            this.DataSource = sortMethod.Invoke(this.dataSource, null);
+            GenericFactory g = new GenericFactory(typeof(Enumerable));
+            var dataSourceList = g.invokeMethod("ToList", null, this.type, this.DataSource);
+            typeof(List<>).MakeGenericType(this.type).GetMethod("Sort", Type.EmptyTypes).Invoke(dataSourceList, null);
+            this.DataSourceUpdate(dataSourceList);
         }
     }
 }
