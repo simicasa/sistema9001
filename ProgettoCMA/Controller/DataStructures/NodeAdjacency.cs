@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgettoCMA.Controller.NodeStruct
+namespace ProgettoCMA.Controller.DataStructures
 {
     public class NodeAdjacency
     {

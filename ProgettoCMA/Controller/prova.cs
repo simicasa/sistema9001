@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProgettoCMA.UserControls;
+using ProgettoCMA.Controller.DataStructures;
 
 namespace ProgettoCMA.Controller
 {
@@ -31,22 +32,41 @@ namespace ProgettoCMA.Controller
             InitializeComponent();
             this.Initialize(this, typeof(Cliente));
 
-            Node node1 = new Node("uno", null);
-            Node node2 = new Node("due", null);
-            Node node3 = new Node("tre", null);
-            Node node4 = new Node("quattro", null);
+            Graph g = new Graph();
 
-            node1.AddAdjacency(node2, null);
-            node1.AddAdjacency(node3, null);
-            node1.AddAdjacency(node4, null);
+            g.AddNode("uno");
+            g.AddNode("due");
+            g.AddNode("tre");
+            g.AddNode("quattro");
+            g.AddAjacency("uno", "due");
+            g.AddAjacency("uno", "tre");
+            g.AddAjacency("uno", "quattro");
 
             NodeAdjacency temp;
 
-            temp = node1.GetAdjacency("tre");
+            temp = g.GetNode("uno").GetAdjacency("tre");
             Console.WriteLine(temp.node.name);
 
-            temp = node1.GetAdjacency(node3);
+            temp = g.GetNode("uno").GetAdjacency(g.GetNode("tre"));
             Console.WriteLine(temp.node.name);
+
+            Tree t = new Tree(2);
+            t.AddNode("uno");
+            t.AddNode("due");
+            t.AddNode("tre");
+            t.AddNode("quattro");
+            t.AddNode("cinque");
+            t.AddNode("sei");
+            t.AddNode("sette");
+            t.AddNode("otto");
+            t.AddNode("nove");
+            t.provola();
+            /*
+            t.RemoveNode("tre");
+            t.provola();
+            t.AddNode("tre");
+            t.provola();
+            */
 
             /*
             //this.comboBoxUC1.Initialize(typeof(String), this.GetPropertiesName());

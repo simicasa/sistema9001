@@ -125,3 +125,4 @@ C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\itextsharp.xml
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\it\EntityFramework.resources.dll
+C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Controller.prova.resources

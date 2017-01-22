@@ -109,13 +109,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\DataStructures\NodeCollection.cs" />
     <Compile Include="Controller\Debug.cs" />
     <Compile Include="Controller\Generic.cs" />
     <Compile Include="Controller\GenericFactory.cs" />
-    <Compile Include="Controller\GraphStruct\Graph.cs" />
-    <Compile Include="Controller\NodeCollection.cs" />
-    <Compile Include="Controller\NodeStruct\Node.cs" />
-    <Compile Include="Controller\NodeStruct\NodeAdjacency.cs" />
+    <Compile Include="Controller\DataStructures\Graph.cs" />
+    <Compile Include="Controller\DataStructures\Node.cs" />
+    <Compile Include="Controller\DataStructures\NodeAdjacency.cs" />
     <Compile Include="Controller\prova.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,7 +129,7 @@
     </Compile>
     <Compile Include="Controller\State.cs" />
     <Compile Include="Controller\StateController.cs" />
-    <Compile Include="Controller\TreeStruct\Tree.cs" />
+    <Compile Include="Controller\DataStructures\Tree.cs" />
     <Compile Include="Controller\TreeViewUC.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -376,5 +376,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
