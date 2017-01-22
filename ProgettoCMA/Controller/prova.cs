@@ -13,23 +13,57 @@ namespace ProgettoCMA.Controller
 {
     public partial class prova : ControllerUC
     {
-        public prova() : base()
+        public void asd<T>(Func<dynamic, bool> dd, Dictionary<String, dynamic> dict)
         {
-            InitializeComponent();
-            this.Initialize(this, typeof(Cliente));
-            //this.comboBoxUC1.Initialize(typeof(String), this.GetPropertiesName());
-
-            Dictionary<String, List<String>> dict = new Dictionary<String, List<String>>();
-
-            foreach (Categoria macro in Shared.cdc.CategoriaSet.Where(c => c.Macro == null).ToList())
+            foreach (T item in Shared.cdc.CategoriaSet.Where(dd).ToList())
             {
+                /*
                 dict[macro.Nome] = new List<String>();
                 foreach (Categoria micro in macro.Micro)
                 {
                     dict[macro.Nome].Add(micro.Nome);
                 }
+                */
+            }
+        }
+        public prova() : base()
+        {
+            InitializeComponent();
+            this.Initialize(this, typeof(Cliente));
+
+            Node node1 = new Node("uno", null);
+            Node node2 = new Node("due", null);
+            Node node3 = new Node("tre", null);
+            Node node4 = new Node("quattro", null);
+
+            node1.AddAdjacency(node2, null);
+            node1.AddAdjacency(node3, null);
+            node1.AddAdjacency(node4, null);
+
+            NodeAdjacency temp;
+
+            temp = node1.GetAdjacency("tre");
+            Console.WriteLine(temp.node.name);
+
+            temp = node1.GetAdjacency(node3);
+            Console.WriteLine(temp.node.name);
+
+            /*
+            //this.comboBoxUC1.Initialize(typeof(String), this.GetPropertiesName());
+            //this.asd<Categoria>(c => c.Macro == null, new Dictionary<String, List<String>>());
+            Dictionary<String, List<String>> dict = new Dictionary<String, List<String>>();
+            //Func<Categoria, bool> func = new Func<Categoria, bool>(c => );
+            foreach (Categoria macro in Shared.cdc.CategoriaSet.Where(c => c.Macro == null).ToList())
+            {
+                Func<Categoria, ICollection<Categoria>> a = new Func<Categoria, ICollection<Categoria>>(c => c.Micro);
+                dict[macro.Nome] = new List<String>();
+                foreach (Categoria micro in a(macro))//macro.Micro)
+                {
+                    dict[macro.Nome].Add(micro.Nome);
+                }
             }
             this.treeViewUC1.PopulateRecursive(dict);
+            */
 
             /*
             List<TreeNode> categorie = new List<TreeNode>();
