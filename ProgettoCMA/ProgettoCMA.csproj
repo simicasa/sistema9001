@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -108,12 +109,31 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\Debug.cs" />
     <Compile Include="Controller\Generic.cs" />
     <Compile Include="Controller\GenericFactory.cs" />
+    <Compile Include="Controller\GraphStruct\Graph.cs" />
+    <Compile Include="Controller\NodeCollection.cs" />
+    <Compile Include="Controller\NodeStruct\Node.cs" />
+    <Compile Include="Controller\NodeStruct\NodeAdjacency.cs" />
+    <Compile Include="Controller\prova.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controller\prova.Designer.cs">
+      <DependentUpon>prova.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controller\StateGraph.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\ListBoxUC.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controller\State.cs" />
+    <Compile Include="Controller\StateController.cs" />
+    <Compile Include="Controller\TreeStruct\Tree.cs" />
+    <Compile Include="Controller\TreeViewUC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controller\TreeViewUCDouble.cs" />
     <Compile Include="Forms\newODA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +281,9 @@
     <Compile Include="Utente.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controller\prova.resx">
+      <DependentUpon>prova.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\newODA.resx">
       <DependentUpon>newODA.cs</DependentUpon>
     </EmbeddedResource>

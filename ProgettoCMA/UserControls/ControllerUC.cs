@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Data.Entity.Core.Objects.DataClasses;
+using ProgettoCMA.Controller;
 
 namespace ProgettoCMA.UserControls
 {
@@ -24,7 +25,16 @@ namespace ProgettoCMA.UserControls
             this.subUC = subUC;
             this.type = type;
         }
-        public static List<T> GetAllControlsRecusrvive<T>(Control control) where T : Control
+        public static List<T> GetAllControlsRecursive<T>(ControlCollection controls, Type[] notToTakeTypes = null) where T : Control
+        {
+            List<T> controlsList = new List<T>();
+            foreach (Control item in controls)
+            {
+                controlsList.AddRange(GetAllControlsRecursive<T>(item, notToTakeTypes));
+            }
+            return controlsList;
+        }
+        public static List<T> GetAllControlsRecursive<T>(Control control, Type[] notToTakeTypes = null) where T : Control
         {
             var rtn = new List<T>();
             foreach (Control item in control.Controls)
@@ -32,15 +42,18 @@ namespace ProgettoCMA.UserControls
                 var ctr = item as T;
                 if (ctr != null)
                 {
-                    rtn.Add(ctr);
+                    if(!notToTakeTypes?.Contains(ctr.GetType()) ?? true)
+                    {
+                        rtn.Add(ctr);
+                    }
                     if (ctr.HasChildren)
                     {
-                        rtn.AddRange(GetAllControlsRecusrvive<T>(item));
+                        rtn.AddRange(GetAllControlsRecursive<T>(item));
                     }
                 }
                 else
                 {
-                    rtn.AddRange(GetAllControlsRecusrvive<T>(item));
+                    rtn.AddRange(GetAllControlsRecursive<T>(item));
                 }
             }
             return rtn;
@@ -53,12 +66,7 @@ namespace ProgettoCMA.UserControls
             Type classType = Type.GetType("ProgettoCMA." + typeof(T).Name);
             if (classType?.IsClass ?? false)
             {
-                List<Panel> controls = new List<Panel>();
-                foreach (Control item in this.subUC.Controls)
-                {
-                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
-                }
-                foreach (Panel item in controls)
+                foreach (Panel item in GetAllControlsRecursive<Panel>(this.subUC.Controls))
                 {
                     if (item.Name.StartsWith(typeof(T).Name.ToLower()))
                     {
@@ -85,11 +93,7 @@ namespace ProgettoCMA.UserControls
             Type classType = Type.GetType("ProgettoCMA." + typeof(T).Name);
             if (classType != null && classType.IsClass)
             {
-                List<Panel> controls = new List<Panel>();
-                foreach (Control item in this.subUC.Controls)
-                {
-                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
-                }
+                List<Panel> controls = GetAllControlsRecursive<Panel>(this.subUC.Controls);
                 foreach (Panel item in controls.ToList())
                 {
                     if (!item.Name.StartsWith(typeof(T).Name.ToLower()))
@@ -167,15 +171,10 @@ namespace ProgettoCMA.UserControls
         protected void UpdateUIFromInstance<T>(T instance)
         {
             Type classType;
-            List<Panel> controls = new List<Panel>();
             classType = Type.GetType("ProgettoCMA." + this.type.Name);
             if (classType != null && classType.IsClass)
             {
-                foreach (Control item in this.subUC.Controls)
-                {
-                    controls.AddRange(GetAllControlsRecusrvive<Panel>(item));
-                }
-                foreach (Control item in controls)
+                foreach (Control item in GetAllControlsRecursive<Panel>(this.subUC.Controls))
                 {
                     if ((item.GetType() == typeof(Panel)) && item.Name.StartsWith(this.type.Name.ToLower()))
                     {
@@ -202,7 +201,7 @@ namespace ProgettoCMA.UserControls
                     }
                     else
                     {
-                        Console.WriteLine("Istanza " + property.Name + " non trovata e non assegnata alla classe principale [" + typeof(T).Name + "]");
+                        Debug.ConsoleWriteLine("Istanza " + property.Name + " non trovata e non assegnata alla classe principale [" + typeof(T).Name + "]");
                     }
                 }
                 else
@@ -215,8 +214,37 @@ namespace ProgettoCMA.UserControls
                     }
                     else
                     {
-                        Console.WriteLine("Controllo " + property.Name + " non trovato e non assegnato");
+                        Debug.ConsoleWriteLine("Controllo " + property.Name + " non trovato e non assegnato");
                     }
+                }
+            }
+        }
+        #endregion
+
+        #region Clean UI
+        protected void CleanUI(params Control[] parentControl)
+        {
+            List<Control> controls;
+            if(parentControl.Count() > 0)
+            {
+                controls = new List<Control>();
+                foreach (var control in parentControl)
+                {
+                    controls.AddRange(ControllerUC.GetAllControlsRecursive<Control>(control));
+                }
+            }
+            else
+            {
+                controls = ControllerUC.GetAllControlsRecursive<Control>(this.subUC.Controls);
+            }
+            foreach (Control control in controls)
+            {
+                if (
+                    control.GetType().GetRuntimeProperty("Text") != null &&
+                    new Type[] { typeof(TextBox) }.Contains(control.GetType())
+                    )
+                {
+                    control.Text = "";
                 }
             }
         }
@@ -256,7 +284,15 @@ namespace ProgettoCMA.UserControls
                 }
                 else if (new Type[] { typeof(int), typeof(Int32) }.Contains(destinationType))
                 {
-                    return int.Parse(control.Text);
+                    try
+                    {
+                        return int.Parse(control.Text);
+                    }
+                    catch (FormatException fe)
+                    {
+                        Debug.ConsoleWriteLine(fe.ToString());
+                        return -1;
+                    }
                 }
             }
             return null;

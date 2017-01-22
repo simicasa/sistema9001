@@ -10,16 +10,24 @@ namespace ProgettoCMA.Controller
 {
     class Controller : IController
     {
-
-        public Controller()
+        bool hasDataSource;
+        public Controller(bool hasDataSource)
         {
-
+            this.hasDataSource = hasDataSource;
         }
         public dynamic bindingListCreate(dynamic list, Type type)
         {
             GenericFactory g = new GenericFactory(typeof(Enumerable));
             list = g.invokeMethod("ToList", null, type, new Object[] { list });
             return GenericFactory.createInstance(typeof(BindingList<>), new Object[] { list }, type);
+        }
+        public dynamic DataSourceUpdate(dynamic list, Type type)
+        {
+            if (!this.hasDataSource)
+            {
+                throw new Exception("Il controller non prevede DataSource");
+            }
+            return this.bindingListCreate(list, type);
         }
     }
 }

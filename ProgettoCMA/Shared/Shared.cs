@@ -9,6 +9,7 @@ namespace ProgettoCMA
 {
     public static class Shared
     {
+        public static bool isDebugPhase = true;
         private static ClassDiagramContainer istanzaCDC = null;
         public static Home home { get; set; }
         public static Utente utente { get; set; }

@@ -96,3 +96,32 @@ C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\Progett
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources
 C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources
+C:\Users\angelotm\Source\Repos\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Controller.prova.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.exe.config
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.exe
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.pdb
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Controller.prova.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.newODA.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Categorie.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Clienti.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Home.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Login.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Liste_RDO_Composizione.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Commesse.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Fornitori.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Properties.Resources.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.GestioneCommessa.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ODA_Composizioni.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.UC.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csproj.GenerateResource.Cache
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.exe
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\ProgettoCMA.pdb
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.dll
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\itextsharp.dll
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.xml
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\itextsharp.xml
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\it\EntityFramework.resources.dll

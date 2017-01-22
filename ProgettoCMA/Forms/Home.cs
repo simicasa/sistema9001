@@ -111,6 +111,8 @@ namespace ProgettoCMA
 
         private void provaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Controller.prova p = new Controller.prova();
+            this.controlsAdd(p);
             /*
             ListUC<Categoria> l = new ListUC<Categoria>();//Shared.cdc.CategoriaSet.ToList());
             l.selectedIndexChanged = this.UserControl_ButtonClick;
@@ -119,7 +121,7 @@ namespace ProgettoCMA
             //l.asd(delegate (Categoria c) { Console.WriteLine(c.ID.ToString()); });
             this.controlsAdd(l);
             */
-            Controller.Authentication a = new Controller.Authentication();
+            //Controller.Authentication a = new Controller.Authentication();
         }
         protected void UserControl_ButtonClick(object sender, EventArgs e, Categoria c)//, Categoria c)
         {
