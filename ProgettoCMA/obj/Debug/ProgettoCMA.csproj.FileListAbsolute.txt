@@ -103,7 +103,6 @@ C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.csprojResolveAssemblyReference.cache
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Controller.prova.resources
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.newODA.resources
-C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.ListUC.resources
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Categorie.resources
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Clienti.resources
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Home.resources
@@ -126,3 +125,6 @@ C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\itextsharp.xml
 C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\bin\Debug\it\EntityFramework.resources.dll
 C:\Users\angelotm\Desktop\works\esseci\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.Controller.prova.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.FornitoriOld.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.UserControls.Amministrazione.resources
+C:\Users\angelotm\Documents\Visual Studio 2015\Projects\sistema9001\ProgettoCMA\obj\Debug\ProgettoCMA.CategorieOld.resources

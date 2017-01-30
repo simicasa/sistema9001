@@ -8,242 +8,167 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using ProgettoCMA.UserControls;
+using ProgettoCMA.Controller;
+using static ProgettoCMA.Controller.Authentication;
+using static ProgettoCMA.Controller.StateController;
 
 namespace ProgettoCMA
 {
-    public partial class Categorie : UC<Categoria>
+    partial class Categorie : ControllerUC
     {
+        StateController sc;
         public Categorie() : base()
         {
             InitializeComponent();
+            this.Initialize(this, typeof(Categoria));
+            this.listBoxUC1.SelectedIndexChanged += listBoxUC1_SelectedIndexChanged;
+            this.listBoxUC1.DataSourceChanged += listBoxUC1_DataSourceChanged;
+            this.listBoxUC1.Initialize(typeof(Categoria), "Nome");
 
-            // DB SET
-            this.dbSet = Shared.cdc.CategoriaSet;
+            // EVENT HANDLERS
+            this.addButton.Click += addButton_Click;
+            this.saveButton.Click += saveButton_Click;
+            this.deleteButton.Click += deleteButton_Click;
+            this.annullaButton.Click += annullaButton_Click;
+            this.editButton.Click += editButton_Click;
+            this.searchTextBox.TextChanged += searchTextBox_TextChanged;
 
-            // LIST
-            this.list = listBox;
-            this.list.DisplayMember = "Nome";
-            this.list.ValueMember = "Nome";
+            this.comboBoxUC1.Initialize(typeof(String), this.GetPropertiesName());
+            this.comboBoxUC1.SelectedItem = "Nome";
+            this.comboBoxUC1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            
+            this.comboBoxUC2.ValueMember = "Nome";
+            this.comboBoxUC2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
 
-            // BUTTONS
-            this.editBt = editButton;
-            this.saveBt = saveButton;
-            this.deleteBt = deleteButton;
-            this.addBt = addButton;
-            this.cancelBt = annullaButton;
+            this.checkBox1.CheckStateChanged += checkBox11_CheckStateChanged;
 
-            microValue1.Enabled = false;
-            this.initialize(this.orderList, null, new Control[] { macroValue, hasMacro });
+            this.sc = new StateController(GetAllControlsRecursive<Control>(this.Controls, new Type[] { typeof(Panel), typeof(GroupBox), typeof(Label) }));
+            this.sc.SetPersistentDisabledControls(id);
+            this.sc.AddState("noItems", true, addButton);
+            this.sc.AddState("moreThanZeroItems", true, listBoxUC1, searchTextBox, editButton, addButton, deleteButton, this.comboBoxUC1);
+            this.sc.AddStateAdjacentFunc(StateController.INITIAL_STATE_NAME, "noItems", i => i == 0);
+            this.sc.AddStateAdjacentFunc(StateController.INITIAL_STATE_NAME, "moreThanZeroItems", i => i > 0);
+            this.sc.AddState("edit", true, saveButton, annullaButton, categoriaPanel);
+            this.sc.AddStateAdjacent("moreThanZeroItems", "edit", true);
+            this.sc.AddState("delete", true, "moreThanZeroItems");
+            this.sc.AddStateAdjacent("moreThanZeroItems", "delete");
+            this.sc.AddStateAdjacent("delete", StateController.INITIAL_STATE_NAME);
+            this.sc.AddState("add", true, "edit");
+            this.sc.AddStateAdjacent("noItems", "add");
+            this.sc.AddStateAdjacent("moreThanZeroItems", "add", true);
+
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
         }
-        protected override void updateUIbefore(Categoria instanceToShow)
+        private void UpdatePossibleMacros(Categoria categoria)
         {
-            if(instanceToShow != null)
+            this.comboBoxUC2.Initialize(typeof(Categoria), Shared.cdc.CategoriaSet.Where(c => c.Macro == null && c.ID != categoria.ID).ToList());
+        }
+        private void checkBox11_CheckStateChanged(object sender, EventArgs e)
+        {
+            if(this.listBoxUC1.SelectedItem != null)
             {
-                //List<Categoria> temp = new List<Categoria>() { new Categoria(-1, "- Nessuna", null) };
-                //macroValue.DataSource = temp.Union(Shared.cdc.CategoriaSet.Where(c => c.Macro == null && c.ID != instanceToShow.ID)).ToList();
-                macroValue.DataSource = Shared.cdc.CategoriaSet.Where(c => c.Macro == null && c.ID != instanceToShow.ID).ToList();
-                macroValue.ValueMember = "Nome";
-                macroValue.DropDownStyle = ComboBoxStyle.DropDownList;
-                if (instanceToShow.Micro != null && instanceToShow.Micro.Count() > 0)
+                if (this.checkBox1.Checked)
                 {
-                    panelMacro.Visible = false;
-                    panelMicro.Visible = true;
-                    microValue1.Clear();
-                    /*
-                    IEnumerator<Categoria> cc = instanceToShow.Micro.GetEnumerator();
-                    while (cc.MoveNext())
-                    {
-                        microValue1.Text = cc.Current.Nome + ", ";
-                    }
-                    */
-                    foreach (var item in instanceToShow.Micro)
-                    {
-                        if (microValue1.TextLength > 0)
-                        {
-                            microValue1.Text += "\r\n";
-                        }
-                        microValue1.Text += item.Nome;
-                    }
+                    this.UpdatePossibleMacros((Categoria)this.listBoxUC1.SelectedItem);
+                }
+                else if(this.comboBoxUC2.Items.Count > 0)
+                {
+                    this.comboBoxUC2.DataSourceUpdate(new List<Categoria>());
+                }
+            }
+        }
+        private void listBoxUC1_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (this.listBoxUC1.Items.Count == 0)
+            {
+                //this.UpdateUIFromInstance<Categoria>((Categoria)new Categoria());
+            }
+        }
+        private void listBoxUC1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listBoxUC1.SelectedItem != null)
+            {
+                this.UpdateUIFromInstance<Categoria>((Categoria)this.listBoxUC1.SelectedItem);
+                if(((Categoria)this.listBoxUC1.SelectedItem).Macro != null)
+                {
+                    this.checkBox1.Checked = true;
+                    this.comboBoxUC2.SelectedItem = ((Categoria)this.listBoxUC1.SelectedItem).Macro;
+                    this.listBoxUC2.DataSourceUpdate(new List<Categoria>());
                 }
                 else
                 {
-                    panelMacro.Visible = true;
-                    panelMicro.Visible = false;
-                    if (instanceToShow.Macro != null)
-                    {
-                        macroValue.SelectedItem = instanceToShow.Macro;
-                        hasMacro.CheckState = CheckState.Checked;
-                    }
-                    else
-                    {
-                        macroValue.SelectedIndex = -1;
-                        hasMacro.CheckState = CheckState.Unchecked;
-                    }
+                    this.checkBox1.Checked = false;
+                    this.listBoxUC2.Initialize(typeof(Categoria), "Nome", ((Categoria)this.listBoxUC1.SelectedItem).Micro);
                 }
-            }
-        }
-        protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.newInstance != null)
-            {
-                if (DialogResult.Yes == this.messageBoxShow("Cambiare categoria e perdere il nuovo?", MessageBoxButtons.YesNo))
-                {
-                    this.listInhibit = true;
-                    this.data.Remove(this.newInstance);
-                    this.dataSubset.Remove(this.newInstance);
-                    //this.list.Items.Remove(this.newInstance);
-                    this.orderList();
-                    this.list.SetSelected(this.selectedIndex, true);
-                    this.listInhibit = false;
-                    this.newInstance = null;
-                }
-                else
-                {
-                    this.listInhibit = true;
-                    this.list.SetSelected(this.selectedIndex, true);
-                    this.listInhibit = false;
-                    return;
-                }
-            }
-            if (this.selectedIndex == -1)
-            {
-                if (this.data.Count() == 0)
-                {
-                    MessageBox.Show("L'elenco e' vuoto");
-                    editButton.Enabled = false;
-                }
-                return;
-            }
-        }
-        private void editButtons()
-        {
-            this.controlsUpdate(true);
-            if (macroValue.SelectedIndex != -1)
-            {
-                macroValue.Enabled = true;
-            }
-            else
-            {
-                macroValue.Enabled = false;
-            }
-            this.buttonsUpdate(true);
-            searchTextBox.Enabled = false;
-            this.list.Enabled = false;
-
-            this.textBoxesEnable(true);
-            idValue.Enabled = false;
-        }
-        private void saveButtons()
-        {
-            this.controlsUpdate(false);
-            this.buttonsUpdate(false);
-            searchTextBox.Enabled = true;
-            this.list.Enabled = true;
-
-            this.textBoxesEnable(false);
-        }
-        private void updateFields()
-        {
-            this.listInhibit = true;
-            bool isNew = (this.newInstance == null) ? false : true;
-            Categoria categoria;
-            if (!isNew)
-            {
-                int ID = Int32.Parse(idValue.Text);
-                categoria = Shared.cdc.CategoriaSet.Where(x => x.ID == ID).First();
-                this.databaseUpdate(categoria);
-                Categoria old = this.dataSubset[this.selectedIndex];
-                this.dataSubset[this.selectedIndex] = categoria;
-                this.data[this.data.IndexOf(old)] = categoria;
-            }
-            else
-            {
-                categoria = this.newInstance;
-                this.databaseAdd(categoria);
-            }
-            this.orderList();
-            this.list.SelectedItem = categoria;
-            searchTextBox.Text = "";
-            this.newInstance = null;
-            this.listInhibit = false;
-        }
-        private void orderList()
-        {
-            base.orderList(x => x.Nome);
-            this.list.DataSource = this.dataSubset;
-        }
-
-        protected override void editButton_Click(object sender, EventArgs e)
-        {
-            if (this.selectedIndex == -1)
-            {
-                MessageBox.Show("Nessun categoria presente", "Gestione Categoria", MessageBoxButtons.OK);
-                return;
-            }
-            this.editButtons();
-        }
-        protected override void saveButton_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Continuare con il salvataggio?", "Aggiunta Categoria", MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
-                this.saveButtons();
-                this.updateFields();
-            }
-        }
-        protected override void addButton_Click(object sender, EventArgs e)
-        {
-            this.listInhibit = true;
-            this.newInstance = new Categoria(-1, "", null);
-            this.data.Add(newInstance);
-            this.dataSubset.Add(newInstance);
-            this.orderList();
-            this.list.SelectedItem = newInstance;
-            this.selectedIndex = this.list.SelectedIndex;
-            this.editButtons();
-            this.updateUI(this.newInstance);
-            this.listInhibit = false;
-            macroValue.Enabled = false;
-            hasMacro.Checked = false;
-        }
-        protected override void deleteButton_Click(object sender, EventArgs e)
-        {
-            DialogResult dr = MessageBox.Show("Eliminare il categoria?", "Gestione categorie", MessageBoxButtons.YesNo);
-            if (dr == DialogResult.Yes)
-            {
-                Categoria categoria = (Categoria)this.listBox.SelectedItem;
-                this.listInhibit = true;
-                Shared.cdc.CategoriaSet.Remove(categoria);
-                this.data.Remove(categoria);
-                this.dataSubset.Remove(categoria);
-                this.listInhibit = false;
-                this.orderList();
-                Shared.cdc.SaveChanges();
             }
         }
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            base.searchTextBoxFilterData(c => c.Nome.Contains(searchTextBox.Text));
-        }
-        protected override void annullaButton_Click(object sender, EventArgs e)
-        {
-            updateUI(this.dataSubset[this.selectedIndex]);
-            saveButtons();
+            this.listBoxUC1.Find(this.searchTextBox.Text);
         }
 
-        private void hasMacro_CheckedChanged(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.saveBt.Enabled)
+            this.listBoxUC1.OrderBy(this.comboBoxUC1.SelectedItem.ToString());
+        }
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Shared.messageBox(((Categoria)this.comboBoxUC2.SelectedItem).Nome);
+        }
+        private void annullaButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState(StateController.INITIAL_STATE_NAME);
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
+        }
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState("delete");
+            if (DialogResult.Yes == Shared.messageBox("Sicuro di voler eliminare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                if (((CheckBox)sender).Checked)
-                {
-                    macroValue.Enabled = true;
-                }
-                else
-                {
-                    macroValue.Enabled = false;
-                    macroValue.SelectedIndex = -1;
-                }
+                Shared.cdc.CategoriaSet.Remove((Categoria)this.listBoxUC1.SelectedItem);
+                Shared.cdc.SaveChanges();
+                this.listBoxUC1.Find(this.searchTextBox.Text);
             }
+            this.sc.SetState(StateController.INITIAL_STATE_NAME);
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
+        }
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (this.sc.IsActiveState("edit"))
+            {
+                if (DialogResult.Yes == Shared.messageBox("Sicuro di voler salvare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    Categoria categoria = this.UpdateInstanceFromUI<Categoria>((Categoria)this.listBoxUC1.SelectedItem);
+                    //Shared.cdc.AziendaSet.AddRange(list);
+                    Shared.cdc.SaveChanges();
+                    this.listBoxUC1.Find(this.searchTextBox.Text);
+                    this.listBoxUC1.SelectedItem = categoria;
+                }
+                this.sc.SetState("moreThanZeroItems");
+            }
+            else if (this.sc.IsActiveState("add"))
+            {
+                if (DialogResult.Yes == Shared.messageBox("Sicuro di voler salvare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    List<Categoria> list = this.CreateInstanceFromUI<Categoria>();
+                    Shared.cdc.CategoriaSet.AddRange(list);
+                    Shared.cdc.SaveChanges();
+                    this.listBoxUC1.Find(this.searchTextBox.Text);
+                    this.listBoxUC1.SelectedItem = list.First();
+                }
+                this.sc.SetState(StateController.INITIAL_STATE_NAME);
+                this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
+            }
+        }
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState("add");
+            this.CleanUI(categoriaPanel);
+        }
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState("edit");
         }
     }
 }

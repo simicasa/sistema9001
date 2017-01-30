@@ -22,6 +22,22 @@ namespace ProgettoCMA.Controller
         }
         public static void SwitchNodeBetweenTreeViews(TreeNode node, TreeViewUC treeViewUCStart, TreeViewUC treeViewUC2Destination)
         {
+            if (node == null)
+            {
+                if (Shared.isDebugPhase)
+                {
+                    throw new Exception("Impossibile effettuare l'operazione, il nodo selezionato e' null");
+                }
+                return;
+            }
+            else if (TreeViewUCDouble.AreTreeViewsNull(treeViewUCStart, treeViewUC2Destination))
+            {
+                if (Shared.isDebugPhase)
+                {
+                    throw new Exception("Una delle due TreeView risulta null, impossibile continuare");
+                }
+                return;
+            }
             TreeNode[] parents = treeViewUCStart.GetParents(node, true);
             node.Remove();
             TreeNode lastParent;
@@ -71,6 +87,18 @@ namespace ProgettoCMA.Controller
                 }
             }
             return lastParent;
+        }
+        private bool AreTreeViewsNull()
+        {
+            return TreeViewUCDouble.AreTreeViewsNull(this.treeViewUC1, this.treeViewUC2);
+        }
+        private static bool AreTreeViewsNull(TreeViewUC treeViewUC1, TreeViewUC treeViewUC2)
+        {
+            if (treeViewUC1 == null || treeViewUC2 == null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

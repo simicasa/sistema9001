@@ -60,8 +60,7 @@ namespace ProgettoCMA
             this.comboBoxUC1.Initialize(typeof(String), this.GetPropertiesName());
             this.comboBoxUC1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             this.comboBoxUC1.SelectedItem = "Ragione";
-
-
+            
             this.sc = new StateController(GetAllControlsRecursive<Control>(this.Controls, new Type[] { typeof(Panel), typeof(GroupBox), typeof(Label) }));
             this.sc.SetPersistentDisabledControls(id, creazione);
             this.sc.AddState("noItems", true, addButton);
@@ -75,8 +74,7 @@ namespace ProgettoCMA
             this.sc.AddStateAdjacent("delete", StateController.INITIAL_STATE_NAME);
             this.sc.AddState("add", true, "edit");
             this.sc.AddStateAdjacent("noItems", "add");
-            this.sc.AddStateAdjacent("moreThanZeroItems", "add");
-            this.sc.AddStateAdjacent("add", StateController.INITIAL_STATE_NAME);
+            this.sc.AddStateAdjacent("moreThanZeroItems", "add", true);
 
             this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
 

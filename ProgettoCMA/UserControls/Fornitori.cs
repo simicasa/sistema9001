@@ -8,278 +8,229 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using ProgettoCMA.UserControls;
+using ProgettoCMA.Controller;
+using static ProgettoCMA.Controller.Authentication;
+using static ProgettoCMA.Controller.StateController;
 
 namespace ProgettoCMA
 {
-    public partial class Fornitori : UC<Fornitore, Categoria, Associazione_Categoria_Fornitore>
+    partial class Fornitori : ControllerUC
     {
-        BindingList<Categoria> dataCombineFull = null;
+        StateController sc;
         public Fornitori() : base()
         {
+
             InitializeComponent();
-            this.visibilizzami(false);
+            this.Initialize(this, typeof(Fornitore));
+            this.listBoxUC1.Initialize(typeof(Fornitore), "Ragione");
 
-            // DB SET
-            this.dbSet = Shared.cdc.AziendaSet;
-            this.dbSetSecondary = Shared.cdc.CategoriaSet;
-            this.dbSetCombine = Shared.cdc.Associazione_Categoria_FornitoreSet;
+            // EVENT HANDLERS
+            this.addButton.Click += addButton_Click;
+            this.saveButton.Click += saveButton_Click;
+            this.deleteButton.Click += deleteButton_Click;
+            this.annullaButton.Click += annullaButton_Click;
+            this.editButton.Click += editButton_Click;
+            this.listBoxUC1.SelectedIndexChanged += listBoxUC1_SelectedIndexChanged;
+            this.listBoxUC1.DataSourceChanged += listBoxUC1_DataSourceChanged;
+            this.searchTextBox.TextChanged += searchTextBox_TextChanged;
 
-            // LIST
-            this.list = listBox;
-            this.list.DisplayMember = "Ragione";
-            this.list.ValueMember = "Ragione";
-            this.listSecondary = listBox1;
-            this.listSecondary.DisplayMember = "Nome";
-            this.listSecondary.ValueMember = "Nome";
-            this.listCombine = listBox2;
-            this.listCombine.DisplayMember = "Nome";
-            this.listCombine.ValueMember = "Nome";
+            this.comboBoxUC1.Initialize(typeof(String), this.GetPropertiesName());
+            this.comboBoxUC1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            this.comboBoxUC1.SelectedItem = "Ragione";
 
-            // BUTTONS
-            this.editBt = editButton;
-            this.saveBt = saveButton;
-            this.deleteBt = deleteButton;
-            this.addBt = addButton;
-            this.cancelBt = annullaButton;
+            this.sc = new StateController(GetAllControlsRecursive<Control>(this.Controls, new Type[] { typeof(Panel), typeof(GroupBox), typeof(Label) }));
+            this.sc.SetPersistentDisabledControls(id, creazione);
+            this.sc.AddState("noItems", true, addButton);
+            this.sc.AddState("moreThanZeroItems", true, listBoxUC1, searchTextBox, editButton, addButton, deleteButton, this.comboBoxUC1);
+            this.sc.AddStateAdjacentFunc(StateController.INITIAL_STATE_NAME, "noItems", i => i == 0);
+            this.sc.AddStateAdjacentFunc(StateController.INITIAL_STATE_NAME, "moreThanZeroItems", i => i > 0);
+            this.sc.AddState("edit", true, saveButton, annullaButton, fornitorePanel, categoriaGroupBox);
+            this.sc.AddStateAdjacent("moreThanZeroItems", "edit", true);
+            this.sc.AddState("delete", true, "moreThanZeroItems");
+            this.sc.AddStateAdjacent("moreThanZeroItems", "delete");
+            this.sc.AddStateAdjacent("delete", StateController.INITIAL_STATE_NAME);
+            this.sc.AddState("add", true, saveButton, annullaButton, fornitorePanel);
+            this.sc.AddStateAdjacent("noItems", "add");
+            this.sc.AddStateAdjacent("moreThanZeroItems", "add", true);
 
-            this.initialize(this.orderList, null, new Control[] { categoriaAddButton, categoriaRemoveButton, listBox1, listBox2, searchCategoria });
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
+
+            this.categoriaAddButton.Click += categoriaAddButton_Click;
+            this.categoriaRemoveButton.Click += categoriaRemoveButton_Click;
         }
 
-        protected override void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void UpdateCategorie(Fornitore fornitore)
         {
-            if (this.newInstance != null)
+            this.treeViewUC1.Nodes.Clear();
+            this.treeViewUC2.Nodes.Clear();
+            Dictionary<String, List<String>> dict1 = new Dictionary<String, List<String>>();
+            foreach (Categoria macro in Shared.cdc.CategoriaSet.Where(c => c.Macro == null).ToList())
             {
-                if (DialogResult.Yes == this.messageBoxShow("Cambiare fornitore e perdere il nuovo?", MessageBoxButtons.YesNo))
+                Func<Categoria, ICollection<Categoria>> a = new Func<Categoria, ICollection<Categoria>>(c => c.Micro);
+                dict1[macro.Nome] = new List<String>();
+                foreach (Categoria micro in a(macro))
                 {
-                    this.listInhibit = true;
-                    this.data.Remove(this.newInstance);
-                    this.dataSubset.Remove(this.newInstance);
-                    //this.list.Items.Remove(this.newInstance);
-                    this.orderList();
-                    this.list.SetSelected(this.selectedIndex, true);
-                    this.listInhibit = false;
-                    this.newInstance = null;
+                    dict1[macro.Nome].Add(micro.Nome);
                 }
-                else
+            }
+            this.treeViewUC1.PopulateRecursive(dict1);
+            var asd = from ass in Shared.cdc.Associazione_Categoria_FornitoreSet
+                      join c in Shared.cdc.CategoriaSet on ass.Categoria.ID equals c.ID
+                      join f in Shared.cdc.AziendaSet.OfType<Fornitore>() on ass.Fornitore.ID equals f.ID
+                      where f.ID == fornitore.ID
+                      select c;
+            //Dictionary<String, List<String>> dict2 = new Dictionary<String, List<String>>();
+            foreach (Categoria cat in asd)
+            {
+                TreeNode t = this.treeViewUC1.Nodes.Find(cat.Macro.Nome, false).First().Nodes.Find(cat.Nome, false).First();
+                //Categoria macro = cat.Macro;
+                //Func<Categoria, ICollection<Categoria>> a = new Func<Categoria, ICollection<Categoria>>(c => c.Micro);
+                /*
+                if (!dict2.ContainsKey(macro.Nome))
                 {
-                    this.listInhibit = true;
-                    this.list.SetSelected(this.selectedIndex, true);
-                    this.listInhibit = false;
-                    return;
+                    //dict2[macro.Nome] = new List<String>();
                 }
+                */
+                //dict1[macro.Nome].Remove(cat.Nome);
+                //dict2[macro.Nome].Add(cat.Nome);
+                TreeViewUCDouble.SwitchNodeBetweenTreeViews(t, treeViewUC1, treeViewUC2);
             }
-            if (this.selectedIndex == -1)
-            {
-                if (this.data.Count() == 0)
-                {
-                    MessageBox.Show("L'elenco e' vuoto");
-                    editButton.Enabled = false;
-                }
-                return;
-            }
-        }
-        private void editButtons()
-        {
-            this.visibilizzami(true);
-            this.buttonsUpdate(true);
-            this.controlsUpdate(true);
-            searchTextBox.Enabled = false;
-            this.list.Enabled = false;
-
-            this.textBoxesEnable(true);
-            idValue.Enabled = false;
-            creazioneValue.Enabled = false;
-            this.dataSecondary = new BindingList<Categoria>(Shared.cdc.CategoriaSet.ToList()); //.Where(c => c.Macro != null)
-            this.associazioneCategoriaFornitoreUpdate();
-        }
-        private void saveButtons()
-        {
-            this.visibilizzami(false);
-            this.buttonsUpdate(false);
-            this.controlsUpdate(false);
-            searchTextBox.Enabled = true;
-            this.list.Enabled = true;
-
-            this.textBoxesEnable(false);
-        }
-
-        private void visibilizzami(bool visible)
-        {
-            clientiGroupBox.Width = clientiGroupBox.Width + ((visible ? 1 : -1) * listBox1.Width);
-            searchCategoria.Visible = visible;
-            listBox1.Visible = visible;
-            listBox2.Visible = visible;
-            categoriaAddButton.Visible = visible;
-            categoriaRemoveButton.Visible = visible;
-            label2.Visible = visible;
-            label3.Visible = visible;
-        }
-
-        private void updateFields()
-        {
-            this.listInhibit = true;
-            bool isNew = (this.newInstance == null) ? false : true;
-            Fornitore fornitore;
-            if (!isNew)
-            {
-                int ID = Int32.Parse(idValue.Text);
-                fornitore = Shared.cdc.AziendaSet.OfType<Fornitore>().Where(x => x.ID == ID).First();
-                this.databaseUpdate(fornitore);
-                Fornitore old = this.dataSubset[this.selectedIndex];
-                this.dataSubset[this.selectedIndex] = fornitore;
-                this.data[this.data.IndexOf(old)] = fornitore;
-            }
-            else
-            {
-                fornitore = this.newInstance;
-                this.databaseAdd(fornitore);
-            }
-            this.orderList();
-            this.list.SelectedItem = fornitore;
-            searchTextBox.Text = "";
-            this.newInstance = null;
-            this.listInhibit = false;
-        }
-        private void orderList()
-        {
-            this.orderList(x => x.Ragione, x => x.Nome);
-            this.intersectDatas();
-            int selected = this.list.SelectedIndex;
-            this.list.DataSource = this.dataSubset;
-            if (selected != -1)
-            {
-                this.list.SelectedIndex = selected;
-            }
-            this.listSecondary.DataSource = this.dataSecondarySubSet;
-            this.listCombine.DataSource = this.dataCombineFull;
-        }
-        protected override void getData()
-        {
-            base.getData();
-            this.associazioneCategoriaFornitoreUpdate();
-            /*
-            this.dataCombineFull = new BindingList<Categoria>(Shared.cdc.Associazione_Categoria_FornitoreSet.Join(Shared.cdc.CategoriaSet,
-                                ass => ass.Categoria.ID,
-                                cat => cat.ID,
-                                (ass, cat) => cat).ToList());
-             */
-        }
-        private void associazioneCategoriaFornitoreUpdate()
-        {
-            if (this.list.SelectedIndex != -1)
-            {
-                var asd = from ass in Shared.cdc.Associazione_Categoria_FornitoreSet
-                          join c in Shared.cdc.CategoriaSet on ass.Categoria.ID equals c.ID
-                          join f in Shared.cdc.AziendaSet.OfType<Fornitore>() on ass.Fornitore.ID equals f.ID
-                          where f.ID == ((Fornitore)this.list.SelectedItem).ID
-                          select c;
-                this.dataCombineFull = new BindingList<Categoria>(asd.ToList());
-            }
-            else
-            {
-                this.dataCombineFull = new BindingList<Categoria>();
-            }
-            if (this.dataCombineFull.Count() > 0)
-            {
-                this.selectedIndexCombine = 0;
-            }
-            else
-            {
-                this.selectedIndexCombine = -1;
-            }
-            this.orderList();
-        }
-        private void intersectDatas()
-        {
-            this.dataSecondary = new BindingList<Categoria>(this.dataSecondary.Except(this.dataSecondary.Intersect(this.dataCombineFull)).ToList());
-            this.dataSecondarySubSet = new BindingList<Categoria>(this.dataSecondarySubSet.Except(this.dataSecondarySubSet.Intersect(this.dataCombineFull)).ToList());
-        }
-
-        protected override void editButton_Click(object sender, EventArgs e)
-        {
-            if (this.selectedIndex == -1)
-            {
-                MessageBox.Show("Nessun fornitore presente", "Gestione Fornitori", MessageBoxButtons.OK);
-                return;
-            }
-            this.editButtons();
-        }
-        protected override void saveButton_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Continuare con il salvataggio?", "Aggiunta Fornitore", MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
-                this.saveButtons();
-                this.updateFields();
-            }
-        }
-        protected override void addButton_Click(object sender, EventArgs e)
-        {
-            this.listInhibit = true;
-            this.newInstance = new Fornitore(-1, "", new Indirizzo(), "", "", "", "Nuovo Fornitore", "");
-            this.data.Add(newInstance);
-            this.dataSubset.Add(newInstance);
-            this.orderList();
-            this.list.SelectedItem = newInstance;
-            this.selectedIndex = this.list.SelectedIndex;
-            this.editButtons();
-            this.updateUI(this.newInstance);
-            this.listInhibit = false;
-        }
-        protected override void deleteButton_Click(object sender, EventArgs e)
-        {
-            if (DialogResult.Yes == this.messageBoxShow("Eliminare il fornitore?", MessageBoxButtons.YesNo))
-            {
-                this.databaseRemove((Fornitore)this.listBox.SelectedItem);
-                this.orderList();
-            }
-        }
-        private void searchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            this.searchTextBoxFilterData(c => c.Ragione.Contains(searchTextBox.Text));
-        }
-        private void searchCategoria_TextChanged(object sender, EventArgs e)
-        {
-            this.searchTextBoxFilterData1(c => c.Nome.Contains(searchCategoria.Text));
-            this.intersectDatas();
-        }
-        protected override void annullaButton_Click(object sender, EventArgs e)
-        {
-            updateUI(this.dataSubset[this.selectedIndex]);
-            saveButtons();
+            //this.treeViewUC2.PopulateRecursive(dict2);
+            this.treeViewUC1.ExpandAll();
+            this.treeViewUC2.ExpandAll();
         }
 
         private void categoriaAddButton_Click(object sender, EventArgs e)
         {
-            if (this.listSecondary.SelectedIndex != -1)
+            if (this.treeViewUC1.SelectedNode != null)
             {
-                Associazione_Categoria_Fornitore acf = new Associazione_Categoria_Fornitore();
-                acf.Categoria = (Categoria) this.listSecondary.SelectedItem;
-                acf.Fornitore = (Fornitore) this.list.SelectedItem;
-                Shared.cdc.Associazione_Categoria_FornitoreSet.Add(acf);
+                Categoria categoria;
+                Associazione_Categoria_Fornitore acf;
+                if (this.treeViewUC1.SelectedNode.Level == 1)
+                {
+                    categoria = Categoria.FindByName(this.treeViewUC1.SelectedNode.Text);
+                    acf = new Associazione_Categoria_Fornitore((Fornitore)this.listBoxUC1.SelectedItem, categoria);
+                    Shared.cdc.Associazione_Categoria_FornitoreSet.Add(acf);
+                }
+                else
+                {
+                    foreach (TreeNode item in this.treeViewUC1.SelectedNode.Nodes)
+                    {
+                        categoria = Categoria.FindByName(item.Text);
+                        acf = new Associazione_Categoria_Fornitore((Fornitore)this.listBoxUC1.SelectedItem, categoria);
+                        Shared.cdc.Associazione_Categoria_FornitoreSet.Add(acf);
+                    }
+                }
+                TreeViewUCDouble.SwitchNodeBetweenTreeViews(this.treeViewUC1.SelectedNode, treeViewUC1, treeViewUC2);
                 Shared.cdc.SaveChanges();
-                this.dataCombineFull.Add(acf.Categoria);
-                this.dataSecondary.Remove(acf.Categoria);
-                this.dataSecondarySubSet.Remove(acf.Categoria);
-                //this.getData();
-                this.orderList();
             }
         }
         private void categoriaRemoveButton_Click(object sender, EventArgs e)
         {
-            if (this.listCombine.SelectedIndex != -1)
+            if (this.treeViewUC2.SelectedNode != null)
             {
-                Categoria cat = (Categoria)this.listCombine.SelectedItem;
-                IQueryable<Associazione_Categoria_Fornitore> categoriaFornitore = Shared.cdc.Associazione_Categoria_FornitoreSet
-                   .Where(x => (x.Fornitore.ID == ((Fornitore)this.list.SelectedItem).ID) && (x.Categoria.ID == ((Categoria)this.listCombine.SelectedItem).ID));
-                Shared.cdc.Associazione_Categoria_FornitoreSet.Remove(categoriaFornitore.First());
+                Categoria categoria;
+                Associazione_Categoria_Fornitore acf;
+                if (this.treeViewUC2.SelectedNode.Level == 1)
+                {
+                    categoria = Categoria.FindByName(this.treeViewUC2.SelectedNode.Text);
+                    acf = Associazione_Categoria_Fornitore.Find((Fornitore)this.listBoxUC1.SelectedItem, categoria);
+                    Shared.cdc.Associazione_Categoria_FornitoreSet.Remove(acf);
+                }
+                else
+                {
+                    foreach (TreeNode item in this.treeViewUC2.SelectedNode.Nodes)
+                    {
+                        categoria = Categoria.FindByName(item.Text);
+                        acf = Associazione_Categoria_Fornitore.Find((Fornitore)this.listBoxUC1.SelectedItem, categoria);
+                        Shared.cdc.Associazione_Categoria_FornitoreSet.Remove(acf);
+                    }
+                }
+                TreeViewUCDouble.SwitchNodeBetweenTreeViews(this.treeViewUC2.SelectedNode, treeViewUC2, treeViewUC1);
                 Shared.cdc.SaveChanges();
-                this.dataCombineFull.Remove(cat);
-                this.dataSecondary.Add(cat);
-                this.dataSecondarySubSet.Add(cat);
-                //this.getData();
-                searchCategoria.Text = "";
-                this.orderList();
             }
+        }
+        private void listBoxUC1_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (this.listBoxUC1.Items.Count == 0)
+            {
+                //this.UpdateUIFromInstance<Fornitore>((Fornitore)new Fornitore());
+            }
+        }
+        private void listBoxUC1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listBoxUC1.SelectedItem != null)
+            {
+                this.UpdateUIFromInstance<Fornitore>((Fornitore)this.listBoxUC1.SelectedItem);
+                this.UpdateCategorie((Fornitore)this.listBoxUC1.SelectedItem);
+            }
+        }
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.listBoxUC1.Find(this.searchTextBox.Text);
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.listBoxUC1.OrderBy(this.comboBoxUC1.SelectedItem.ToString());
+        }
+        private void annullaButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState(StateController.INITIAL_STATE_NAME);
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
+        }
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState("delete");
+            if (DialogResult.Yes == Shared.messageBox("Sicuro di voler eliminare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                Shared.cdc.AziendaSet.Remove((Fornitore)this.listBoxUC1.SelectedItem);
+                Shared.cdc.SaveChanges();
+                this.listBoxUC1.Find(this.searchTextBox.Text);
+            }
+            this.sc.SetState(StateController.INITIAL_STATE_NAME);
+            this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
+        }
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (this.sc.IsActiveState("edit"))
+            {
+                if (DialogResult.Yes == Shared.messageBox("Sicuro di voler salvare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    Fornitore fornitore = this.UpdateInstanceFromUI<Fornitore>((Fornitore)this.listBoxUC1.SelectedItem);
+                    //Shared.cdc.AziendaSet.AddRange(list);
+                    Shared.cdc.SaveChanges();
+                    this.listBoxUC1.Find(this.searchTextBox.Text);
+                    this.listBoxUC1.SelectedItem = fornitore;
+                }
+                this.sc.SetState("moreThanZeroItems");
+            }
+            else if (this.sc.IsActiveState("add"))
+            {
+                if (DialogResult.Yes == Shared.messageBox("Sicuro di voler salvare?", "Attenzione", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    List<Fornitore> list = this.CreateInstanceFromUI<Fornitore>();
+                    Shared.cdc.AziendaSet.AddRange(list);
+                    Shared.cdc.SaveChanges();
+                    this.listBoxUC1.Find(this.searchTextBox.Text);
+                    this.listBoxUC1.SelectedItem = list.First();
+                }
+                this.sc.SetState(StateController.INITIAL_STATE_NAME);
+                this.sc.ChooseAndSetState(this.listBoxUC1.Items.Count);
+            }
+        }
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState("add");
+            this.CleanUI(fornitorePanel);
+            this.treeViewUC1.Nodes.Clear();
+            this.treeViewUC2.Nodes.Clear();
+        }
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            this.sc.SetState("edit");
+            this.treeViewUC1.CollapseAll();
+            this.treeViewUC2.CollapseAll();
         }
     }
 }

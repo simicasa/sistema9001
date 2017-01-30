@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProgettoCMA.UserControls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -31,6 +32,13 @@ namespace ProgettoCMA
                 //cdc.Entry(utente).State = System.Data.Entity.EntityState.Added;
                 Shared.cdc.SaveChanges();
             }
+            /*
+            Associazione_Categoria_Fornitore acf = new Associazione_Categoria_Fornitore();
+            acf.Fornitore = Shared.cdc.AziendaSet.OfType<Fornitore>().First();
+            acf.Categoria = Shared.cdc.CategoriaSet.Where(c => c.ID == 9).First();
+            Shared.cdc.Associazione_Categoria_FornitoreSet.Add(acf);
+            Shared.cdc.SaveChanges();
+            */
         }
         public void ahsi()
         {
@@ -126,6 +134,12 @@ namespace ProgettoCMA
         protected void UserControl_ButtonClick(object sender, EventArgs e, Categoria c)//, Categoria c)
         {
             Shared.messageBox("b" + c.ID.ToString());
+        }
+
+        private void amministrazioneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Amministrazione amministrazione = new Amministrazione();
+            this.controlsAdd(amministrazione);
         }
     }
 }

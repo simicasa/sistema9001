@@ -8,11 +8,18 @@ namespace ProgettoCMA.Controller.DataStructures
 {
     class Tree : NodeCollection
     {
+        public enum INSERT_MODE
+        {
+            CUSTOM = 0,
+            COMPLETE_TREE = 1
+        }
         public int childrenNumber { get; protected set; }
         public Node root { get; protected set; }
-        public Tree(int nodeChildrenNumber) : base()
+        public INSERT_MODE insertMode { get; protected set; }
+        public Tree(int nodeChildrenNumber, INSERT_MODE insertMode = INSERT_MODE.COMPLETE_TREE) : base()
         {
             this.childrenNumber = nodeChildrenNumber;
+            this.insertMode = insertMode;
         }
         public override void AddNode(String name)
         {
@@ -20,6 +27,15 @@ namespace ProgettoCMA.Controller.DataStructures
         }
         public override void AddNode(String name, Object data)
         {
+            switch (this.insertMode)
+            {
+                case INSERT_MODE.COMPLETE_TREE:
+                    this.AddNodeCompleteTree(name, data);
+                    break;
+                default:
+                    throw new Exception("INSERT_MODE non valido, impossibile aggiungere un nodo");
+                    break;
+            }
             //int parentIndex = this.GetParentIndex();
             /*
             double a = Math.Floor(Math.Log(this.nodes.Count, this.childrenNumber));
@@ -34,9 +50,12 @@ namespace ProgettoCMA.Controller.DataStructures
                 Node parent = this.nodes[parentIndex];
                 Node node = this.GetNode(name);
                 //Console.WriteLine("Genitore " + (parentIndex - 1) + " " + parent.name);
-                this.AddAjacency(parent, node, data);
+                this.AddAjacencyBody(parent, node, data);
             }
             */
+        }
+        private void AddNodeCompleteTree(String name, Object data)
+        {
             Queue<Node> queue = new Queue<Node>(this.nodes.Count);
             if (this.nodes.Count > 0)
             {
@@ -71,7 +90,18 @@ namespace ProgettoCMA.Controller.DataStructures
             }
             return null;
         }
-        protected new Tree AddAjacency(Node startNode, Node adjacencyNode, Object adjacencyData)
+        public new Tree AddAjacency(Node startNode, Node adjacencyNode, Object adjacencyData)
+        {
+            switch (this.insertMode)
+            {
+                case INSERT_MODE.CUSTOM:
+                    break;
+                default:
+                    throw new Exception("Aggiunta adiacenza non possibile con l'INSERT_MODE scelto");
+            }
+            return this.AddAjacencyBody(startNode, adjacencyNode, adjacencyData);
+        }
+        protected Tree AddAjacencyBody(Node startNode, Node adjacencyNode, Object adjacencyData)
         {
             base.AddAjacency(startNode, adjacencyNode, adjacencyData);
             return this;

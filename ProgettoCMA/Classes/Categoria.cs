@@ -14,5 +14,13 @@ namespace ProgettoCMA
             this.Macro = macro;
             this.Nome = nome;
         }
+        public static Categoria FindByName(String nome)
+        {
+            IQueryable<Categoria> categoria = Shared.cdc.CategoriaSet.Where(c => c.Nome == nome);
+            if(categoria.Count() != 1) {
+                throw new Exception("Trovata piu' di una categoria con lo stesso nome: " + nome);
+            }
+            return categoria.First();
+        }
     }
 }

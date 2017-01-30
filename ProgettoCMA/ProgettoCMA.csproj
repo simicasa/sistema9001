@@ -88,6 +88,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClassDiagram.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Associazione_Categoria_Fornitore.cs" />
     <Compile Include="Classes\Categoria.cs" />
     <Compile Include="Classes\Cliente.cs" />
     <Compile Include="Classes\Commessa.cs" />
@@ -146,25 +147,25 @@
     <Compile Include="Lista_RDO_Composizione.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
     </Compile>
-    <Compile Include="Nuova\Class2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Nuova\Class3.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Nuova\ListUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Nuova\ListUC.Designer.cs">
-      <DependentUpon>ListUC.cs</DependentUpon>
-    </Compile>
     <Compile Include="Shared\Shared.cs" />
     <Compile Include="Shared\Validator.cs" />
+    <Compile Include="UserControls\Amministrazione.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Amministrazione.Designer.cs">
+      <DependentUpon>Amministrazione.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Categorie.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\Categorie.Designer.cs">
       <DependentUpon>Categorie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CategorieOld.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CategorieOld.Designer.cs">
+      <DependentUpon>CategorieOld.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Clienti.cs">
       <SubType>UserControl</SubType>
@@ -199,6 +200,12 @@
     <Compile Include="UserControls\ControllerUC.Designer.cs">
       <DependentUpon>ControllerUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Fornitori.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Fornitori.Designer.cs">
+      <DependentUpon>Fornitori.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Liste_RDO_Composizione.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -211,11 +218,11 @@
     <Compile Include="UserControls\Commesse.Designer.cs">
       <DependentUpon>Commesse.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Fornitori.cs">
+    <Compile Include="UserControls\Old\FornitoriOld.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\Fornitori.Designer.cs">
-      <DependentUpon>Fornitori.cs</DependentUpon>
+    <Compile Include="UserControls\Old\FornitoriOld.Designer.cs">
+      <DependentUpon>FornitoriOld.cs</DependentUpon>
     </Compile>
     <Compile Include="Indirizzo.cs">
       <DependentUpon>ClassDiagram.tt</DependentUpon>
@@ -287,11 +294,14 @@
     <EmbeddedResource Include="Forms\newODA.resx">
       <DependentUpon>newODA.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Nuova\ListUC.resx">
-      <DependentUpon>ListUC.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Amministrazione.resx">
+      <DependentUpon>Amministrazione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Categorie.resx">
       <DependentUpon>Categorie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CategorieOld.resx">
+      <DependentUpon>CategorieOld.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Clienti.resx">
       <DependentUpon>Clienti.cs</DependentUpon>
@@ -302,14 +312,17 @@
     <EmbeddedResource Include="Forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Fornitori.resx">
+      <DependentUpon>Fornitori.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Liste_RDO_Composizione.resx">
       <DependentUpon>Liste_RDO_Composizione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Commesse.resx">
       <DependentUpon>Commesse.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Fornitori.resx">
-      <DependentUpon>Fornitori.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\Old\FornitoriOld.resx">
+      <DependentUpon>FornitoriOld.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

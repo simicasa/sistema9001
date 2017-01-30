@@ -22,10 +22,17 @@ namespace ProgettoCMA.Controller
         {
             this.controller = new Controller(true);
         }
-        public void Initialize(Type type, string memberToShow)
+        public void Initialize(Type type, string memberToShow, dynamic list = null)
         {
             this.type = type;
-            this.DataSourceUpdate(Shared.cdc.Set(this.type));
+            if (list == null)
+            {
+                this.DataSourceUpdate(Shared.cdc.Set(this.type));
+            }
+            else
+            {
+                this.DataSourceUpdate(list);
+            }
             this.memberToShow = memberToShow;
             this.findComparisonFunc = this.CreateFindComparisonFunc(memberToShow);
             this.OrderBy(memberToShow, false);
@@ -65,7 +72,7 @@ namespace ProgettoCMA.Controller
             var list = whereMethod.Invoke(dbSet, new Object[] { dbSet, func });
             this.DataSourceUpdate(list);
         }
-        private void DataSourceUpdate(dynamic list)
+        public void DataSourceUpdate(dynamic list)
         {
             this.DataSource = this.controller.DataSourceUpdate(list, this.type);
         }
@@ -75,7 +82,9 @@ namespace ProgettoCMA.Controller
             this.DisplayMember = fieldToOrder;
             this.findComparisonFunc = this.CreateFindComparisonFunc(fieldToOrder.ToString());
             dynamic selectedItem = this.SelectedItem;
-            PropertyInfo fieldInfo = this.type.BaseType.GetProperty(fieldToOrder, BindingFlags.IgnoreCase | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            // controllo necessario per le classi di specializzazione, di cui ho bisogno dei parametri della classe specializzata
+            Type typeToUse = (this.type.BaseType == typeof(Object)) ? this.type : this.type.BaseType;
+            PropertyInfo fieldInfo = typeToUse.GetProperty(fieldToOrder, BindingFlags.IgnoreCase | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
             if(fieldInfo == null)
             {
                 throw new Exception("non esiste la property " + fieldToOrder);

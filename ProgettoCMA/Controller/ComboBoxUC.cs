@@ -27,13 +27,13 @@ namespace ProgettoCMA.Controller
             this.StyleUpdate(style);
             this.DataSourceUpdate(list);
         }
-        private void DataSourceUpdate(dynamic list)
+        public void DataSourceUpdate(dynamic list)
         {
             this.DataSource = this.CreateBindingList(list);
         }
-        private dynamic CreateBindingList(dynamic list, Type type = null)
+        private dynamic CreateBindingList(dynamic list, Type listType = null)
         {
-            Type bindingListType = (type != null) ? type : this.type;
+            Type bindingListType = (listType != null) ? listType : this.type;
             return this.controller.bindingListCreate(list, bindingListType);
         }
         public void StyleUpdate(ComboBoxStyle style)

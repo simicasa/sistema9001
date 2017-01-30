@@ -64,7 +64,12 @@ namespace ProgettoCMA.Controller
         }
         public MethodInfo getGenericMethod(String methodName, Type genericMethodType, BindingFlags bindingFlags = BindingFlags.Default, Func<MethodInfo, bool> func = null)
         {
-            return this.getGenericMethod(methodName, new Type[] { genericMethodType }, bindingFlags, func);
+            Type[] types = null;
+            if(genericMethodType != null)
+            {
+                types = new Type[] { genericMethodType };
+            }
+            return this.getGenericMethod(methodName, types, bindingFlags, func);
         }
         public MethodInfo getGenericMethod(String methodName, Type[] genericMethodTypes, BindingFlags bindingFlags = BindingFlags.Default, Func<MethodInfo, bool> func = null)
         {

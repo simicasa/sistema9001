@@ -303,7 +303,8 @@ namespace ProgettoCMA.UserControls
         {
             classType = classType ?? this.type;
             List <String> propertyNames = new List<String>();
-            foreach (var property in classType.BaseType.GetProperties())
+            Type typeToUse = (classType.BaseType == typeof(Object)) ? classType : classType.BaseType;
+            foreach (var property in typeToUse.GetProperties())
             {
                 if (!property.PropertyType.Namespace.StartsWith("ProgettoCMA") && !property.PropertyType.IsGenericType)
                 {

@@ -1,10 +1,6 @@
-﻿using iTextSharp.awt.geom;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace ProgettoCMA
+﻿namespace ProgettoCMA.UserControls
 {
-    partial class ListUC<T>
+    partial class Amministrazione
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
@@ -32,30 +28,43 @@ namespace ProgettoCMA
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBoxUC1 = new ProgettoCMA.Controller.ListBoxUC();
+            this.comboBoxUC1 = new ProgettoCMA.Controller.ComboBoxUC();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // listBoxUC1
+            // comboBoxUC1
             // 
-            this.listBoxUC1.FormattingEnabled = true;
-            this.listBoxUC1.Location = new System.Drawing.Point(56, 33);
-            this.listBoxUC1.Name = "listBoxUC1";
-            this.listBoxUC1.Size = new System.Drawing.Size(115, 82);
-            this.listBoxUC1.TabIndex = 0;
+            this.comboBoxUC1.FormattingEnabled = true;
+            this.comboBoxUC1.Location = new System.Drawing.Point(81, 6);
+            this.comboBoxUC1.Name = "comboBoxUC1";
+            this.comboBoxUC1.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxUC1.TabIndex = 0;
             // 
-            // ListUC
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Debug phase";
+            // 
+            // Amministrazione
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listBoxUC1);
-            this.Name = "ListUC";
-            this.Size = new System.Drawing.Size(416, 337);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBoxUC1);
+            this.Name = "Amministrazione";
+            this.Size = new System.Drawing.Size(392, 245);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private Controller.ListBoxUC listBoxUC1;
+        private Controller.ComboBoxUC comboBoxUC1;
+        private System.Windows.Forms.Label label1;
     }
 }

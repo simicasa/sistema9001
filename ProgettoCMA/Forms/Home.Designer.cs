@@ -81,6 +81,7 @@
             this.amministrazioneToolStripMenuItem.Name = "amministrazioneToolStripMenuItem";
             this.amministrazioneToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
             this.amministrazioneToolStripMenuItem.Text = "Amministrazione";
+            this.amministrazioneToolStripMenuItem.Click += new System.EventHandler(this.amministrazioneToolStripMenuItem_Click);
             // 
             // commesseToolStripMenuItem
             // 
